@@ -1,0 +1,112 @@
+@import "./_main";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+
+  *::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+html {
+  height: 100%;
+  width: 100%;
+
+  body {
+    //@include flex-display();
+    //@include flex-direction(column);
+    height: 100%;
+    width: 100%;
+    //background-color: $background-color;
+    overflow-x: hidden;
+    // overflow-y: hidden;
+    font-family: Metric;
+
+    a {
+      text-decoration: none;
+    }
+
+    a,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    code,
+    span,
+    button {
+      font-family: Metric;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    textarea {
+      font-size: 14px;
+      width: 100%;
+      height: 75px;
+      //@include border-radius(3px);
+      //background-color: $light-5;
+      //border: solid 1px $border-color;
+      padding: 10px;
+      resize: none;
+      overflow: auto;
+
+      &::placeholder {
+        //color: $light-1;
+      }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      font-size: 14px;
+      width: 100%;
+      height: 40px;
+      //@include border-radius(3px);
+      //background-color: $light-5;
+      //border: solid 1px $border-color;
+      padding: 10px;
+
+      &::placeholder {
+        //color: $light-1;
+      }
+
+      &::-ms-clear,
+      &::-ms-reveal {
+        display: none;
+      }
+    }
+
+    input[type="submit"] {
+      cursor: pointer;
+    }
+
+    code {
+      //background-color: $light-5;
+      width: 100%;
+      display: block;
+      text-align: center;
+      font-size: 9px;
+      font-style: italic;
+      //border: 1px solid $border-color;
+      //@include border-radius(3px);
+    }
+
+    &.modal-open {
+      overflow: hidden;
+    }
+
+  }
+}

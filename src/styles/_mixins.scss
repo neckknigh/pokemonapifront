@@ -1,0 +1,66 @@
+@mixin transition($transition...) {
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-ms-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition;
+}
+
+@mixin transform($transform) {
+	-webkit-transform: $transform;
+	-ms-transform: $transform;
+	transform: $transform;
+}
+
+@mixin appearance($value){
+	-webkit-appearance: $value;
+    -moz-appearance: $value;
+    appearance: $value;
+}
+
+@mixin transform-origin($transform-origin) {
+	-webkit-transform-origin: $transform-origin;
+	-ms-transform-origin: $transform-origin;
+	transform-origin: $transform-origin;
+}
+
+@mixin border-radius($border) {
+	-webkit-border-radius: $border;
+	-moz-border-radius: $border;
+	border-radius: $border;
+}
+
+
+@mixin box-shadow($value) {
+	-webkit-box-shadow: $value;
+	-moz-box-shadow: $value;
+	box-shadow: $value;
+}
+
+@mixin preload-image($path) {
+	display: block;
+	content: url($path);
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+@mixin text-outline($color){
+	text-shadow:
+	 	-1px -1px 0 $color,
+		1px -1px 0 $color,
+		-1px 1px 0 $color,
+		1px 1px 0 $color;
+}
+
+@mixin animation($animation) {
+	-webkit-animation: $animation;
+	-moz-animation: $animation;
+	-o-animation: $animation;
+	animation: $animation;
+}
+
+@mixin filter($filter) {
+	-webkit-filter: $filter;
+    filter: $filter;
+}

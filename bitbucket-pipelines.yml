@@ -10,6 +10,8 @@ pipelines:
     - step:
         script:
           
+          - eval $(ssh-agent -s)
+          
           # Install dependencies
           - npm install
           

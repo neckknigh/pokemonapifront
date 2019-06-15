@@ -9,5 +9,13 @@ pipelines:
   default:
     - step:
         script:
+          
+          # Install dependencies
           - npm install
-          - npm test
+          
+          # build the proyect
+          - npm run build
+          
+          # create
+          - ssh -o StrictHostKeyChecking=no doo1@157.230.189.153 mkdir /var/www/doomicilios.net/html/carpetica
+

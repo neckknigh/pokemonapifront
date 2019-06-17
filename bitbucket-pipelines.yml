@@ -16,11 +16,15 @@ pipelines:
           # build the proyect
           - npm run build
           
-          # create
+          # create the ssh folder where the private keys will be placed
           - mkdir -p ~/.ssh
           
-          #
+          # The key is added
           - (umask  077 ; echo $DOO_PRIVATE_KEY | base64 --decode > ~/.ssh/id_rsa)
           
-          - ssh -o StrictHostKeyChecking=no doo1@157.230.189.153 mkdir /var/www/doomicilios.net/html/carpetica
+          # Remove all the hmtl folder's files
+          - ssh -o StrictHostKeyChecking=no doo1@157.230.189.153 rm -rf /var/www/doomicilios.net/html/*
+          
+          # Add the generated files
+          - scp -o StrictHostKeyChecking=no -r build/* doo1@157.230.189.153:/var/www/doomicilios.net/html
 

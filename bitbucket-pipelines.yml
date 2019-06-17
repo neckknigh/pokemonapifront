@@ -9,8 +9,7 @@ pipelines:
   default:
     - step:
         script:
-          
-          - eval $(ssh-agent -s)          
+                 
           # Install dependencies
           - npm install
           
@@ -18,5 +17,9 @@ pipelines:
           - npm run build
           
           # create
+          - mkdir -p ~/.ssh
+          
+          - (umask  077 ; echo $DOO_PRIVATE_KEY | base64 --decode > ~/.ssh/id_rsa)
+          
           - ssh -o StrictHostKeyChecking=no doo1@157.230.189.153 mkdir /var/www/doomicilios.net/html/carpetica
 

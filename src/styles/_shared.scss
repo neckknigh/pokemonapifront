@@ -1,1 +1,16 @@
 // put shares styles here
+.test-border {
+    border: $test-border;
+}
+
+.flex-row-space-between {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+}
+
+.flex-row-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(center);
+}

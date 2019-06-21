@@ -2,19 +2,20 @@
 
 header {
     position: fixed;
-    width: $maximum-width;
+    width: $maximum-percentage;
+    height: $header-height;
     background-color: $blue-doo;
 
     nav {
-        padding-bottom: 0.4em;
-        padding-top: 0.4em;
+        padding: 0.5em 0.4em;
 
         .logo-container {
             // TODO: Revisar este tamaño
-            width: 15em;
+            width: 10em;
 
             .logo {
-                width: 2em;
+                // TODO: Revisar este tamaño
+                width: 4.15em;
             }
         }
     }

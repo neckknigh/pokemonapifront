@@ -18,14 +18,10 @@
 }
 
 html {
-  height: 100%;
-  width: 100%;
+  @include maximun-size();
 
   body {
-    //@include flex-display();
-    //@include flex-direction(column);
-    height: 100%;
-    width: 100%;
+    @include maximun-size();
     //background-color: $background-color;
     overflow-x: hidden;
     // overflow-y: hidden;
@@ -58,7 +54,7 @@ html {
 
     textarea {
       font-size: 14px;
-      width: 100%;
+      width: $maximum-percentage;
       height: 75px;
       //@include border-radius(3px);
       //background-color: $light-5;
@@ -75,7 +71,7 @@ html {
     input[type="text"],
     input[type="password"] {
       font-size: 14px;
-      width: 100%;
+      width: $maximum-percentage;
       height: 40px;
       //@include border-radius(3px);
       //background-color: $light-5;
@@ -98,7 +94,7 @@ html {
 
     code {
       //background-color: $light-5;
-      width: 100%;
+      width: $maximum-percentage;
       display: block;
       text-align: center;
       font-size: 9px;
@@ -109,6 +105,10 @@ html {
 
     &.modal-open {
       overflow: hidden;
+    }
+
+    .main-container {
+      padding-top: $header-height;
     }
 
   }

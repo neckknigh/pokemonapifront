@@ -1,0 +1,14 @@
+@import "../../../styles/_main";
+
+.login-container {
+    @include maximun-size();
+    color: red;
+
+    .right-container {
+        padding-top: 3em;
+
+        .right-logo {
+            height: 20em;
+        }
+    }
+}

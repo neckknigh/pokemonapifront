@@ -12,10 +12,10 @@
 	transform: $transform;
 }
 
-@mixin appearance($value){
+@mixin appearance($value) {
 	-webkit-appearance: $value;
-    -moz-appearance: $value;
-    appearance: $value;
+	-moz-appearance: $value;
+	appearance: $value;
 }
 
 @mixin transform-origin($transform-origin) {
@@ -45,9 +45,9 @@
 	visibility: hidden;
 }
 
-@mixin text-outline($color){
+@mixin text-outline($color) {
 	text-shadow:
-	 	-1px -1px 0 $color,
+		-1px -1px 0 $color,
 		1px -1px 0 $color,
 		-1px 1px 0 $color,
 		1px 1px 0 $color;
@@ -62,5 +62,10 @@
 
 @mixin filter($filter) {
 	-webkit-filter: $filter;
-    filter: $filter;
+	filter: $filter;
+}
+
+@mixin maximun-size {
+	height: $maximum-percentage;
+	width: $maximum-percentage;
 }

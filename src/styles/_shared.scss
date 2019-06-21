@@ -14,3 +14,14 @@
     @include flex-direction(row);
     @include justify-content(center);
 }
+
+.flex-row-space-around {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(space-around);
+}
+
+.maximun-size {
+    height: $maximum-percentage;
+    width: $maximum-percentage;
+}

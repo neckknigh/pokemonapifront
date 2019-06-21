@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./headercomponent.scss";
+import "./header.component.scss";
 
 export interface HeaderComponentProps {
 
@@ -15,10 +15,10 @@ class HeaderComponent extends Component<HeaderComponentProps, HeaderComponentSta
         return (
             <header>
                 <nav className="flex-row-space-between">
-                    <div className="flex-row-center logo-container">
+                    <div className="test-border flex-row-center logo-container">
                         <img className="logo" src="/img/login/logo.png" alt="Doo" />
                     </div>
-                    <div className="div1" >
+                    <div className="test-border div1" >
                         Buscador
                     </div>
                 </nav>

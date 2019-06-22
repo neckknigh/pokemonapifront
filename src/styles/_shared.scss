@@ -21,6 +21,12 @@
     @include justify-content(space-around);
 }
 
+.flex-column-center-items {
+    @include flex-display();
+    @include flex-direction(column);
+    @include align-items(center);
+}
+
 .maximun-size {
     height: $maximum-percentage;
     width: $maximum-percentage;

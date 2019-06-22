@@ -15,10 +15,10 @@ class HeaderComponent extends Component<HeaderComponentProps, HeaderComponentSta
         return (
             <header>
                 <nav className="flex-row-space-between">
-                    <div className="test-border flex-row-center logo-container">
+                    <div className="flex-row-center logo-container">
                         <img className="logo" src="/img/login/logo.png" alt="Doo" />
                     </div>
-                    <div className="test-border div1" >
+                    <div className=" div1" >
                         Buscador
                     </div>
                 </nav>

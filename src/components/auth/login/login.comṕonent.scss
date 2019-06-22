@@ -1,8 +1,59 @@
 @import "../../../styles/_main";
 
 .login-container {
+    p {
+        margin-bottom: 0;
+    }
+
     @include maximun-size();
-    color: red;
+
+    .left-container {
+        padding-left: 11em;
+        padding-right: 3em;
+        padding-top: 3em;
+
+        .login-card {
+            @include border-radius(6px);
+
+            .logo-doo-simple {
+                width: 7em;
+            }
+
+            .slogan-doo {
+                color: $dark-gray;
+                font-size: 19px;
+            }
+
+            .line-on-side {
+                padding-left: 1em;
+                padding-right: 1em;
+                margin-top: 1em;
+                @include text-between-lines();
+            }
+
+            .login-buttons {
+                padding-left: 2em;
+                padding-right: 2em;
+                margin-top: 1.2em;
+                width: $maximum-percentage;
+
+                .login-btn {
+                    @include border-radius(12px);
+                    padding: 2px;
+                    font-size: 12px;
+                }
+            }
+
+            .doo-terms {
+                padding: 2em 3em 0.5em 3em;
+                text-align: center;
+
+                p {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
 
     .right-container {
         padding-top: 3em;

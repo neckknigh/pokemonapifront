@@ -69,3 +69,21 @@
 	height: $maximum-percentage;
 	width: $maximum-percentage;
 }
+
+@mixin text-between-lines($gap: 15px,
+	$border-size: 1px,
+	$border-color: $dark-gray) {
+
+	display: grid;
+	width: $maximum-percentage;
+	align-items: center;
+	text-align: center;
+	grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+	grid-gap: $gap;
+
+	&:before,
+	&:after {
+		content: '';
+		border-top: $border-size solid $border-color;
+	}
+}

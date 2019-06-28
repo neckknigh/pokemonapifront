@@ -1,16 +1,18 @@
 import React from 'react';
 import "./login.comṕonent.scss";
+import FacebookLoginComponent from './facebooklogincomponent/facebooklogin.component';
 
 export interface LoginComponentProps {
 
 }
 
 export interface LoginComponentState {
-
 }
 
 class LoginComponent extends React.Component<LoginComponentProps, LoginComponentState> {
     //state = { :  }
+
+
     render() {
         return (
             <div className="grid login-container">
@@ -26,7 +28,7 @@ class LoginComponent extends React.Component<LoginComponentProps, LoginComponent
                             <p>Ingresar</p>
                         </div>
                         <div className=" login-buttons flex-column-center-items">
-                            <button type="button" className="btn btn-primary btn-lg btn-block login-btn">Ingresar con facebook</button>
+                            <FacebookLoginComponent />
                             <button type="button" className="btn btn-success btn-lg btn-block login-btn">Ingresar con tu celular</button>
                         </div>
                         <div className="doo-terms">

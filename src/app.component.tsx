@@ -30,6 +30,14 @@ class App extends React.Component<IAppProps, {}> {
 
   }
 
+  clicked = () => {
+    console.log("click");
+  }
+
+  responseFacebook = (response: any) => {
+    console.log(response);
+  }
+
   render() {
 
     if (this.props.isFacebookLogin) {

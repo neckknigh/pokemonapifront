@@ -1,6 +1,6 @@
 import React from 'react';
 import "./login.comṕonent.scss";
-import FacebookLoginComponent from './facebooklogincomponent/facebooklogin.component';
+import FacebookLoginComponent from './facebooklogincomponent/facebook-login.component';
 
 export interface LoginComponentProps {
 

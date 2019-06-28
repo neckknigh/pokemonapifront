@@ -22,7 +22,7 @@ class LoginComponent extends React.Component<LoginComponentProps, LoginComponent
                             <img className="logo-doo-simple" src="/img/login/simple-doo-icon.png" alt="Icon Doo" />
                         </div>
                         <div>
-                            <h1 className="slogan-doo">Todo el barrio en tu bolsillo</h1>
+                            <h1 className="slogan-doo">Todo el barrio en tu mano</h1>
                         </div>
                         <div className="line-on-side">
                             <p>Ingresar</p>

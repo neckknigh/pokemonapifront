@@ -25,6 +25,16 @@ export const userReducer: Reducer<IUserState, UserActions> = (
                 isFacebookLogginIn: true
             };
 
+        /**
+         * Se actualiza el estado que indica que el usuario
+         * se loguéo con facebook correctamente.
+         */
+        case UserConstants.FACEBOOK_LOGIN_SUCCESS:
+            return {
+                ...state,
+                isFacebookLoggedIn: action.isFacebookLoggedIn
+            }
+
         default:
             return state;
     }

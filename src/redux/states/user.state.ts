@@ -4,5 +4,8 @@ export interface IUserState {
     readonly isLoggedIn: boolean,
 
     // indica que está logueandose
-    readonly isFacebookLogginIn: boolean
+    readonly isFacebookLogginIn: boolean,
+
+    // indica que se logueó con facebook correctamente
+    readonly isFacebookLoggedIn?: boolean
 }

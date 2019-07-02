@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import * as CSS from 'csstype';
-import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
+import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 import { Dispatch } from 'redux';
 import { UserActions } from '../../../../redux/actions/user.actions';
 import { connect } from 'react-redux';
@@ -9,7 +9,8 @@ import { userActions } from '../../../../redux/action-creators/user.action.creat
 interface Style extends CSS.Properties, CSS.PropertiesHyphen { }
 
 export interface FacebookLoginComponentProps {
-    startFacebookRequestlogin: () => any
+    startFacebookRequestlogin: () => any,
+    setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => any
 }
 
 export interface FacebookLoginComponentState {
@@ -49,12 +50,20 @@ class FacebookLoginComponent extends React.Component<FacebookLoginComponentProps
     }
 
     handleFacebookBtnClick = () => {
-        console.log("clickeó");
+
+        // Se indica que se inicia proceso de login con facebook
         this.props.startFacebookRequestlogin();
     }
 
     handleFacebookResponse = (userInfo: ReactFacebookLoginInfo) => {
         console.log(userInfo);
+        // Se indica que se logueó con facebook correctamente
+        this.props.setFacebookLoggedInStatus(true);
+    }
+
+    handleFailureFacebookLoginResponse = (response: ReactFacebookFailureResponse) => {
+        console.log("Ocurrió un error");
+        // TODO: Revisar que logica ejuctar cuando falle.
     }
 
     render() {
@@ -75,6 +84,7 @@ class FacebookLoginComponent extends React.Component<FacebookLoginComponentProps
                     cssClass="btn btn-primary btn-lg btn-block login-btn"
                     onClick={this.handleFacebookBtnClick}
                     callback={this.handleFacebookResponse}
+                    onFailure={this.handleFailureFacebookLoginResponse}
                 />
             </Fragment>
         );
@@ -82,10 +92,12 @@ class FacebookLoginComponent extends React.Component<FacebookLoginComponentProps
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch<UserActions>) => {
-    return {
-        startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin())
+const mapDispatchToProps = (dispatch: Dispatch<UserActions>): FacebookLoginComponentProps => {
+    const props: FacebookLoginComponentProps = {
+        startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin()),
+        setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => dispatch(userActions.setFacebookLoggedInStatus(isFacebookLoggedIn))
     }
+    return props;
 }
 
 export default connect(null, mapDispatchToProps)(FacebookLoginComponent);

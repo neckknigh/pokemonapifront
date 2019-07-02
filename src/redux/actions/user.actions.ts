@@ -11,7 +11,19 @@ export interface IFacebookLoginRequestAction extends Action<UserConstants.FACEBO
  * Interface de la acción que se dispara cuando el usuario
  * realiza el login corectamente. 
  */
-export interface ISaveLoggedUserAction extends Action<UserConstants.LOGIN_SUCCESS> { }
+export interface IFacebookLoggedSucessAction extends Action<UserConstants.FACEBOOK_LOGIN_SUCCESS> {
+    isFacebookLoggedIn: boolean
+}
+
+/**
+ * Interface de la acción que se dispara cuando el usuario
+ * inicia el proceso de registro en el servidor con los datos
+ * de la api de facebook. 
+ */
+export interface IFacebookUserRegisterRequestAction extends Action<UserConstants.FACEBOOK_USER_REGISTER_REQUEST> { }
 
 // Se exporta el tipo con las dos acciones
-export type UserActions = IFacebookLoginRequestAction | ISaveLoggedUserAction;
+export type UserActions =
+    IFacebookLoginRequestAction |
+    IFacebookLoggedSucessAction |
+    IFacebookUserRegisterRequestAction;

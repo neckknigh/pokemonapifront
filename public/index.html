@@ -30,6 +30,13 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root" class="maximun-size"></div>
+
+  <input value="+1" id="country_code" />
+  <input placeholder="phone number" id="phone_number" />
+  <button onclick="smsLogin();">Login via SMS</button>
+  <div>OR</div>
+  <input placeholder="email" id="email" />
+  <button onclick="emailLogin();">Login via Email</button>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -40,6 +47,67 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+  <!-- HTTPS required. HTTP will give a 403 forbidden response -->
+  <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
+
+  <script>
+    // initialize Account Kit with CSRF protection
+    AccountKit_OnInteractive = function () {
+      AccountKit.init({
+        appId: "368256876708367",
+        state: "31e2a963ada08b93e2667243805407c3",
+        version: "v1.1",
+        fbAppEventsEnabled: true,
+        redirect: "https://doomicilios.net/home.html",
+        debug: true
+      });
+    };
+
+    // login callback
+    function loginCallback(response) {
+      if (response.status === "PARTIALLY_AUTHENTICATED") {
+        var code = response.code;
+        var csrf = response.state;
+        // Send code to server to exchange for access token
+        console.log("entro")
+      } else if (response.status === "NOT_AUTHENTICATED") {
+        // handle authentication failure
+        console.log("entro error")
+      } else if (response.status === "BAD_PARAMS") {
+        // handle bad parameters
+        console.log("entro bad")
+      }
+    }
+
+    // phone form submission handler
+    function smsLogin() {
+      var countryCode = document.getElementById("country_code").value;
+      var phoneNumber = document.getElementById("phone_number").value;
+      AccountKit.login(
+        'PHONE', {
+          countryCode: countryCode,
+          phoneNumber: phoneNumber
+        }, // will use default values if not specified
+        loginCallback
+      );
+    }
+
+
+    // email form submission handler
+    function emailLogin() {
+      var emailAddress = document.getElementById("email").value;
+      AccountKit.login(
+        'EMAIL', {
+          emailAddress: emailAddress
+        },
+        loginCallback
+      );
+    }
+  </script>
+
+
 </body>
 
 </html>

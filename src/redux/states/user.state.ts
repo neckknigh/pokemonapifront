@@ -7,5 +7,8 @@ export interface IUserState {
     readonly isFacebookLogginIn: boolean,
 
     // indica que se logueó con facebook correctamente
-    readonly isFacebookLoggedIn?: boolean
+    readonly isFacebookLoggedIn?: boolean,
+
+    // indica que está logueandose con account kit
+    readonly isAccountKitLogginIn: boolean
 }

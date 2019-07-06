@@ -8,12 +8,12 @@ import { userActions } from '../../../../redux/action-creators/user.action.creat
 
 interface Style extends CSS.Properties, CSS.PropertiesHyphen { }
 
-export interface FacebookLoginComponentProps {
+export interface IFacebookLoginComponentProps {
     startFacebookRequestlogin: () => any,
     setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => any
 }
 
-export interface FacebookLoginComponentState {
+export interface IFacebookLoginComponentState {
 
     /**
      *  Contendrá los estilos para el contenedor del
@@ -28,14 +28,14 @@ export interface FacebookLoginComponentState {
     buttonStyle: Style
 }
 
-class FacebookLoginComponent extends React.Component<FacebookLoginComponentProps, FacebookLoginComponentState> {
+class FacebookLoginComponent extends React.Component<IFacebookLoginComponentProps, IFacebookLoginComponentState> {
 
     // Declaración del estado del componente
 
     // Declaración del estado del componente
-    constructor(props: FacebookLoginComponentProps) {
+    constructor(props: IFacebookLoginComponentProps) {
         super(props);
-        const initialState: FacebookLoginComponentState = {
+        const initialState: IFacebookLoginComponentState = {
             containerStyle: {
                 width: "100%",
                 marginBottom: "0.5rem"
@@ -92,8 +92,8 @@ class FacebookLoginComponent extends React.Component<FacebookLoginComponentProps
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch<UserActions>): FacebookLoginComponentProps => {
-    const props: FacebookLoginComponentProps = {
+const mapDispatchToProps = (dispatch: Dispatch<UserActions>): IFacebookLoginComponentProps => {
+    const props: IFacebookLoginComponentProps = {
         startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin()),
         setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => dispatch(userActions.setFacebookLoggedInStatus(isFacebookLoggedIn))
     }

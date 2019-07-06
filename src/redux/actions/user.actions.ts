@@ -8,6 +8,12 @@ import { UserConstants } from "../../services/constants.service";
 export interface IFacebookLoginRequestAction extends Action<UserConstants.FACEBOOK_LOGIN_REQUEST> { }
 
 /**
+ * Interface de la acción que se dispara cuando
+ * el usuario intenta loguearse con account kit
+ */
+export interface IAccountKitLoginRequestAction extends Action<UserConstants.ACCOUNT_KIT_LOGIN_REQUEST> { }
+
+/**
  * Interface de la acción que se dispara cuando el usuario
  * realiza el login corectamente. 
  */
@@ -26,4 +32,5 @@ export interface IFacebookUserRegisterRequestAction extends Action<UserConstants
 export type UserActions =
     IFacebookLoginRequestAction |
     IFacebookLoggedSucessAction |
-    IFacebookUserRegisterRequestAction;
+    IFacebookUserRegisterRequestAction |
+    IAccountKitLoginRequestAction;

@@ -1,16 +1,31 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import axios from "axios";
 
-
+// TODO: Refactorizar: Solo importar un indexs
 import { userReducer } from "./reducers/user.reducer";
+import { authReducer } from './reducers/auth.reducer';
+
 import { IAppState } from './app-state';
+import { createLogicMiddleware } from 'redux-logic';
+import appLogic from './app-logic';
+
+const depts = {
+    httpClient: axios
+}
+
+// @ts-ignore
+const logicMiddleware = createLogicMiddleware(appLogic, depts);
+
+const composedMiddleware = compose(applyMiddleware(logicMiddleware));
 
 export const rootReducer = combineReducers<IAppState>({
-    userState: userReducer
+    userState: userReducer,
+    authState: authReducer
 });
 
-const appStore = createStore<IAppState, any, any, any>(
-    rootReducer //,
-    //applyMiddleware(thunk)
+const appStore = createStore(
+    rootReducer,
+    composedMiddleware
 );
 
 console.log(appStore.getState());

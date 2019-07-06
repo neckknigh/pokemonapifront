@@ -7,7 +7,8 @@ import { UserConstants } from "../../services/constants.service";
 // Estado inicial del usuario
 const initialUserState: IUserState = {
     isLoggedIn: false,
-    isFacebookLogginIn: false
+    isFacebookLogginIn: false,
+    isAccountKitLogginIn: false
 };
 
 // root reducer
@@ -32,7 +33,14 @@ export const userReducer: Reducer<IUserState, UserActions> = (
         case UserConstants.FACEBOOK_LOGIN_SUCCESS:
             return {
                 ...state,
-                isFacebookLoggedIn: action.isFacebookLoggedIn
+                isFacebookLoggedIn: action.isFacebookLoggedIn,
+                isFacebookLogginIn: false
+            }
+
+        case UserConstants.ACCOUNT_KIT_LOGIN_REQUEST:
+            return {
+                ...state,
+                isAccountKitLogginIn: true
             }
 
         default:

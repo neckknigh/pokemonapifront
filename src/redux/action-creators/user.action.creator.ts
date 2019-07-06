@@ -1,5 +1,5 @@
 import { UserConstants } from "../../services/constants.service";
-import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction } from "../actions/user.actions";
+import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction } from "../actions/user.actions";
 
 /**
  * Accion-creators para el usuario.
@@ -13,6 +13,17 @@ const startFacebookRequestlogin = (): UserActions => {
         type: UserConstants.FACEBOOK_LOGIN_REQUEST
     };
     return facebookLoginRequestAction;
+}
+
+/**
+ * Accion-creator de login de usuario con Account kit
+ */
+const startAccountKitLoginRequest = (): UserActions => {
+    const accountKitLoginRequestAction: IAccountKitLoginRequestAction = {
+        type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST
+    }
+
+    return accountKitLoginRequestAction;
 }
 
 /**
@@ -44,5 +55,6 @@ const setFacebookLoggedInStatus = (facebookLoggedIn: boolean): UserActions => {
 export const userActions = {
     startFacebookRequestlogin,
     startFacebookUserRegisterRequest,
-    setFacebookLoggedInStatus
+    setFacebookLoggedInStatus,
+    startAccountKitLoginRequest
 }

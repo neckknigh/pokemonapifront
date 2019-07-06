@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import "./login.comṕonent.scss";
-import FacebookLoginComponent from './facebooklogincomponent/facebook-login.component';
+import FacebookLoginComponent from './facebook-login/facebook-login.component';
+import AccountKitLoginComponent from "./accountkit-login/accountkit-login.component";
 
 export interface LoginComponentProps {
 
@@ -9,11 +10,12 @@ export interface LoginComponentProps {
 export interface LoginComponentState {
 }
 
-class LoginComponent extends React.Component<LoginComponentProps, LoginComponentState> {
+class LoginComponent extends Component<LoginComponentProps, LoginComponentState> {
     //state = { :  }
 
 
     render() {
+
         return (
             <div className="grid login-container">
                 <div className="column-50 left-container">
@@ -29,7 +31,7 @@ class LoginComponent extends React.Component<LoginComponentProps, LoginComponent
                         </div>
                         <div className=" login-buttons flex-column-center-items">
                             <FacebookLoginComponent />
-                            <button type="button" className="btn btn-success btn-lg btn-block login-btn">Ingresar con tu celular</button>
+                            <AccountKitLoginComponent />
                         </div>
                         <div className="doo-terms">
                             <p>

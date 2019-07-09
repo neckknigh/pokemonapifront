@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { userActions } from '../../../../redux/action-creators/user.action.creator';
 import { connect } from 'react-redux';
 import { IAppState } from '../../../../redux/app-state';
+import { SystemConstants, AuthConstants } from '../../../../services/constants.service';
 
 export interface IAccountKitLoginComponentProps {
     readonly startAccountKitLoginRequest?: () => any,
@@ -16,28 +17,29 @@ export interface IAccountKitLoginComponentState {
 
 class AccountKitLoginComponent extends Component<IAccountKitLoginComponentProps, IAccountKitLoginComponentState> {
 
-    private form: any = null;
+    private refForm: any = React.createRef();
 
+    /**
+     * Se lanza la validación del formulario
+     * cuando se actualiza el estado/componente.
+     */
     componentDidUpdate() {
         this.submitForm();
     }
 
-    // TODO: Revisar si esta lógica va aquí
     handleFormSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
-
-        this.form = event.target;
 
         // Se indica que se inicia proceso de login con accountKit
         this.props.startAccountKitLoginRequest!();
     }
 
-    // TODO: MOVER ESTAS CONSTANTES DE AQUI
     submitForm = () => {
-        if (this.props.accountKitSDKLoaded && this.form) {
-            this.form.method = "post";
-            this.form.action = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/";
-            this.form.submit();
+        const form = this.refForm.current;
+        if (this.props.accountKitSDKLoaded) {
+            form.method = SystemConstants.POST_METHOD;
+            form.action = AuthConstants.ACCOUNT_KIT_FORM_ACTION
+            form.submit();
         }
     }
 
@@ -46,7 +48,11 @@ class AccountKitLoginComponent extends Component<IAccountKitLoginComponentProps,
         // TODO: Validar como ponemos la redirección adecudamente
         return (
             <Fragment>
-                <form className="maximun-size" onSubmit={this.handleFormSubmit}>
+                <form
+                    ref={this.refForm}
+                    className="maximun-size"
+                    onSubmit={this.handleFormSubmit}
+                >
                     <input type="hidden" name="app_id" value="368256876708367" />
                     <input type="hidden" name="redirect" value={window.location.href + "auth"} />
                     <input type="hidden" name="state" value="31e2a963ada08b93e2667243805407c3" />

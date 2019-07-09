@@ -2,9 +2,13 @@ import React from 'react';
 import LoginComponent from './login/login.component';
 import { IAppState } from '../../redux/app-state';
 import { connect } from 'react-redux';
+import { AuthActions } from '../../redux/actions/auth.actions';
+import { Dispatch } from 'redux';
+import { authActions } from '../../redux/action-creators/auth.action.creator';
 
 export interface IAuthComponentProps {
-    isFacebookLoggedIn?: boolean
+    isFacebookLoggedIn?: boolean,
+    validateAccountKitLoginDone?: () => any
 }
 
 export interface IAuthComponentState {
@@ -13,6 +17,16 @@ export interface IAuthComponentState {
 class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentState> {
     //state = { :  }
 
+    constructor(props: IAuthComponentProps) {
+        super(props);
+
+        /**
+         * Se valida si el usuario realizó correctamente el login
+         * por account kit
+         */
+        this.props.validateAccountKitLoginDone!();
+    }
+
     /*
         TODO: 
         Montar la lógica para validar la sesíon
@@ -20,6 +34,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     */
 
     render() {
+
+
 
         if (this.props.isFacebookLoggedIn) {
             console.log("Se logueó con facebook (AuthComponent");
@@ -38,4 +54,10 @@ const mapStateToProps = (state: IAppState): IAuthComponentProps => {
     }
 };
 
-export default connect(mapStateToProps)(AuthComponent);
+const mapDispatchToProps = (dispatch: Dispatch<AuthActions>): IAuthComponentProps => {
+    return {
+        validateAccountKitLoginDone: () => dispatch(authActions.validateAccountKitLoginDone())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthComponent);

@@ -10,6 +10,7 @@ import { userActions } from './redux/action-creators/user.action.creator';
 import { Dispatch } from 'redux';
 import { UserActions } from './redux/actions/user.actions';
 import { IAppState } from './redux/app-state';
+import Cominity from './components/comunities/comunities';
 
 /**
  * Interface para mapear las propiedades del 
@@ -52,6 +53,9 @@ class App extends React.Component<IAppProps, {}> {
 
           <Router>
             <Route exact path="/" component={AuthComponent} />
+            <Route exact path="/auth" component={AuthComponent} />
+            <Route exact path="/comunities" component={Cominity} />
+
           </Router>
         </main>
         <footer>

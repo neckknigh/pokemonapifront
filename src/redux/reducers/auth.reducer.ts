@@ -15,8 +15,6 @@ export const authReducer: Reducer<IAuthState, AuthActions> = (
     action: AuthActions
 ): IAuthState => {
 
-    //debugger;
-
     // Se examina la acción
     switch (action.type) {
 

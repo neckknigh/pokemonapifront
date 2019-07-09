@@ -1,4 +1,11 @@
-import { SystemConstants } from "./constants.service";
+import { SystemConstants, AuthConstants } from "./constants.service";
+import { Observable } from "rxjs/Observable";
+import { Observer } from "rxjs/Observer";
+import axios from "axios";
+import queryString from "query-string";
+import { Account } from "../models/account.model";
+import { authAdapter } from "./adapter/auth.adapter.service";
+
 
 class AuthService {
 
@@ -51,6 +58,59 @@ class AuthService {
                 debug: true
             });
         }
+    }
+
+    public getAccountKitAuth(): Observable<any> {
+        return new Observable((observer: Observer<any>) => {
+
+            // Si la url no tiene el formato correcto
+            if (!this.getUrlParams().includes(AuthConstants.ACCOUT_KIT_PARTIALLY_AUTH_STATUS)) {
+                observer.error({
+                    msg: "Ocurrió un error!"
+                });
+                observer.complete();
+            }
+            else {
+                // TODO: Sacar estas constantes de aqui
+                const objectUrlParams = this.getUrlParamsAsObject();
+                axios.get(`https://graph.accountkit.com/v1.3/access_token?grant_type=authorization_code&code=${objectUrlParams.code}&access_token=AA|368256876708367|451561d911947080fb697fcc53eef74f`)
+                    .then((response) => observer.next(response.data))
+                    .catch((error) => observer.error(error))
+                    .finally(() => observer.complete());
+            }
+        });
+    }
+
+    public getAccountKitUser(): Observable<Account> {
+        return new Observable((observer: Observer<Account>) => {
+            this.getAccountKitAuth()
+                .subscribe(
+                    (response: any) => {
+                        // TODO: Crear método que reciba un string y reemplace los params
+                        axios.get(`${AuthConstants.ACCOUNT_KIT_USER_API}${response.access_token}`)
+                            .then((response) => observer.next(
+                                authAdapter.adaptAccountKitUserForAccount(response.data)
+                            )
+                            )
+                            .catch((error) => observer.error(error))
+                            .finally(() => observer.complete());
+                    }, error => {
+                        observer.error(error);
+                        observer.complete();
+                    },
+                    () => {
+                        console.log("Get account kit user data completed");
+                    }
+                );
+        });
+    }
+
+    private getUrlParamsAsObject(): any {
+        return queryString.parse(this.getUrlParams());
+    }
+
+    private getUrlParams(): string {
+        return window.location.search;
     }
 }
 

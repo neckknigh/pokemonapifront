@@ -10,4 +10,6 @@ export interface IAccountKitSDKDoneLoadingAction extends Action<AuthConstants.AC
     loadStatus: any
 }
 
-export type AuthActions = IAccountKitSDKDoneLoadingAction;
+export interface IAccountKitLoginDoneAction extends Action<AuthConstants.ACCOUNT_KIT_LOGIN_DONE> { };
+
+export type AuthActions = IAccountKitSDKDoneLoadingAction | IAccountKitLoginDoneAction;

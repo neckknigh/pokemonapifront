@@ -3,6 +3,8 @@ import { UserConstants, AuthConstants } from '../../services/constants.service';
 import { authService } from '../../services/auth.service';
 import { authActions } from '../action-creators/auth.action.creator';
 import { IAccountKitSDKDoneLoadingAction } from '../actions/auth.actions';
+import { Account } from '../../models/account.model';
+
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
     latest: true,
@@ -20,6 +22,7 @@ export const loadAccountKitApiLogic = createLogic({
     }
 });
 
+// TODO: Si falla la carga del sdk del account kit que hacemos?
 export const doAccountKitLogin = createLogic<
     any,
     any,
@@ -44,9 +47,47 @@ export const doAccountKitLogin = createLogic<
     }
 });
 
+/**
+ * Permite validar si el usuario realizó corectamente el login
+ * utilizando el account kit.
+ */
+export const validateAccountKitLoginDone = createLogic({
+    type: AuthConstants.ACCOUNT_KIT_LOGIN_DONE,
+    latest: true,
+    validate({ action }, allow) {
+        //debugger;
+
+        // TODO: Mover esto al process?
+        authService.getAccountKitUser()
+            .subscribe(
+                (userAccount: Account) => {
+                    console.log(userAccount);
+
+                    // TODO: Después de obtener los datos, mandar una accion 
+                    // para registralos
+
+                    // Remover esto:
+                    localStorage.setItem("user", JSON.stringify(userAccount));
+                    window.location.href = "/comunities";
+
+
+                }, error => {
+                    // TODO: Que hacer cuando el usuario falla el logueo?
+                    console.log(error);
+                },
+                () => {
+                    console.log("Get accountKit User");
+                }
+            );
+    }
+});
+
+
+
 const authLogics = [
     loadAccountKitApiLogic,
-    doAccountKitLogin
+    doAccountKitLogin,
+    validateAccountKitLoginDone
 ];
 
 

@@ -9,8 +9,15 @@ const doneAccountKitSdkLoading = (loadStatus: any): AuthActions => {
     };
 
     return accountKitSDKDoneLoadingAction;
+};
+
+const validateAccountKitLoginDone = (): AuthActions => {
+    return {
+        type: AuthConstants.ACCOUNT_KIT_LOGIN_DONE
+    }
 }
 
 export const authActions = {
-    doneAccountKitSdkLoading
+    doneAccountKitSdkLoading,
+    validateAccountKitLoginDone
 }

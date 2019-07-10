@@ -1,4 +1,4 @@
-import { SystemConstants, AuthConstants } from "./constants.service";
+import { SystemConstants, AuthConstants, API_CONSTANTS } from "./constants.service";
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import axios from "axios";
@@ -102,6 +102,34 @@ class AuthService {
                         console.log("Get account kit user data completed");
                     }
                 );
+        });
+    }
+
+    public saveFacebookUser(facebookUserData: any): Observable<any> {
+
+        const { email, id, name } = facebookUserData;
+        return new Observable((observer: Observer<any>) => {
+            //debugger;
+            console.log("Guardando..", facebookUserData);
+
+            const instance = axios.create({
+                baseURL: API_CONSTANTS.API_BASE_URL
+            });
+
+
+            instance.post(API_CONSTANTS.FACEBOOK_SIGNIN_API, {
+                user: {
+                    email,
+                    name,
+                    facebookId: id,
+                    profileImage: facebookUserData.picture.data.url
+                }
+            })
+                .then(((response: any) => observer.next(response)))
+                .catch((error: any) => observer.error(error))
+                .finally(() => {
+                    observer.complete();
+                });
         });
     }
 

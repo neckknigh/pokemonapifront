@@ -2,7 +2,7 @@ import { createLogic } from 'redux-logic';
 import { UserConstants, AuthConstants } from '../../services/constants.service';
 import { authService } from '../../services/auth.service';
 import { authActions } from '../action-creators/auth.action.creator';
-import { IAccountKitSDKDoneLoadingAction } from '../actions/auth.actions';
+import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction } from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
 
 export const loadAccountKitApiLogic = createLogic({
@@ -82,12 +82,52 @@ export const validateAccountKitLoginDone = createLogic({
     }
 });
 
+/**
+ * Permite guardar los datos obtenidos del
+ * usuario de facebook en base de datos
+ */
+export const saveFacebookUser = createLogic<
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    ISaveFacebookUserAction
+>({
+    type: AuthConstants.SAVE_FACEBOOK_USER,
+    latest: true,
+    // eslint-disable-next-line
+    process({ action }, dispatch, done) {
+        //debugger;
+
+        authService.saveFacebookUser(
+            action.facebookUserData
+        ).subscribe(
+            (response: any) => {
+                console.log(response);
+
+                done();
+
+            }, error => {
+                // TODO: Que hacer cuando el usuario falla el logueo?
+                console.log(error);
+                done();
+            },
+            () => {
+                console.log("Facebook user saved");
+            }
+        );
+    }
+});
+
 
 
 const authLogics = [
     loadAccountKitApiLogic,
     doAccountKitLogin,
-    validateAccountKitLoginDone
+    validateAccountKitLoginDone,
+    saveFacebookUser
 ];
 
 

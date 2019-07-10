@@ -12,4 +12,15 @@ export interface IAccountKitSDKDoneLoadingAction extends Action<AuthConstants.AC
 
 export interface IAccountKitLoginDoneAction extends Action<AuthConstants.ACCOUNT_KIT_LOGIN_DONE> { };
 
-export type AuthActions = IAccountKitSDKDoneLoadingAction | IAccountKitLoginDoneAction;
+/**
+ * Interface de la acción que se dispara
+ * cuando se requiere almacenar el usuario de facebook
+ * en el servidor.
+ */
+export interface ISaveFacebookUserAction extends Action<AuthConstants.SAVE_FACEBOOK_USER> {
+    facebookUserData: any
+}
+
+export type AuthActions = IAccountKitSDKDoneLoadingAction |
+    IAccountKitLoginDoneAction |
+    ISaveFacebookUserAction;

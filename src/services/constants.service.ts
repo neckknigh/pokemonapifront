@@ -30,5 +30,11 @@ export enum AuthConstants {
     ACCOUNT_KIT_LOGIN_DONE = "ACCOUNT_KIT_LOGIN_DONE",
     ACCOUNT_KIT_FORM_ACTION = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/",
     ACCOUT_KIT_PARTIALLY_AUTH_STATUS = "PARTIALLY_AUTHENTICATED",
-    ACCOUNT_KIT_USER_API = "https://graph.accountkit.com/v1.3/me/?access_token="
+    ACCOUNT_KIT_USER_API = "https://graph.accountkit.com/v1.3/me/?access_token=",
+    SAVE_FACEBOOK_USER = "SAVE_FACEBOOK_USER"
+}
+
+export enum API_CONSTANTS {
+    API_BASE_URL = "http://www.comunidadesdoo.com/admon/ws",
+    FACEBOOK_SIGNIN_API = "/facebookSignIn.php"
 }

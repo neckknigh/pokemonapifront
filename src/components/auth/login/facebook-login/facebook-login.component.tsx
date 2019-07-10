@@ -2,16 +2,11 @@ import React, { Fragment } from 'react'
 import * as CSS from 'csstype';
 import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 import { Dispatch } from 'redux';
-import { UserActions } from '../../../../redux/actions/user.actions';
 import { connect } from 'react-redux';
 import { userActions } from '../../../../redux/action-creators/user.action.creator';
+import { authActions } from '../../../../redux/action-creators/auth.action.creator';
 
 interface Style extends CSS.Properties, CSS.PropertiesHyphen { }
-
-export interface IFacebookLoginComponentProps {
-    startFacebookRequestlogin: () => any,
-    setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => any
-}
 
 export interface IFacebookLoginComponentState {
 
@@ -28,12 +23,12 @@ export interface IFacebookLoginComponentState {
     buttonStyle: Style
 }
 
-class FacebookLoginComponent extends React.Component<IFacebookLoginComponentProps, IFacebookLoginComponentState> {
+class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponentState> {
 
     // Declaración del estado del componente
 
     // Declaración del estado del componente
-    constructor(props: IFacebookLoginComponentProps) {
+    constructor(props: any) {
         super(props);
         const initialState: IFacebookLoginComponentState = {
             containerStyle: {
@@ -56,9 +51,12 @@ class FacebookLoginComponent extends React.Component<IFacebookLoginComponentProp
     }
 
     handleFacebookResponse = (userInfo: ReactFacebookLoginInfo) => {
-        console.log(userInfo);
+
+        // TODO: Solo lanzar una acción, la otra que se lanze automaticamente
+
         // Se indica que se logueó con facebook correctamente
         this.props.setFacebookLoggedInStatus(true);
+        this.props.saveFacebookUser!(userInfo);
     }
 
     handleFailureFacebookLoginResponse = (response: ReactFacebookFailureResponse) => {
@@ -92,10 +90,17 @@ class FacebookLoginComponent extends React.Component<IFacebookLoginComponentProp
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch<UserActions>): IFacebookLoginComponentProps => {
-    const props: IFacebookLoginComponentProps = {
-        startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin()),
-        setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => dispatch(userActions.setFacebookLoggedInStatus(isFacebookLoggedIn))
+const mapDispatchToProps = (dispatch: Dispatch<any>): any => {
+    const props: any = {
+        startFacebookRequestlogin: () => dispatch(
+            userActions.startFacebookRequestlogin()
+        ),
+        setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => dispatch(
+            userActions.setFacebookLoggedInStatus(isFacebookLoggedIn)
+        ),
+        saveFacebookUser: (facebookUserData: ReactFacebookLoginInfo) => dispatch(
+            authActions.saveFacebookUser(facebookUserData)
+        )
     }
     return props;
 }

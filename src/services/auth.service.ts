@@ -1,10 +1,11 @@
-import { SystemConstants, AuthConstants, API_CONSTANTS } from "./constants.service";
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import axios from "axios";
-import queryString from "query-string";
 import { Account } from "../models/account.model";
-import { authAdapter } from "./adapter/auth.adapter.service";
+import { responseAdapter } from "./adapter/response-adapter.service";
+import { urlProvider } from "./config/url.service";
+import { ConfigProvider as CP } from "./config/config.service";
+import { requestAdapter } from "./adapter/request-adapter.service";
 
 
 class AuthService {
@@ -21,7 +22,7 @@ class AuthService {
             //debugger;
 
             // Si ya existe el script, no se carga nuevamente.
-            if (typeof this.rootWindow["AccountKit_OnInteractive"] === "function") {
+            if (typeof this.rootWindow[CP.get(CP.ACCOUNT_KIT_WINDOW_PROPERTY)] === "function") {
                 resolve(true);
             }
             else {
@@ -29,8 +30,7 @@ class AuthService {
                 script.type = "text/javascript";
                 script.async = true;
                 script.defer = true;
-                script.src = "https://sdk.accountkit.com/es_LA/sdk.js";
-                script.id = SystemConstants.ACCOUNT_KIT_API_ID;
+                script.src = CP.get(CP.ACCOUNT_KIT_SDK_SRC);
                 script.onload = () => {
                     this.initializeAccountKit();
                     resolve(true);
@@ -48,32 +48,45 @@ class AuthService {
         const me = this;
 
         // initialize Account Kit with CSRF protection
-        this.rootWindow["AccountKit_OnInteractive"] = function () {
-            me.rootWindow["AccountKit"].init({
-                appId: "368256876708367",
-                state: "31e2a963ada08b93e2667243805407c3",
-                version: "v1.1",
-                fbAppEventsEnabled: true,
-                redirect: "http://localhost:3000/",
-                debug: true
+        this.rootWindow[CP.get(CP.ACCOUNT_KIT_WINDOW_PROPERTY)] = function () {
+            me.rootWindow[CP.get(CP.ACCOUNT_KIT)].init({
+                appId: CP.get(CP.FACEBOOK_APP_ID),
+                state: CP.get(CP.ACCOUNT_KIT_STATE),
+                version: CP.get(CP.ACCOUNT_KIT_VERSION),
+                fbAppEventsEnabled: CP.get(CP.ACCOUNT_KIT_ENABLE_FACEBOOK_EVENTS),
+                debug: CP.get(CP.ACCOUNT_KIT_DEBUG_MODE)
             });
         }
     }
 
+    /**
+     * Permite obtener información sensible para realizar
+     * el proceso de login con account kit.
+     * 
+     */
     public getAccountKitAuth(): Observable<any> {
         return new Observable((observer: Observer<any>) => {
 
             // Si la url no tiene el formato correcto
-            if (!this.getUrlParams().includes(AuthConstants.ACCOUT_KIT_PARTIALLY_AUTH_STATUS)) {
+            if (!urlProvider.getUrlParams().includes(CP.get(CP.ACCOUT_KIT_PARTIALLY_AUTH_STATUS))) {
+
+                // TODO: Mandar un mensaje más significativo.
                 observer.error({
                     msg: "Ocurrió un error!"
                 });
                 observer.complete();
             }
             else {
-                // TODO: Sacar estas constantes de aqui
-                const objectUrlParams = this.getUrlParamsAsObject();
-                axios.get(`https://graph.accountkit.com/v1.3/access_token?grant_type=authorization_code&code=${objectUrlParams.code}&access_token=AA|368256876708367|451561d911947080fb697fcc53eef74f`)
+                axios.get(
+                    urlProvider.get(
+                        urlProvider.URL_ACCOUNT_KIT_AUTH_USER,
+                        {
+                            code: urlProvider.getUrlParamsAsObject().code,
+                            facebookappid: CP.get(CP.FACEBOOK_APP_ID),
+                            acccountkitappsecret: CP.get(CP.ACCOUNT_KIT_APP_SECRET)
+                        }
+                    )
+                )
                     .then((response) => observer.next(response.data))
                     .catch((error) => observer.error(error))
                     .finally(() => observer.complete());
@@ -87,9 +100,16 @@ class AuthService {
                 .subscribe(
                     (response: any) => {
                         // TODO: Crear método que reciba un string y reemplace los params
-                        axios.get(`${AuthConstants.ACCOUNT_KIT_USER_API}${response.access_token}`)
+                        axios.get(
+                            urlProvider.get(
+                                urlProvider.URL_USER_GRAPH_ACCOUNT_KIT,
+                                {
+                                    accessToken: response.access_token
+                                }
+                            )
+                        )
                             .then((response) => observer.next(
-                                authAdapter.adaptAccountKitUserForAccount(response.data)
+                                responseAdapter.adaptAccountKitUserForAccount(response.data)
                             )
                             )
                             .catch((error) => observer.error(error))
@@ -105,40 +125,26 @@ class AuthService {
         });
     }
 
+    /**
+     * Permite guardar los datos obtenidos de la api de facebook
+     * al servicio web de doo
+     * @param facebookUserData datos del usuario de facebook 
+     */
     public saveFacebookUser(facebookUserData: any): Observable<any> {
-
-        const { email, id, name } = facebookUserData;
         return new Observable((observer: Observer<any>) => {
-            //debugger;
             console.log("Guardando..", facebookUserData);
 
-            const instance = axios.create({
-                baseURL: API_CONSTANTS.API_BASE_URL
-            });
 
-
-            instance.post(API_CONSTANTS.FACEBOOK_SIGNIN_API, {
-                user: {
-                    email,
-                    name,
-                    facebookId: id,
-                    profileImage: facebookUserData.picture.data.url
-                }
-            })
+            axios.post(
+                urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
+                requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
+            )
                 .then(((response: any) => observer.next(response)))
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
                     observer.complete();
                 });
         });
-    }
-
-    private getUrlParamsAsObject(): any {
-        return queryString.parse(this.getUrlParams());
-    }
-
-    private getUrlParams(): string {
-        return window.location.search;
     }
 }
 

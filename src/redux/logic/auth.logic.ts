@@ -110,7 +110,7 @@ export const saveFacebookUser = createLogic<
                 done();
 
             }, error => {
-                // TODO: Que hacer cuando el usuario falla el logueo?
+                // TODO: Que hacer cuando falla el guardado del usuario?
                 console.log(error);
                 done();
             },

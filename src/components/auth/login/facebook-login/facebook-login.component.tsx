@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { userActions } from '../../../../redux/action-creators/user.action.creator';
 import { authActions } from '../../../../redux/action-creators/auth.action.creator';
+import { ConfigProvider as CP } from "../../../../services/config/config.service";
 
 interface Style extends CSS.Properties, CSS.PropertiesHyphen { }
 
@@ -20,7 +21,22 @@ export interface IFacebookLoginComponentState {
      *  Contendrá los estilos para el contenedor del
      *  botón interno de facebook.
      */
-    buttonStyle: Style
+    buttonStyle: Style,
+
+    /**
+     * Identificador de la app de facebook.
+     */
+    facebookAppId: string,
+
+    /**
+     * Listado de la info del usuario de facebook a solicitar.
+     */
+    facebookRequestedFields: string,
+
+    /**
+     * Texto a mostrar en el botón de login con facebook
+     */
+    facebookLoginInDisplay: string
 }
 
 class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponentState> {
@@ -30,15 +46,20 @@ class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponen
     // Declaración del estado del componente
     constructor(props: any) {
         super(props);
+        const facebookColor: string = CP.get(CP.FACEBOOK_COLOR);
+
         const initialState: IFacebookLoginComponentState = {
             containerStyle: {
                 width: "100%",
                 marginBottom: "0.5rem"
             },
             buttonStyle: {
-                backgroundColor: "#3b5998",
-                borderColor: "#3b5998"
-            }
+                backgroundColor: facebookColor,
+                borderColor: facebookColor
+            },
+            facebookAppId: CP.get(CP.FACEBOOK_APP_ID),
+            facebookRequestedFields: CP.get(CP.FACEBOOK_USER_REQUESTED_FIELDS),
+            facebookLoginInDisplay: CP.get(CP.FACEBOOK_LOGIN_IN_DISPLAY)
         }
 
         this.state = initialState;
@@ -68,7 +89,7 @@ class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponen
         return (
             <Fragment>
                 <FacebookLogin
-                    appId="368256876708367"
+                    appId={this.state.facebookAppId}
                     autoLoad={false}
                     containerStyle={
                         this.state.containerStyle
@@ -76,8 +97,8 @@ class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponen
                     buttonStyle={
                         this.state.buttonStyle
                     }
-                    fields="name,email,picture"
-                    textButton="Ingresar con Facebook"
+                    fields={this.state.facebookRequestedFields}
+                    textButton={this.state.facebookLoginInDisplay}
                     typeButton="button"
                     cssClass="btn btn-primary btn-lg btn-block login-btn"
                     onClick={this.handleFacebookBtnClick}

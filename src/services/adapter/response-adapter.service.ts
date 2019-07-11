@@ -1,6 +1,6 @@
 import { Account } from "../../models/account.model";
 
-class AuthAdapter {
+class ResponseAdapter {
     public adaptAccountKitUserForAccount(accountKitUserData: any): Account {
         return {
             id: accountKitUserData.id,
@@ -13,4 +13,4 @@ class AuthAdapter {
     }
 }
 
-export const authAdapter = new AuthAdapter();
+export const responseAdapter = new ResponseAdapter();

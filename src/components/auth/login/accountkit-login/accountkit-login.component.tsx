@@ -5,6 +5,7 @@ import { userActions } from '../../../../redux/action-creators/user.action.creat
 import { connect } from 'react-redux';
 import { IAppState } from '../../../../redux/app-state';
 import { SystemConstants, AuthConstants } from '../../../../services/constants.service';
+import { ConfigProvider as CP } from "../../../../services/config/config.service";
 
 export interface IAccountKitLoginComponentProps {
     readonly startAccountKitLoginRequest?: () => any,
@@ -12,18 +13,41 @@ export interface IAccountKitLoginComponentProps {
 }
 
 export interface IAccountKitLoginComponentState {
-    form: any
+    accountKitLoginInDisplay: string,
+    accountKitDebugMode: string,
+    facebookAppId: string,
+    accountKitRedirectURL: string,
+    facebookEventsEnabled: string,
+    accountKitState: string
 }
 
 class AccountKitLoginComponent extends Component<IAccountKitLoginComponentProps, IAccountKitLoginComponentState> {
 
-    private refForm: any = React.createRef();
+    private refForm: any;
+
+    constructor(props: IAccountKitLoginComponentProps) {
+        super(props);
+        this.refForm = React.createRef();
+        const initialState: IAccountKitLoginComponentState = {
+            accountKitLoginInDisplay: CP.get(CP.ACCOUNT_KIT_LOGIN_IN_DISPLAY),
+            accountKitDebugMode: String(CP.get(CP.ACCOUNT_KIT_DEBUG_MODE)),
+
+            // TODO: Mejorar esta forma de obtener la url
+            accountKitRedirectURL: window.location.href + "auth",
+            facebookEventsEnabled: String(CP.ACCOUNT_KIT_ENABLE_FACEBOOK_EVENTS),
+            facebookAppId: CP.get(CP.FACEBOOK_APP_ID),
+            accountKitState: CP.get(CP.ACCOUNT_KIT_STATE)
+        }
+        this.state = initialState;
+    }
 
     /**
      * Se lanza la validación del formulario
      * cuando se actualiza el estado/componente.
      */
     componentDidUpdate() {
+
+        // TODO: Solo disparar si hay un cambio en el estado
         this.submitForm();
     }
 
@@ -53,17 +77,17 @@ class AccountKitLoginComponent extends Component<IAccountKitLoginComponentProps,
                     className="maximun-size"
                     onSubmit={this.handleFormSubmit}
                 >
-                    <input type="hidden" name="app_id" value="368256876708367" />
-                    <input type="hidden" name="redirect" value={window.location.href + "auth"} />
-                    <input type="hidden" name="state" value="31e2a963ada08b93e2667243805407c3" />
-                    <input type="hidden" name="fbAppEventsEnabled" value="true" />
-                    <input type="hidden" name="debug" value="true" />
+                    <input type="hidden" name="app_id" value={this.state.facebookAppId} />
+                    <input type="hidden" name="redirect" value={this.state.accountKitRedirectURL} />
+                    <input type="hidden" name="state" value={this.state.accountKitState} />
+                    <input type="hidden" name="fbAppEventsEnabled" value={this.state.facebookEventsEnabled} />
+                    <input type="hidden" name="debug" value={this.state.accountKitDebugMode} />
                     <button
                         type="submit"
                         className="btn btn-success btn-lg btn-block login-btn"
                     >
-                        Ingresar con tu celular
-                </button>
+                        {this.state.accountKitLoginInDisplay}
+                    </button>
                 </form>
             </Fragment>
         );

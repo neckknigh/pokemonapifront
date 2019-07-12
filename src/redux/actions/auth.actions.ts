@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { AuthConstants } from "../../services/constants.service";
+import { Account } from "../../models/account.model";
 
 /**
  * Interface de la acción que se dispara
@@ -21,6 +22,15 @@ export interface ISaveFacebookUserAction extends Action<AuthConstants.SAVE_FACEB
     facebookUserData: any
 }
 
+/**
+ * Interface de la acción que se dispara 
+ * cuando se requiere validar el teléfono de un usuario.
+ */
+export interface IValidatePhoneUserAction extends Action<AuthConstants.VALIDATE_PHONE_USER> {
+    user: Account
+}
+
 export type AuthActions = IAccountKitSDKDoneLoadingAction |
     IAccountKitLoginDoneAction |
-    ISaveFacebookUserAction;
+    ISaveFacebookUserAction |
+    IValidatePhoneUserAction;

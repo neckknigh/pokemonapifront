@@ -5,6 +5,7 @@ class URLProvider {
     public readonly URL_ACCOUNT_KIT_AUTH_USER: string = "accountkit_auth";
     public readonly URL_USER_GRAPH_ACCOUNT_KIT: string = "accountkit_user";
     public readonly URL_USER_FACEBOOK_SIGN_IN: string = "facebook_signin";
+    public readonly URL_PHONE_USER_VALIDATION: string = "phone_user_validation";
 
     private baseUrl: string;
     private urls: any;
@@ -15,7 +16,7 @@ class URLProvider {
         this.urls[this.URL_ACCOUNT_KIT_AUTH_USER] = "https://graph.accountkit.com/v1.3/access_token?grant_type=authorization_code&code=:code&access_token=AA|:facebookappid|:acccountkitappsecret";
         this.urls[this.URL_USER_GRAPH_ACCOUNT_KIT] = "https://graph.accountkit.com/v1.3/me/?access_token=:accessToken";
         this.urls[this.URL_USER_FACEBOOK_SIGN_IN] = this.baseUrl + "facebookSignIn.php";
-
+        this.urls[this.URL_PHONE_USER_VALIDATION] = this.baseUrl + "checkPhoneNumber.php";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {

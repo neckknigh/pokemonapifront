@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { AuthActions } from '../../redux/actions/auth.actions';
 import { Dispatch } from 'redux';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
+import { Redirect } from 'react-router';
 
 export interface IAuthComponentProps {
     isFacebookLoggedIn?: boolean,
-    validateAccountKitLoginDone?: () => any
+    validateAccountKitLoginDone?: () => any,
+    userHasPendingRegistration?: boolean
 }
 
 export interface IAuthComponentState {
@@ -35,10 +37,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 
     render() {
 
-
-
-        if (this.props.isFacebookLoggedIn) {
-            console.log("Se logueó con facebook (AuthComponent");
+        if (this.props.userHasPendingRegistration) {
+            return (<Redirect to='/signup' />)
         }
 
         return (
@@ -50,7 +50,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 const mapStateToProps = (state: IAppState): IAuthComponentProps => {
     console.log(state);
     return {
-        isFacebookLoggedIn: state.userState.isFacebookLoggedIn
+        isFacebookLoggedIn: state.userState.isFacebookLoggedIn,
+        userHasPendingRegistration: state.userState.pendingRegistration
     }
 };
 

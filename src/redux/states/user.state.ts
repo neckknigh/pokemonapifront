@@ -10,5 +10,11 @@ export interface IUserState {
     readonly isFacebookLoggedIn?: boolean,
 
     // indica que está logueandose con account kit
-    readonly isAccountKitLogginIn: boolean
+    readonly isAccountKitLogginIn: boolean,
+
+    // indica que se ha logueado con account kit
+    readonly isAccountKitLoggedIn: boolean,
+
+    // Indica si necesita completar el proceso de registro
+    readonly pendingRegistration: boolean
 }

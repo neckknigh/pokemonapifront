@@ -15,7 +15,7 @@ export interface IAccountKitLoginRequestAction extends Action<UserConstants.ACCO
 
 /**
  * Interface de la acción que se dispara cuando el usuario
- * realiza el login corectamente. 
+ * realiza el login por facebook. 
  */
 export interface IFacebookLoggedSucessAction extends Action<UserConstants.FACEBOOK_LOGIN_SUCCESS> {
     isFacebookLoggedIn: boolean
@@ -28,9 +28,27 @@ export interface IFacebookLoggedSucessAction extends Action<UserConstants.FACEBO
  */
 export interface IFacebookUserRegisterRequestAction extends Action<UserConstants.FACEBOOK_USER_REGISTER_REQUEST> { }
 
+/**
+ * Interface de la acción que se dispara cuando el usuario
+ * se ha logueado por la api de accountKit.
+ */
+export interface IAccountKitLoggedSucessAction extends Action<UserConstants.ACCOUNT_KIT_LOGIN_SUCCESS> {
+    isAccountKitLoggedIn: boolean
+}
+
+/**
+ * Interface de la acción que se dispara cuando el usuario
+ * se logueó por account kit y requiere registro.
+ */
+export interface IHasPendingRegistrationAction extends Action<UserConstants.HAS_PENDING_REGISTRATION> {
+    hasPendingRegistration: boolean
+}
+
 // Se exporta el tipo con las dos acciones
 export type UserActions =
     IFacebookLoginRequestAction |
     IFacebookLoggedSucessAction |
     IFacebookUserRegisterRequestAction |
-    IAccountKitLoginRequestAction;
+    IAccountKitLoginRequestAction |
+    IAccountKitLoggedSucessAction |
+    IHasPendingRegistrationAction;

@@ -11,6 +11,10 @@ class ResponseAdapter {
             }
         }
     }
+
+    public adaptPhoneUserValidationResponse(rawResponse: any) {
+        return rawResponse.data;
+    }
 }
 
 export const responseAdapter = new ResponseAdapter();

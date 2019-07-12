@@ -1,6 +1,7 @@
 import { AuthActions, IAccountKitSDKDoneLoadingAction } from "../actions/auth.actions";
 import { AuthConstants } from "../../services/constants.service";
 import { ReactFacebookLoginInfo } from "react-facebook-login";
+import { Account } from "../../models/account.model";
 
 const doneAccountKitSdkLoading = (loadStatus: any): AuthActions => {
     //debugger;
@@ -30,8 +31,21 @@ const saveFacebookUser = (facebookUserData: ReactFacebookLoginInfo): AuthActions
     }
 }
 
+/**
+ * Action-creator para lanzar la acción de validación
+ * del teléfono del usuario.
+ */
+const startValidatingPhoneUser = (user: Account): AuthActions => {
+    return {
+        type: AuthConstants.VALIDATE_PHONE_USER,
+        user
+    }
+}
+
+
 export const authActions = {
     doneAccountKitSdkLoading,
     validateAccountKitLoginDone,
-    saveFacebookUser
+    saveFacebookUser,
+    startValidatingPhoneUser
 }

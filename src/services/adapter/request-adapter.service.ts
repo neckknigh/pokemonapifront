@@ -1,7 +1,8 @@
+import { Account } from "../../models/account.model";
+
 class RequestAdapter {
 
-
-    getBodyDataForSaveFacebookUser(
+    public getBodyDataForSaveFacebookUser(
         facebookUserData: any
     ): string {
         const {
@@ -12,7 +13,7 @@ class RequestAdapter {
             gender,
             birthday
         } = facebookUserData;
-        let body = {
+        const body = {
             user: {
                 email,
                 name: first_name,
@@ -28,6 +29,19 @@ class RequestAdapter {
                 sex: gender
             }
         };
+
+        return JSON.stringify(body);
+    }
+
+    public getBodyDataForPhoneUserValidation(
+        user: Account
+    ): string {
+        const { phone } = user;
+        const body = {
+            user: {
+                phone: phone!.number + "22"
+            }
+        }
 
         return JSON.stringify(body);
     }

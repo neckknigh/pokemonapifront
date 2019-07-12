@@ -134,7 +134,6 @@ class AuthService {
         return new Observable((observer: Observer<any>) => {
             console.log("Guardando..", facebookUserData);
 
-
             axios.post(
                 urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
                 requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
@@ -144,6 +143,27 @@ class AuthService {
                 .finally(() => {
                     observer.complete();
                 });
+        });
+    }
+
+    public validatePhoneUser(userData: Account): Observable<any> {
+        return new Observable((observer: Observer<any>) => {
+            console.log("Phone number validation..", userData);
+
+            axios.post(
+                urlProvider.get(urlProvider.URL_PHONE_USER_VALIDATION),
+                requestAdapter.getBodyDataForPhoneUserValidation(userData)
+            )
+                .then(((response: any) => observer.next(
+                    responseAdapter.adaptPhoneUserValidationResponse(
+                        response
+                    )
+                )))
+                .catch((error: any) => observer.error(error))
+                .finally(() => {
+                    observer.complete();
+                });
+
         });
     }
 }

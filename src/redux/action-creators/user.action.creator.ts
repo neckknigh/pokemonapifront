@@ -1,5 +1,5 @@
 import { UserConstants } from "../../services/constants.service";
-import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction } from "../actions/user.actions";
+import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction, IAccountKitLoggedSucessAction, IHasPendingRegistrationAction } from "../actions/user.actions";
 
 /**
  * Accion-creators para el usuario.
@@ -13,7 +13,7 @@ const startFacebookRequestlogin = (): UserActions => {
         type: UserConstants.FACEBOOK_LOGIN_REQUEST
     };
     return facebookLoginRequestAction;
-}
+};
 
 /**
  * Accion-creator de login de usuario con Account kit
@@ -24,7 +24,7 @@ const startAccountKitLoginRequest = (): UserActions => {
     }
 
     return accountKitLoginRequestAction;
-}
+};
 
 /**
  * Accion-creator de inicio de registro de usuario
@@ -35,7 +35,7 @@ const startFacebookUserRegisterRequest = (): UserActions => {
         type: UserConstants.FACEBOOK_USER_REGISTER_REQUEST
     };
     return facebookUserRegisterRequestAction;
-}
+};
 
 /**
  * Action-creator para guardar el estado se logueado
@@ -43,18 +43,38 @@ const startFacebookUserRegisterRequest = (): UserActions => {
  * @param facebookLoggedIn true si el usuario se logueó correctamente
  *                         con facebook, false de otra forma.
  */
-const setFacebookLoggedInStatus = (facebookLoggedIn: boolean): UserActions => {
+const setFacebookLoggedInStatus = (isFacebookLoggedIn: boolean): UserActions => {
     const facebookLoggedSucessAction: IFacebookLoggedSucessAction = {
         type: UserConstants.FACEBOOK_LOGIN_SUCCESS,
-        isFacebookLoggedIn: facebookLoggedIn
+        isFacebookLoggedIn
     }
 
     return facebookLoggedSucessAction;
-}
+};
+
+const setAccountKitLoggedInStatus = (isAccountKitLoggedIn: boolean): UserActions => {
+    const accountKitLoggedInAction: IAccountKitLoggedSucessAction = {
+        type: UserConstants.ACCOUNT_KIT_LOGIN_SUCCESS,
+        isAccountKitLoggedIn
+    };
+
+    return accountKitLoggedInAction;
+};
+
+const setUserHasPendingRegistration = (hasPendingRegistration: boolean): UserActions => {
+    const hasPendingRegistrationAction: IHasPendingRegistrationAction = {
+        type: UserConstants.HAS_PENDING_REGISTRATION,
+        hasPendingRegistration
+    }
+
+    return hasPendingRegistrationAction;
+};
 
 export const userActions = {
     startFacebookRequestlogin,
     startFacebookUserRegisterRequest,
     setFacebookLoggedInStatus,
-    startAccountKitLoginRequest
+    startAccountKitLoginRequest,
+    setAccountKitLoggedInStatus,
+    setUserHasPendingRegistration
 }

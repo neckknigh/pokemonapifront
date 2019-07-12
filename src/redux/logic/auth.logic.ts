@@ -2,8 +2,9 @@ import { createLogic } from 'redux-logic';
 import { UserConstants, AuthConstants } from '../../services/constants.service';
 import { authService } from '../../services/auth.service';
 import { authActions } from '../action-creators/auth.action.creator';
-import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction } from '../actions/auth.actions';
+import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction, IValidatePhoneUserAction } from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
+import { userActions } from '../action-creators/user.action.creator';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -54,31 +55,27 @@ export const doAccountKitLogin = createLogic<
 export const validateAccountKitLoginDone = createLogic({
     type: AuthConstants.ACCOUNT_KIT_LOGIN_DONE,
     latest: true,
-    validate({ action }, allow) {
+    // eslint-disable-next-line
+    async process({ action }, dispatch, done) {
         //debugger;
 
-        // TODO: Mover esto al process?
         authService.getAccountKitUser()
             .subscribe(
                 (userAccount: Account) => {
+                    debugger;
                     console.log(userAccount);
-
-                    // TODO: Después de obtener los datos, mandar una accion 
-                    // para registralos
-
-                    // Remover esto:
-                    localStorage.setItem("user", JSON.stringify(userAccount));
-                    window.location.href = "/comunities";
-
-
+                    dispatch(authActions.startValidatingPhoneUser(userAccount));
                 }, error => {
                     // TODO: Que hacer cuando el usuario falla el logueo?
                     console.log(error);
+                    done();
                 },
                 () => {
                     console.log("Get accountKit User");
+                    done();
                 }
             );
+
     }
 });
 
@@ -121,13 +118,73 @@ export const saveFacebookUser = createLogic<
     }
 });
 
+/**
+ * Permite validar si el teléfono del usuario
+ * ya se encuentra registrado en el sistema.
+ */
+export const validatePhoneUser = createLogic<
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    IValidatePhoneUserAction
+>({
+    type: AuthConstants.VALIDATE_PHONE_USER,
+    latest: true,
+    // eslint-disable-next-line
+    process({ action }, dispatch, done) {
+
+        console.log("llego validatePhoneUser", action);
+        let hasPendingRegistration = false;
+
+        authService.validatePhoneUser(
+            action.user
+        ).subscribe(
+            (response: any) => {
+                debugger;
+                console.log(response);
+
+                if (response.status !== 1) {
+                    hasPendingRegistration = true;
+                }
+                else {
+                    // Se indica que el usuario se logueó correctamente
+                    dispatch(
+                        userActions.setAccountKitLoggedInStatus(true)
+                    );
+                }
+
+                // Se indica si el usuario necesita completar su registro
+                dispatch(
+                    userActions.setUserHasPendingRegistration(
+                        hasPendingRegistration
+                    )
+                );
+
+                done();
+
+            }, error => {
+                // TODO: Que hacer cuando falla el guardado del usuario?
+                console.log(error);
+                done();
+            },
+            () => {
+                console.log("Phone user Validated");
+            }
+        );
+    }
+});
+
 
 
 const authLogics = [
     loadAccountKitApiLogic,
     doAccountKitLogin,
     validateAccountKitLoginDone,
-    saveFacebookUser
+    saveFacebookUser,
+    validatePhoneUser
 ];
 
 

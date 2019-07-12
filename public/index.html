@@ -6,6 +6,7 @@
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -39,91 +40,7 @@
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
-
-  <!--
-
-    TODO: REMOVER ESTE CÓDIGO DE AQUÍ
-
-  <script>
-    // initialize Account Kit with CSRF protection
-    /*
-    AccountKit_OnInteractive = function () {
-      AccountKit.init({
-        appId: "368256876708367",
-        state: "31e2a963ada08b93e2667243805407c3",
-        version: "v1.1",
-        fbAppEventsEnabled: true,
-        redirect: "http://localhost/",
-        debug: true
-      });
-    };
-    */
-
-    // login callback
-    function loginCallback(response) {
-
-      console.log(response);
-
-      if (response.status === "PARTIALLY_AUTHENTICATED") {
-        var code = response.code;
-        var csrf = response.state;
-        // Send code to server to exchange for access token
-      } else if (response.status === "NOT_AUTHENTICATED") {
-        // handle authentication failure
-      } else if (response.status === "BAD_PARAMS") {
-        // handle bad parameters
-      }
-    }
-
-    // phone form submission handler
-    function smsLogin() {
-      var countryCode = document.getElementById("country_code").value;
-      var phoneNumber = document.getElementById("phone_number").value;
-      AccountKit.login(
-        'PHONE', {
-          countryCode: countryCode,
-          phoneNumber: phoneNumber
-        }, // will use default values if not specified
-        loginCallback
-      );
-    }
-
-
-    // email form submission handler
-    function emailLogin() {
-      var emailAddress = document.getElementById("email").value;
-      AccountKit.login(
-        'EMAIL', {
-          emailAddress: emailAddress
-        },
-        loginCallback
-      );
-    }
-  </script>
-
-
-  <input value="+1" id="country_code" />
-  <input placeholder="phone number" id="phone_number" />
-  <button onclick="smsLogin();">Login via SMS</button>
-  <div>OR</div>
-  <input placeholder="email" id="email" />
-  <button onclick="emailLogin();">Login via Email</button>
-
-
-  <form method="post" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
-    <input type="hidden" name="app_id" value="368256876708367">
-    <input type="hidden" name="redirect" value="http://localhost:3000/auth">
-    <input type="hidden" name="state" value="31e2a963ada08b93e2667243805407c3">
-    <input type="hidden" name="fbAppEventsEnabled" value=false>
-    <input type="hidden" name="debug" value=true>
-    <button type="submit">Login</button>
-  </form>
-
--->
-
-
+      -->
 </body>
 
 </html>

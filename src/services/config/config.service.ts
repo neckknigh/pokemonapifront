@@ -14,6 +14,7 @@ export class ConfigProvider {
     static readonly FACEBOOK_USER_REQUESTED_FIELDS: string = "FACEBOOK_USER_REQUESTED_FIELDS";
     static readonly FACEBOOK_LOGIN_IN_DISPLAY: string = "FACEBOOK_LOGIN_IN_DISPLAY";
     static readonly FACEBOOK_COLOR: string = "FACEBOOK_COLOR";
+    static readonly LOADING_TEXT_DISPLAY: string = "LOADING_TEXT_DISPLAY";
 
 
     private static configs: any;
@@ -37,6 +38,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.FACEBOOK_USER_REQUESTED_FIELDS] = "first_name,last_name,email,birthday,gender,picture";
         ConfigProvider.configs[ConfigProvider.FACEBOOK_LOGIN_IN_DISPLAY] = "Ingresar con Facebook";
         ConfigProvider.configs[ConfigProvider.FACEBOOK_COLOR] = "#3b5998";
+        ConfigProvider.configs[ConfigProvider.LOADING_TEXT_DISPLAY] = "Cargando...";
 
     }
 

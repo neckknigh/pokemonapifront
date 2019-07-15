@@ -22,7 +22,8 @@ export enum UserConstants {
 // Constantes del sistema
 export enum SystemConstants {
     ACCOUNT_KIT_API_ID = "accountkitapi",
-    POST_METHOD = "post"
+    POST_METHOD = "post",
+    APP_IS_LOADING = "APP_IS_LOADING"
 };
 
 // Constantes de Autorización

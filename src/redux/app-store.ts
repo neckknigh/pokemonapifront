@@ -8,6 +8,7 @@ import { authReducer } from './reducers/auth.reducer';
 import { IAppState } from './app-state';
 import { createLogicMiddleware } from 'redux-logic';
 import appLogic from './app-logic';
+import { systemReducer } from './reducers/system.reducer';
 
 const depts = {
     httpClient: axios
@@ -20,7 +21,8 @@ const composedMiddleware = compose(applyMiddleware(logicMiddleware));
 
 export const rootReducer = combineReducers<IAppState>({
     userState: userReducer,
-    authState: authReducer
+    authState: authReducer,
+    systemState: systemReducer
 });
 
 const appStore = createStore(

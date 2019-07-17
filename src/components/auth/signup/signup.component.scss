@@ -1,5 +1,46 @@
 @import "../../../styles/_main";
 
+$signup-inputs-padding: 1.3rem;
+$signup-btn-padding: 0.4rem;
+
 .signup-container {
-    color: black;
+    font-family: 'Roboto Bold';
+    @include maximun-size();
+
+    .sign-up-card {
+        margin-top: 4.5rem;
+        width: 26rem;
+        border: 1px solid $ligh-gray-color;
+
+        .signup-card-body {
+            width: 20rem;
+
+            .signup-inputs-container {
+                width: $maximum-percentage;
+                margin-top: 1rem;
+                padding-left: $signup-inputs-padding;
+                padding-right: $signup-inputs-padding;
+
+                .form-control+.form-control {
+                    margin-top: 0.6rem;
+                }
+            }
+
+            .signup-card-body-btn {
+                margin-top: 1rem;
+                padding-left: $signup-btn-padding;
+                padding-right: $signup-btn-padding;
+
+                .signup-btn {
+                    @include border-radius(18px);
+                    font-size: 12px;
+                }
+            }
+        }
+
+
+    }
+
+
+
 }

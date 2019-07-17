@@ -42,11 +42,11 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
 
     /*
-      TODO: Testing for the loading screen overlay
     setTimeout(() => {
       this.props.setAppLoadingStatus!(true);
     }, 4000);
     */
+
 
   }
 
@@ -63,7 +63,7 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
         <div className="maximun-size">
           <HeaderComponent />
-          <main className="test-border main-container maximun-size">
+          <main className="main-container maximun-size">
 
             <Router>
               <Route exact path="/" component={AuthComponent} />

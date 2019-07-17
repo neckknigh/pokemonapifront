@@ -1,9 +1,7 @@
 @import "../../../styles/_main";
 
 .login-container {
-    p {
-        margin-bottom: 0;
-    }
+    font-family: 'Roboto', sans-serif;
 
     @include maximun-size();
 
@@ -14,22 +12,6 @@
 
         .login-card {
             @include border-radius(6px);
-
-            .logo-doo-simple {
-                width: 7em;
-            }
-
-            .slogan-doo {
-                color: $dark-gray;
-                font-size: 19px;
-            }
-
-            .line-on-side {
-                padding-left: 1em;
-                padding-right: 1em;
-                margin-top: 1em;
-                @include text-between-lines();
-            }
 
             .login-buttons {
                 padding-left: 2em;

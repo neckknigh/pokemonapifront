@@ -27,7 +27,23 @@
     @include align-items(center);
 }
 
+.flex-column-center {
+    @include flex-display();
+    @include flex-direction(column);
+    @include justify-content(center);
+}
+
 .maximun-size {
     height: $maximum-percentage;
     width: $maximum-percentage;
+}
+
+.hint {
+    font-family: Roboto;
+    color: $hint-text-color;
+    font-size: 12px;
+}
+
+.form-control {
+    font-size: 12px !important;
 }

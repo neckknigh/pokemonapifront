@@ -1,0 +1,32 @@
+@import "../../../styles/_main";
+
+
+.auth-header-outer-container {
+    .auth-header-inner-container {
+
+        padding-top: 0.5rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+
+        .logo-doo-simple {
+            width: 7em;
+        }
+
+        .auth-header-slogan {
+            font-size: 20px;
+            font-family: Roboto Bold;
+        }
+    }
+
+    .auth-line-on-side-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-top: 1rem;
+
+        .line-on-side {
+            @include text-between-lines($border-color:$ligh-gray-color);
+        }
+    }
+
+
+}

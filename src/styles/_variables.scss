@@ -10,5 +10,17 @@ $light-blue-doo: #2EE2EF;
 $blue-doo: #349CBB;
 $dark-gray: #A9A9A9;
 $facebook-color: #3b5998;
+$hint-text-color: #919191;
+$ligh-gray-color: #DEDEDE;
 
 $test-border: 1px solid black;
+
+@font-face {
+    font-family: Roboto Bold;
+    src: url("/fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("/fonts/Roboto/Roboto-Regular.ttf");
+}

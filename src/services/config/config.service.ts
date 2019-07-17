@@ -15,7 +15,9 @@ export class ConfigProvider {
     static readonly FACEBOOK_LOGIN_IN_DISPLAY: string = "FACEBOOK_LOGIN_IN_DISPLAY";
     static readonly FACEBOOK_COLOR: string = "FACEBOOK_COLOR";
     static readonly LOADING_TEXT_DISPLAY: string = "LOADING_TEXT_DISPLAY";
-
+    static readonly SLOGAN_DOO: string = "SLOGAN_DOO";
+    static readonly SIGN_UP_HINT: string = "SIGN_UP_HINT";
+    static readonly LOGIN_HINT: string = "LOGIN_HINT";
 
     private static configs: any;
 
@@ -39,6 +41,9 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.FACEBOOK_LOGIN_IN_DISPLAY] = "Ingresar con Facebook";
         ConfigProvider.configs[ConfigProvider.FACEBOOK_COLOR] = "#3b5998";
         ConfigProvider.configs[ConfigProvider.LOADING_TEXT_DISPLAY] = "Cargando...";
+        ConfigProvider.configs[ConfigProvider.SLOGAN_DOO] = "Todo el barrio en tu bolsillo";
+        ConfigProvider.configs[ConfigProvider.SIGN_UP_HINT] = "Completa el registro";
+        ConfigProvider.configs[ConfigProvider.LOGIN_HINT] = "Ingresar";
 
     }
 

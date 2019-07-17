@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import "./login.comṕonent.scss";
 import FacebookLoginComponent from './facebook-login/facebook-login.component';
 import AccountKitLoginComponent from "./accountkit-login/accountkit-login.component";
+import AuthHeaderComponent from '../auth-header.component/auth-header.component';
+import { ConfigProvider as CP } from '../../../services/config/config.service';
 
-export interface LoginComponentProps {
-
-}
 
 export interface LoginComponentState {
+    logInHint: string
 }
 
-class LoginComponent extends Component<LoginComponentProps, LoginComponentState> {
-    //state = { :  }
+class LoginComponent extends Component<{}, LoginComponentState> {
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            logInHint: CP.get(CP.LOGIN_HINT)
+        }
+
+    }
 
 
     render() {
@@ -20,15 +28,7 @@ class LoginComponent extends Component<LoginComponentProps, LoginComponentState>
             <div className="grid login-container">
                 <div className="column-50 left-container">
                     <div className="test-border login-card flex-column-center-items">
-                        <div>
-                            <img className="logo-doo-simple" src="/img/login/simple-doo-icon.png" alt="Icon Doo" />
-                        </div>
-                        <div>
-                            <h1 className="slogan-doo">Todo el barrio en tu mano</h1>
-                        </div>
-                        <div className="line-on-side">
-                            <p>Ingresar</p>
-                        </div>
+                        <AuthHeaderComponent hintText={this.state.logInHint} />
                         <div className=" login-buttons flex-column-center-items">
                             <FacebookLoginComponent />
                             <AccountKitLoginComponent />

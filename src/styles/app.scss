@@ -25,7 +25,7 @@ html {
     //background-color: $background-color;
     overflow-x: hidden;
     // overflow-y: hidden;
-    font-family: Metric;
+    @include roboto-regular-font();
 
     a {
       text-decoration: none;
@@ -45,7 +45,7 @@ html {
     code,
     span,
     button {
-      font-family: Metric;
+      @include roboto-regular-font();
     }
 
     button {
@@ -109,6 +109,10 @@ html {
 
     .main-container {
       padding-top: $header-height;
+    }
+
+    p {
+      margin: 0;
     }
 
   }

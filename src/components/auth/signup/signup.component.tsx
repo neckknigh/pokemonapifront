@@ -35,11 +35,11 @@ class SignUpComponent extends React.Component<SignUpComponentProps, SignUpCompon
          * No se podrá acceder a esta ruta si no se ha realizado
          * el login con account kit
          */
-        /*
+
         if (!this.props.userHasPendingRegistration) {
             return (<Redirect to='/' />)
         }
-        */
+
 
         return (
             <div className="signup-container flex-column-center-items">

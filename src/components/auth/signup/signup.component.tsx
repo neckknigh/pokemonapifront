@@ -1,32 +1,56 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import "./signup.component.scss";
 import { Redirect } from 'react-router';
 import { IAppState } from '../../../redux/app-state';
 import { connect } from 'react-redux';
-import AuthHeaderComponent from '../auth-header.component/auth-header.component';
+import AuthHeaderComponent from '../auth-header/auth-header.component';
 import { ConfigProvider as CP } from '../../../services/config/config.service';
+import AuthFooterComponent from '../auth-footer/auth-footer.component';
+import { Dispatch } from 'redux';
+import { UserActions } from '../../../redux/actions/user.actions';
+import { userActions } from '../../../redux/action-creators/user.action.creator';
 
 export interface SignUpComponentProps {
-    readonly userHasPendingRegistration: boolean
+    readonly userHasPendingRegistration?: boolean,
+    readonly startSignUpUserRequest?: (userName: string, email: string) => any
 }
 
 export interface SignUpComponentState {
-    signUpHint: string
+    signUpHint?: string,
+    userNamePlaceHolder?: string,
+    emailPlaceHolder?: string,
+    userName?: string,
+    email?: string
 }
 
-class SignUpComponent extends React.Component<SignUpComponentProps, SignUpComponentState> {
+class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentState> {
 
     constructor(props: SignUpComponentProps) {
         super(props);
 
         this.state = {
-            signUpHint: CP.get(CP.SIGN_UP_HINT)
+            signUpHint: CP.get(CP.SIGN_UP_HINT),
+            userNamePlaceHolder: CP.get(CP.USERNAME_PLACEHOLDER),
+            emailPlaceHolder: CP.get(CP.EMAIL_PLACEHOLDER),
+            userName: "",
+            email: ""
         }
     }
 
-    handleFormSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault();
+    handleSignUpBtnClick = () => {
         console.log("click");
+        const { userName, email } = this.state;
+
+        // Se lanza la petición de registro
+        this.props.startSignUpUserRequest!(
+            userName!,
+            email!
+        );
+    }
+
+    handleChange = (event: any) => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     }
 
     render() {
@@ -40,28 +64,44 @@ class SignUpComponent extends React.Component<SignUpComponentProps, SignUpCompon
             return (<Redirect to='/' />)
         }
 
-
         return (
             <div className="signup-container flex-column-center-items">
                 <div className="sign-up-card flex-column-center-items">
 
-                    <AuthHeaderComponent hintText={this.state.signUpHint} />
+                    <AuthHeaderComponent hintText={this.state.signUpHint!} />
 
                     <div className="signup-card-body">
                         <div className="signup-inputs-container flex-column-center-items ">
-                            <input type="password" className="form-control" placeholder="Ingresa un nombre de usuario..." />
-                            <input type="password" className="form-control" placeholder="Ingresa email..." />
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder={this.state.userNamePlaceHolder}
+                                value={this.state.userName}
+                                onChange={this.handleChange}
+                                name="userName"
+                            />
+
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder={this.state.emailPlaceHolder}
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                                name="email"
+                            />
 
                         </div>
                         <div className="signup-card-body-btn">
                             <button
-                                type="submit"
+                                type="button"
                                 className="btn btn-success btn-lg btn-block signup-btn"
+                                onClick={this.handleSignUpBtnClick}
                             >
                                 Continuar
-                        </button>
+                            </button>
                         </div>
                     </div>
+                    <AuthFooterComponent />
 
                 </div>
 
@@ -74,6 +114,12 @@ const mapStateToProps = (state: IAppState): SignUpComponentProps => {
     return {
         userHasPendingRegistration: state.userState.pendingRegistration
     }
-}
+};
 
-export default connect(mapStateToProps)(SignUpComponent);
+const mapDispathToProps = (dispatch: Dispatch<UserActions>): SignUpComponentProps => {
+    return {
+        startSignUpUserRequest: (userName: string, email: string) => dispatch(userActions.startSignUpUserRequest(userName, email))
+    }
+};
+
+export default connect(mapStateToProps, mapDispathToProps)(SignUpComponent);

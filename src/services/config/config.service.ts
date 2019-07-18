@@ -18,6 +18,10 @@ export class ConfigProvider {
     static readonly SLOGAN_DOO: string = "SLOGAN_DOO";
     static readonly SIGN_UP_HINT: string = "SIGN_UP_HINT";
     static readonly LOGIN_HINT: string = "LOGIN_HINT";
+    static readonly LEGAL_TERMS: string = "LEGAL_TERMS";
+    static readonly GO_TO_WEBSITE_DISPLAY: string = "GO_TO_WEBSITE_DISPLAY";
+    static readonly USERNAME_PLACEHOLDER: string = "USERNAME_PLACEHOLDER";
+    static readonly EMAIL_PLACEHOLDER: string = "EMAIL_PLACEHOLDER";
 
     private static configs: any;
 
@@ -44,6 +48,10 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.SLOGAN_DOO] = "Todo el barrio en tu bolsillo";
         ConfigProvider.configs[ConfigProvider.SIGN_UP_HINT] = "Completa el registro";
         ConfigProvider.configs[ConfigProvider.LOGIN_HINT] = "Ingresar";
+        ConfigProvider.configs[ConfigProvider.LEGAL_TERMS] = "Al hacer clic, aceptas los Términos y Condiciones de Uso y Políticas de Habeas Data";
+        ConfigProvider.configs[ConfigProvider.GO_TO_WEBSITE_DISPLAY] = "Ir al sitio web";
+        ConfigProvider.configs[ConfigProvider.USERNAME_PLACEHOLDER] = "Ingresa un nombre de usuario...";
+        ConfigProvider.configs[ConfigProvider.EMAIL_PLACEHOLDER] = "Ingresa email...";
 
     }
 

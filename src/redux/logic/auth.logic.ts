@@ -5,6 +5,7 @@ import { authActions } from '../action-creators/auth.action.creator';
 import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction, IValidatePhoneUserAction } from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
 import { userActions } from '../action-creators/user.action.creator';
+import { ISignUpUserRequestAction } from '../actions/user.actions';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -56,7 +57,7 @@ export const validateAccountKitLoginDone = createLogic({
     type: AuthConstants.ACCOUNT_KIT_LOGIN_DONE,
     latest: true,
     // eslint-disable-next-line
-    async process({ action }, dispatch, done) {
+    process({ }, dispatch, done) {
         //debugger;
 
         authService.getAccountKitUser()
@@ -177,6 +178,28 @@ export const validatePhoneUser = createLogic<
     }
 });
 
+/**
+ * Permite validar si el teléfono del usuario
+ * ya se encuentra registrado en el sistema.
+ */
+export const signUpUser = createLogic<
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    ISignUpUserRequestAction
+>({
+    type: UserConstants.SIGNUP_USER_REQUEST,
+    latest: true,
+    // eslint-disable-next-line
+    process({ action }, dispatch, done) {
+
+        console.log("llego la acción", action);
+    }
+});
+
 
 
 const authLogics = [
@@ -184,7 +207,8 @@ const authLogics = [
     doAccountKitLogin,
     validateAccountKitLoginDone,
     saveFacebookUser,
-    validatePhoneUser
+    validatePhoneUser,
+    signUpUser
 ];
 
 

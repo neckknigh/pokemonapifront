@@ -44,6 +44,10 @@ export interface IHasPendingRegistrationAction extends Action<UserConstants.HAS_
     hasPendingRegistration: boolean
 }
 
+export interface ISignUpUserRequestAction extends Action<UserConstants.SIGNUP_USER_REQUEST> {
+    user: any
+}
+
 // Se exporta el tipo con las dos acciones
 export type UserActions =
     IFacebookLoginRequestAction |
@@ -51,4 +55,5 @@ export type UserActions =
     IFacebookUserRegisterRequestAction |
     IAccountKitLoginRequestAction |
     IAccountKitLoggedSucessAction |
-    IHasPendingRegistrationAction;
+    IHasPendingRegistrationAction |
+    ISignUpUserRequestAction;

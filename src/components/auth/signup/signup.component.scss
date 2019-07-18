@@ -4,7 +4,6 @@ $signup-inputs-padding: 1.3rem;
 $signup-btn-padding: 0.4rem;
 
 .signup-container {
-    font-family: 'Roboto Bold';
     @include maximun-size();
 
     .sign-up-card {

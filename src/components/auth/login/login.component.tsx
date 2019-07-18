@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import "./login.comṕonent.scss";
 import FacebookLoginComponent from './facebook-login/facebook-login.component';
 import AccountKitLoginComponent from "./accountkit-login/accountkit-login.component";
-import AuthHeaderComponent from '../auth-header.component/auth-header.component';
 import { ConfigProvider as CP } from '../../../services/config/config.service';
+import AuthHeaderComponent from '../auth-header/auth-header.component';
 
 
 export interface LoginComponentState {

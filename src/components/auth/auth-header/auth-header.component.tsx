@@ -31,7 +31,7 @@ class AuthHeaderComponent extends Component<AuthHeaderComponentProps, AuthHeader
                         <h1 className="auth-header-slogan">{this.state.dooSlogan}</h1>
                     </div>
                 </div>
-                <div className="auth-line-on-side-container">
+                <div className="line-on-side-container">
                     <div className="line-on-side">
                         <p className="hint">{this.props.hintText}</p>
                     </div>

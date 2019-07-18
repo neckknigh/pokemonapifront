@@ -1,5 +1,5 @@
 import { UserConstants } from "../../services/constants.service";
-import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction, IAccountKitLoggedSucessAction, IHasPendingRegistrationAction } from "../actions/user.actions";
+import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction, IAccountKitLoggedSucessAction, IHasPendingRegistrationAction, ISignUpUserRequestAction } from "../actions/user.actions";
 
 /**
  * Accion-creators para el usuario.
@@ -70,11 +70,23 @@ const setUserHasPendingRegistration = (hasPendingRegistration: boolean): UserAct
     return hasPendingRegistrationAction;
 };
 
+const startSignUpUserRequest = (userName: string, email: string): UserActions => {
+    const signUpUserRequestAction: ISignUpUserRequestAction = {
+        type: UserConstants.SIGNUP_USER_REQUEST,
+        user: {
+            userName,
+            email
+        }
+    }
+    return signUpUserRequestAction;
+};
+
 export const userActions = {
     startFacebookRequestlogin,
     startFacebookUserRegisterRequest,
     setFacebookLoggedInStatus,
     startAccountKitLoginRequest,
     setAccountKitLoggedInStatus,
-    setUserHasPendingRegistration
+    setUserHasPendingRegistration,
+    startSignUpUserRequest
 }

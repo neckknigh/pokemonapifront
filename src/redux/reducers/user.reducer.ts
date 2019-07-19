@@ -18,7 +18,7 @@ export const userReducer: Reducer<IUserState, UserActions> = (
     state: IUserState = initialUserState,
     action: UserActions
 ): IUserState => {
-    debugger;
+    //debugger;
 
     // Se examina la acción
     switch (action.type) {

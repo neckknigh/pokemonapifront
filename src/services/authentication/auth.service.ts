@@ -1,16 +1,18 @@
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
-import axios from "axios";
-import { Account } from "../models/account.model";
-import { responseAdapter } from "./adapter/response-adapter.service";
-import { urlProvider } from "./config/url.service";
-import { ConfigProvider as CP } from "./config/config.service";
-import { requestAdapter } from "./adapter/request-adapter.service";
+import { Account } from "../../models/account.model";
+import { responseAdapter } from "../adapter/response-adapter.service";
+import { urlProvider } from "../config/url.service";
+import { ConfigProvider as CP } from "../config/config.service";
+import { requestAdapter } from "../adapter/request-adapter.service";
+import { clientService } from "../config/client.service";
 
 
 class AuthService {
 
+    public static readonly USER_ID_FIELD_NAME = "user_id";
     private rootWindow: any = window;
+    private accountKitData: any = null;
 
     /**
     * Permite cargar el api (sdk) de Facebook Account Kit
@@ -77,7 +79,7 @@ class AuthService {
                 observer.complete();
             }
             else {
-                axios.get(
+                clientService.get(
                     urlProvider.get(
                         urlProvider.URL_ACCOUNT_KIT_AUTH_USER,
                         {
@@ -100,7 +102,7 @@ class AuthService {
                 .subscribe(
                     (response: any) => {
                         // TODO: Crear método que reciba un string y reemplace los params
-                        axios.get(
+                        clientService.get(
                             urlProvider.get(
                                 urlProvider.URL_USER_GRAPH_ACCOUNT_KIT,
                                 {
@@ -108,9 +110,12 @@ class AuthService {
                                 }
                             )
                         )
-                            .then((response) => observer.next(
-                                responseAdapter.adaptAccountKitUserForAccount(response.data)
-                            )
+                            .then((response) => {
+                                this.accountKitData = responseAdapter.adaptAccountKitUserForAccount(response.data);
+                                return observer.next(
+                                    this.accountKitData
+                                );
+                            }
                             )
                             .catch((error) => observer.error(error))
                             .finally(() => observer.complete());
@@ -134,7 +139,8 @@ class AuthService {
         return new Observable((observer: Observer<any>) => {
             console.log("Guardando..", facebookUserData);
 
-            axios.post(
+            /*
+            clientService.post(
                 urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
                 requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
             )
@@ -143,6 +149,7 @@ class AuthService {
                 .finally(() => {
                     observer.complete();
                 });
+                */
         });
     }
 
@@ -150,7 +157,7 @@ class AuthService {
         return new Observable((observer: Observer<any>) => {
             console.log("Phone number validation..", userData);
 
-            axios.post(
+            clientService.post(
                 urlProvider.get(urlProvider.URL_PHONE_USER_VALIDATION),
                 requestAdapter.getBodyDataForPhoneUserValidation(userData)
             )
@@ -165,6 +172,40 @@ class AuthService {
                 });
 
         });
+    }
+
+    public signUpUser(userData: any): Observable<any> {
+        return new Observable((observer: Observer<any>) => {
+
+            // TODO: call auth service
+            clientService.post(
+                urlProvider.get(urlProvider.URL_USER_REGISTRATION),
+                requestAdapter.getBodyDataForUserRegistration(userData, this.accountKitData)
+            )
+                .then((response: any) => {
+                    debugger;
+                    return observer.next(
+                        response
+                    )
+                })
+                .catch((error: any) => observer.error(error))
+                .finally(() => {
+                    observer.complete();
+                });
+
+        });
+    }
+
+    private createSession(data: any): void {
+        this.setUserId(data.user_id);
+    }
+
+    private setUserId(id: string): void {
+        localStorage.setItem(AuthService.USER_ID_FIELD_NAME, id);
+    }
+
+    private getUserId() {
+        return localStorage.getItem(AuthService.USER_ID_FIELD_NAME);
     }
 }
 

@@ -60,9 +60,11 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
          * el login con account kit
          */
 
+
         if (!this.props.userHasPendingRegistration) {
             return (<Redirect to='/' />)
         }
+
 
         return (
             <div className="signup-container flex-column-center-items">

@@ -13,6 +13,16 @@ const setLoadingAppStatus = (appIsLoading: boolean): SystemActions => {
     }
 }
 
+const showLoadingScreen = (): SystemActions => {
+    return setLoadingAppStatus(true);
+}
+
+const hideLoadingScreen = (): SystemActions => {
+    return setLoadingAppStatus(false);
+}
+
+
 export const systemActions = {
-    setLoadingAppStatus
+    showLoadingScreen,
+    hideLoadingScreen
 }

@@ -1,0 +1,63 @@
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { systemActions } from "../../redux/action-creators/system.action.creator";
+import appStore from "../../redux/app-store";
+
+class ClientHttpService {
+    private axiosClient: AxiosInstance;
+
+    constructor() {
+        this.axiosClient = axios.create();
+
+        // Se interceptan las peticiones para poner una máscara
+        this.interceptRequest();
+
+        // Se interceptan las respuestas para remover la máscara
+        this.interceptResponse();
+
+    }
+
+    /**
+     * Permite interceptar las peticiones http realizadas.
+     * Esto con le objetivo de adicionar una máscara de carga.
+     */
+    private interceptRequest() {
+        this.axiosClient.interceptors.request.use(
+            (config: AxiosRequestConfig): AxiosRequestConfig => {
+                appStore.dispatch(systemActions.showLoadingScreen());
+                return config;
+            },
+            (error: any) => {
+                appStore.dispatch(systemActions.showLoadingScreen());
+                console.log("error: mostrando mascara");
+                return Promise.reject(error);
+            }
+        );
+    }
+
+    /**
+     * Permite interceptar las respuestas http obtenidas.
+     * Esto con le objetivo de remover la máscara de carga.
+     */
+    private interceptResponse() {
+        this.axiosClient.interceptors.response.use(
+            (response: any) => {
+                appStore.dispatch(systemActions.hideLoadingScreen());
+                return response;
+            },
+            (error: any) => {
+                appStore.dispatch(systemActions.hideLoadingScreen());
+                return Promise.reject(error);
+            }
+        );
+    }
+
+    get(resource: string) {
+        return this.axiosClient.get(resource);
+    }
+
+    post(resource: string, body: string) {
+        return this.axiosClient.post(resource, body);
+    }
+}
+
+export const clientService = new ClientHttpService();

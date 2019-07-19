@@ -14,7 +14,6 @@ import SignUpComponent from './components/auth/signup/signup.component';
 // @ts-ignore
 import LoadingOverlay from 'react-loading-overlay';
 import { ConfigProvider as CP } from './services/config/config.service';
-import { systemActions } from './redux/action-creators/system.action.creator';
 import { AppActions } from './redux/app.actions';
 
 /**
@@ -39,14 +38,6 @@ class App extends React.Component<IAppProps, IApplicationState> {
     this.state = {
       loadingTextDisplay: CP.get(CP.LOADING_TEXT_DISPLAY)
     }
-
-
-    /*
-    setTimeout(() => {
-      this.props.setAppLoadingStatus!(true);
-    }, 4000);
-    */
-
 
   }
 
@@ -94,10 +85,7 @@ const mapStateToProps = (state: IAppState): IAppProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch<AppActions>): IAppProps => {
   return {
-    startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin()),
-    setAppLoadingStatus: (appIsLoading: boolean) => dispatch(
-      systemActions.setLoadingAppStatus(appIsLoading)
-    )
+    startFacebookRequestlogin: () => dispatch(userActions.startFacebookRequestlogin())
   }
 }
 

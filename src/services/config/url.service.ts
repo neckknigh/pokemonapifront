@@ -6,6 +6,7 @@ class URLProvider {
     public readonly URL_USER_GRAPH_ACCOUNT_KIT: string = "accountkit_user";
     public readonly URL_USER_FACEBOOK_SIGN_IN: string = "facebook_signin";
     public readonly URL_PHONE_USER_VALIDATION: string = "phone_user_validation";
+    public readonly URL_USER_REGISTRATION: string = "user_registration";
 
     private baseUrl: string;
     private urls: any;
@@ -17,10 +18,10 @@ class URLProvider {
         this.urls[this.URL_USER_GRAPH_ACCOUNT_KIT] = "https://graph.accountkit.com/v1.3/me/?access_token=:accessToken";
         this.urls[this.URL_USER_FACEBOOK_SIGN_IN] = this.baseUrl + "facebookSignIn.php";
         this.urls[this.URL_PHONE_USER_VALIDATION] = this.baseUrl + "checkPhoneNumber.php";
+        this.urls[this.URL_USER_REGISTRATION] = this.baseUrl + "phoneSignIn.php";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {
-
         let url: string = "";
         if (this.urls.hasOwnProperty(key)) {
             url = this.replaceParams(this.urls[key], URLPathParams || {});
@@ -32,7 +33,7 @@ class URLProvider {
 
     replaceParams(url: string, params: any): string {
         let returnedUrl = url;
-        let paramsKeys = Object.keys(params);
+        const paramsKeys = Object.keys(params);
 
         if (paramsKeys.length) {
             paramsKeys.forEach((key: string) => {
@@ -46,7 +47,7 @@ class URLProvider {
 
     paramsToQueryString(params: any): string {
         let queryString = "";
-        let paramsKeys = Object.keys(params);
+        const paramsKeys = Object.keys(params);
 
         if (paramsKeys.length) {
             queryString = "?";
@@ -60,7 +61,7 @@ class URLProvider {
     }
 
     getURLWithoutQueryParams(): string {
-        let url = window.location.pathname;
+        const url = window.location.pathname;
         return url;
     }
 

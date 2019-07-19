@@ -29,12 +29,6 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
         this.props.validateAccountKitLoginDone!();
     }
 
-    /*
-        TODO: 
-        Montar la lógica para validar la sesíon
-        Por ahora irá siempre al componente de login
-    */
-
     render() {
 
         if (this.props.userHasPendingRegistration) {

@@ -12,7 +12,7 @@ class ResponseAdapter {
         }
     }
 
-    public adaptPhoneUserValidationResponse(rawResponse: any) {
+    public adaptPhoneUserValidationResponse(rawResponse: any): any {
         return rawResponse.data;
     }
 }

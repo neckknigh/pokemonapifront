@@ -1,6 +1,6 @@
 import { createLogic } from 'redux-logic';
 import { UserConstants, AuthConstants } from '../../services/constants.service';
-import { authService } from '../../services/auth.service';
+import { authService } from '../../services/authentication/auth.service';
 import { authActions } from '../action-creators/auth.action.creator';
 import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction, IValidatePhoneUserAction } from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
@@ -63,7 +63,7 @@ export const validateAccountKitLoginDone = createLogic({
         authService.getAccountKitUser()
             .subscribe(
                 (userAccount: Account) => {
-                    debugger;
+                    //debugger;
                     console.log(userAccount);
                     dispatch(authActions.startValidatingPhoneUser(userAccount));
                 }, error => {
@@ -197,6 +197,33 @@ export const signUpUser = createLogic<
     process({ action }, dispatch, done) {
 
         console.log("llego la acción", action);
+
+        authService.signUpUser(
+            action.user
+        ).subscribe(
+            (response: any) => {
+                console.log(response);
+
+                localStorage.setItem("user", JSON.stringify(response.data));
+
+                //TODO: BORRAR ESTO
+                dispatch(
+                    userActions.setUserHasPendingRegistration(
+                        false
+                    )
+                );
+
+                done();
+
+            }, error => {
+                // TODO: Que hacer cuando falla el guardado del usuario?
+                console.log(error);
+                done();
+            },
+            () => {
+                console.log("Phone user Validated");
+            }
+        );
     }
 });
 

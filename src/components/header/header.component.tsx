@@ -9,13 +9,16 @@ import { userActions } from '../../redux/action-creators/user.action.creator';
 export interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean,
     readonly history?: any,
-    readonly deletePendingRegistration?: () => void
+    readonly deletePendingRegistration?: () => void,
+    readonly userHasSession?: boolean
 }
 
 
 class HeaderComponent extends Component<IHeaderComponentProps, {}> {
 
     private handleClickCancelBtn = (): void => {
+
+        // se elimina el status de pendiente de registro
         this.props.deletePendingRegistration!();
         this.props.history.push("/");
     }
@@ -37,6 +40,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, {}> {
                                 >
                                     CANCELAR
                                 </button> :
+                                this.props.userHasSession &&
                                 <span>Buscador</span>
                         }
                     </div>
@@ -48,7 +52,8 @@ class HeaderComponent extends Component<IHeaderComponentProps, {}> {
 
 const mapStateToProps = (state: IAppState): IHeaderComponentProps => {
     return {
-        userHasPendingRegistration: state.userState.pendingRegistration
+        userHasPendingRegistration: state.userState.pendingRegistration,
+        userHasSession: state.authState.userHasSession
     }
 };
 

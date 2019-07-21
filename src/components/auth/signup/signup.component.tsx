@@ -85,6 +85,7 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
         }
 
 
+
         return (
             <div className="signup-container flex-column-center-items">
                 <div className="sign-up-card flex-column-center-items">

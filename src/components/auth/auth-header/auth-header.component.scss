@@ -2,6 +2,9 @@
 
 
 .auth-header-outer-container {
+    @include maximum-width();
+
+
     .auth-header-inner-container {
 
         padding-top: 0.5rem;

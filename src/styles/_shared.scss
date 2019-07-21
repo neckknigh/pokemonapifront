@@ -15,10 +15,31 @@
     @include justify-content(center);
 }
 
+.flex-row-center-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+}
+
 .flex-row-space-around {
     @include flex-display();
     @include flex-direction(row);
     @include justify-content(space-around);
+}
+
+.flex-row-end-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(flex-end);
+    @include align-items(center);
+}
+
+.flex-row-start-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(flex-start);
+    @include align-items(center);
 }
 
 .flex-column-center-items {

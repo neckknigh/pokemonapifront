@@ -6,11 +6,10 @@
     @include maximun-size();
 
     .left-container {
-        padding-left: 11em;
-        padding-right: 3em;
-        padding-top: 3em;
+        padding-right: 6rem;
 
         .login-card {
+            width: 27rem;
             @include border-radius(6px);
 
             .login-buttons {
@@ -34,14 +33,19 @@
                     font-size: 10px;
                 }
             }
+
+            .line-on-side {
+                @include roboto-regular-font();
+                font-size: 12px;
+            }
         }
     }
 
     .right-container {
-        padding-top: 3em;
+        padding-left: 6rem;
 
         .right-logo {
-            height: 20em;
+            height: 29em;
         }
     }
 }

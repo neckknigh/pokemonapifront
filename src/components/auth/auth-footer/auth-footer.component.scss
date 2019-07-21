@@ -13,4 +13,13 @@ $legal-terms-padding: 3.8rem;
         padding-left: $legal-terms-padding;
         padding-right: $legal-terms-padding;
     }
+
+    .flags-container {
+        margin-top: 1rem;
+
+        .country-flag {
+            height: 2.5rem;
+        }
+    }
+
 }

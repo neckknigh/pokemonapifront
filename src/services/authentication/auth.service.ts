@@ -140,7 +140,7 @@ class AuthService {
         return new Observable((observer: Observer<any>) => {
             console.log("Guardando..", facebookUserData);
 
-            /*
+
             clientService.post(
                 urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
                 requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
@@ -150,7 +150,7 @@ class AuthService {
                 .finally(() => {
                     observer.complete();
                 });
-                */
+
         });
     }
 

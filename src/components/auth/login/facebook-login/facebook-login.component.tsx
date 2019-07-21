@@ -41,9 +41,6 @@ export interface IFacebookLoginComponentState {
 
 class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponentState> {
 
-    // Declaración del estado del componente
-
-    // Declaración del estado del componente
     constructor(props: any) {
         super(props);
         const facebookColor: string = CP.get(CP.FACEBOOK_COLOR);
@@ -73,10 +70,7 @@ class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponen
 
     handleFacebookResponse = (userInfo: ReactFacebookLoginInfo) => {
 
-        // TODO: Solo lanzar una acción, la otra que se lanze automaticamente
-
-        // Se indica que se logueó con facebook correctamente
-        this.props.setFacebookLoggedInStatus(true);
+        // Se guarda al usuario logueado por facebook en el sistema.
         this.props.saveFacebookUser!(userInfo);
     }
 
@@ -115,9 +109,6 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): any => {
     const props: any = {
         startFacebookRequestlogin: () => dispatch(
             userActions.startFacebookRequestlogin()
-        ),
-        setFacebookLoggedInStatus: (isFacebookLoggedIn: boolean) => dispatch(
-            userActions.setFacebookLoggedInStatus(isFacebookLoggedIn)
         ),
         saveFacebookUser: (facebookUserData: ReactFacebookLoginInfo) => dispatch(
             authActions.saveFacebookUser(facebookUserData)

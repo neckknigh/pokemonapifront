@@ -39,8 +39,8 @@ class RequestAdapter {
         const { phone } = user;
         const body = {
             user: {
-                //phone: phone!.number + "22"
-                phone: phone!.number
+                phone: phone!.number + "22"
+                //phone: phone!.number 
             }
         }
 
@@ -53,8 +53,8 @@ class RequestAdapter {
         const body: any = {
             user: {
                 // TODO: quitar el valor de new date
-                //phone: phone!.number + new Date().getMilliseconds(),
-                phone: phone!.number,
+                phone: phone!.number + new Date().getMilliseconds(),
+                //phone: phone!.number,
                 userName: userData.userName,
                 email: userData.email,
                 country: phone!.country_prefix,
@@ -64,6 +64,15 @@ class RequestAdapter {
         return JSON.stringify(body);
     }
 
+    /**
+     * Permite construir el username que utilizará
+     * el usuario logueado por facebook
+     * @param {string} id de facebook 
+     * @param {string} firstName primer nombre de facebook 
+     * @param {string} lastName segundo nombre de facebook
+     * 
+     * @return {string} el username del usuario en Doo. 
+     */
     private buildDooUserName(
         id: string,
         firstName: string = "",
@@ -72,7 +81,7 @@ class RequestAdapter {
         let dooUserName: string = [
             this.removeWhiteSpaces(firstName),
             this.removeWhiteSpaces(lastName),
-            id.substring(0, 5)
+            id.substring(id.length - 5)
         ].join("");
 
         return dooUserName;

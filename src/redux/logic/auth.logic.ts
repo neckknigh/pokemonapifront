@@ -97,15 +97,25 @@ export const saveFacebookUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-        //debugger;
+        debugger;
+        const isLoggedIn = true;
 
+        // Se indica que se logueó correctamente por facebook
+        dispatch(userActions.setFacebookLoggedInStatus(isLoggedIn));
+
+        // Se registra al usuario en el sistema
         authService.saveFacebookUser(
             action.facebookUserData
         ).subscribe(
             (response: any) => {
+                debugger;
                 console.log(response);
 
-                done();
+                // Se indica se logueó correctamente
+                dispatch(authActions.setUserLoggedInStatus(isLoggedIn));
+
+                // Se crea la sessión
+                authService.createSession(response);
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?
@@ -114,6 +124,7 @@ export const saveFacebookUser = createLogic<
             },
             () => {
                 console.log("Facebook user saved");
+                done();
             }
         );
     }
@@ -204,16 +215,22 @@ export const signUpUser = createLogic<
         ).subscribe(
             (response: any) => {
                 const hasSession = true;
-                console.log(response);
 
-                // Se indica que no tiene pendiente completar registro
-                dispatch(userActions.setUserHasPendingRegistration(!hasSession));
+                if (response.status !== 1) {
+                    // TODO: Manejar el Error al registrar
+                }
+                else {
+                    // Se indica que no tiene pendiente completar registro
+                    dispatch(userActions.setUserHasPendingRegistration(!hasSession));
 
-                // Se indica que se logué correctamente.
-                dispatch(authActions.setUserLoggedInStatus(hasSession));
+                    // Se indica que se logué correctamente.
+                    dispatch(authActions.setUserLoggedInStatus(hasSession));
 
-                // Después de registrar al usuario se crea la sessión
-                authService.createSession(response);
+                    // Después de registrar al usuario se crea la sessión
+                    authService.createSession(response);
+                }
+
+
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?

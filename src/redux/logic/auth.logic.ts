@@ -136,25 +136,26 @@ export const validatePhoneUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-
-        console.log("llego validatePhoneUser", action);
         let hasPendingRegistration = false;
 
         authService.validatePhoneUser(
             action.user
         ).subscribe(
             (response: any) => {
-                debugger;
-                console.log(response);
 
                 if (response.status !== 1) {
                     hasPendingRegistration = true;
                 }
                 else {
-                    // Se indica que el usuario se logueó correctamente
-                    dispatch(
-                        userActions.setAccountKitLoggedInStatus(true)
-                    );
+
+                    // Se indica que el usuario no tiene pendiente un registro
+                    dispatch(userActions.setUserHasPendingRegistration(false));
+
+                    // Se indica se logueó correctamente
+                    dispatch(authActions.setUserLoggedInStatus(true));
+
+                    // Se crea la sessión
+                    authService.createSession(response);
                 }
 
                 // Se indica si el usuario necesita completar su registro
@@ -205,10 +206,14 @@ export const signUpUser = createLogic<
                 const hasSession = true;
                 console.log(response);
 
+                // Se indica que no tiene pendiente completar registro
                 dispatch(userActions.setUserHasPendingRegistration(!hasSession));
 
-                // TODO: Enviar señal de redireción
+                // Se indica que se logué correctamente.
                 dispatch(authActions.setUserLoggedInStatus(hasSession));
+
+                // Después de registrar al usuario se crea la sessión
+                authService.createSession(response);
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?

@@ -10,7 +10,7 @@ const initialUserState: IUserState = {
     isFacebookLogginIn: false,
     isAccountKitLogginIn: false,
     isAccountKitLoggedIn: false,
-    pendingRegistration: true
+    pendingRegistration: false
 };
 
 // root reducer

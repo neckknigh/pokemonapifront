@@ -183,9 +183,6 @@ class AuthService {
                 requestAdapter.getBodyDataForUserRegistration(userData, this.accountKitData)
             )
                 .then((response: any) => {
-
-                    // Después de registrar al usuario se crea la sessión
-                    this.createSession(response);
                     return observer.next(response);
                 })
                 .catch((error: any) => observer.error(error))
@@ -196,7 +193,7 @@ class AuthService {
         });
     }
 
-    private createSession(data: any): void {
+    public createSession(data: any): void {
         this.setToken(data.userId);
         this.setUserId(data.userToken);
     }

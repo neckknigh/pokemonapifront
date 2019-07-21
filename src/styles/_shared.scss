@@ -58,3 +58,30 @@
         @include text-between-lines($border-color:$ligh-gray-color);
     }
 }
+
+.maximum-width {
+    width: $maximum-percentage;
+}
+
+.input-error {
+    position: relative;
+
+    .error-message {
+        color: $error-color;
+        font-size: 10px;
+        padding-left: 4px;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: -25px;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            background-color: #fc603d;
+            border-radius: 50%;
+        }
+    }
+
+}

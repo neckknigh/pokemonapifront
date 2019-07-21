@@ -51,7 +51,8 @@ class RequestAdapter {
         const { phone } = accountKitData;
         const body: any = {
             user: {
-                phone: phone!.number,
+                // TODO: quitar el valor de new date
+                phone: phone!.number + new Date().getMilliseconds(),
                 userName: userData.userName,
                 email: userData.email,
                 country: phone!.country_prefix,

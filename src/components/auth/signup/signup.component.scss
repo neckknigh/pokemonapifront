@@ -20,7 +20,7 @@ $signup-btn-padding: 0.4rem;
                 padding-left: $signup-inputs-padding;
                 padding-right: $signup-inputs-padding;
 
-                .form-control+.form-control {
+                .textfield-container+.textfield-container {
                     margin-top: 0.6rem;
                 }
             }

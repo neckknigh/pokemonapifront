@@ -10,7 +10,8 @@ import { Redirect } from 'react-router';
 export interface IAuthComponentProps {
     isFacebookLoggedIn?: boolean,
     validateAccountKitLoginDone?: () => any,
-    userHasPendingRegistration?: boolean
+    userHasPendingRegistration?: boolean,
+    userHasSession?: boolean
 }
 
 export interface IAuthComponentState {
@@ -22,6 +23,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     constructor(props: IAuthComponentProps) {
         super(props);
 
+        console.log("aaa")
+
         /**
          * Se valida si el usuario realizó correctamente el login
          * por account kit
@@ -31,8 +34,22 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 
     render() {
 
+        console.log("aaa");
+
+        /**
+         * Si se tiene pendiente un registro,
+         * se redirecciona
+         */
         if (this.props.userHasPendingRegistration) {
-            return (<Redirect to='/signup' />)
+            return (<Redirect to='/signup' />);
+        }
+
+        /**
+         * Si ya ha iniciado sesión,
+         * redirecciona a la página princiipal.
+         */
+        if (this.props.userHasSession) {
+            return (<Redirect to='/comunities' />);
         }
 
         return (
@@ -42,10 +59,10 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 }
 
 const mapStateToProps = (state: IAppState): IAuthComponentProps => {
-    console.log(state);
     return {
         isFacebookLoggedIn: state.userState.isFacebookLoggedIn,
-        userHasPendingRegistration: state.userState.pendingRegistration
+        userHasPendingRegistration: state.userState.pendingRegistration,
+        userHasSession: state.authState.userHasSession
     }
 };
 

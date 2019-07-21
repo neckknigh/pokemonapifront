@@ -18,12 +18,9 @@ class LoginComponent extends Component<{}, LoginComponentState> {
         this.state = {
             logInHint: CP.get(CP.LOGIN_HINT)
         }
-
     }
 
-
     render() {
-
         return (
             <div className="grid login-container">
                 <div className="column-50 left-container">

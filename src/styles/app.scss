@@ -25,7 +25,7 @@ html {
     //background-color: $background-color;
     overflow-x: hidden;
     // overflow-y: hidden;
-    @include roboto-regular-font();
+    @include roboto-medium-font();
 
     a {
       text-decoration: none;
@@ -45,7 +45,7 @@ html {
     code,
     span,
     button {
-      @include roboto-regular-font();
+      @include roboto-medium-font();
     }
 
     button {

@@ -18,5 +18,17 @@ header {
                 width: 4.15em;
             }
         }
+
+        .searcher-container {
+            .cancel-heading {
+                color: white;
+                font-size: 14px;
+                margin: 0;
+                background: transparent;
+                border: none;
+                padding-right: 1rem;
+                padding-top: 0.2rem;
+            }
+        }
     }
 }

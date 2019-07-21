@@ -11,6 +11,7 @@ import { clientService } from "../config/client.service";
 class AuthService {
 
     public static readonly USER_ID_FIELD_NAME = "user_id";
+    public static readonly ACCESS_TOKEN_NAME = "access_token";
     private rootWindow: any = window;
     private accountKitData: any = null;
 
@@ -177,16 +178,15 @@ class AuthService {
     public signUpUser(userData: any): Observable<any> {
         return new Observable((observer: Observer<any>) => {
 
-            // TODO: call auth service
             clientService.post(
                 urlProvider.get(urlProvider.URL_USER_REGISTRATION),
                 requestAdapter.getBodyDataForUserRegistration(userData, this.accountKitData)
             )
                 .then((response: any) => {
-                    debugger;
-                    return observer.next(
-                        response
-                    )
+
+                    // Después de registrar al usuario se crea la sessión
+                    this.createSession(response);
+                    return observer.next(response);
                 })
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
@@ -197,7 +197,16 @@ class AuthService {
     }
 
     private createSession(data: any): void {
-        this.setUserId(data.user_id);
+        this.setToken(data.userId);
+        this.setUserId(data.userToken);
+    }
+
+    private setToken(token: string): void {
+        localStorage.setItem(AuthService.ACCESS_TOKEN_NAME, token);
+    }
+
+    private getToken(): string {
+        return localStorage.getItem(AuthService.ACCESS_TOKEN_NAME)!;
     }
 
     private setUserId(id: string): void {

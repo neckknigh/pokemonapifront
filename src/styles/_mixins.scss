@@ -67,7 +67,7 @@
 
 @mixin maximun-size {
 	height: $maximum-percentage;
-	width: $maximum-percentage;
+	@include maximum-width();
 }
 
 @mixin text-between-lines($gap: 15px,
@@ -75,7 +75,7 @@
 	$border-color: $dark-gray) {
 
 	display: grid;
-	width: $maximum-percentage;
+	@include maximum-width();
 	align-items: center;
 	text-align: center;
 	grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
@@ -90,4 +90,14 @@
 
 @mixin roboto-regular-font {
 	font-family: Roboto;
+}
+
+@mixin roboto-medium-font {
+	font-family: Roboto Medium;
+}
+
+
+
+@mixin maximum-width {
+	width: $maximum-percentage;
 }

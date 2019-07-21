@@ -40,12 +40,24 @@ const startValidatingPhoneUser = (user: Account): AuthActions => {
         type: AuthConstants.VALIDATE_PHONE_USER,
         user
     }
-}
+};
+
+/**
+ * Action-creator para lanzar la acción de establecimiento
+ * de estado de logueado del usuario.
+ */
+const setUserLoggedInStatus = (hasSession: boolean): AuthActions => {
+    return {
+        type: AuthConstants.USER_HAS_SESSION,
+        hasSession
+    }
+};
 
 
 export const authActions = {
     doneAccountKitSdkLoading,
     validateAccountKitLoginDone,
     saveFacebookUser,
-    startValidatingPhoneUser
+    startValidatingPhoneUser,
+    setUserLoggedInStatus
 }

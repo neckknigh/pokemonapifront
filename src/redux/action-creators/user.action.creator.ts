@@ -1,5 +1,14 @@
 import { UserConstants } from "../../services/constants.service";
-import { IFacebookLoginRequestAction, UserActions, IFacebookUserRegisterRequestAction, IFacebookLoggedSucessAction, IAccountKitLoginRequestAction, IAccountKitLoggedSucessAction, IHasPendingRegistrationAction, ISignUpUserRequestAction } from "../actions/user.actions";
+import {
+    IFacebookLoginRequestAction,
+    UserActions,
+    IFacebookUserRegisterRequestAction,
+    IFacebookLoggedSucessAction,
+    IAccountKitLoginRequestAction,
+    IAccountKitLoggedSucessAction,
+    IHasPendingRegistrationAction,
+    ISignUpUserRequestAction
+} from "../actions/user.actions";
 
 /**
  * Accion-creators para el usuario.

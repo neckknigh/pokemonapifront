@@ -1,5 +1,5 @@
 // Put shared styling variables here
-$error: #fc603d;
+$error-color: #fc603d;
 
 
 $maximum-percentage: 100%;
@@ -23,4 +23,9 @@ $test-border: 1px solid black;
 @font-face {
     font-family: Roboto;
     src: url("/fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto Medium;
+    src: url("/fonts/Roboto/Roboto-Medium.ttf");
 }

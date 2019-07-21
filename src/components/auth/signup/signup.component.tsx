@@ -9,10 +9,12 @@ import AuthFooterComponent from '../auth-footer/auth-footer.component';
 import { Dispatch } from 'redux';
 import { UserActions } from '../../../redux/actions/user.actions';
 import { userActions } from '../../../redux/action-creators/user.action.creator';
+import TextFieldComponent from '../../widgets/textfield.component';
 
 export interface SignUpComponentProps {
     readonly userHasPendingRegistration?: boolean,
-    readonly startSignUpUserRequest?: (userName: string, email: string) => any
+    readonly startSignUpUserRequest?: (userName: string, email: string) => any,
+    readonly userHasSession?: boolean
 }
 
 export interface SignUpComponentState {
@@ -20,7 +22,8 @@ export interface SignUpComponentState {
     userNamePlaceHolder?: string,
     emailPlaceHolder?: string,
     userName?: string,
-    email?: string
+    email?: string,
+    disabledButton?: boolean
 }
 
 class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentState> {
@@ -33,12 +36,12 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
             userNamePlaceHolder: CP.get(CP.USERNAME_PLACEHOLDER),
             emailPlaceHolder: CP.get(CP.EMAIL_PLACEHOLDER),
             userName: "",
-            email: ""
+            email: "",
+            disabledButton: true
         }
     }
 
-    handleSignUpBtnClick = () => {
-        console.log("click");
+    private handleSignUpBtnClick = (): void => {
         const { userName, email } = this.state;
 
         // Se lanza la petición de registro
@@ -48,20 +51,36 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
         );
     }
 
-    handleChange = (event: any) => {
+    private handleChange = (event: any): void => {
         const { name, value } = event.target;
-        this.setState({ [name]: value });
+        this.setState({ [name]: value },
+            () => {
+                this.updateButtonState();
+            }
+        );
+    }
+
+    private updateButtonState = (): void => {
+        let disabledButton = true;
+        const { userName, email } = this.state;
+
+        if (userName && email) {
+            disabledButton = false;
+        }
+
+        this.setState({ disabledButton });
     }
 
     render() {
 
         /**
          * No se podrá acceder a esta ruta si no se ha realizado
-         * el login con account kit
+         * el login con account kit ó
+         * si ya inició sesión.
          */
 
-
-        if (!this.props.userHasPendingRegistration) {
+        if (!this.props.userHasPendingRegistration ||
+            this.props.userHasSession) {
             return (<Redirect to='/' />)
         }
 
@@ -74,22 +93,21 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
 
                     <div className="signup-card-body">
                         <div className="signup-inputs-container flex-column-center-items ">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder={this.state.userNamePlaceHolder}
+
+                            <TextFieldComponent
                                 value={this.state.userName}
                                 onChange={this.handleChange}
                                 name="userName"
+                                required={true}
+                                placeHolder={this.state.userNamePlaceHolder}
                             />
 
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder={this.state.emailPlaceHolder}
+                            <TextFieldComponent
                                 value={this.state.email}
                                 onChange={this.handleChange}
                                 name="email"
+                                required={true}
+                                placeHolder={this.state.emailPlaceHolder}
                             />
 
                         </div>
@@ -98,6 +116,7 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
                                 type="button"
                                 className="btn btn-success btn-lg btn-block signup-btn"
                                 onClick={this.handleSignUpBtnClick}
+                                disabled={this.state.disabledButton}
                             >
                                 Continuar
                             </button>
@@ -114,7 +133,8 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
 
 const mapStateToProps = (state: IAppState): SignUpComponentProps => {
     return {
-        userHasPendingRegistration: state.userState.pendingRegistration
+        userHasPendingRegistration: state.userState.pendingRegistration,
+        userHasSession: state.authState.userHasSession
     }
 };
 

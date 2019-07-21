@@ -202,18 +202,13 @@ export const signUpUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
+                const hasSession = true;
                 console.log(response);
 
-                localStorage.setItem("user", JSON.stringify(response.data));
+                dispatch(userActions.setUserHasPendingRegistration(!hasSession));
 
-                //TODO: BORRAR ESTO
-                dispatch(
-                    userActions.setUserHasPendingRegistration(
-                        false
-                    )
-                );
-
-                done();
+                // TODO: Enviar señal de redireción
+                dispatch(authActions.setUserLoggedInStatus(hasSession));
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?
@@ -222,12 +217,11 @@ export const signUpUser = createLogic<
             },
             () => {
                 console.log("Phone user Validated");
+                done();
             }
         );
     }
 });
-
-
 
 const authLogics = [
     loadAccountKitApiLogic,

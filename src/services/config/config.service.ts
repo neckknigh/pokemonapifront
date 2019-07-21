@@ -22,6 +22,7 @@ export class ConfigProvider {
     static readonly GO_TO_WEBSITE_DISPLAY: string = "GO_TO_WEBSITE_DISPLAY";
     static readonly USERNAME_PLACEHOLDER: string = "USERNAME_PLACEHOLDER";
     static readonly EMAIL_PLACEHOLDER: string = "EMAIL_PLACEHOLDER";
+    static readonly REQUIRED_FIELD_MESSAGE: string = "REQUIRED_FIELD_MESSAGE";
 
     private static configs: any;
 
@@ -52,6 +53,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.GO_TO_WEBSITE_DISPLAY] = "Ir al sitio web";
         ConfigProvider.configs[ConfigProvider.USERNAME_PLACEHOLDER] = "Ingresa un nombre de usuario...";
         ConfigProvider.configs[ConfigProvider.EMAIL_PLACEHOLDER] = "Ingresa email...";
+        ConfigProvider.configs[ConfigProvider.REQUIRED_FIELD_MESSAGE] = "El campo es requerido";
 
     }
 

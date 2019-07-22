@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./textfield.component.scss";
-import { ConfigProvider as CP } from '../../services/config/config.service';
+import { ConfigProvider as CP } from '../../../services/config/config.service';
 
 export interface ITextFieldComponentProps {
     name: string | undefined,

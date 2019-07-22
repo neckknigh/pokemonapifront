@@ -9,7 +9,7 @@ import AuthFooterComponent from '../auth-footer/auth-footer.component';
 import { Dispatch } from 'redux';
 import { UserActions } from '../../../redux/actions/user.actions';
 import { userActions } from '../../../redux/action-creators/user.action.creator';
-import TextFieldComponent from '../../widgets/textfield.component';
+import TextFieldComponent from '../../widgets/textfield/textfield.component';
 
 export interface SignUpComponentProps {
     readonly userHasPendingRegistration?: boolean,

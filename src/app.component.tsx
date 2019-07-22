@@ -12,6 +12,7 @@ import SignUpComponent from './components/auth/signup/signup.component';
 // @ts-ignore
 import LoadingOverlay from 'react-loading-overlay';
 import { ConfigProvider as CP } from './services/config/config.service';
+import ErrorMessageComponent from './components/widgets/error-message/error-message.component';
 
 /**
  * Interface para mapear las propiedades del 
@@ -46,13 +47,12 @@ class App extends React.Component<IAppProps, IApplicationState> {
         text={this.state.loadingTextDisplay}
         className="maximun-size"
       >
-
-
         <Router>
           <div className="maximun-size">
 
             <HeaderComponent />
             <main className="main-container maximun-size">
+              <ErrorMessageComponent />
 
               <Route exact path="/" component={AuthComponent} />
               <Route exact path="/auth" component={AuthComponent} />

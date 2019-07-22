@@ -1,0 +1,7 @@
+@import "../../../styles/_main";
+
+.error-container {
+    position: fixed;
+    @include maximum-width();
+    text-align: center;
+}

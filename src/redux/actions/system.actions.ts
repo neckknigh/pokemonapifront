@@ -9,5 +9,10 @@ export interface IAppIsLoadingAction extends Action<SystemConstants.APP_IS_LOADI
     appIsLoading: boolean
 }
 
+export interface IAppHasErrorAction extends Action<SystemConstants.APP_HAS_ERROR> {
+    appHasError: boolean
+}
 
-export type SystemActions = IAppIsLoadingAction;
+
+export type SystemActions = IAppIsLoadingAction |
+    IAppHasErrorAction;

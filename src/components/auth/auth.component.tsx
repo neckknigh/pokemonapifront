@@ -11,7 +11,9 @@ export interface IAuthComponentProps {
     isFacebookLoggedIn?: boolean,
     validateAccountKitLoginDone?: () => any,
     userHasPendingRegistration?: boolean,
-    userHasSession?: boolean
+    userHasSession?: boolean,
+    history?: any,
+    appHasError?: boolean
 }
 
 export interface IAuthComponentState {
@@ -21,9 +23,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     //state = { :  }
 
     constructor(props: IAuthComponentProps) {
+        debugger
         super(props);
-
-        console.log("aaa")
 
         /**
          * Se valida si el usuario realizó correctamente el login
@@ -32,9 +33,20 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
         this.props.validateAccountKitLoginDone!();
     }
 
-    render() {
+    public componentWillReceiveProps(props: IAuthComponentProps): void {
+        debugger;
 
-        console.log("aaa");
+        /**
+         * Si hubo un cambio en el estado de error de la app
+         * y si hubo un error, se redirecciona a la ruta base.  
+         */
+        if (props.appHasError !== this.props.appHasError
+            && props.appHasError) {
+            this.props.history.push("/");
+        }
+    }
+
+    render() {
 
         /**
          * Si se tiene pendiente un registro,
@@ -62,7 +74,8 @@ const mapStateToProps = (state: IAppState): IAuthComponentProps => {
     return {
         isFacebookLoggedIn: state.userState.isFacebookLoggedIn,
         userHasPendingRegistration: state.userState.pendingRegistration,
-        userHasSession: state.authState.userHasSession
+        userHasSession: state.authState.userHasSession,
+        appHasError: state.systemState.appHasError
     }
 };
 

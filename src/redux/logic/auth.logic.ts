@@ -6,6 +6,7 @@ import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction, IValidatePhon
 import { Account } from '../../models/account.model';
 import { userActions } from '../action-creators/user.action.creator';
 import { ISignUpUserRequestAction } from '../actions/user.actions';
+import { systemActions } from '../action-creators/system.action.creator';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -67,8 +68,11 @@ export const validateAccountKitLoginDone = createLogic({
                     console.log(userAccount);
                     dispatch(authActions.startValidatingPhoneUser(userAccount));
                 }, error => {
-                    // TODO: Que hacer cuando el usuario falla el logueo?
+                    debugger;
                     console.log(error);
+
+                    // TODO: Lanzar el error, intervenir la acción y setear el estado de error
+                    dispatch(systemActions.setAppWithError(true));
                     done();
                 },
                 () => {

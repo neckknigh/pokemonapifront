@@ -1,3 +1,5 @@
 export interface ISystemState {
-    isAppLoading: boolean
+    isAppLoading: boolean,
+    appHasError: boolean,
+    errorMessage: string
 }

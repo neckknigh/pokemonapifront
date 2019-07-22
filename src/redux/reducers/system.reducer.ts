@@ -6,7 +6,9 @@ import { SystemActions } from "../actions/system.actions";
 
 // Estado inicial del sistema
 const initialSystemState: ISystemState = {
-    isAppLoading: false
+    isAppLoading: false,
+    appHasError: false,
+    errorMessage: ""
 };
 
 // root reducer
@@ -24,6 +26,12 @@ export const systemReducer: Reducer<ISystemState, SystemActions> = (
                 ...state,
                 isAppLoading: action.appIsLoading
             };
+
+        case SystemConstants.APP_HAS_ERROR:
+            return {
+                ...state,
+                appHasError: action.appHasError
+            }
 
         default:
             return state;

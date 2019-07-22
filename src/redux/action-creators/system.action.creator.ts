@@ -21,8 +21,16 @@ const hideLoadingScreen = (): SystemActions => {
     return setLoadingAppStatus(false);
 }
 
+const setAppWithError = (appHasError: boolean): SystemActions => {
+    return {
+        type: SystemConstants.APP_HAS_ERROR,
+        appHasError
+    }
+}
+
 
 export const systemActions = {
     showLoadingScreen,
-    hideLoadingScreen
+    hideLoadingScreen,
+    setAppWithError
 }

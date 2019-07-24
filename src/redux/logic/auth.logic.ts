@@ -78,7 +78,7 @@ export const validateAccountKitLoginDone = createLogic({
                     // TODO: Lanzar el error, intervenir la acción y setear el estado de error
                     // dispatch(systemActions.setAppWithError(true));
 
-                    dispatch(systemActions.setAppErrorMessage(error));
+                    dispatch(systemActions.setAppErrorMessage(error.msg));
 
                     done();
                 },

@@ -6,6 +6,7 @@ import { AuthActions } from '../../redux/actions/auth.actions';
 import { Dispatch } from 'redux';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
 import { Redirect } from 'react-router';
+import { urlProvider } from '../../services/config/url.service';
 
 export interface IAuthComponentProps {
     isFacebookLoggedIn?: boolean,
@@ -17,20 +18,27 @@ export interface IAuthComponentProps {
 }
 
 export interface IAuthComponentState {
+    validateAccountKitLogin: boolean
 }
 
 class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentState> {
-    //state = { :  }
+
 
     constructor(props: IAuthComponentProps) {
         debugger
         super(props);
 
+        this.state = {
+            validateAccountKitLogin: !urlProvider.isRoot()
+        }
+
         /**
          * Se valida si el usuario realizó correctamente el login
          * por account kit
          */
-        this.props.validateAccountKitLoginDone!();
+        if (this.state.validateAccountKitLogin) {
+            this.props.validateAccountKitLoginDone!();
+        }
     }
 
     public componentWillReceiveProps(props: IAuthComponentProps): void {

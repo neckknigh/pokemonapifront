@@ -6,6 +6,7 @@ import { ConfigProvider as CP } from '../../../services/config/config.service';
 import { Dispatch } from 'redux';
 import { SystemActions } from '../../../redux/actions/system.actions';
 import { systemActions } from '../../../redux/action-creators/system.action.creator';
+import { utilService } from '../../../services/util.service';
 
 export interface IErrorMessageComponentProps {
     readonly appHasError?: boolean,
@@ -46,7 +47,7 @@ class ErrorMessageComponent extends Component<IErrorMessageComponentProps, IErro
      */
     private buildContainerStyles = (): string => {
         const styles = this.state.mainContainerStyle.concat([
-            !this.props.appHasError ? this.state.hiddenClass : ""
+            this.props.appHasError && !utilService.isEmpty(this.props.appErrorMessage) ? "" : this.state.hiddenClass
         ]);
         return styles.join(" ");
     }

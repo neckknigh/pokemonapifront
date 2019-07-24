@@ -75,7 +75,7 @@ class AuthService {
 
                 // TODO: Mandar un mensaje más significativo.
                 observer.error({
-                    msg: "Ocurrió un error!"
+                    msg: CP.get(CP.ACCOUNT_KIT_LOGIN_ERROR)
                 });
                 observer.complete();
             }

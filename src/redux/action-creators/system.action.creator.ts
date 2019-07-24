@@ -36,7 +36,7 @@ const setAppErrorMessage = (errorMessage: string): SystemActions => {
 };
 
 const handleAppError = (
-    appErrorMessage: string,
+    appErrorMessage: string = "",
     appHasError: boolean = true
 ): SystemActions => {
     return {

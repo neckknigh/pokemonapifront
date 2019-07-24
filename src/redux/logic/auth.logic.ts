@@ -63,23 +63,14 @@ export const validateAccountKitLoginDone = createLogic({
     latest: true,
     // eslint-disable-next-line
     process({ }, dispatch, done) {
-        //debugger;
 
         authService.getAccountKitUser()
             .subscribe(
                 (userAccount: Account) => {
-                    //debugger;
-                    console.log(userAccount);
                     dispatch(authActions.startValidatingPhoneUser(userAccount));
                 }, error => {
-                    debugger;
                     console.log(error);
-
-                    // TODO: Lanzar el error, intervenir la acción y setear el estado de error
-                    // dispatch(systemActions.setAppWithError(true));
-
-                    dispatch(systemActions.setAppErrorMessage(error.msg));
-
+                    dispatch(systemActions.handleAppError(error.msg));
                     done();
                 },
                 () => {

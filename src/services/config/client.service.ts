@@ -41,6 +41,10 @@ class ClientHttpService {
     private interceptResponse() {
         this.axiosClient.interceptors.response.use(
             (response: any) => {
+                // se elimina cualquier mensaje de error existente
+                appStore.dispatch(systemActions.handleAppError());
+
+                // Se oculta la pantalla de carga
                 appStore.dispatch(systemActions.hideLoadingScreen());
                 return response;
             },

@@ -72,6 +72,10 @@ class URLProvider {
     getUrlParams(): string {
         return window.location.search;
     }
+
+    isRoot(): boolean {
+        return window.location.pathname === "/";
+    }
 }
 
 export const urlProvider = new URLProvider();

@@ -13,6 +13,17 @@ export interface IAppHasErrorAction extends Action<SystemConstants.APP_HAS_ERROR
     appHasError: boolean
 }
 
+export interface IAppErrorMessageAction extends Action<SystemConstants.APP_ERROR_MESSAGE> {
+    errorMessage: string
+}
+
+export interface IHandleAppErrorAction extends Action<SystemConstants.HANDLE_APP_ERROR> {
+    appHasError: boolean
+    appErrorMessage: string
+}
+
 
 export type SystemActions = IAppIsLoadingAction |
-    IAppHasErrorAction;
+    IAppHasErrorAction |
+    IAppErrorMessageAction |
+    IHandleAppErrorAction;

@@ -23,6 +23,7 @@ export class ConfigProvider {
     static readonly USERNAME_PLACEHOLDER: string = "USERNAME_PLACEHOLDER";
     static readonly EMAIL_PLACEHOLDER: string = "EMAIL_PLACEHOLDER";
     static readonly REQUIRED_FIELD_MESSAGE: string = "REQUIRED_FIELD_MESSAGE";
+    static readonly HIDDEN_CLASS: string = "HIDDEN_CLASS";
 
     private static configs: any;
 
@@ -54,6 +55,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.USERNAME_PLACEHOLDER] = "Ingresa un nombre de usuario...";
         ConfigProvider.configs[ConfigProvider.EMAIL_PLACEHOLDER] = "Ingresa email...";
         ConfigProvider.configs[ConfigProvider.REQUIRED_FIELD_MESSAGE] = "El campo es requerido";
+        ConfigProvider.configs[ConfigProvider.HIDDEN_CLASS] = "hidden";
 
     }
 

@@ -2,7 +2,11 @@ import { createLogic } from 'redux-logic';
 import { UserConstants, AuthConstants } from '../../services/constants.service';
 import { authService } from '../../services/authentication/auth.service';
 import { authActions } from '../action-creators/auth.action.creator';
-import { IAccountKitSDKDoneLoadingAction, ISaveFacebookUserAction, IValidatePhoneUserAction } from '../actions/auth.actions';
+import {
+    IAccountKitSDKDoneLoadingAction,
+    ISaveFacebookUserAction,
+    IValidatePhoneUserAction
+} from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
 import { userActions } from '../action-creators/user.action.creator';
 import { ISignUpUserRequestAction } from '../actions/user.actions';
@@ -72,7 +76,10 @@ export const validateAccountKitLoginDone = createLogic({
                     console.log(error);
 
                     // TODO: Lanzar el error, intervenir la acción y setear el estado de error
-                    dispatch(systemActions.setAppWithError(true));
+                    // dispatch(systemActions.setAppWithError(true));
+
+                    dispatch(systemActions.setAppErrorMessage(error));
+
                     done();
                 },
                 () => {
@@ -219,9 +226,10 @@ export const signUpUser = createLogic<
         ).subscribe(
             (response: any) => {
                 const hasSession = true;
+                const { data } = response;
 
-                if (response.status !== 1) {
-                    // TODO: Manejar el Error al registrar
+                if (data.status !== 1) {
+                    dispatch(systemActions.handleAppError(data.msg));
                 }
                 else {
                     // Se indica que no tiene pendiente completar registro
@@ -235,8 +243,8 @@ export const signUpUser = createLogic<
                 }
 
 
-
             }, error => {
+                debugger;
                 // TODO: Que hacer cuando falla el guardado del usuario?
                 console.log(error);
                 done();

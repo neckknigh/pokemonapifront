@@ -11,19 +11,37 @@ const setLoadingAppStatus = (appIsLoading: boolean): SystemActions => {
         type: SystemConstants.APP_IS_LOADING,
         appIsLoading
     }
-}
+};
 
 const showLoadingScreen = (): SystemActions => {
     return setLoadingAppStatus(true);
-}
+};
 
 const hideLoadingScreen = (): SystemActions => {
     return setLoadingAppStatus(false);
-}
+};
 
 const setAppWithError = (appHasError: boolean): SystemActions => {
     return {
         type: SystemConstants.APP_HAS_ERROR,
+        appHasError
+    }
+};
+
+const setAppErrorMessage = (errorMessage: string): SystemActions => {
+    return {
+        type: SystemConstants.APP_ERROR_MESSAGE,
+        errorMessage
+    }
+};
+
+const handleAppError = (
+    appErrorMessage: string,
+    appHasError: boolean = true
+): SystemActions => {
+    return {
+        type: SystemConstants.HANDLE_APP_ERROR,
+        appErrorMessage,
         appHasError
     }
 }
@@ -32,5 +50,7 @@ const setAppWithError = (appHasError: boolean): SystemActions => {
 export const systemActions = {
     showLoadingScreen,
     hideLoadingScreen,
-    setAppWithError
+    setAppWithError,
+    setAppErrorMessage,
+    handleAppError
 }

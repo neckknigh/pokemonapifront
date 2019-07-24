@@ -1,24 +1,67 @@
 import React, { Component } from 'react'
 import "./error-message.component.scss";
+import { IAppState } from '../../../redux/app-state';
+import { connect } from 'react-redux';
+import { ConfigProvider as CP } from '../../../services/config/config.service';
+import { Dispatch } from 'redux';
+import { SystemActions } from '../../../redux/actions/system.actions';
+import { systemActions } from '../../../redux/action-creators/system.action.creator';
 
 export interface IErrorMessageComponentProps {
-
+    readonly appHasError?: boolean,
+    readonly appErrorMessage?: string,
+    readonly hideErrorMessage?: () => any
 }
 
 export interface IErrorMessageComponentState {
-
+    mainContainerStyle: string[],
+    hiddenClass: string
 }
 
 class ErrorMessageComponent extends Component<IErrorMessageComponentProps, IErrorMessageComponentState> {
 
-    private onDismissError = (): void => {
+    constructor(props: IErrorMessageComponentProps) {
+        super(props);
 
+        this.state = {
+            mainContainerStyle: [
+                "alert",
+                "alert-danger",
+                "alert-dismissible",
+                "fade",
+                "show",
+                "error-container"
+            ],
+            hiddenClass: CP.get(CP.HIDDEN_CLASS)
+        }
+    }
+
+    private onDismissError = (): void => {
+        this.props.hideErrorMessage!();
+    }
+
+    /**
+     * Permite construir los estilos que tendrá 
+     * el contenedor del error.
+     */
+    private buildContainerStyles = (): string => {
+        const styles = this.state.mainContainerStyle.concat([
+            !this.props.appHasError ? this.state.hiddenClass : ""
+        ]);
+        return styles.join(" ");
     }
 
     render() {
+        debugger;
         return (
-            <div className="alert alert-danger alert-dismissible fade show error-container" role="alert">
-                <strong>Ocurrió un error!</strong> No se pudo registrar
+            <div
+                className={
+                    this.buildContainerStyles()
+                }
+                role="alert"
+            >
+                <strong>Error: </strong>
+                {this.props.appErrorMessage}
                 <button
                     type="button"
                     className="close"
@@ -31,4 +74,17 @@ class ErrorMessageComponent extends Component<IErrorMessageComponentProps, IErro
     }
 }
 
-export default ErrorMessageComponent;
+const mapStateToProps = (appState: IAppState): IErrorMessageComponentProps => {
+    return {
+        appErrorMessage: appState.systemState.errorMessage,
+        appHasError: appState.systemState.appHasError
+    }
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<SystemActions>): IErrorMessageComponentProps => {
+    return {
+        hideErrorMessage: () => dispatch(systemActions.setAppWithError(false))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorMessageComponent);

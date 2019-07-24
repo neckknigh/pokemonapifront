@@ -33,6 +33,12 @@ export const systemReducer: Reducer<ISystemState, SystemActions> = (
                 appHasError: action.appHasError
             }
 
+        case SystemConstants.APP_ERROR_MESSAGE:
+            return {
+                ...state,
+                errorMessage: action.errorMessage
+            }
+
         default:
             return state;
     }

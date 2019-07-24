@@ -1,7 +1,9 @@
 import authLogics from "./logic/auth.logic";
+import systemLogics from "./logic/system.logic";
 
 const appLogic = [
-    ...authLogics
+    ...authLogics,
+    ...systemLogics
 ];
 
 export default appLogic;

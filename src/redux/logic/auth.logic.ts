@@ -99,7 +99,7 @@ export const saveFacebookUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-        debugger;
+        //debugger;
         const isLoggedIn = true;
 
         // Se indica que se logueó correctamente por facebook
@@ -110,7 +110,7 @@ export const saveFacebookUser = createLogic<
             action.facebookUserData
         ).subscribe(
             (response: any) => {
-                debugger;
+                //debugger;
                 console.log(response);
 
                 // Se indica se logueó correctamente
@@ -235,7 +235,7 @@ export const signUpUser = createLogic<
 
 
             }, error => {
-                debugger;
+                //debugger;
                 // TODO: Que hacer cuando falla el guardado del usuario?
                 console.log(error);
                 done();

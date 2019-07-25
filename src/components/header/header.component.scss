@@ -14,11 +14,13 @@ header {
             color: white;
 
             .logo-container {
-                // TODO: Revisar este tamaño
-                width: 10em;
+
+                width: 6rem;
+                height: 80%;
+                padding-bottom: 0.2rem;
 
                 .logo {
-                    // TODO: Revisar este tamaño
+
                     width: 4.15em;
                 }
             }

@@ -43,7 +43,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
             <header>
                 <nav className="grid">
                     <div className="column flex-row-start-items-center left-container">
-                        <div>Arrow</div>
+                        <div></div>
                         <a href={this.state.basePath} className="flex-row-center logo-container">
                             <img className="logo" src="/img/login/logo.png" alt="Doo" />
                         </a>
@@ -56,7 +56,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                         }
                     </div>
                     <div className="column flex-row-end-items-center">
-                        2 3 4
+
                     </div>
                 </nav>
             </header>

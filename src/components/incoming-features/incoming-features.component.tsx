@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import "./incoming-features.component.scss";
+import { IAppState } from '../../redux/app-state';
+import { connect } from 'react-redux';
+
+interface IIncomingFeaturesProps {
+    userHasSession: boolean;
+    history?: any;
+}
 
 
-class IncomingFeaturesComponent extends Component<{}, {}> {
+class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
 
     private handleGooglePlayBtn() {
         window.open("https://play.google.com/store/apps/details?id=and.doo.greenggers.com.doo&hl=es", "_blank")
@@ -13,6 +20,11 @@ class IncomingFeaturesComponent extends Component<{}, {}> {
     }
 
     render() {
+
+        if (!this.props.userHasSession) {
+            this.props.history.push("/");
+        }
+
         return (
             <div className="grid login-container incoming-features-container">
                 <div className="column-50 left-container flex-row-end-items-center">
@@ -76,4 +88,10 @@ class IncomingFeaturesComponent extends Component<{}, {}> {
     }
 }
 
-export default IncomingFeaturesComponent;
+const mapStateToProps = (appState: IAppState): IIncomingFeaturesProps => {
+    return {
+        userHasSession: appState.authState.userHasSession
+    }
+}
+
+export default connect(mapStateToProps)(IncomingFeaturesComponent);

@@ -9,12 +9,12 @@ import { Redirect } from 'react-router';
 import { urlProvider } from '../../services/config/url.service';
 
 export interface IAuthComponentProps {
-    isFacebookLoggedIn?: boolean,
-    validateAccountKitLoginDone?: () => any,
-    userHasPendingRegistration?: boolean,
-    userHasSession?: boolean,
-    history?: any,
-    appHasError?: boolean
+    isFacebookLoggedIn?: boolean;
+    validateAccountKitLoginDone?: () => any;
+    userHasPendingRegistration?: boolean;
+    userHasSession?: boolean;
+    history?: any;
+    appHasError?: boolean;
 }
 
 export interface IAuthComponentState {
@@ -69,7 +69,7 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
          * redirecciona a la página princiipal.
          */
         if (this.props.userHasSession) {
-            return (<Redirect to='/comunities' />);
+            return (<Redirect to='/incoming_features' />);
         }
 
         return (

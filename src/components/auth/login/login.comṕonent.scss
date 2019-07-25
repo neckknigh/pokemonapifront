@@ -11,6 +11,7 @@
         .login-card {
             width: 27rem;
             @include border-radius(6px);
+            border-color: $ligh-gray-color;
 
             .login-buttons {
                 padding-left: 2em;

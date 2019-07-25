@@ -13,6 +13,7 @@ import SignUpComponent from './components/auth/signup/signup.component';
 import LoadingOverlay from 'react-loading-overlay';
 import { ConfigProvider as CP } from './services/config/config.service';
 import ErrorMessageComponent from './components/widgets/error-message/error-message.component';
+import IncomingFeaturesComponent from './components/incoming-features/incoming-features.component';
 
 /**
  * Interface para mapear las propiedades del 
@@ -58,6 +59,7 @@ class App extends React.Component<IAppProps, IApplicationState> {
               <Route exact path="/auth" component={AuthComponent} />
               <Route exact path="/comunities" component={Cominity} />
               <Route exact path="/signup" component={SignUpComponent} />
+              <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
 
 
             </main>

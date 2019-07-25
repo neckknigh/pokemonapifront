@@ -39,8 +39,8 @@ class RequestAdapter {
         const { phone } = user;
         const body = {
             user: {
-                phone: phone!.number + "22"
-                //phone: phone!.number
+                //phone: phone!.number + "22"
+                phone: phone!.number
             }
         }
 
@@ -53,8 +53,8 @@ class RequestAdapter {
         const body: any = {
             user: {
                 // TODO: quitar el valor de new date
-                phone: phone!.number + new Date().getMilliseconds(),
-                //phone: phone!.number,
+                //phone: phone!.number + new Date().getMilliseconds(),
+                phone: phone!.number,
                 userName: userData.userName,
                 email: userData.email,
                 country: phone!.country_prefix,

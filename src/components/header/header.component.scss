@@ -7,17 +7,31 @@ header {
     background-color: $blue-doo;
 
     nav {
-        padding: 0.5em 0.4em;
+        //padding: 0.5em 0.4em;
+        height: $maximum-percentage;
 
-        .logo-container {
-            // TODO: Revisar este tamaño
-            width: 10em;
+        .left-container {
+            color: white;
 
-            .logo {
+            .logo-container {
                 // TODO: Revisar este tamaño
-                width: 4.15em;
+                width: 10em;
+
+                .logo {
+                    // TODO: Revisar este tamaño
+                    width: 4.15em;
+                }
+            }
+
+            .searcher {
+                @include maximum-height();
+                width: 25rem;
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
             }
         }
+
+
 
         .searcher-container {
             .cancel-heading {

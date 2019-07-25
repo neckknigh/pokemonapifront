@@ -30,6 +30,24 @@
 	border-radius: $border;
 }
 
+@mixin border-left-radius($border) {
+	-webkit-border-top-left-radius: $border;
+	-moz-border-top-left-radius: $border;
+	border-top-left-radius: $border;
+	-webkit-border-bottom-left-radius: $border;
+	-moz-border-bottom-left-radius: $border;
+	border-bottom-left-radius: $border;
+}
+
+@mixin border-right-radius($border) {
+	-webkit-border-top-right-radius: $border;
+	-moz-border-top-right-radius: $border;
+	border-top-right-radius: $border;
+	-webkit-border-bottom-right-radius: $border;
+	-moz-border-bottom-right-radius: $border;
+	border-bottom-right-radius: $border;
+}
+
 
 @mixin box-shadow($value) {
 	-webkit-box-shadow: $value;
@@ -66,7 +84,7 @@
 }
 
 @mixin maximun-size {
-	height: $maximum-percentage;
+	@include maximum-height();
 	@include maximum-width();
 }
 
@@ -98,4 +116,8 @@
 
 @mixin maximum-width {
 	width: $maximum-percentage;
+}
+
+@mixin maximum-height {
+	height: $maximum-percentage;
 }

@@ -44,6 +44,8 @@ class ErrorMessageComponent extends Component<IErrorMessageComponentProps, IErro
     /**
      * Permite construir los estilos que tendrá 
      * el contenedor del error.
+     * Agrega un estilo de oculto si el mensaje de error 
+     * es vacío.
      */
     private buildContainerStyles = (): string => {
         const styles = this.state.mainContainerStyle.concat([
@@ -53,7 +55,6 @@ class ErrorMessageComponent extends Component<IErrorMessageComponentProps, IErro
     }
 
     render() {
-        debugger;
         return (
             <div
                 className={

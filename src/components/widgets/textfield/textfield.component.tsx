@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import "./textfield.component.scss";
 import { ConfigProvider as CP } from '../../../services/config/config.service';
+import { utilService } from '../../../services/util.service';
 
 export interface ITextFieldComponentProps {
-    name: string | undefined,
-    value: string | undefined,
-    onChange: (event: any) => void,
-    required?: boolean,
-    placeHolder?: string,
-    requiredErrorMessage?: string
+    name: string | undefined;
+    value: string | undefined;
+    onChange: (event: any) => void;
+    required?: boolean;
+    placeHolder?: string;
+    requiredErrorMessage?: string;
+
+    /**
+     * @cfg {string} className - clase CSS a aplicar sobre el contenedor principal
+     * del componente. 
+     */
+    className?: string;
 }
 
 export interface ITextFieldComponentState {
@@ -56,12 +63,24 @@ class TextFieldComponent extends Component<ITextFieldComponentProps, ITextFieldC
         }
     }
 
+    private getContainerStyle = (): string => {
+        let styles: string[] = ["textfield-container"];
+        const { className } = this.props;
+
+        // Si hay un estilo a aplicar
+        if (!utilService.isEmpty(className)) {
+            styles.push(className!);
+        }
+
+        return styles.join(" ");
+    }
+
     render() {
         return (
-            <div className="textfield-container">
+            <div className={this.getContainerStyle()}>
                 <input
                     type="text"
-                    className="form-control"
+                    className="form-control input-text"
                     placeholder={this.props.placeHolder}
                     value={this.props.value}
                     name={this.props.name}

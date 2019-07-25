@@ -25,7 +25,6 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 
 
     constructor(props: IAuthComponentProps) {
-        debugger
         super(props);
 
         this.state = {
@@ -42,7 +41,6 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     }
 
     public componentWillReceiveProps(props: IAuthComponentProps): void {
-        debugger;
 
         /**
          * Si hubo un cambio en el estado de error de la app

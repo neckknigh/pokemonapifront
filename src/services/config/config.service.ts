@@ -25,6 +25,7 @@ export class ConfigProvider {
     static readonly REQUIRED_FIELD_MESSAGE: string = "REQUIRED_FIELD_MESSAGE";
     static readonly HIDDEN_CLASS: string = "HIDDEN_CLASS";
     static readonly ACCOUNT_KIT_LOGIN_ERROR: string = "ACCOUNT_KIT_LOGIN_ERROR";
+    static readonly SEARCHER_PLACEHOLDER: string = "SEARCHER_PLACEHOLDER";
 
     private static configs: any;
 
@@ -58,6 +59,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.REQUIRED_FIELD_MESSAGE] = "El campo es requerido";
         ConfigProvider.configs[ConfigProvider.HIDDEN_CLASS] = "hidden";
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_LOGIN_ERROR] = "No se pudo completar el inicio de sesión";
+        ConfigProvider.configs[ConfigProvider.SEARCHER_PLACEHOLDER] = "¿Que estás buscando?";
     }
 
     public static get(key: string, defaultValue?: string): any {

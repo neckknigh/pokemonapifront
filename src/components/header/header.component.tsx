@@ -43,7 +43,9 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
             <header>
                 <nav className="grid">
                     <div className="column flex-row-start-items-center left-container">
-                        <div></div>
+                        <div> <button type="button" className="searcher-btn">
+                            <i className="fas fa-align-justify"></i>
+                        </button></div>
                         <a href={this.state.basePath} className="flex-row-center logo-container">
                             <img className="logo" src="/img/login/logo.png" alt="Doo" />
                         </a>

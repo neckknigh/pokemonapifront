@@ -7,19 +7,20 @@ import { Dispatch } from 'redux';
 import { userActions } from '../../redux/action-creators/user.action.creator';
 import { urlProvider } from '../../services/config/url.service';
 import SearcherComponent from '../widgets/searcher/searcher.component';
+import { systemActions } from '../../redux/action-creators/system.action.creator';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
     readonly history?: any;
     readonly deletePendingRegistration?: () => void;
     readonly userHasSession?: boolean;
+    readonly showSideMenu?: (open: boolean) => void;
+    readonly isSideMenuOpen?: boolean;
 }
 
 interface IHeaderComponentState {
     readonly basePath: string;
 }
-
-
 
 class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentState> {
 
@@ -38,17 +39,39 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
         this.props.history.push(this.state.basePath);
     }
 
+    private toogleSideMenuHandler = (): void => {
+        this.props.showSideMenu!(!this.props.isSideMenuOpen);
+    }
+
+    // TODO: Refactorizar este render para que solo evalue una vez la session
     render() {
         return (
             <header>
                 <nav className="grid">
                     <div className="column flex-row-start-items-center left-container">
-                        <div> <button type="button" className="searcher-btn">
-                            <i className="fas fa-align-justify"></i>
-                        </button></div>
+
+                        {
+                            // Si tiene sesión se muestra el botón de abrir el sidemenu
+                            this.props.userHasSession &&
+                            <div className="flex-row-center-items-center side-btn-menu-container">
+                                <button
+                                    type="button"
+                                    className="btn side-menu-btn"
+                                    onClick={this.toogleSideMenuHandler}
+                                >
+                                    {
+                                        this.props.isSideMenuOpen ?
+                                            <i className="fas fa-arrow-left side-menu-btn-icon"></i> :
+                                            <i className="fas fa-align-justify side-menu-btn-icon"></i>
+                                    }
+                                </button>
+                            </div>
+                        }
+
                         <a href={this.state.basePath} className="flex-row-center logo-container">
                             <img className="logo" src="/img/login/logo.png" alt="Doo" />
                         </a>
+
                         {
                             // Solo si tiene sesión se muestra el buscador
                             this.props.userHasSession &&
@@ -56,6 +79,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                                 <SearcherComponent />
                             </div>
                         }
+
                     </div>
                     <div className="column flex-row-end-items-center">
 
@@ -69,13 +93,15 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 const mapStateToProps = (state: IAppState): IHeaderComponentProps => {
     return {
         userHasPendingRegistration: state.userState.pendingRegistration,
-        userHasSession: state.authState.userHasSession
+        userHasSession: state.authState.userHasSession,
+        isSideMenuOpen: state.systemState.isSideMenuOpen
     }
 };
 
-const mapDispatchToProps = (dipatch: Dispatch): IHeaderComponentProps => {
+const mapDispatchToProps = (dispatch: Dispatch): IHeaderComponentProps => {
     return {
-        deletePendingRegistration: () => dipatch(userActions.setUserHasPendingRegistration(false))
+        deletePendingRegistration: () => dispatch(userActions.setUserHasPendingRegistration(false)),
+        showSideMenu: (open: boolean) => dispatch(systemActions.openSideMenu(open))
     }
 };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./login.comṕonent.scss";
+import "./login.component.scss";
 import FacebookLoginComponent from './facebook-login/facebook-login.component';
 import AccountKitLoginComponent from "./accountkit-login/accountkit-login.component";
 import { ConfigProvider as CP } from '../../../services/config/config.service';

@@ -44,7 +44,14 @@ const handleAppError = (
         appErrorMessage,
         appHasError
     }
-}
+};
+
+const openSideMenu = (openSideMenu: boolean): SystemActions => {
+    return {
+        type: SystemConstants.OPEN_SIDE_MENU,
+        openSideMenu
+    }
+};
 
 
 export const systemActions = {
@@ -52,5 +59,6 @@ export const systemActions = {
     hideLoadingScreen,
     setAppWithError,
     setAppErrorMessage,
-    handleAppError
+    handleAppError,
+    openSideMenu
 }

@@ -6,24 +6,28 @@ import { SystemConstants } from "../../services/constants.service";
  * cuando el sistema realiza algún tipo de procesamiento.
  */
 export interface IAppIsLoadingAction extends Action<SystemConstants.APP_IS_LOADING> {
-    appIsLoading: boolean
+    appIsLoading: boolean;
 }
 
 export interface IAppHasErrorAction extends Action<SystemConstants.APP_HAS_ERROR> {
-    appHasError: boolean
+    appHasError: boolean;
 }
 
 export interface IAppErrorMessageAction extends Action<SystemConstants.APP_ERROR_MESSAGE> {
-    errorMessage: string
+    errorMessage: string;
 }
 
 export interface IHandleAppErrorAction extends Action<SystemConstants.HANDLE_APP_ERROR> {
-    appHasError: boolean
-    appErrorMessage: string
+    appHasError: boolean;
+    appErrorMessage: string;
 }
 
+export interface IOpenSideMenuAction extends Action<SystemConstants.OPEN_SIDE_MENU> {
+    openSideMenu: boolean;
+}
 
 export type SystemActions = IAppIsLoadingAction |
     IAppHasErrorAction |
     IAppErrorMessageAction |
-    IHandleAppErrorAction;
+    IHandleAppErrorAction |
+    IOpenSideMenuAction;

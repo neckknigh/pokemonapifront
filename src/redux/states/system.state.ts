@@ -1,5 +1,6 @@
 export interface ISystemState {
-    isAppLoading: boolean,
-    appHasError: boolean,
-    errorMessage: string
+    isAppLoading: boolean;
+    appHasError: boolean;
+    errorMessage: string;
+    isSideMenuOpen: boolean;
 }

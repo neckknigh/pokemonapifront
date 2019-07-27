@@ -8,7 +8,8 @@ import { SystemActions } from "../actions/system.actions";
 const initialSystemState: ISystemState = {
     isAppLoading: false,
     appHasError: false,
-    errorMessage: ""
+    errorMessage: "",
+    isSideMenuOpen: false
 };
 
 // root reducer
@@ -37,6 +38,12 @@ export const systemReducer: Reducer<ISystemState, SystemActions> = (
             return {
                 ...state,
                 errorMessage: action.errorMessage
+            }
+
+        case SystemConstants.OPEN_SIDE_MENU:
+            return {
+                ...state,
+                isSideMenuOpen: action.openSideMenu
             }
 
         default:

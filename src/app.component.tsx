@@ -14,6 +14,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import { ConfigProvider as CP } from './services/config/config.service';
 import ErrorMessageComponent from './components/widgets/error-message/error-message.component';
 import IncomingFeaturesComponent from './components/incoming-features/incoming-features.component';
+import SideMenuComponent from './components/widgets/side-menu/side-menu.component';
 
 /**
  * Interface para mapear las propiedades del 
@@ -24,7 +25,7 @@ interface IAppProps {
 }
 
 interface IApplicationState {
-  loadingTextDisplay: boolean
+  loadingTextDisplay?: boolean;
 }
 
 class App extends React.Component<IAppProps, IApplicationState> {
@@ -35,8 +36,8 @@ class App extends React.Component<IAppProps, IApplicationState> {
     this.state = {
       loadingTextDisplay: CP.get(CP.LOADING_TEXT_DISPLAY)
     }
-
   }
+
 
   render() {
 
@@ -50,28 +51,34 @@ class App extends React.Component<IAppProps, IApplicationState> {
       >
         <Router>
           <div className="maximun-size">
-
             <HeaderComponent />
+
             <main className="main-container maximun-size">
               <ErrorMessageComponent />
+              <SideMenuComponent>
 
-              <Route exact path="/" component={AuthComponent} />
-              <Route exact path="/auth" component={AuthComponent} />
-              <Route exact path="/comunities" component={Cominity} />
-              <Route exact path="/signup" component={SignUpComponent} />
-              <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
+                <Route exact path="/" component={AuthComponent} />
+                <Route exact path="/auth" component={AuthComponent} />
+                <Route exact path="/comunities" component={Cominity} />
+                <Route exact path="/signup" component={SignUpComponent} />
+                <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
 
-
+              </SideMenuComponent>
             </main>
             <footer>
 
             </footer>
+
           </div>
+
 
 
         </Router>
 
       </LoadingOverlay>
+
+
+
     );
   }
 }

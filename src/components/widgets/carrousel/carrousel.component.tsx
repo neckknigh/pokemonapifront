@@ -1,21 +1,33 @@
 import React, { Component } from "react";
+import Carousel from 'react-bootstrap/Carousel';
 
 class CarrouselComponent extends Component<{}, {}> {
   public render() {
     return (
-      <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="..." className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
-          </div>
-        </div>
-      </div>
+      <Carousel indicators={false}>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/1500x220.png"
+            alt="First slide"
+          />
+
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/1500x220.png"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/1500x220.png"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+      </Carousel>
     )
   }
 }

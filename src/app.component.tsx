@@ -7,7 +7,7 @@ import HeaderComponent from "./components/header/header.component";
 import AuthComponent from './components/auth/auth.component';
 import { connect } from 'react-redux';
 import { IAppState } from './redux/app-state';
-import Cominity from './components/comunities/comunities';
+import Comunity from './components/comunities/comunity.component';
 import SignUpComponent from './components/auth/signup/signup.component';
 // @ts-ignore
 import LoadingOverlay from 'react-loading-overlay';
@@ -59,7 +59,7 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
                 <Route exact path="/" component={AuthComponent} />
                 <Route exact path="/auth" component={AuthComponent} />
-                <Route exact path="/comunities" component={Cominity} />
+                <Route exact path="/comunities" component={Comunity} />
                 <Route exact path="/signup" component={SignUpComponent} />
                 <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
 

@@ -65,6 +65,21 @@ class RequestAdapter {
     }
 
     /**
+     * Permite obtener el body necesario para el servicio
+     * de consulta de comunidades recomendadas.
+     * TODO: Servicio pendiente de finalizar.
+     */
+    public getBodyForRecomendedComunities(): string {
+        const dummyBody = {
+            userGPS: "4.908307, -74.035193",
+            city: "Cajica",
+            radius: 900
+        }
+
+        return JSON.stringify(dummyBody);
+    }
+
+    /**
      * Permite construir el username que utilizará
      * el usuario logueado por facebook
      * @param {string} id de facebook 

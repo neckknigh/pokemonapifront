@@ -41,6 +41,7 @@ class ClientHttpService {
     private interceptResponse() {
         this.axiosClient.interceptors.response.use(
             (response: any) => {
+
                 // se elimina cualquier mensaje de error existente
                 appStore.dispatch(systemActions.handleAppError());
 
@@ -59,8 +60,14 @@ class ClientHttpService {
         return this.axiosClient.get(resource);
     }
 
-    post(resource: string, body: string) {
-        return this.axiosClient.post(resource, body);
+    post(resource: string, body: string, headers: any = {}) {
+        return this.axiosClient.post(
+            resource,
+            body,
+            {
+                headers
+            }
+        );
     }
 }
 

@@ -22,7 +22,7 @@ class URLProvider {
         this.urls[this.URL_USER_REGISTRATION] = this.baseUrl + "phoneSignIn.php";
 
         // TODO: Si esta URL se repite ponerla como config
-        this.urls[this.URL_RECOMENDED_COMUNITIES] = "http://www.lacigarreria.com/bodega/admon/ws/" + "getComReco.php";
+        this.urls[this.URL_RECOMENDED_COMUNITIES] = "http://www.lacigarreria.com/bodega/admon/ws/getComReco.php";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {

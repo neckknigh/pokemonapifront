@@ -1,20 +1,23 @@
 export interface IUserState {
 
     // Indica si se logueó o no
-    readonly isLoggedIn: boolean,
+    readonly isLoggedIn: boolean;
 
     // indica que está logueandose
-    readonly isFacebookLogginIn: boolean,
+    readonly isFacebookLogginIn: boolean;
 
     // indica que se logueó con facebook correctamente
-    readonly isFacebookLoggedIn?: boolean,
+    readonly isFacebookLoggedIn?: boolean;
 
     // indica que está logueandose con account kit
-    readonly isAccountKitLogginIn: boolean,
+    readonly isAccountKitLogginIn: boolean;
 
     // indica que se ha logueado con account kit
-    readonly isAccountKitLoggedIn: boolean,
+    readonly isAccountKitLoggedIn: boolean;
 
     // Indica si necesita completar el proceso de registro
-    readonly pendingRegistration: boolean
+    readonly pendingRegistration: boolean;
+
+    // Indica si el usuario es administrador del sistema.
+    readonly isAdmin: boolean;
 }

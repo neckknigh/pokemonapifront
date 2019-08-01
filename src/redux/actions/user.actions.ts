@@ -48,6 +48,10 @@ export interface ISignUpUserRequestAction extends Action<UserConstants.SIGNUP_US
     user: any
 }
 
+export interface IAdminUser extends Action<UserConstants.ADMIN_USER> {
+    isAdminUser: boolean
+}
+
 // Se exporta el tipo con las dos acciones
 export type UserActions =
     IFacebookLoginRequestAction |
@@ -56,4 +60,5 @@ export type UserActions =
     IAccountKitLoginRequestAction |
     IAccountKitLoggedSucessAction |
     IHasPendingRegistrationAction |
-    ISignUpUserRequestAction;
+    ISignUpUserRequestAction |
+    IAdminUser;

@@ -149,12 +149,14 @@ export const validatePhoneUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-        let hasPendingRegistration = false;
+        let hasPendingRegistration = false,
+            isAdmin = false;
 
         authService.validatePhoneUser(
             action.user
         ).subscribe(
             (response: any) => {
+                debugger;
 
                 if (response.status !== 1) {
                     hasPendingRegistration = true;
@@ -169,6 +171,11 @@ export const validatePhoneUser = createLogic<
 
                     // Se crea la sessión
                     authService.createSession(response);
+
+                    isAdmin = authService.IsAdminUser();
+
+                    // Se establece si el usuario es administrador
+                    dispatch(userActions.setIsAdminUser(isAdmin));
                 }
 
                 // Se indica si el usuario necesita completar su registro
@@ -256,14 +263,13 @@ export const validateUserSession = createLogic({
     type: AuthConstants.VALIDATE_USER_SESSION,
     latest: true,
     // eslint-disable-next-line
-    process({ action }, dispatch, done) {
-        debugger;
-
-        console.log("llego la acción", action);
+    process({ }, dispatch, done) {
 
         const userHasSession = authService.userHasSession();
 
         dispatch(authActions.setUserLoggedInStatus(userHasSession));
+
+        // TODO: Traer la data del usuario si tiene sesión
 
         done();
 

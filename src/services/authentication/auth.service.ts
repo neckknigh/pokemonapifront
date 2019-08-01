@@ -193,8 +193,8 @@ class AuthService {
     }
 
     public createSession(data: any): void {
-        this.setToken(data.userId);
-        this.setUserId(data.userToken);
+        this.setUserId(data.userId);
+        this.setToken(data.userToken);
     }
 
     private setToken(token: string): void {
@@ -217,9 +217,26 @@ class AuthService {
      * Permite determinar si el usuario tiene la sesión
      * iniciada o no.
      */
-    public userHasSession() {
+    public userHasSession(): boolean {
         debugger;
         return !utilService.isEmpty(this.getToken());
+    }
+
+    /**
+     * TODO: Este método es solo temporal, debe borrarse.
+     * Será utilizado mientras se contruye la web. 
+     * Devolvera true si el usuario logueado es Kevin Perez o
+     * Carlos Navas.
+     * La comparacion se realiza por sus tokens.
+     */
+    public IsAdminUser() {
+        return utilService.isEqual(
+            this.getToken(),
+            "w591t2adx9bc68rgozjv09qd99kp6fus7h7e4li37yn55camc"
+        ) || utilService.isEqual(
+            this.getToken(),
+            "k830wf3uy5ecrvnsza2a4t8cfq55id2l35hom7xgjp9fb1f56"
+        )
     }
 }
 

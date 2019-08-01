@@ -25,7 +25,6 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 
 
     constructor(props: IAuthComponentProps) {
-        debugger;
         super(props);
 
         this.state = {
@@ -43,7 +42,6 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     }
 
     public componentWillReceiveProps(props: IAuthComponentProps): void {
-
         /**
          * Si hubo un cambio en el estado de error de la app
          * y si hubo un error, se redirecciona a la ruta base.  
@@ -64,12 +62,17 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
             return (<Redirect to='/signup' />);
         }
 
+
         /**
          * Si ya ha iniciado sesión,
          * redirecciona a la página princiipal.
          */
         if (this.props.userHasSession) {
-            return (<Redirect to='/incoming_features' />);
+
+            /**
+             * Si es usuario normal verá la página en construcción.
+             */
+            return (<Redirect to="/incoming_features" />);
         }
 
         return (

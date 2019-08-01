@@ -18,6 +18,7 @@ interface IHeaderComponentProps {
     readonly showSideMenu?: (open: boolean) => void;
     readonly isSideMenuOpen?: boolean;
     readonly validateUserSession?: () => void;
+    readonly isAdminUser?: boolean;
 }
 
 interface IHeaderComponentState {
@@ -50,6 +51,8 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
     // TODO: Refactorizar este render para que solo evalue una vez la session
     render() {
+        debugger;
+        const readOnlyMode = !this.props.userHasSession || !this.props.isAdminUser;
         return (
             <header>
                 <nav className="grid">
@@ -57,7 +60,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
                         {
                             // Si tiene sesión se muestra el botón de abrir el sidemenu
-                            this.props.userHasSession &&
+                            !readOnlyMode &&
                             <div className="flex-row-center-items-center side-btn-menu-container">
                                 <button
                                     type="button"
@@ -79,7 +82,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
                         {
                             // Solo si tiene sesión se muestra el buscador
-                            this.props.userHasSession &&
+                            !readOnlyMode &&
                             <div className="searcher">
                                 <SearcherComponent />
                             </div>
@@ -99,7 +102,8 @@ const mapStateToProps = (state: IAppState): IHeaderComponentProps => {
     return {
         userHasPendingRegistration: state.userState.pendingRegistration,
         userHasSession: state.authState.userHasSession,
-        isSideMenuOpen: state.systemState.isSideMenuOpen
+        isSideMenuOpen: state.systemState.isSideMenuOpen,
+        isAdminUser: state.userState.isAdmin
     }
 };
 

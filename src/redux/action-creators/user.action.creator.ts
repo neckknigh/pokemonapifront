@@ -90,6 +90,13 @@ const startSignUpUserRequest = (userName: string, email: string): UserActions =>
     return signUpUserRequestAction;
 };
 
+const setIsAdminUser = (isAdminUser: boolean): UserActions => {
+    return {
+        type: UserConstants.ADMIN_USER,
+        isAdminUser
+    }
+};
+
 export const userActions = {
     startFacebookRequestlogin,
     startFacebookUserRegisterRequest,
@@ -97,5 +104,6 @@ export const userActions = {
     startAccountKitLoginRequest,
     setAccountKitLoggedInStatus,
     setUserHasPendingRegistration,
-    startSignUpUserRequest
+    startSignUpUserRequest,
+    setIsAdminUser
 }

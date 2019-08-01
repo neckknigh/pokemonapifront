@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 interface IIncomingFeaturesProps {
     userHasSession?: boolean;
     history?: any;
+    isAdminUser: boolean;
 }
 
 
 class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
-
 
     private handleGooglePlayBtn() {
         window.open("https://play.google.com/store/apps/details?id=and.doo.greenggers.com.doo&hl=es", "_blank")
@@ -20,10 +20,22 @@ class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
         window.open("https://apps.apple.com/us/app/doo-el-barrio-en-tu-bolsillo/id1167625418", "_blank")
     }
 
+
     render() {
 
+        /**
+         * No podrá acceder a esta ruta si no tiene sesión
+         */
         if (!this.props.userHasSession) {
             this.props.history.push("/");
+        }
+
+        /**
+         * Si es un administrador, se redirecciona 
+         * al dashboard principal
+         */
+        if (this.props.isAdminUser) {
+            this.props.history.push("/comunities");
         }
 
         return (
@@ -91,7 +103,8 @@ class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
 
 const mapStateToProps = (appState: IAppState): IIncomingFeaturesProps => {
     return {
-        userHasSession: appState.authState.userHasSession
+        userHasSession: appState.authState.userHasSession,
+        isAdminUser: appState.userState.isAdmin
     }
 };
 

@@ -6,6 +6,7 @@ import { urlProvider } from "../config/url.service";
 import { ConfigProvider as CP } from "../config/config.service";
 import { requestAdapter } from "../adapter/request-adapter.service";
 import { clientService } from "../config/client.service";
+import { utilService } from "../util.service";
 
 
 class AuthService {
@@ -210,6 +211,15 @@ class AuthService {
 
     private getUserId() {
         return localStorage.getItem(AuthService.USER_ID_FIELD_NAME);
+    }
+
+    /**
+     * Permite determinar si el usuario tiene la sesión
+     * iniciada o no.
+     */
+    public userHasSession() {
+        debugger;
+        return !utilService.isEmpty(this.getToken());
     }
 }
 

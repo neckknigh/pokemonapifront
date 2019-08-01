@@ -53,11 +53,18 @@ const setUserLoggedInStatus = (hasSession: boolean): AuthActions => {
     }
 };
 
+const validateUserSession = (): AuthActions => {
+    return {
+        type: AuthConstants.VALIDATE_USER_SESSION
+    }
+};
+
 
 export const authActions = {
     doneAccountKitSdkLoading,
     validateAccountKitLoginDone,
     saveFacebookUser,
     startValidatingPhoneUser,
-    setUserLoggedInStatus
+    setUserLoggedInStatus,
+    validateUserSession
 }

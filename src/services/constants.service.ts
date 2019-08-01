@@ -41,7 +41,8 @@ export enum AuthConstants {
     ACCOUNT_KIT_USER_API = "https://graph.accountkit.com/v1.3/me/?access_token=",
     SAVE_FACEBOOK_USER = "SAVE_FACEBOOK_USER",
     VALIDATE_PHONE_USER = "VALIDATE_PHONE_USER",
-    USER_HAS_SESSION = "USER_HAS_SESSION"
+    USER_HAS_SESSION = "USER_HAS_SESSION",
+    VALIDATE_USER_SESSION = "VALIDATE_USER_SESSION"
 }
 
 export enum API_CONSTANTS {

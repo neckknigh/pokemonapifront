@@ -4,12 +4,13 @@ import { IAppState } from '../../redux/app-state';
 import { connect } from 'react-redux';
 
 interface IIncomingFeaturesProps {
-    userHasSession: boolean;
+    userHasSession?: boolean;
     history?: any;
 }
 
 
 class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
+
 
     private handleGooglePlayBtn() {
         window.open("https://play.google.com/store/apps/details?id=and.doo.greenggers.com.doo&hl=es", "_blank")
@@ -92,6 +93,7 @@ const mapStateToProps = (appState: IAppState): IIncomingFeaturesProps => {
     return {
         userHasSession: appState.authState.userHasSession
     }
-}
+};
+
 
 export default connect(mapStateToProps)(IncomingFeaturesComponent);

@@ -248,13 +248,36 @@ export const signUpUser = createLogic<
     }
 });
 
+/**
+ * Permite validar si el teléfono del usuario
+ * ya se encuentra registrado en el sistema.
+ */
+export const validateUserSession = createLogic({
+    type: AuthConstants.VALIDATE_USER_SESSION,
+    latest: true,
+    // eslint-disable-next-line
+    process({ action }, dispatch, done) {
+        debugger;
+
+        console.log("llego la acción", action);
+
+        const userHasSession = authService.userHasSession();
+
+        dispatch(authActions.setUserLoggedInStatus(userHasSession));
+
+        done();
+
+    }
+});
+
 const authLogics = [
     loadAccountKitApiLogic,
     doAccountKitLogin,
     validateAccountKitLoginDone,
     saveFacebookUser,
     validatePhoneUser,
-    signUpUser
+    signUpUser,
+    validateUserSession
 ];
 
 

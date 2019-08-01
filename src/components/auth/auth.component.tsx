@@ -25,6 +25,7 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
 
 
     constructor(props: IAuthComponentProps) {
+        debugger;
         super(props);
 
         this.state = {
@@ -32,8 +33,9 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
         }
 
         /**
+         * Si la url no es el path base
          * Se valida si el usuario realizó correctamente el login
-         * por account kit
+         * por account kit.
          */
         if (this.state.validateAccountKitLogin) {
             this.props.validateAccountKitLoginDone!();

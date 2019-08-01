@@ -34,8 +34,13 @@ export interface IUserHasSessionAction extends Action<AuthConstants.USER_HAS_SES
     hasSession: boolean;
 }
 
+export interface IValidateUserSession extends Action<AuthConstants.VALIDATE_USER_SESSION> {
+
+}
+
 export type AuthActions = IAccountKitSDKDoneLoadingAction |
     IAccountKitLoginDoneAction |
     ISaveFacebookUserAction |
     IValidatePhoneUserAction |
-    IUserHasSessionAction;
+    IUserHasSessionAction |
+    IValidateUserSession;

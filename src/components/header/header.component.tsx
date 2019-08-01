@@ -8,6 +8,7 @@ import { userActions } from '../../redux/action-creators/user.action.creator';
 import { urlProvider } from '../../services/config/url.service';
 import SearcherComponent from '../widgets/searcher/searcher.component';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
+import { authActions } from '../../redux/action-creators/auth.action.creator';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
@@ -16,6 +17,7 @@ interface IHeaderComponentProps {
     readonly userHasSession?: boolean;
     readonly showSideMenu?: (open: boolean) => void;
     readonly isSideMenuOpen?: boolean;
+    readonly validateUserSession?: () => void;
 }
 
 interface IHeaderComponentState {
@@ -30,6 +32,9 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
         this.state = {
             basePath: urlProvider.getRootPath()
         }
+
+        // Se valida la sessión de usuario
+        this.props.validateUserSession!();
     }
 
     private handleClickCancelBtn = (): void => {
@@ -101,7 +106,8 @@ const mapStateToProps = (state: IAppState): IHeaderComponentProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IHeaderComponentProps => {
     return {
         deletePendingRegistration: () => dispatch(userActions.setUserHasPendingRegistration(false)),
-        showSideMenu: (open: boolean) => dispatch(systemActions.openSideMenu(open))
+        showSideMenu: (open: boolean) => dispatch(systemActions.openSideMenu(open)),
+        validateUserSession: () => dispatch(authActions.validateUserSession())
     }
 };
 

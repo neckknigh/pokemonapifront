@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Sidebar from 'react-sidebar';
 import { IAppState } from '../../../redux/app-state';
 import { connect } from 'react-redux';
+import { sideMenuStyleConfig } from './side-menu-data.component';
 
 export interface ISideMenuComponentProps {
     readonly isSideMenuOpen: boolean;
@@ -19,55 +20,7 @@ class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComp
         super(props);
         this.state = {
             mql: window.matchMedia(`(min-width: 800px)`),
-            styles: {
-                root: {
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    overflow: "hidden"
-                },
-                sidebar: {
-                    zIndex: 2,
-                    position: "absolute",
-                    top: "2.8rem",
-                    bottom: 0,
-                    transition: "transform .3s ease-out",
-                    WebkitTransition: "-webkit-transform .3s ease-out",
-                    willChange: "transform",
-                    overflowY: "auto",
-                    width: "17rem"
-                },
-                content: {
-                    position: "absolute",
-                    top: "2.8rem",
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    overflowY: "auto",
-                    WebkitOverflowScrolling: "touch",
-                    transition: "left .3s ease-out, right .3s ease-out"
-                },
-                overlay: {
-                    zIndex: 1,
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    opacity: 0,
-                    visibility: "hidden",
-                    transition: "opacity .3s ease-out, visibility .3s ease-out",
-                    backgroundColor: "rgba(0,0,0,.3)"
-                },
-                dragHandle: {
-                    zIndex: 1,
-                    position: "fixed",
-                    top: 0,
-                    bottom: 0
-                }
-            }
+            styles: sideMenuStyleConfig
         }
     }
 

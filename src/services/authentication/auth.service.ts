@@ -13,8 +13,13 @@ class AuthService {
 
     public static readonly USER_ID_FIELD_NAME = "user_id";
     public static readonly ACCESS_TOKEN_NAME = "access_token";
-    private rootWindow: any = window;
-    private accountKitData: any = null;
+    private rootWindow: any;
+    private accountKitData: any;
+
+    constructor() {
+        this.rootWindow = window;
+        this.accountKitData = null;
+    }
 
     /**
     * Permite cargar el api (sdk) de Facebook Account Kit
@@ -209,8 +214,8 @@ class AuthService {
         localStorage.setItem(AuthService.USER_ID_FIELD_NAME, id);
     }
 
-    private getUserId() {
-        return localStorage.getItem(AuthService.USER_ID_FIELD_NAME);
+    public getUserId(): string {
+        return localStorage.getItem(AuthService.USER_ID_FIELD_NAME) || "";
     }
 
     /**
@@ -237,6 +242,13 @@ class AuthService {
             this.getToken(),
             "k830wf3uy5ecrvnsza2a4t8cfq55id2l35hom7xgjp9fb1f56"
         )
+    }
+
+    public getAuthHeaders() {
+        return {
+            Doouserid: this.getUserId(),
+            Dooauth: this.getToken()
+        };
     }
 }
 

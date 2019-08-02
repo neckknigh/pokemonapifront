@@ -10,6 +10,10 @@ class UtilService {
         return _.isEqual(firstValue, secondValue);
     }
 
+    public merge(first: any, second: any): any {
+        return _.merge(first, second);
+    }
+
 }
 
 export const utilService = new UtilService(); 

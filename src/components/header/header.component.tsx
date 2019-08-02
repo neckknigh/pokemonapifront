@@ -51,7 +51,6 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
     // TODO: Refactorizar este render para que solo evalue una vez la session
     render() {
-        debugger;
         const readOnlyMode = !this.props.userHasSession || !this.props.isAdminUser;
         return (
             <header>

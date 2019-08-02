@@ -7,7 +7,8 @@ import {
     IAccountKitLoginRequestAction,
     IAccountKitLoggedSucessAction,
     IHasPendingRegistrationAction,
-    ISignUpUserRequestAction
+    ISignUpUserRequestAction,
+    IAdminUser
 } from "../actions/user.actions";
 
 /**
@@ -90,11 +91,12 @@ const startSignUpUserRequest = (userName: string, email: string): UserActions =>
     return signUpUserRequestAction;
 };
 
-const setIsAdminUser = (isAdminUser: boolean): UserActions => {
-    return {
+const setIsAdminUser = (isAdmin: boolean): UserActions => {
+    const setIsAdminUserAction: IAdminUser = {
         type: UserConstants.ADMIN_USER,
-        isAdminUser
+        isAdmin
     }
+    return setIsAdminUserAction;
 };
 
 export const userActions = {

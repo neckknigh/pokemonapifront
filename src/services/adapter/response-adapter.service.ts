@@ -15,6 +15,16 @@ class ResponseAdapter {
     public adaptPhoneUserValidationResponse(rawResponse: any): any {
         return rawResponse.data;
     }
+
+    public adaptUserForAccount(rawResponse: any): Account {
+        const { user } = rawResponse.data;
+        return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            lastName: user.lastName
+        }
+    }
 }
 
 export const responseAdapter = new ResponseAdapter();

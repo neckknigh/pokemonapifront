@@ -49,7 +49,7 @@ export interface ISignUpUserRequestAction extends Action<UserConstants.SIGNUP_US
 }
 
 export interface IAdminUser extends Action<UserConstants.ADMIN_USER> {
-    isAdminUser: boolean
+    isAdmin: boolean
 }
 
 // Se exporta el tipo con las dos acciones

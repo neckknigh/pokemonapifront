@@ -19,7 +19,6 @@ export const userReducer: Reducer<IUserState, UserActions> = (
     state: IUserState = initialUserState,
     action: UserActions
 ): IUserState => {
-    //debugger;
 
     // Se examina la acción
     switch (action.type) {
@@ -64,7 +63,7 @@ export const userReducer: Reducer<IUserState, UserActions> = (
         case UserConstants.ADMIN_USER:
             return {
                 ...state,
-                isAdmin: action.isAdminUser
+                isAdmin: action.isAdmin
             }
 
         default:

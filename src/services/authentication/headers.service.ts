@@ -1,11 +1,18 @@
+import { authService } from "./auth.service";
+import { utilService } from "../util.service";
+
 class HeadersService {
 
     public getHeaders(): any {
-        const headers = {
-            "Content-Type": "application/json",
-            "Doouserid": "41",
-            "Dooauth": "59d853l7ucoaz071ysqr2p2d4v398251mnbiw6djkefgh71tx"
-        }
+        // Se obtienen los headers de autenticación
+        let authHeaders = authService.getAuthHeaders();
+
+        const headers = utilService.merge(
+            {
+                "Content-Type": "application/json"
+            },
+            authHeaders
+        );
 
         return headers;
     }

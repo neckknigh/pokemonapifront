@@ -11,6 +11,7 @@ import { Account } from '../../models/account.model';
 import { userActions } from '../action-creators/user.action.creator';
 import { ISignUpUserRequestAction } from '../actions/user.actions';
 import { systemActions } from '../action-creators/system.action.creator';
+import { accountService } from '../../services/data/account.service';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -265,13 +266,38 @@ export const validateUserSession = createLogic({
     // eslint-disable-next-line
     process({ }, dispatch, done) {
 
+        debugger;
         const userHasSession = authService.userHasSession();
 
+        // Se actualiza el estado de logueado.
         dispatch(authActions.setUserLoggedInStatus(userHasSession));
 
-        // TODO: Traer la data del usuario si tiene sesión
+        // Si el usuario tiene sesión
+        if (userHasSession) {
 
-        done();
+            // Se consutan sus datos
+            accountService.getAccount(
+                authService.getUserId()
+            ).subscribe(
+                (account: Account) => {
+
+                    /**
+                     * Después de consultar al usuario, 
+                     * se establece su rol de admin, si lo tiene.
+                     */
+                    dispatch(userActions.setIsAdminUser(authService.IsAdminUser()));
+
+
+                }, error => {
+                    // TODO: Que hacer cuando falla el guardado del usuario?
+                    console.log(error);
+                    done();
+                },
+                () => {
+                    done();
+                }
+            );
+        }
 
     }
 });

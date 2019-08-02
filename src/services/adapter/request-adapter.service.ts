@@ -80,6 +80,20 @@ class RequestAdapter {
     }
 
     /**
+     * Permite obtener el body para la petición
+     * que obtiene la información del usuario 
+     * apartir de su ID.
+     * @param userId {string} id del usuario
+     */
+    public getBodyForUserById(userId: string): string {
+        const body: any = {
+            userId
+        }
+
+        return JSON.stringify(body);
+    }
+
+    /**
      * Permite construir el username que utilizará
      * el usuario logueado por facebook
      * @param {string} id de facebook 

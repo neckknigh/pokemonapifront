@@ -235,13 +235,8 @@ class AuthService {
      * La comparacion se realiza por sus tokens.
      */
     public IsAdminUser() {
-        return utilService.isEqual(
-            this.getToken(),
-            "w591t2adx9bc68rgozjv09qd99kp6fus7h7e4li37yn55camc"
-        ) || utilService.isEqual(
-            this.getToken(),
-            "k830wf3uy5ecrvnsza2a4t8cfq55id2l35hom7xgjp9fb1f56"
-        )
+        const adminsIds: string[] = CP.get(CP.ADMINS);
+        return utilService.includes(adminsIds, this.getUserId());
     }
 
     public getAuthHeaders() {

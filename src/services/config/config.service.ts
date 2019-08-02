@@ -26,6 +26,7 @@ export class ConfigProvider {
     static readonly HIDDEN_CLASS: string = "HIDDEN_CLASS";
     static readonly ACCOUNT_KIT_LOGIN_ERROR: string = "ACCOUNT_KIT_LOGIN_ERROR";
     static readonly SEARCHER_PLACEHOLDER: string = "SEARCHER_PLACEHOLDER";
+    static readonly ADMINS: string = "ADMINS";
 
     private static configs: any;
 
@@ -60,6 +61,9 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.HIDDEN_CLASS] = "hidden";
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_LOGIN_ERROR] = "No se pudo completar el inicio de sesión";
         ConfigProvider.configs[ConfigProvider.SEARCHER_PLACEHOLDER] = "¿Que estás buscando?";
+        ConfigProvider.configs[ConfigProvider.ADMINS] = [
+            "4040", "9"
+        ];
     }
 
     public static get(key: string, defaultValue?: string): any {

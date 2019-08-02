@@ -14,6 +14,10 @@ class UtilService {
         return _.merge(first, second);
     }
 
+    public includes(collection: any, element: any): boolean {
+        return _.includes(collection, element)
+    }
+
 }
 
 export const utilService = new UtilService(); 

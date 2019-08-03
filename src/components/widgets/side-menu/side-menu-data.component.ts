@@ -47,3 +47,43 @@ export const sideMenuStyleConfig: any = {
         bottom: 0
     }
 }
+
+export const items: any[] = [
+    {
+        name: "Doo Market",
+        img: "/img/login/flags/dummy.png",
+        innerItems: []
+    },
+    {
+        name: "Comunidades",
+        img: "/img/login/flags/dummy.png",
+        innerItems: [
+            {
+                name: "Restaurantes",
+                path: "#"
+            },
+            {
+                name: "Establecimientos",
+                path: "#"
+            },
+            {
+                name: "Salones de Belleza",
+                path: "#"
+            },
+            {
+                name: "Centros Comerciales",
+                path: "#"
+            }
+        ]
+    },
+    {
+        name: "Comunidades",
+        img: "/img/login/flags/dummy.png",
+        innerItems: []
+    },
+    {
+        name: "Repetir Compra",
+        img: "/img/login/flags/dummy.png",
+        innerItems: []
+    }
+]

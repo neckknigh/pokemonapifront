@@ -106,6 +106,7 @@
 	}
 }
 
+// FONTS
 @mixin roboto-regular-font {
 	font-family: Roboto;
 }
@@ -113,6 +114,11 @@
 @mixin roboto-medium-font {
 	font-family: Roboto Medium;
 }
+
+@mixin helvetica-neue-bold-font {
+	font-family: Helvetica Neue Bold;
+}
+
 
 @mixin maximum-width {
 	width: $maximum-percentage;

@@ -22,6 +22,12 @@
     @include align-items(center);
 }
 
+.flex-row-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include align-items(center);
+}
+
 .flex-row-space-around {
     @include flex-display();
     @include flex-direction(row);
@@ -46,6 +52,12 @@
     @include flex-display();
     @include flex-direction(column);
     @include align-items(center);
+}
+
+.flex-row-baseline-items {
+    @include flex-display();
+    @include flex-direction(row);
+    @include align-items(baseline);
 }
 
 .flex-column-center {
@@ -113,4 +125,8 @@
 
 .hidden {
     display: none;
+}
+
+.clickable {
+    cursor: pointer;
 }

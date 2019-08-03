@@ -2,7 +2,9 @@ import React, { Component, Fragment } from 'react'
 import Sidebar from 'react-sidebar';
 import { IAppState } from '../../../redux/app-state';
 import { connect } from 'react-redux';
-import { sideMenuStyleConfig } from './side-menu-data.component';
+import { sideMenuStyleConfig, items } from './side-menu-data.component';
+import "./side-menu.component.scss";
+import DropDownComponent from '../drop-down/drop-down.component';
 
 export interface ISideMenuComponentProps {
     readonly isSideMenuOpen: boolean;
@@ -12,6 +14,7 @@ export interface ISideMenuComponentProps {
 export interface ISideMenuComponentState {
     readonly mql: any;
     readonly styles: any;
+    readonly items: any[];
 }
 
 class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComponentState> {
@@ -20,7 +23,8 @@ class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComp
         super(props);
         this.state = {
             mql: window.matchMedia(`(min-width: 800px)`),
-            styles: sideMenuStyleConfig
+            styles: sideMenuStyleConfig,
+            items: items
         }
     }
 
@@ -49,7 +53,18 @@ class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComp
 
         return (
             <Sidebar
-                sidebar={<b>Sidebar content</b>}
+                sidebar={
+                    <div className="flex-column-center-items side-menu-container">
+                        {
+                            this.state.items.map((item: any) => {
+                                return <DropDownComponent
+                                    headerText={item.name}
+                                    innerItems={item.innerItems}
+                                />
+                            })
+                        }
+                    </div>
+                }
                 styles={this.state.styles}
                 docked={this.props.isSideMenuOpen}
                 contentClassName="content"

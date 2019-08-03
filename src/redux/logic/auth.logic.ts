@@ -298,6 +298,9 @@ export const validateUserSession = createLogic({
                 }
             );
         }
+        else {
+            done();
+        }
 
     }
 });

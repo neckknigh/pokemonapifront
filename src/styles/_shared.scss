@@ -28,6 +28,16 @@
     @include align-items(center);
 }
 
+.flex-row-center-items-center-wrap {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+}
+
+
+
 .flex-row-space-around {
     @include flex-display();
     @include flex-direction(row);

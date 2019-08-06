@@ -56,10 +56,11 @@ class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComp
                 sidebar={
                     <div className="flex-column-center-items side-menu-container">
                         {
-                            this.state.items.map((item: any) => {
+                            this.state.items.map((item: any, index: number) => {
                                 return <DropDownComponent
                                     headerText={item.name}
                                     innerItems={item.innerItems}
+                                    key={index}
                                 />
                             })
                         }

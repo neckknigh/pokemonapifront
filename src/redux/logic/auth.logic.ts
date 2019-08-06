@@ -275,6 +275,9 @@ export const validateUserSession = createLogic({
         // Si el usuario tiene sesión
         if (userHasSession) {
 
+            // Se abre el menú lateral
+            dispatch(systemActions.openSideMenu(true));
+
             // Se consutan sus datos
             accountService.getAccount(
                 authService.getUserId()

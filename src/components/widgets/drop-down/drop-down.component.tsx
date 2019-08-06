@@ -27,8 +27,8 @@ class DropDownComponent extends Component<IDropDownComponentProps, {}> {
                 </div>
                 <div className="drop-down-body">
                     {
-                        this.props.innerItems!.map((innerItem: DropDownItem) => {
-                            return <a className="dropdown-item"
+                        this.props.innerItems!.map((innerItem: DropDownItem, index: number) => {
+                            return <a key={index} className="dropdown-item"
                                 href={innerItem.path} >
                                 {innerItem.name}
                             </a>

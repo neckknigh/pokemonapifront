@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CarrouselComponent from '../widgets/carrousel/carrousel.component';
 import { connect } from 'react-redux';
 import { IAppState } from '../../redux/app-state';
+import Comunities from '../comunities/comunities.component';
+import "./dashboard.component.scss";
 
 interface IDashBoardComponent {
     userHasSession?: boolean;
@@ -32,6 +34,9 @@ class DashBoardComponent extends Component<IDashBoardComponent, {}> {
         return (
             <div>
                 <CarrouselComponent />
+                <div className="comunities-container">
+                    <Comunities />
+                </div>
             </div>
         );
     }

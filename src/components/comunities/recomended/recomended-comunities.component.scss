@@ -1,0 +1,22 @@
+@import "../../../styles/_main";
+
+$heading-color: #434343;
+
+.recomended-comunities-container {
+    @include border-radius(10px);
+    border: 1px solid $ligh-gray-color;
+    background-color: $white;
+
+    // TODO: revisar esto
+    padding-top: 11px;
+    padding-bottom: 11px;
+
+    .comunity-header-container {
+        margin-right: 0.8rem;
+        padding-left: 1.1rem;
+
+        .header {
+            margin: 0;
+        }
+    }
+}

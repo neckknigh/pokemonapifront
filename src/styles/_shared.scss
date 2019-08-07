@@ -72,16 +72,16 @@
     @include align-items(center);
 }
 
-.flex-column-center-items {
-    @include flex-display();
-    @include flex-direction(column);
-    @include align-items(center);
-}
-
 .flex-row-baseline-items {
     @include flex-display();
     @include flex-direction(row);
     @include align-items(baseline);
+}
+
+.flex-column-center-items {
+    @include flex-display();
+    @include flex-direction(column);
+    @include align-items(center);
 }
 
 .flex-column-center {
@@ -153,4 +153,14 @@
 
 .clickable {
     cursor: pointer;
+}
+
+.comunity-header-container {
+    padding-left: 2rem;
+
+    .header {
+        @include roboto-medium-font();
+        font-size: 20px;
+        color: $comunity-heading-color;
+    }
 }

@@ -4,18 +4,6 @@ $heading-color: #434343;
 
 .popular-comunities-container {
 
-    .header-container {
-        padding-left: 2rem;
-
-        .popular-header {
-            @include roboto-medium-font();
-            font-size: 20px;
-            color: $heading-color;
-        }
-    }
-
-
-
     .cards-comunities-container {
         @include maximum-width;
 

@@ -17,7 +17,9 @@ class Comunities extends Component<{}, {}> {
                     <TagsFilterComponent />
                 </div>
 
-                <RecomendedComunities />
+                <div className="recomended-container">
+                    <RecomendedComunities />
+                </div>
             </div>
         );
     }

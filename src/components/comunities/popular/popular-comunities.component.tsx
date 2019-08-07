@@ -6,8 +6,8 @@ class PopularComunities extends Component<{}, {}> {
     public render() {
         return (
             <div className="popular-comunities-container">
-                <div className="header-container">
-                    <h1 className="popular-header">Comunidades Populares</h1>
+                <div className="comunity-header-container">
+                    <h1 className="header">Comunidades Populares</h1>
                 </div>
                 <div className="flex-row-center-items-center-wrap cards-comunities-container">
                     <div className="comunity-card">

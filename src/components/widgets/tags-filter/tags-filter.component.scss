@@ -1,0 +1,21 @@
+@import "../../../styles/_main";
+
+.tags-filter-container {
+    @include maximum-width;
+    @include roboto-regular-font;
+
+    .hint-container {
+        padding: 0.42rem 0.85rem 0.42rem 2.5rem;
+    }
+
+    .tag-container {
+        padding: 0.42rem 1.5rem;
+        @include border-radius(21px);
+        margin-left: 0.42rem;
+        margin-right: 0.42rem;
+        margin-bottom: 0.5rem;
+        min-width: 9.21rem;
+
+        @include box-shadow(2px 2px 2px 1px $hint-text-color);
+    }
+}

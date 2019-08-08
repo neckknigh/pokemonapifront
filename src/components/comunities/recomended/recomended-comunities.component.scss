@@ -1,7 +1,5 @@
 @import "../../../styles/_main";
 
-$heading-color: #434343;
-
 .recomended-comunities-container {
     @include border-radius(10px);
     border: 1px solid $ligh-gray-color;
@@ -18,5 +16,9 @@ $heading-color: #434343;
         .header {
             margin: 0;
         }
+    }
+
+    .carrousel-container {
+        margin-top: 0.9rem;
     }
 }

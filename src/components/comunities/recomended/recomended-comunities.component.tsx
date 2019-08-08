@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./recomended-comunities.component.scss";
+import CardCarrouselComponent from '../../widgets/carrousel/card-carrousel.component';
 
 class RecomendedComunities extends Component<{}, {}> {
     public render() {
@@ -12,6 +13,9 @@ class RecomendedComunities extends Component<{}, {}> {
                     <div>
                         <span className="hint">(45 encontradas)</span>
                     </div>
+                </div>
+                <div className="carrousel-container">
+                    <CardCarrouselComponent />
                 </div>
             </div>
         );

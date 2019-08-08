@@ -1,0 +1,16 @@
+@import "../../../styles/_main";
+
+.card-carrousel-container {
+    padding: 0 1.1rem;
+    max-width: 1000;
+    margin: 0 auto;
+
+    .left-chevron {
+        margin-left: -2.3rem;
+    }
+
+    .right-chevron {
+        margin-right: -2.3rem;
+    }
+
+}

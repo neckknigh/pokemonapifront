@@ -48,6 +48,15 @@
 	border-bottom-right-radius: $border;
 }
 
+@mixin border-top-radius($border) {
+	-webkit-border-top-right-radius: $border;
+	-moz-border-top-right-radius: $border;
+	border-top-right-radius: $border;
+	-webkit-border-top-left-radius: $border;
+	-moz-border-top-left-radius: $border;
+	border-top-left-radius: $border;
+}
+
 
 @mixin box-shadow($value) {
 	-webkit-box-shadow: $value;

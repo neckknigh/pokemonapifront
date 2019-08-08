@@ -8,7 +8,7 @@ class CarrouselComponent extends Component<{}, {}> {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/1500x220.png"
+            src="https://placeimg.com/1500/220/nature"
             alt="First slide"
           />
 
@@ -16,14 +16,14 @@ class CarrouselComponent extends Component<{}, {}> {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/1500x220.png"
-            alt="Third slide"
+            src="https://placeimg.com/1500/220/nature"
+            alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/1500x220.png"
+            src="https://placeimg.com/1500/220/nature"
             alt="Third slide"
           />
         </Carousel.Item>

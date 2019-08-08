@@ -3,6 +3,7 @@ import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import "./card-carrousel.component.scss";
 import ChevronComponent from './chevron/chevron.component';
+import CardComponent from '../card/card.component';
 
 interface CardCarrouselComponentState {
 
@@ -77,6 +78,8 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                     requestToChangeActive={this.onTapChevron}
                 >
                     {false ? [] : Array.from(new Array(8)).map((_, i) =>
+
+                        /*
                         <div
                             key={i}
                             style={{
@@ -84,6 +87,13 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                                 background: 'url(https://placeimg.com/380/205/nature)'
                             }}
                         />
+                        //*/
+
+
+                        ///*
+                        <CardComponent key={i} />
+                        //*/
+
                     )}
                 </ItemsCarousel>
             </div>

@@ -1,0 +1,56 @@
+@import "../../../styles/_main";
+
+$border-radius: 10px;
+
+.card-container {
+    height: 15rem;
+    @include border-radius($border-radius);
+    border: 1px solid $ligh-gray-color;
+
+    .card-header-container {
+        position: relative;
+        height: 9.7rem;
+
+        .card-img {
+            @include maximun-size;
+            @include border-top-radius($border-radius);
+        }
+
+        .user-likes-container {
+            position: absolute;
+            bottom: -0.9rem;
+            margin: 0 1rem;
+            @include flex-display();
+
+            .circle {
+                height: 33px;
+                width: 33px;
+                background-color: $white;
+                @include border-radius(50%);
+                display: inline-block;
+                border: 2px solid $ligh-gray-color;
+                margin-left: -0.5rem;
+
+                &.with-inner-text {
+                    font-family: Helvetica Neue;
+                    font-size: 9px;
+                    @include flex-display();
+                    @include align-items(center);
+                    @include justify-content(center);
+                    color: #707070;
+                }
+            }
+        }
+    }
+
+    .card-body-container {
+        margin-top: 1rem;
+        padding: 0 0.5rem 0 0.5rem;
+
+        .card-title {
+            @include roboto-regular-font;
+            font-size: 16px;
+            margin: 0;
+        }
+    }
+}

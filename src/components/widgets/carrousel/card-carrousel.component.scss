@@ -1,20 +1,20 @@
 @import "../../../styles/_main";
 
 .card-carrousel-container {
-    padding: 0 1.1rem;
-    max-width: 1000;
+    //padding: 0 1.1rem;
+    //max-width: 1000px;
     margin: 0 auto;
 
     .left-chevron {
         position: absolute;
         left: 0;
-        top: 3rem;
+        top: 4rem;
     }
 
     .right-chevron {
         position: absolute;
         right: 0;
-        top: 3rem;
+        top: 4rem;
     }
 
 }

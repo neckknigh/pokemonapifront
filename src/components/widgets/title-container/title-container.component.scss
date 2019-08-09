@@ -1,0 +1,22 @@
+@import "../../../styles/_main";
+
+.title-container {
+    @include border-radius(10px);
+    border: 1px solid $ligh-gray-color;
+    background-color: $white;
+    padding: 0.78rem 1.1rem;
+
+    .title-header-container {
+        .header {
+            margin: 0;
+        }
+
+        h1+div {
+            margin-left: 0.8rem;
+        }
+    }
+
+    .title-body-container {
+        margin-top: 0.9rem;
+    }
+}

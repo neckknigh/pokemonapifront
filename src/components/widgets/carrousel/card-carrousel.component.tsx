@@ -5,6 +5,13 @@ import "./card-carrousel.component.scss";
 import ChevronComponent from './chevron/chevron.component';
 import CardComponent from '../card/card.component';
 
+export interface CardCarrouselItem {
+    title: string;
+    showUserLikes: boolean;
+    img: string;
+    innerTitles: string[];
+}
+
 interface CardCarrouselComponentState {
 
     // indice de la tarjeta activa por defecto
@@ -24,6 +31,9 @@ interface CardCarrouselComponentProps {
 
     // Espacio entre tarjetas en px
     spaceBetweenCards?: number;
+
+    // items que se mostrarán en el carrousel
+    cardItems?: CardCarrouselItem[];
 }
 
 export default class CardCarrouselComponent extends React.Component<CardCarrouselComponentProps, CardCarrouselComponentState> {
@@ -31,7 +41,7 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
     constructor(props: CardCarrouselComponentProps) {
         super(props);
         this.state = {
-            activeCardIndex: 1,
+            activeCardIndex: 0,
             chevronWidth: 60,
             outsideChevron: false
         }
@@ -43,23 +53,13 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
         })
     }
 
-
     render() {
-        const { numberOfCards, spaceBetweenCards } = this.props;
+        const { numberOfCards, spaceBetweenCards, cardItems } = this.props;
         return (
             <div className="card-carrousel-container">
                 <ItemsCarousel
                     numberOfCards={numberOfCards ? numberOfCards : 5}
                     gutter={spaceBetweenCards ? spaceBetweenCards : 23}
-                    /*
-                    rightChevron={
-                        <div className="flex-row-center-items-center chevron-container right">
-                            <span>
-                                <i className="fas fa-chevron-right"></i>
-                            </span>
-                        </div>
-                    }
-                    */
                     rightChevron={
                         <ChevronComponent
                             containerCss="right-chevron"
@@ -77,24 +77,17 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                     activeItemIndex={this.state.activeCardIndex}
                     requestToChangeActive={this.onTapChevron}
                 >
-                    {false ? [] : Array.from(new Array(8)).map((_, i) =>
-
-                        /*
-                        <div
-                            key={i}
-                            style={{
-                                height: 205,
-                                background: 'url(https://placeimg.com/380/205/nature)'
-                            }}
-                        />
-                        //*/
-
-
-                        ///*
-                        <CardComponent key={i} />
-                        //*/
-
-                    )}
+                    {
+                        cardItems && cardItems.map((cardItem: CardCarrouselItem, index: number): JSX.Element => {
+                            return <CardComponent
+                                key={index}
+                                image={cardItem.img}
+                                showUserLikes={cardItem.showUserLikes}
+                                innerTitles={cardItem.innerTitles}
+                                title={cardItem.title}
+                            />
+                        })
+                    }
                 </ItemsCarousel>
             </div>
         );

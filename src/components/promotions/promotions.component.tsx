@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import "./recomended-comunities.component.scss";
-import CardCarrouselComponent, { CardCarrouselItem } from '../../widgets/carrousel/card-carrousel.component';
-import TitleContainerComponent from '../../widgets/title-container/title-container.component';
+import "./promotions.component.scss";
+import TitleContainerComponent from '../widgets/title-container/title-container.component';
+import CardCarrouselComponent, { CardCarrouselItem } from '../widgets/carrousel/card-carrousel.component';
 
-class RecomendedComunities extends Component<{}, {}> {
+
+export default class PromotionsComponent extends Component<{}, {}> {
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
         const items: CardCarrouselItem[] = [];
@@ -11,12 +12,11 @@ class RecomendedComunities extends Component<{}, {}> {
         for (let index = 0; index < 10; index++) {
             items.push(
                 {
-                    title: "Nombre Comunidad",
+                    title: "Desayuna con Alpina",
                     showUserLikes: false,
                     img: "https://placeimg.com/380/185/nature",
                     innerTitles: [
-                        "Hamburguesas - Perros",
-                        "Abierto hasta las 10pm"
+                        "Quesito Alpina de 325gr + 20 arenas Don Maia por tan solo $10.000"
                     ]
                 }
             );
@@ -24,14 +24,15 @@ class RecomendedComunities extends Component<{}, {}> {
         return items;
     }
 
-    public render() {
+    public render(): JSX.Element {
         return (
             <TitleContainerComponent
-                mainTitle="Comunidades recomendadas"
-                secondaryTitle="(45 encontradas)"
+                mainTitle="Promociones"
+                secondaryTitle="(25 encontradas)"
             >
-                <div className="carrousel-container">
+                <div>
                     <CardCarrouselComponent
+                        numberOfCards={4}
                         cardItems={this.getCarrouselItems()}
                     />
                 </div>
@@ -39,6 +40,3 @@ class RecomendedComunities extends Component<{}, {}> {
         );
     }
 }
-
-export default RecomendedComunities;
-

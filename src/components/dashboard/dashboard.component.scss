@@ -1,3 +1,19 @@
-.comunities-container {
-    margin-top: 1rem;
+$padding-side: 0.9rem;
+
+.dashboard-container {
+
+    .dashboard-body {
+        padding-left: $padding-side;
+        padding-right: $padding-side;
+
+        .comunities-container {
+            margin-top: 1rem;
+        }
+
+        .promotions-container {
+            margin-top: 2rem;
+        }
+    }
+
+
 }

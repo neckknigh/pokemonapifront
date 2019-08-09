@@ -4,14 +4,18 @@ $heading-color: #434343;
 
 .popular-comunities-container {
 
+    .comunity-header-container {
+        padding-left: 1.1rem;
+    }
+
     .cards-comunities-container {
         @include maximum-width;
 
         .comunity-card {
             position: relative;
 
-            padding-left: 0.9rem;
-            padding-right: 0.9rem;
+            //padding-left: 0.9rem;
+            //padding-right: 0.9rem;
             margin-bottom: 0.9rem;
             width: calc(100% /3);
 
@@ -31,6 +35,9 @@ $heading-color: #434343;
         }
 
 
+        .comunity-card+.comunity-card {
+            padding-left: 2rem;
+        }
     }
 
 

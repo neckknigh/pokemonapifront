@@ -18,6 +18,10 @@ class UtilService {
         return _.includes(collection, element)
     }
 
+    public isUndefined(value: any): boolean {
+        return _.isUndefined(value);
+    }
+
 }
 
 export const utilService = new UtilService(); 

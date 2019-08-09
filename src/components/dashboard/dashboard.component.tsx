@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import CarrouselComponent from '../widgets/carrousel/carrousel.component';
 import { connect } from 'react-redux';
 import { IAppState } from '../../redux/app-state';
-import Comunities from '../comunities/comunities.component';
 import "./dashboard.component.scss";
+import PromotionsComponent from '../promotions/promotions.component';
+import ComunitiesComponent from '../comunities/comunities.component';
 
 interface IDashBoardComponent {
     userHasSession?: boolean;
@@ -32,10 +33,15 @@ class DashBoardComponent extends Component<IDashBoardComponent, {}> {
         }
 
         return (
-            <div>
+            <div className="dashboard-container">
                 <CarrouselComponent />
-                <div className="comunities-container">
-                    <Comunities />
+                <div className="dashboard-body">
+                    <div className="comunities-container">
+                        <ComunitiesComponent />
+                    </div>
+                    <div className="promotions-container">
+                        <PromotionsComponent />
+                    </div>
                 </div>
             </div>
         );

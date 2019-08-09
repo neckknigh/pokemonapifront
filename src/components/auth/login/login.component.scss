@@ -20,9 +20,10 @@
                 width: $maximum-percentage;
 
                 .login-btn {
-                    @include border-radius(12px);
+                    @include border-radius(18px);
                     padding: 2px;
                     font-size: 12px;
+                    height: 2.5rem;
                 }
             }
 

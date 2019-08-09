@@ -170,6 +170,9 @@ export const validatePhoneUser = createLogic<
                     // Se indica se logueó correctamente
                     dispatch(authActions.setUserLoggedInStatus(true));
 
+                    // Se abre el menú lateral
+                    dispatch(systemActions.openSideMenu(true));
+
                     // Se crea la sessión
                     authService.createSession(response);
 

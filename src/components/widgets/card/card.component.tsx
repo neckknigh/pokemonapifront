@@ -38,8 +38,8 @@ export default class CardComponent extends Component<CardComponentProps, {}> {
                 <div className="card-body-container">
                     <h3 className="card-title">{title}</h3>
                     {
-                        innerTitles && innerTitles.map((innerTitle: string): JSX.Element => {
-                            return <p className="hint">{innerTitle}</p>
+                        innerTitles && innerTitles.map((innerTitle: string, i: number): JSX.Element => {
+                            return <p key={i} className="hint">{innerTitle}</p>
                         })
                     }
                 </div>

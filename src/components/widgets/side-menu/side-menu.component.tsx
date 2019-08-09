@@ -18,7 +18,6 @@ export interface ISideMenuComponentState {
 }
 
 class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComponentState> {
-    private stiles: any;
     constructor(props: ISideMenuComponentProps) {
         super(props);
         this.state = {

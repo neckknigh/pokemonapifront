@@ -15,6 +15,7 @@ import ErrorMessageComponent from './components/widgets/error-message/error-mess
 import IncomingFeaturesComponent from './components/incoming-features/incoming-features.component';
 import SideMenuComponent from './components/widgets/side-menu/side-menu.component';
 import DashBoardComponent from './components/dashboard/dashboard.component';
+import FooterComponent from './components/footer/footer.component';
 
 /**
  * Interface para mapear las propiedades del 
@@ -52,7 +53,6 @@ class App extends React.Component<IAppProps, IApplicationState> {
         <Router>
           <div className="maximun-size">
             <HeaderComponent />
-
             <main className="main-container maximun-size">
               <ErrorMessageComponent />
               <SideMenuComponent>
@@ -63,18 +63,12 @@ class App extends React.Component<IAppProps, IApplicationState> {
                 <Route exact path="/signup" component={SignUpComponent} />
                 <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
 
+                <FooterComponent />
               </SideMenuComponent>
+
             </main>
-            <footer>
-
-            </footer>
-
           </div>
-
-
-
         </Router>
-
       </LoadingOverlay>
 
 

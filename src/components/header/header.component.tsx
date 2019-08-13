@@ -9,6 +9,7 @@ import { urlProvider } from '../../services/config/url.service';
 import SearcherComponent from '../widgets/searcher/searcher.component';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
+import AccountComponent from '../account/account.component';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
@@ -56,7 +57,6 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
             <header>
                 <nav className="grid">
                     <div className="column flex-row-start-items-center left-container">
-
                         {
                             // Si tiene sesión se muestra el botón de abrir el sidemenu
                             !readOnlyMode &&
@@ -88,8 +88,10 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                         }
 
                     </div>
-                    <div className="column flex-row-end-items-center">
-
+                    <div className="column flex-row-end-items-center right-container">
+                        <div className="account-container">
+                            <AccountComponent />
+                        </div>
                     </div>
                 </nav>
             </header>

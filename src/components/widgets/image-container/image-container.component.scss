@@ -1,0 +1,25 @@
+@import "../../../styles/_main";
+
+.image-container {
+    color: $white;
+
+    .image {
+        height: 1.7rem;
+    }
+
+    .box-container {
+        margin-left: 0.8rem;
+
+        .container-display {
+            @include roboto-bold-font;
+        }
+
+        .icon-container {
+            padding-left: 0.3rem;
+
+            .icon {
+                font-size: 9px;
+            }
+        }
+    }
+}

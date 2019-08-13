@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./drop-down.component.scss";
+import ImageContainerComponent, { ImageContainerPosition } from '../image-container/image-container.component';
 
 export interface DropDownItem {
     name: string;
@@ -16,15 +17,16 @@ class DropDownComponent extends Component<IDropDownComponentProps, {}> {
 
     public render() {
         return (
-            <div className="flex-column-center-items drop-down-container">
-                <div className="flex-row-items-center drop-down-header clickable">
-                    <div className="icon-container">
-                        <img src="/img/login/flags/dummy.png" className="icon" alt="item-icon" />
-                    </div>
-                    <h4 className="header-label">
-                        {this.props.headerText}
-                    </h4>
-                </div>
+            <div className="flex-column-center-items drop-down-container clickable">
+                <ImageContainerComponent
+                    img="/img/login/flags/dummy.png"
+                    displayText={this.props.headerText!}
+                    containerCls="drop-down-image-container"
+                    layoutPosition={ImageContainerPosition.START}
+                    textContainerCls="drop-down-text-container"
+                    textCls="drop-down-text"
+                    imageCls="drop-down-image"
+                />
                 <div className="drop-down-body">
                     {
                         this.props.innerItems!.map((innerItem: DropDownItem, index: number) => {

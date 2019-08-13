@@ -5,22 +5,25 @@
     color: $hint-text-color;
     @include maximum-width;
 
-    .drop-down-header {
+    .drop-down-image-container {
+        color: $hint-text-color;
         @include maximum-width;
+    }
 
-        .icon-container {
-            padding: 0.5rem;
+    .drop-down-text-container {
+        margin-left: 0;
+    }
 
-            .icon {
-                height: 2.5rem;
-            }
-        }
+    .drop-down-text {
+        @include helvetica-neue-bold-font($important: !important);
+        margin: 0;
+        font-size: 14px;
+    }
 
-        .header-label {
-            @include helvetica-neue-bold-font;
-            margin: 0;
-            font-size: 14px;
-        }
+    .drop-down-image {
+        height: auto;
+        padding: 0.5rem;
+        width: 3.5rem;
     }
 
     .drop-down-body {
@@ -34,7 +37,5 @@
             padding-left: 3.5rem;
         }
     }
-
-    .header {}
 
 }

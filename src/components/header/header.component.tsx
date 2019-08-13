@@ -89,9 +89,12 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
                     </div>
                     <div className="column flex-row-end-items-center right-container">
-                        <div className="account-container">
-                            <AccountComponent />
-                        </div>
+                        {
+                            !readOnlyMode &&
+                            <div className="account-container">
+                                <AccountComponent />
+                            </div>
+                        }
                     </div>
                 </nav>
             </header>

@@ -128,8 +128,8 @@
 	font-family: Roboto Bold;
 }
 
-@mixin helvetica-neue-bold-font {
-	font-family: Helvetica Neue Bold;
+@mixin helvetica-neue-bold-font($important: null) {
+	font-family: Helvetica Neue Bold $important;
 }
 
 

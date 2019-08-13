@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./account.component.scss";
 import Popup from "reactjs-popup";
+import ImageContainerComponent from '../widgets/image-container/image-container.component';
 
 
 class AccountComponent extends Component<{}, {}> {
@@ -8,29 +9,22 @@ class AccountComponent extends Component<{}, {}> {
         return (
             <Popup
                 trigger={
-                    //<button>Trigger</button>
-                    <div className="flex-row-center-items-center account clickable">
-                        <img
-                            src="/img/login/flags/dummy.png"
-                            alt="account"
-                            className="account-image"
+                    <div className="account-image-container clickable">
+                        <ImageContainerComponent
+                            img="/img/login/flags/dummy.png"
+                            displayText="CUENTA"
+                            iconCls="fas fa-chevron-down"
+                            showIcon={true}
                         />
-                        <div className="flex-row-center-items-center account-box">
-                            <span className="account-display">CUENTA</span>
-                            <span className="flex-row-center-items-center account-arrow">
-                                <i className="fas fa-chevron-down" />
-                            </span>
-                        </div>
                     </div>
                 }
                 position="bottom right"
                 offsetX={11}
                 on="hover"
-                //defaultOpen={true}
+                defaultOpen={false}
                 contentStyle={{
                     width: "264px"
                 }}
-                open={true}
             >
                 <div className="account-popup-container">
                     Content here

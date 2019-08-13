@@ -22,6 +22,18 @@ class UtilService {
         return _.isUndefined(value);
     }
 
+    public isDefined(value: any): boolean {
+        return !_.isUndefined(value);
+    }
+
+    /**
+     * Permite obtener la representación en cadena
+     * de un array separados por espacio en blanco.
+     */
+    public getArrayItemsAsString(array: string[]): string {
+        return array.join(" ");
+    }
+
 }
 
 export const utilService = new UtilService(); 

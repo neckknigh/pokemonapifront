@@ -8,7 +8,7 @@ header {
     z-index: 100;
 
     nav {
-        //padding: 0.5em 0.4em;
+        padding: 0 1.3rem;
         height: $maximum-percentage;
 
         .left-container {
@@ -35,13 +35,14 @@ header {
 
             .side-btn-menu-container {
                 @include maximum-height();
-                margin-left: 0.5rem;
+                padding-right: 0.5rem;
 
                 .side-menu-btn {
                     color: $white;
                     @include flex-display();
                     @include align-items(center);
-                    padding-right: 0.5rem;
+
+                    padding: 0;
 
                     .side-menu-btn-icon {
                         font-size: 22px;

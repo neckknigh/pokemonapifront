@@ -27,6 +27,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-sidebar": "^3.0.2",
+    "reactjs-popup": "^1.4.2",
     "redux-logic": "^2.1.1",
     "rxjs": "^5.5.12",
     "typescript": "3.5.1"

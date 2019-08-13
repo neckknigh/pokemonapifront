@@ -1,7 +1,31 @@
-.account {
-    color: red;
+@import "../../styles/_main";
 
-    .account-image {
-        height: 2.1rem;
+.account-container {
+    .account {
+        color: $white;
+
+        .account-image {
+            height: 1.7rem;
+        }
+
+        .account-box {
+            margin-left: 0.8rem;
+
+            .account-display {
+                @include roboto-bold-font;
+            }
+
+            .account-arrow {
+                padding-left: 0.3rem;
+
+                .fa-chevron-down {
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+
+    .account-popup-container {
+        width: 500px;
     }
 }

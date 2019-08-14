@@ -132,6 +132,10 @@
 	font-family: Helvetica Neue Bold $important;
 }
 
+@mixin helvetica-neue-font() {
+	font-family: Helvetica Neue;
+}
+
 
 @mixin maximum-width {
 	width: $maximum-percentage;

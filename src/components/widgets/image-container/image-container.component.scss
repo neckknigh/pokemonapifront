@@ -5,6 +5,7 @@
 
     .image {
         height: 1.7rem;
+        @include border-radius(50%);
     }
 
     .box-container {

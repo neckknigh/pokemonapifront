@@ -12,7 +12,7 @@ class RecomendedComunities extends Component<{}, {}> {
             items.push(
                 {
                     title: "Nombre Comunidad",
-                    showUserLikes: false,
+                    showUserLikes: true,
                     img: "https://placeimg.com/380/185/nature",
                     innerTitles: [
                         "Hamburguesas - Perros",

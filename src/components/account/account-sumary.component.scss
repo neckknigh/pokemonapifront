@@ -1,0 +1,62 @@
+@import "../../styles/_main";
+
+$border-color: #C3C3C3;
+
+.account-summary-content {
+    @include border-radius(5px);
+
+    .account-popup-container {
+        .account-sumary-header {
+            .account-user-image-container {
+                color: $hint-text-color;
+                border-bottom: 1px solid $border-color;
+                padding: 0.71rem 0;
+            }
+
+            .account-user-text-display {
+                @include helvetica-neue-bold-font;
+                font-size: 16px;
+            }
+
+            .account-user-img {
+                height: 3rem;
+            }
+        }
+
+        .account-sumary-body {
+            .account-drop-item {
+                padding: 5px;
+
+                .drop-item-container {
+                    color: $hint-text-color;
+                }
+
+                .drop-item-image {
+                    height: 2.2rem;
+                }
+
+                .drop-item-text-display {
+                    @include helvetica-neue-font;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .account-sumary-footer {
+            border-top: 1px solid $border-color;
+            height: 3.21rem;
+
+            .btn-logout {
+                height: 100%;
+                padding: 0;
+
+                span {
+
+                    @include helvetica-neue-font();
+                    color: $hint-text-color;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

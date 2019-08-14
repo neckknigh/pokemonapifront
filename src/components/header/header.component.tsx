@@ -9,7 +9,7 @@ import { urlProvider } from '../../services/config/url.service';
 import SearcherComponent from '../widgets/searcher/searcher.component';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
-import AccountComponent from '../account/account.component';
+import AccountSummaryComponent from '../account/account-sumary.component';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
@@ -92,7 +92,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                         {
                             !readOnlyMode &&
                             <div className="account-container">
-                                <AccountComponent />
+                                <AccountSummaryComponent />
                             </div>
                         }
                     </div>

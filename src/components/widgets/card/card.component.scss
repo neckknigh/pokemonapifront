@@ -3,7 +3,7 @@
 $border-radius: 10px;
 
 .card-container {
-    height: 15rem;
+    height: 18rem;
     @include border-radius($border-radius);
     border: 1px solid $ligh-gray-color;
 

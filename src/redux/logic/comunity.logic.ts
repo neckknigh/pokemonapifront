@@ -1,6 +1,8 @@
 import { createLogic } from "redux-logic";
 import { ComunityConstants } from "../../services/constants.service";
 import { comunityService } from "../../services/data/comunity.service";
+import { Comunity } from "../../models/comunity.model";
+import { comunityActions } from "../action-creators/comunity.action.creator";
 
 const getRecomendedComunities = createLogic({
     type: ComunityConstants.LOAD_RECOMENDED_COMUNITIES,
@@ -12,15 +14,13 @@ const getRecomendedComunities = createLogic({
 
         comunityService.getRecomendedComunities()
             .subscribe(
-                (response: any) => {
-                    debugger
+                (comunities: Comunity[]) => {
+                    dispatch(comunityActions.saveRecomendedComunities(comunities));
                 }, error => {
                     console.log(error);
-                    debugger
                     done();
                 },
                 () => {
-                    console.log("Get accountKit User");
                     done();
                 }
             );

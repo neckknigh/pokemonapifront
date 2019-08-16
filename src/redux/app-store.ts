@@ -9,6 +9,7 @@ import { IAppState } from './app-state';
 import { createLogicMiddleware } from 'redux-logic';
 import appLogic from './app-logic';
 import { systemReducer } from './reducers/system.reducer';
+import { comunityReducer } from './reducers/comunity.reducer';
 
 
 const depts = {
@@ -23,7 +24,9 @@ const composedMiddleware = compose(applyMiddleware(logicMiddleware));
 export const rootReducer = combineReducers<IAppState>({
     userState: userReducer,
     authState: authReducer,
-    systemState: systemReducer
+    systemState: systemReducer,
+    comunityState: comunityReducer
+
 });
 
 const appStore = createStore(

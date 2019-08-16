@@ -5,12 +5,28 @@ import TitleContainerComponent from '../../widgets/title-container/title-contain
 import { Dispatch } from 'redux';
 import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
 import { connect } from 'react-redux';
+import { IAppState } from '../../../redux/app-state';
+import { Comunity } from '../../../models/comunity.model';
+import { ConfigProvider as CP } from '../../../services/config/config.service';
 
-export interface IRecomendedComunitiesComponentProps {
+interface IRecomendedComunitiesComponentProps {
     readonly loadRecomendedComunities?: () => void;
+    readonly recomendedComunities?: Comunity[];
 }
 
-class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesComponentProps, {}> {
+interface IRecomendedComunitiesComponentState {
+    comunitylogosUrl: string;
+}
+
+class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesComponentProps, IRecomendedComunitiesComponentState> {
+
+    constructor(props: IRecomendedComunitiesComponentProps) {
+        super(props);
+
+        this.state = {
+            comunitylogosUrl: CP.get(CP.COMUNITY_LOGOS_URL)
+        }
+    }
 
     componentDidMount = () => {
         this.props.loadRecomendedComunities!();
@@ -18,28 +34,33 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
         const items: CardCarrouselItem[] = [];
+        const { recomendedComunities } = this.props;
 
-        for (let index = 0; index < 10; index++) {
+        recomendedComunities!.forEach(recomendedComunity => {
             items.push(
                 {
-                    title: "Nombre Comunidad",
+                    title: recomendedComunity.name,
                     showUserLikes: true,
-                    img: "https://placeimg.com/380/185/nature",
+                    img: `${this.state.comunitylogosUrl}${recomendedComunity.logo}`,
                     innerTitles: [
-                        "Hamburguesas - Perros",
-                        "Abierto hasta las 10pm"
+                        recomendedComunity.description
                     ]
                 }
             );
-        }
+        });
         return items;
+    }
+
+    private getRecomendedComunitiesCount() {
+        return this.props.recomendedComunities!.length;
     }
 
     public render() {
         return (
             <TitleContainerComponent
                 mainTitle="Comunidades recomendadas"
-                secondaryTitle="(45 encontradas)"
+                // TODO: Mover el armado de este texto al componente TitleContainerComponent
+                secondaryTitle={"(" + this.getRecomendedComunitiesCount() + " encontradas)"}
             >
                 <div className="carrousel-container">
                     <CardCarrouselComponent
@@ -55,7 +76,13 @@ const mapDispatchToProps = (dispatch: Dispatch): IRecomendedComunitiesComponentP
     return {
         loadRecomendedComunities: () => dispatch(comunityActions.loadRecomendedComunities())
     };
-}
+};
 
-export default connect(null, mapDispatchToProps)(RecomendedComunitiesComponent);
+const mapStateToProps = (state: IAppState): IRecomendedComunitiesComponentProps => {
+    return {
+        recomendedComunities: state.comunityState.recomendedComunities
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecomendedComunitiesComponent);
 

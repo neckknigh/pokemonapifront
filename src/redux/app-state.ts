@@ -1,6 +1,7 @@
 import { IUserState } from "./states/user.state";
 import { IAuthState } from "./states/auth.state";
 import { ISystemState } from "./states/system.state";
+import { IComunityState } from "./states/comunity.state";
 
 /**
  * Estado general de la aplicación.
@@ -12,5 +13,6 @@ import { ISystemState } from "./states/system.state";
 export interface IAppState {
     userState: IUserState,
     authState: IAuthState,
-    systemState: ISystemState
+    systemState: ISystemState,
+    comunityState: IComunityState
 }

@@ -1,4 +1,5 @@
 import { Account } from "../../models/account.model";
+import { Comunity } from "../../models/comunity.model";
 
 class ResponseAdapter {
     public adaptAccountKitUserForAccount(accountKitUserData: any): Account {
@@ -25,6 +26,23 @@ class ResponseAdapter {
             lastName: user.lastName,
             profileImage: user.profileImage
         }
+    }
+
+    public adaptRecomendedComunitiesForComunities(rawResponse: any): Comunity[] {
+        debugger;
+        const rawComunities = rawResponse.data.communities;
+        let comunities: Comunity[] = [];
+
+        rawComunities.forEach((rawComunity: any) => {
+            comunities.push({
+                id: rawComunity.id,
+                name: rawComunity.name,
+                logo: rawComunity.logo,
+                description: rawComunity.description
+            })
+        });
+
+        return comunities;
     }
 }
 

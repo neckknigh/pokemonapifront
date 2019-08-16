@@ -4,6 +4,7 @@ import { clientService } from "../config/client.service";
 import { urlProvider } from "../config/url.service";
 import { requestAdapter } from "../adapter/request-adapter.service";
 import { headersService } from "../authentication/headers.service";
+import { responseAdapter } from "../adapter/response-adapter.service";
 
 class ComunityService {
 
@@ -15,7 +16,7 @@ class ComunityService {
                 requestAdapter.getBodyForRecomendedComunities(),
                 headersService.getHeaders()
             )
-                .then(((response: any) => observer.next(response)))
+                .then(((response: any) => observer.next(responseAdapter.adaptRecomendedComunitiesForComunities(response))))
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
                     observer.complete();

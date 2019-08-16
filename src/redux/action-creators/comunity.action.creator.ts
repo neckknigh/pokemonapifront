@@ -1,5 +1,6 @@
 import { ComunityActions } from "../actions/comunity.actions";
 import { ComunityConstants } from "../../services/constants.service";
+import { Comunity } from "../../models/comunity.model";
 
 const loadRecomendedComunities = (): ComunityActions => {
     return {
@@ -7,7 +8,15 @@ const loadRecomendedComunities = (): ComunityActions => {
     };
 };
 
+const saveRecomendedComunities = (recomendedComunities: Comunity[]): ComunityActions => {
+    return {
+        type: ComunityConstants.SAVE_RECOMENDED_COMUNITIES,
+        recomendedComunities
+    }
+}
+
 
 export const comunityActions = {
-    loadRecomendedComunities
+    loadRecomendedComunities,
+    saveRecomendedComunities
 }

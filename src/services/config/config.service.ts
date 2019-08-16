@@ -27,6 +27,7 @@ export class ConfigProvider {
     static readonly ACCOUNT_KIT_LOGIN_ERROR: string = "ACCOUNT_KIT_LOGIN_ERROR";
     static readonly SEARCHER_PLACEHOLDER: string = "SEARCHER_PLACEHOLDER";
     static readonly ADMINS: string = "ADMINS";
+    static readonly COMUNITY_LOGOS_URL: string = "COMUNITY_LOGOS_URL";
 
     private static configs: any;
 
@@ -64,6 +65,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.ADMINS] = [
             "4040", "9"
         ];
+        ConfigProvider.configs[ConfigProvider.COMUNITY_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/communityphoto/";
     }
 
     public static get(key: string, defaultValue?: string): any {

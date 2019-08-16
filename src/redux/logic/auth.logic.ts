@@ -228,7 +228,6 @@ export const signUpUser = createLogic<
         ).subscribe(
             (response: any) => {
                 debugger;
-                const hasSession = true;
                 const { data } = response;
 
                 if (data.status !== 1) {

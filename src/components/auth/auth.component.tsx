@@ -15,6 +15,7 @@ export interface IAuthComponentProps {
     userHasSession?: boolean;
     history?: any;
     appHasError?: boolean;
+    isAdminUser?: boolean;
 }
 
 export interface IAuthComponentState {
@@ -75,6 +76,10 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
             return (<Redirect to="/incoming_features" />);
         }
 
+        if (this.props.isAdminUser) {
+            return (<Redirect to="/comunities" />);
+        }
+
         return (
             <LoginComponent />
         );
@@ -86,7 +91,8 @@ const mapStateToProps = (state: IAppState): IAuthComponentProps => {
         isFacebookLoggedIn: state.userState.isFacebookLoggedIn,
         userHasPendingRegistration: state.userState.pendingRegistration,
         userHasSession: state.authState.userHasSession,
-        appHasError: state.systemState.appHasError
+        appHasError: state.systemState.appHasError,
+        isAdminUser: state.userState.isAdmin
     }
 };
 

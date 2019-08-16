@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 interface FooterComponentProps {
     readonly userHasSession: boolean;
+    readonly isAdminUser: boolean;
 }
 
 class FooterComponent extends Component<FooterComponentProps, {}> {
@@ -11,7 +12,8 @@ class FooterComponent extends Component<FooterComponentProps, {}> {
         return (
             <footer>
                 {
-                    this.props.userHasSession &&
+                    (this.props.userHasSession &&
+                        this.props.isAdminUser) &&
                     <div>
                         <p>FooterComponent</p>
                     </div>
@@ -24,7 +26,8 @@ class FooterComponent extends Component<FooterComponentProps, {}> {
 
 const mapStateToProps = (state: IAppState): FooterComponentProps => {
     return {
-        userHasSession: state.authState.userHasSession
+        userHasSession: state.authState.userHasSession,
+        isAdminUser: state.userState.isAdmin
     }
 }
 

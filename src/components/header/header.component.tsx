@@ -90,10 +90,19 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                     </div>
                     <div className="column flex-row-end-items-center right-container">
                         {
-                            !readOnlyMode &&
-                            <div className="account-container">
-                                <AccountSummaryComponent />
-                            </div>
+                            this.props.userHasPendingRegistration ?
+                                <button
+                                    type="button"
+                                    className="cancel-heading"
+                                    onClick={this.handleClickCancelBtn}
+                                >
+                                    CANCELAR
+                                </button> :
+
+                                !readOnlyMode &&
+                                <div className="account-container">
+                                    <AccountSummaryComponent />
+                                </div>
                         }
                     </div>
                 </nav>

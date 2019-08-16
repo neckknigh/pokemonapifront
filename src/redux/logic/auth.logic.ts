@@ -227,6 +227,7 @@ export const signUpUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
+                debugger;
                 const hasSession = true;
                 const { data } = response;
 
@@ -234,14 +235,20 @@ export const signUpUser = createLogic<
                     dispatch(systemActions.handleAppError(data.msg));
                 }
                 else {
-                    // Se indica que no tiene pendiente completar registro
-                    dispatch(userActions.setUserHasPendingRegistration(!hasSession));
 
-                    // Se indica que se logué correctamente.
-                    dispatch(authActions.setUserLoggedInStatus(hasSession));
+                    // TODO: Refactorizar esta lógica, arriba está repetida
 
-                    // Después de registrar al usuario se crea la sessión
+                    // Se indica que el usuario no tiene pendiente un registro
+                    dispatch(userActions.setUserHasPendingRegistration(false));
+
+                    // Se indica se logueó correctamente
+                    dispatch(authActions.setUserLoggedInStatus(true));
+
+                    // Se crea la sessión
                     authService.createSession(response);
+
+                    // Se establece si el usuario es administrador
+                    dispatch(userActions.setIsAdminUser(authService.IsAdminUser()));
                 }
 
 

@@ -11,7 +11,8 @@ const initialUserState: IUserState = {
     isAccountKitLogginIn: false,
     isAccountKitLoggedIn: false,
     pendingRegistration: false,
-    isAdmin: false
+    isAdmin: false,
+    userInfo: null!
 };
 
 // root reducer
@@ -40,31 +41,37 @@ export const userReducer: Reducer<IUserState, UserActions> = (
                 ...state,
                 isFacebookLoggedIn: action.isFacebookLoggedIn,
                 isFacebookLogginIn: false
-            }
+            };
 
         case UserConstants.ACCOUNT_KIT_LOGIN_REQUEST:
             return {
                 ...state,
                 isAccountKitLogginIn: true
-            }
+            };
 
         case UserConstants.ACCOUNT_KIT_LOGIN_SUCCESS:
             return {
                 ...state,
                 isAccountKitLoggedIn: action.isAccountKitLoggedIn
-            }
+            };
 
         case UserConstants.HAS_PENDING_REGISTRATION:
             return {
                 ...state,
                 pendingRegistration: action.hasPendingRegistration
-            }
+            };
 
         case UserConstants.ADMIN_USER:
             return {
                 ...state,
                 isAdmin: action.isAdmin
-            }
+            };
+
+        case UserConstants.SAVE_USER_INFO:
+            return {
+                ...state,
+                userInfo: action.userInfo
+            };
 
         default:
             return state;

@@ -10,6 +10,7 @@ export class Account {
     lastName?: string;
     email?: string;
     phone?: IAccountPhone;
+    profileImage?: string;
 
     constructor(
         id: string,

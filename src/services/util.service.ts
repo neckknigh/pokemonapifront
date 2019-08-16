@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import { Account } from "../models/account.model";
 
 class UtilService {
 
@@ -32,6 +33,15 @@ class UtilService {
      */
     public getArrayItemsAsString(array: string[]): string {
         return array.join(" ");
+    }
+
+    public getUserFullName(userInfo: Account): string {
+
+        if (this.isEmpty(userInfo)) {
+            return "";
+        }
+
+        return `${userInfo.name} ${userInfo.lastName}`;
     }
 
 }

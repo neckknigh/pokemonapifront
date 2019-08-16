@@ -33,7 +33,13 @@ class AccountService {
                 headersService.getHeaders()
             )
                 .then((response: any) => {
-                    this.account = responseAdapter.adaptUserForAccount(response);
+                    //debugger;
+
+                    // TODO: Sacar el 1 como constante
+                    if (response.data.status === 1) {
+                        this.account = responseAdapter.adaptUserForAccount(response);
+                    }
+
                     return observer.next(
                         this.account
                     );

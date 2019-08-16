@@ -206,7 +206,7 @@ class AuthService {
         localStorage.setItem(AuthService.ACCESS_TOKEN_NAME, token);
     }
 
-    private getToken(): string {
+    public getToken(): string {
         return localStorage.getItem(AuthService.ACCESS_TOKEN_NAME)!;
     }
 
@@ -215,7 +215,7 @@ class AuthService {
     }
 
     public getUserId(): string {
-        return localStorage.getItem(AuthService.USER_ID_FIELD_NAME) || "";
+        return (localStorage.getItem(AuthService.USER_ID_FIELD_NAME) + "") || "";
     }
 
     /**

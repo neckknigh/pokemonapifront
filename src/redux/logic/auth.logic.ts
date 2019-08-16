@@ -12,6 +12,7 @@ import { userActions } from '../action-creators/user.action.creator';
 import { ISignUpUserRequestAction } from '../actions/user.actions';
 import { systemActions } from '../action-creators/system.action.creator';
 import { accountService } from '../../services/data/account.service';
+import { utilService } from '../../services/util.service';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -79,7 +80,6 @@ export const validateAccountKitLoginDone = createLogic({
                     done();
                 }
             );
-
     }
 });
 
@@ -270,28 +270,40 @@ export const validateUserSession = createLogic({
     process({ }, dispatch, done) {
 
         debugger;
-        const userHasSession = authService.userHasSession();
+        const userToken = authService.getToken();
 
-        // Se actualiza el estado de logueado.
-        dispatch(authActions.setUserLoggedInStatus(userHasSession));
-
-        // Si el usuario tiene sesión
-        if (userHasSession) {
-
-            // Se abre el menú lateral
-            dispatch(systemActions.openSideMenu(true));
+        // Si existe un token
+        if (!utilService.isEmpty(userToken)) {
 
             // Se consutan sus datos
             accountService.getAccount(
                 authService.getUserId()
             ).subscribe(
                 (account: Account) => {
+                    debugger;
 
-                    /**
-                     * Después de consultar al usuario, 
-                     * se establece su rol de admin, si lo tiene.
-                     */
-                    dispatch(userActions.setIsAdminUser(authService.IsAdminUser()));
+                    // No se encontró usuario con ese ID
+                    const userExist = !utilService.isEmpty(account);
+
+                    if (userExist) {
+
+                        // Se actualiza el estado de logueado.
+                        dispatch(authActions.setUserLoggedInStatus(true));
+
+
+                        // Se abre el menú lateral
+                        dispatch(systemActions.openSideMenu(true));
+
+                        /**
+                         * Después de consultar al usuario, 
+                         * se establece su rol de admin, si lo tiene.
+                         */
+                        dispatch(userActions.setIsAdminUser(authService.IsAdminUser()));
+
+                        // Se guarda la data del usuario
+                        dispatch(userActions.saveUserInfo(account));
+                    }
+
 
 
                 }, error => {

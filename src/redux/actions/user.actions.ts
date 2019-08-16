@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { UserConstants } from "../../services/constants.service";
+import { Account } from "../../models/account.model";
 
 /**
  * Interface de la acción que se dispara cuando 
@@ -52,6 +53,11 @@ export interface IAdminUser extends Action<UserConstants.ADMIN_USER> {
     isAdmin: boolean
 }
 
+
+export interface ISaveUserInfoAction extends Action<UserConstants.SAVE_USER_INFO> {
+    userInfo: Account;
+}
+
 // Se exporta el tipo con las dos acciones
 export type UserActions =
     IFacebookLoginRequestAction |
@@ -61,4 +67,5 @@ export type UserActions =
     IAccountKitLoggedSucessAction |
     IHasPendingRegistrationAction |
     ISignUpUserRequestAction |
-    IAdminUser;
+    IAdminUser |
+    ISaveUserInfoAction;

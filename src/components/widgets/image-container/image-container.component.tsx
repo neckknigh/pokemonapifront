@@ -9,7 +9,7 @@ export enum ImageContainerPosition {
 
 export interface ImageContainerComponentProps {
     readonly img: string;
-    readonly displayText: string;
+    readonly displayText: string | undefined;
     readonly iconCls?: string;
     readonly showIcon?: boolean;
     readonly containerCls?: string;

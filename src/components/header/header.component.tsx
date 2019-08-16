@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import "./header.component.scss";
 import { connect } from 'react-redux';
 import { IAppState } from '../../redux/app-state';

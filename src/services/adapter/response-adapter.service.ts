@@ -22,7 +22,8 @@ class ResponseAdapter {
             id: user.id,
             email: user.email,
             name: user.name,
-            lastName: user.lastName
+            lastName: user.lastName,
+            profileImage: user.profileImage
         }
     }
 }

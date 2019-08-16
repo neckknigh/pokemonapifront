@@ -1,3 +1,5 @@
+import { Account } from "../../models/account.model";
+
 export interface IUserState {
 
     // Indica si se logueó o no
@@ -20,4 +22,7 @@ export interface IUserState {
 
     // Indica si el usuario es administrador del sistema.
     readonly isAdmin: boolean;
+
+    // Datos básicos del usuario
+    readonly userInfo: Account;
 }

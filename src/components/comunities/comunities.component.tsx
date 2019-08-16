@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./comunities.component.scss";
 import PopularComunities from './popular/popular-comunities.component';
-import RecomendedComunities from './recomended/recomended-comunities.component';
+import RecomendedComunitiesComponent from './recomended/recomended-comunities.component';
 import TagsFilterComponent from '../widgets/tags-filter/tags-filter.component';
 
 class ComunitiesComponent extends Component<{}, {}> {
@@ -18,7 +18,7 @@ class ComunitiesComponent extends Component<{}, {}> {
                 </div>
 
                 <div className="recomended-container">
-                    <RecomendedComunities />
+                    <RecomendedComunitiesComponent />
                 </div>
             </div>
         );

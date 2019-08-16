@@ -71,8 +71,9 @@ class RequestAdapter {
      */
     public getBodyForRecomendedComunities(): string {
         const dummyBody = {
-            userGPS: "4.908307, -74.035193",
-            city: "Cajica",
+            userGPS: "4.715596, -74.037143",
+            city: "Bogota",
+            country: "Colombia",
             radius: 900
         }
 

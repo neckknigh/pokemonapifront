@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import "./recomended-comunities.component.scss";
 import CardCarrouselComponent, { CardCarrouselItem } from '../../widgets/carrousel/card-carrousel.component';
 import TitleContainerComponent from '../../widgets/title-container/title-container.component';
+import { Dispatch } from 'redux';
+import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
+import { connect } from 'react-redux';
 
-class RecomendedComunities extends Component<{}, {}> {
+export interface IRecomendedComunitiesComponentProps {
+    readonly loadRecomendedComunities?: () => void;
+}
+
+class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesComponentProps, {}> {
+
+    componentDidMount = () => {
+        this.props.loadRecomendedComunities!();
+    }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
         const items: CardCarrouselItem[] = [];
@@ -40,5 +51,11 @@ class RecomendedComunities extends Component<{}, {}> {
     }
 }
 
-export default RecomendedComunities;
+const mapDispatchToProps = (dispatch: Dispatch): IRecomendedComunitiesComponentProps => {
+    return {
+        loadRecomendedComunities: () => dispatch(comunityActions.loadRecomendedComunities())
+    };
+}
+
+export default connect(null, mapDispatchToProps)(RecomendedComunitiesComponent);
 

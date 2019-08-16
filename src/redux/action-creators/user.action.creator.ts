@@ -10,6 +10,7 @@ import {
     ISignUpUserRequestAction,
     IAdminUser
 } from "../actions/user.actions";
+import { Account } from "../../models/account.model";
 
 /**
  * Accion-creators para el usuario.
@@ -99,6 +100,14 @@ const setIsAdminUser = (isAdmin: boolean): UserActions => {
     return setIsAdminUserAction;
 };
 
+
+const saveUserInfo = (userInfo: Account): UserActions => {
+    return {
+        type: UserConstants.SAVE_USER_INFO,
+        userInfo
+    }
+}
+
 export const userActions = {
     startFacebookRequestlogin,
     startFacebookUserRegisterRequest,
@@ -107,5 +116,6 @@ export const userActions = {
     setAccountKitLoggedInStatus,
     setUserHasPendingRegistration,
     startSignUpUserRequest,
-    setIsAdminUser
+    setIsAdminUser,
+    saveUserInfo
 }

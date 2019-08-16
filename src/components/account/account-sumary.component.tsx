@@ -2,16 +2,37 @@ import React, { Component } from 'react';
 import "./account-sumary.component.scss";
 import Popup from "reactjs-popup";
 import ImageContainerComponent from '../widgets/image-container/image-container.component';
+import { IAppState } from '../../redux/app-state';
+import { Account } from '../../models/account.model';
+import { connect } from 'react-redux';
+import { utilService } from '../../services/util.service';
+
+export interface IAccountSummaryComponentProps {
+    readonly userInfo?: Account;
+}
+
+class AccountSummaryComponent extends Component<IAccountSummaryComponentProps, {}> {
+
+    private getUserFullName = (userInfo: Account): string => {
+        return utilService.getUserFullName(userInfo);
+    }
+
+    public getUserProfileImage = (userInfo: Account): string => {
+        if (userInfo) {
+            return userInfo.profileImage!;
+        }
+        return "";
+    }
 
 
-class AccountSummaryComponent extends Component<{}, {}> {
     public render(): JSX.Element {
+        const { userInfo } = this.props;
         return (
             <Popup
                 trigger={
                     <div className="clickable">
                         <ImageContainerComponent
-                            img="https://i.pravatar.cc/150?img=8"
+                            img={this.getUserProfileImage(userInfo!)}
                             displayText="CUENTA"
                             iconCls="fas fa-chevron-down"
                             showIcon={true}
@@ -38,8 +59,8 @@ class AccountSummaryComponent extends Component<{}, {}> {
                 <div className="account-popup-container clickable">
                     <div className="account-sumary-header">
                         <ImageContainerComponent
-                            img="https://i.pravatar.cc/150?img=8"
-                            displayText="Kevin Perez"
+                            img={this.getUserProfileImage(userInfo!)}
+                            displayText={this.getUserFullName(userInfo!)}
                             iconCls="fas fa-chevron-down"
                             containerCls="account-user-image-container"
                             textCls="account-user-text-display"
@@ -88,4 +109,10 @@ class AccountSummaryComponent extends Component<{}, {}> {
     }
 }
 
-export default AccountSummaryComponent;
+const mapStateToProps = (state: IAppState): IAccountSummaryComponentProps => {
+    return {
+        userInfo: state.userState.userInfo
+    }
+}
+
+export default connect(mapStateToProps)(AccountSummaryComponent);

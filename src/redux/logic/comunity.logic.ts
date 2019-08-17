@@ -10,7 +10,7 @@ const getRecomendedComunities = createLogic({
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
         console.log(action);
-        debugger;
+        //debugger;
 
         comunityService.getRecomendedComunities()
             .subscribe(

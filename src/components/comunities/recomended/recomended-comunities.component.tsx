@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { IAppState } from '../../../redux/app-state';
 import { Comunity } from '../../../models/comunity.model';
 import { ConfigProvider as CP } from '../../../services/config/config.service';
+import { utilService } from '../../../services/util.service';
 
 interface IRecomendedComunitiesComponentProps {
     readonly loadRecomendedComunities?: () => void;
@@ -16,6 +17,8 @@ interface IRecomendedComunitiesComponentProps {
 
 interface IRecomendedComunitiesComponentState {
     comunitylogosUrl: string;
+    mainTitle: string;
+    totalComuityfounded: string;
 }
 
 class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesComponentProps, IRecomendedComunitiesComponentState> {
@@ -24,11 +27,14 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
         super(props);
 
         this.state = {
-            comunitylogosUrl: CP.get(CP.COMUNITY_LOGOS_URL)
+            comunitylogosUrl: CP.get(CP.COMUNITY_LOGOS_URL),
+            mainTitle: CP.get(CP.RECOMENDED_COMUNITY_MAIN_TITLE),
+            totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY)
         }
     }
 
     componentDidMount = () => {
+        debugger;
         this.props.loadRecomendedComunities!();
     }
 
@@ -52,16 +58,21 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
         return items;
     }
 
-    private getRecomendedComunitiesCount() {
+    private getRecomendedComunitiesCount(): number {
         return this.props.recomendedComunities!.length;
     }
 
-    public render() {
+    public render(): JSX.Element {
         return (
             <TitleContainerComponent
-                mainTitle="Comunidades recomendadas"
+                mainTitle={this.state.mainTitle}
                 // TODO: Mover el armado de este texto al componente TitleContainerComponent
-                secondaryTitle={"(" + this.getRecomendedComunitiesCount() + " encontradas)"}
+                secondaryTitle={utilService.replaceParamsInString(
+                    this.state.totalComuityfounded,
+                    {
+                        count: this.getRecomendedComunitiesCount()
+                    }
+                )}
             >
                 <div className="carrousel-container">
                     <CardCarrouselComponent

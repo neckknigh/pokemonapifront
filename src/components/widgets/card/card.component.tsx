@@ -29,7 +29,7 @@ export default class CardComponent extends Component<CardComponentProps, CardCom
     }
 
     private buildPreviewImagesContainer(): JSX.Element {
-        debugger;
+        //debugger;
         let container: JSX.Element | null = null;
         if (this.getShowPreviewImages()) {
 

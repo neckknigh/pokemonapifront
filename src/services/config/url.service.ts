@@ -1,5 +1,6 @@
 import { ConfigProvider as CP } from "../config/config.service";
 import queryString from "query-string";
+import { utilService } from "../util.service";
 
 class URLProvider {
     public readonly URL_ACCOUNT_KIT_AUTH_USER: string = "accountkit_auth";
@@ -37,18 +38,8 @@ class URLProvider {
         return url;
     }
 
-    replaceParams(url: string, params: any): string {
-        let returnedUrl = url;
-        const paramsKeys = Object.keys(params);
-
-        if (paramsKeys.length) {
-            paramsKeys.forEach((key: string) => {
-                let regex = new RegExp(":" + key, "g");
-                returnedUrl = returnedUrl.replace(regex, params[key]);
-            });
-        }
-
-        return returnedUrl;
+    replaceParams(url: string, params: string[]): string {
+        return utilService.replaceParamsInString(url, params);
     }
 
     paramsToQueryString(params: any): string {

@@ -44,6 +44,20 @@ class UtilService {
         return `${userInfo.name} ${userInfo.lastName}`;
     }
 
+    public replaceParamsInString(text: string, params: any): string {
+        let returnedText = text;
+        const paramsKeys: string[] = Object.keys(params);
+
+        if (paramsKeys.length) {
+            paramsKeys.forEach((keyParam: string) => {
+                let regex = new RegExp(":" + keyParam, "g");
+                returnedText = returnedText.replace(regex, params[keyParam]);
+            });
+        }
+
+        return returnedText;
+    }
+
 }
 
 export const utilService = new UtilService(); 

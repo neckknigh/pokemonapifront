@@ -28,6 +28,8 @@ export class ConfigProvider {
     static readonly SEARCHER_PLACEHOLDER: string = "SEARCHER_PLACEHOLDER";
     static readonly ADMINS: string = "ADMINS";
     static readonly COMUNITY_LOGOS_URL: string = "COMUNITY_LOGOS_URL";
+    static readonly RECOMENDED_COMUNITY_MAIN_TITLE: string = "RECOMENDED_COMUNITY_MAIN_TITLE";
+    static readonly TOTAL_ITEMS_FOUNDED_DISPLAY: string = "TOTAL_ITEMS_FOUNDED_DISPLAY";
 
     private static configs: any;
 
@@ -66,6 +68,9 @@ export class ConfigProvider {
             "4040", "9"
         ];
         ConfigProvider.configs[ConfigProvider.COMUNITY_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/communityphoto/";
+        ConfigProvider.configs[ConfigProvider.RECOMENDED_COMUNITY_MAIN_TITLE] = "Comunidades Recomendadas";
+        ConfigProvider.configs[ConfigProvider.TOTAL_ITEMS_FOUNDED_DISPLAY] = ":count encontradas";
+
     }
 
     public static get(key: string, defaultValue?: string): any {

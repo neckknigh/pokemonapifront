@@ -5,15 +5,35 @@ import { IAppState } from '../../redux/app-state';
 import "./dashboard.component.scss";
 import PromotionsComponent from '../promotions/promotions.component';
 import ComunitiesComponent from '../comunities/comunities.component';
+import { utilService } from '../../services/util.service';
 
-interface IDashBoardComponent {
+interface IDashBoardComponentProps {
     userHasSession?: boolean;
     history?: any,
     isAdminUser?: boolean;
 }
 
 
-class DashBoardComponent extends Component<IDashBoardComponent, {}> {
+class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
+
+    constructor(props: IDashBoardComponentProps) {
+        super(props);
+
+        // TODO: Quitar esto de aquí
+        if (utilService.isDefined(navigator.geolocation)) {
+            navigator.geolocation.getCurrentPosition(
+                function success(position) {
+                    // for when getting location is a success
+                    console.log('latitude', position.coords.latitude,
+                        'longitude', position.coords.longitude);
+                },
+                function error(error_message) {
+                    // for when getting location results in an error
+                    console.error('An error has occured while retrieving location', error_message);
+                });
+        }
+
+    }
 
     render() {
 
@@ -48,7 +68,7 @@ class DashBoardComponent extends Component<IDashBoardComponent, {}> {
     }
 }
 
-const mapStateToProps = (state: IAppState): IDashBoardComponent => {
+const mapStateToProps = (state: IAppState): IDashBoardComponentProps => {
     return {
         isAdminUser: state.userState.isAdmin,
         userHasSession: state.authState.userHasSession

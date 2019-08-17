@@ -2,25 +2,57 @@ import React, { Component } from 'react';
 import "./promotions.component.scss";
 import TitleContainerComponent from '../widgets/title-container/title-container.component';
 import CardCarrouselComponent, { CardCarrouselItem } from '../widgets/carrousel/card-carrousel.component';
+import { promotionService } from '../../services/data/promotion.service';
+import { Promotion } from '../../models/promotion.model';
+import { ConfigProvider as CP } from '../../services/config/config.service';
 
+interface IPromotionsComponentState {
+    // TOOD: Quitar esto
+    promotions: Promotion[];
+    comunitylogosUrl: string;
+}
 
-export default class PromotionsComponent extends Component<{}, {}> {
+export default class PromotionsComponent extends Component<{}, IPromotionsComponentState> {
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            promotions: [],
+            comunitylogosUrl: CP.get(CP.ANNOUNCEMENTS_LOGOS_URL)
+        };
+
+        // TODO: Sacar esto de aquí
+        promotionService.getPromotions()
+            .subscribe(
+                (promotions: Promotion[]) => {
+                    this.setState({
+                        promotions
+                    })
+                }, error => {
+                    console.log(error);
+                },
+                () => {
+                    //done();
+                }
+            );
+    }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
         const items: CardCarrouselItem[] = [];
 
-        for (let index = 0; index < 10; index++) {
+        this.state.promotions.forEach((promotion: Promotion) => {
             items.push(
                 {
-                    title: "Desayuna con Alpina",
+                    title: promotion.name,
                     showUserLikes: false,
-                    img: "https://placeimg.com/380/185/nature",
+                    img: `${this.state.comunitylogosUrl}${promotion.imagePath}`,
                     innerTitles: [
-                        "Quesito Alpina de 325gr + 20 arenas Don Maia por tan solo $10.000"
+                        promotion.description
                     ]
                 }
             );
-        }
+        })
         return items;
     }
 
@@ -28,7 +60,7 @@ export default class PromotionsComponent extends Component<{}, {}> {
         return (
             <TitleContainerComponent
                 mainTitle="Promociones"
-                secondaryTitle="(25 encontradas)"
+                secondaryTitle="(8 encontradas)"
             >
                 <div>
                     <CardCarrouselComponent

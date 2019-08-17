@@ -9,6 +9,7 @@ class URLProvider {
     public readonly URL_PHONE_USER_VALIDATION: string = "phone_user_validation";
     public readonly URL_USER_REGISTRATION: string = "user_registration";
     public readonly URL_RECOMENDED_COMUNITIES: string = "recomended_comunities";
+    public readonly URL_PROMOTIONS: string = "promotions";
     public readonly URL_USER_BY_ID: string = "user_by_id";
 
     private baseUrl: string;
@@ -22,10 +23,9 @@ class URLProvider {
         this.urls[this.URL_USER_FACEBOOK_SIGN_IN] = this.baseUrl + "facebookSignIn.php";
         this.urls[this.URL_PHONE_USER_VALIDATION] = this.baseUrl + "checkPhoneNumber.php";
         this.urls[this.URL_USER_REGISTRATION] = this.baseUrl + "phoneSignIn.php";
-
-        // Urls bodega
         this.urls[this.URL_RECOMENDED_COMUNITIES] = this.baseUrl + "getComReco.php";
         this.urls[this.URL_USER_BY_ID] = this.baseUrl + "getDooUserById.php";
+        this.urls[this.URL_PROMOTIONS] = this.baseUrl + "prcGetAnunciosNew.php";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {

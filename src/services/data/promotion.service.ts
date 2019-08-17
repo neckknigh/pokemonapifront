@@ -5,19 +5,19 @@ import { urlProvider } from "../config/url.service";
 import { requestAdapter } from "../adapter/request-adapter.service";
 import { headersService } from "../authentication/headers.service";
 import { responseAdapter } from "../adapter/response-adapter.service";
-import { Comunity } from "../../models/comunity.model";
+import { Promotion } from "../../models/promotion.model";
 
-class ComunityService {
+class PromotionService {
 
-    public getRecomendedComunities(): Observable<Comunity[]> {
-        return new Observable((observer: Observer<Comunity[]>) => {
+    public getPromotions(): Observable<Promotion[]> {
+        return new Observable((observer: Observer<Promotion[]>) => {
 
             clientService.post(
-                urlProvider.get(urlProvider.URL_RECOMENDED_COMUNITIES),
-                requestAdapter.getBodyForRecomendedComunities(),
+                urlProvider.get(urlProvider.URL_PROMOTIONS),
+                requestAdapter.getBodyForPromotions(),
                 headersService.getHeaders()
             )
-                .then(((response: any) => observer.next(responseAdapter.adaptRecomendedComunitiesForComunities(response))))
+                .then(((response: any) => observer.next(responseAdapter.adaptPromotionsForPromotions(response))))
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
                     observer.complete();
@@ -26,4 +26,4 @@ class ComunityService {
     }
 }
 
-export const comunityService = new ComunityService();
+export const promotionService = new PromotionService();

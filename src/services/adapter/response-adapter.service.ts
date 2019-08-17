@@ -1,5 +1,6 @@
 import { Account } from "../../models/account.model";
 import { Comunity } from "../../models/comunity.model";
+import { Promotion } from "../../models/promotion.model";
 
 class ResponseAdapter {
     public adaptAccountKitUserForAccount(accountKitUserData: any): Account {
@@ -31,7 +32,7 @@ class ResponseAdapter {
     public adaptRecomendedComunitiesForComunities(rawResponse: any): Comunity[] {
         debugger;
         const rawComunities = rawResponse.communities;
-        let comunities: Comunity[] = [];
+        const comunities: Comunity[] = [];
 
         rawComunities.forEach((rawComunity: any) => {
             comunities.push({
@@ -45,6 +46,22 @@ class ResponseAdapter {
 
         debugger
         return comunities;
+    }
+
+    public adaptPromotionsForPromotions(rawResponse: any): Promotion[] {
+        const promotions: Promotion[] = [];
+        const rawPromotions = rawResponse.AnunciosLista;
+
+        rawPromotions.forEach((rawPromotion: any) => {
+            promotions.push({
+                id: rawPromotion.id,
+                description: rawPromotion.text,
+                name: rawPromotion.title,
+                imagePath: rawPromotion.image
+            });
+        });
+
+        return promotions;
     }
 }
 

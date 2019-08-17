@@ -81,6 +81,22 @@ class RequestAdapter {
     }
 
     /**
+     * Permite obtener el body necesario para el servicio
+     * de consulta de promociones.
+     * TODO: Servicio pendiente de finalizar.
+     */
+    public getBodyForPromotions(): string {
+        const dummyBody = {
+            communityId: 120,
+            type: "2",
+            city: "Bogota",
+            country: "Colombia"
+        }
+
+        return JSON.stringify(dummyBody);
+    }
+
+    /**
      * Permite obtener el body para la petición
      * que obtiene la información del usuario 
      * apartir de su ID.

@@ -36,7 +36,7 @@ class AccountService {
                     //debugger;
 
                     // TODO: Sacar el 1 como constante
-                    if (response.data.status === 1) {
+                    if (response.status === 1) {
                         this.account = responseAdapter.adaptUserForAccount(response);
                     }
 

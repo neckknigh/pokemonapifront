@@ -16,7 +16,7 @@ $border-radius: 10px;
             @include border-top-radius($border-radius);
         }
 
-        .user-likes-container {
+        .preview-images-container {
             position: absolute;
             bottom: -0.9rem;
             margin: 0 1rem;

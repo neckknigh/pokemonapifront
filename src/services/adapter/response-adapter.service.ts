@@ -14,11 +14,11 @@ class ResponseAdapter {
     }
 
     public adaptPhoneUserValidationResponse(rawResponse: any): any {
-        return rawResponse.data;
+        return rawResponse;
     }
 
     public adaptUserForAccount(rawResponse: any): Account {
-        const { user } = rawResponse.data;
+        const { user } = rawResponse;
         return {
             id: user.id,
             email: user.email,
@@ -30,7 +30,7 @@ class ResponseAdapter {
 
     public adaptRecomendedComunitiesForComunities(rawResponse: any): Comunity[] {
         debugger;
-        const rawComunities = rawResponse.data.communities;
+        const rawComunities = rawResponse.communities;
         let comunities: Comunity[] = [];
 
         rawComunities.forEach((rawComunity: any) => {
@@ -38,10 +38,12 @@ class ResponseAdapter {
                 id: rawComunity.id,
                 name: rawComunity.name,
                 logo: rawComunity.logo,
-                description: rawComunity.description
+                description: rawComunity.description,
+                likeUserPhotos: rawComunity.userPhotos.map((userPhoto: any): string => userPhoto.profileImage)
             })
         });
 
+        debugger
         return comunities;
     }
 }

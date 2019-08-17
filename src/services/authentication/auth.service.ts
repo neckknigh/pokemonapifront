@@ -96,7 +96,7 @@ class AuthService {
                         }
                     )
                 )
-                    .then((response) => observer.next(response.data))
+                    .then((response) => observer.next(response))
                     .catch((error) => observer.error(error))
                     .finally(() => observer.complete());
             }
@@ -118,7 +118,7 @@ class AuthService {
                             )
                         )
                             .then((response) => {
-                                this.accountKitData = responseAdapter.adaptAccountKitUserForAccount(response.data);
+                                this.accountKitData = responseAdapter.adaptAccountKitUserForAccount(response);
                                 return observer.next(
                                     this.accountKitData
                                 );

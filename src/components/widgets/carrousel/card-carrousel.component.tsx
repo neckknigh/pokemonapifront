@@ -10,6 +10,7 @@ export interface CardCarrouselItem {
     showUserLikes: boolean;
     img: string;
     innerTitles: string[];
+    previewImages?: string[];
 }
 
 interface CardCarrouselComponentState {
@@ -85,6 +86,7 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                                 showUserLikes={cardItem.showUserLikes}
                                 innerTitles={cardItem.innerTitles}
                                 title={cardItem.title}
+                                previewImages={cardItem.previewImages}
                             />
                         })
                     }

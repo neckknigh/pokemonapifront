@@ -47,7 +47,7 @@ class ClientHttpService {
 
                 // Se oculta la pantalla de carga
                 appStore.dispatch(systemActions.hideLoadingScreen());
-                return response;
+                return response.data;
             },
             (error: any) => {
                 appStore.dispatch(systemActions.hideLoadingScreen());

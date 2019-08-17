@@ -227,7 +227,6 @@ export const signUpUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
-                debugger;
                 const { data } = response;
 
                 if (data.status !== 1) {
@@ -235,7 +234,7 @@ export const signUpUser = createLogic<
                 }
                 else {
 
-                    // TODO: Refactorizar esta lógica, arriba está repetida
+                    // TODO: Refactorizar esta lógica, arriba está repetida.
 
                     // Se indica que el usuario no tiene pendiente un registro
                     dispatch(userActions.setUserHasPendingRegistration(false));

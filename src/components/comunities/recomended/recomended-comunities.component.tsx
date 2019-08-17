@@ -44,7 +44,8 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
                     img: `${this.state.comunitylogosUrl}${recomendedComunity.logo}`,
                     innerTitles: [
                         recomendedComunity.description
-                    ]
+                    ],
+                    previewImages: recomendedComunity.likeUserPhotos
                 }
             );
         });

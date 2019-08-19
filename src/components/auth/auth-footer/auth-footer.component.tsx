@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ConfigProvider as CP } from '../../../services/config/config.service';
 import "./auth-footer.component.scss";
+import CountryFlagsComponent from '../../widgets/country-flags/country-flags.component';
 
 export interface AuthFooterComponentProps {
     showFlags?: boolean
@@ -9,7 +10,7 @@ export interface AuthFooterComponentProps {
 export interface AuthFooterComponentState {
     legalTerms: string,
     goToWebSiteDisplay: string,
-    flags: any[]
+    flagsWidth: string
 }
 
 class AuthFooterComponent extends Component<AuthFooterComponentProps, AuthFooterComponentState> {
@@ -20,53 +21,22 @@ class AuthFooterComponent extends Component<AuthFooterComponentProps, AuthFooter
         this.state = {
             legalTerms: CP.get(CP.LEGAL_TERMS),
             goToWebSiteDisplay: CP.get(CP.GO_TO_WEBSITE_DISPLAY),
-            flags: this.buildFlags()
+            flagsWidth: "2.2rem"
         }
     }
 
-    private buildFlags(): any[] {
-        return [
-            {
-                src: "/img/login/flags/dummy.png",
-                alt: "country flag 1"
-            },
-            {
-                src: "/img/login/flags/dummy.png",
-                alt: "country flag 1"
-            },
-            {
-                src: "/img/login/flags/dummy.png",
-                alt: "country flag 1"
-            }
-        ]
-    }
-
-    render() {
+    public render(): JSX.Element {
         return (
             <div className="flex-column-center-items auth-footer-container">
                 <p className="legal-terms">{this.state.legalTerms}</p>
                 {
                     this.props.showFlags &&
-                    <div className="maximun-size">
+                    <div className="maxsimun-size">
                         <div className="line-on-side-container">
                             <p className="line-on-side hint">Ir al sitio web</p>
                         </div>
                         <div className="grid grid-justify-center grid-center flags-container">
-                            {
-                                this.state.flags.map((flag: any, index: number) => {
-                                    return <button
-                                        type="button"
-                                        className="btn"
-                                        key={index}
-                                    >
-                                        <img
-                                            className="country-flag"
-                                            src={flag.src}
-                                            alt={flag.alt}
-                                        />
-                                    </button>
-                                })
-                            }
+                            <CountryFlagsComponent flagWidth={this.state.flagsWidth} />
                         </div>
                     </div>
                 }

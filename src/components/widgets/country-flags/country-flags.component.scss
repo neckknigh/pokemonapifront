@@ -1,9 +1,6 @@
-.flags-container {
-    .flag-icon {
-        width: 1.4rem;
-    }
+.country-flags-container {
 
-    .flag-icon+.flag-icon {
+    img+img {
         margin-left: 1rem;
     }
 }

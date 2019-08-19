@@ -27,16 +27,16 @@ class CountryFlagsComponent extends Component<CountryFlagsComponentProps, Countr
 
     public render(): JSX.Element {
         return (
-            <div className="country-flags-container clickable">
+            <div className="country-flags-container">
                 <img src="/img/flags/bol-flag.png" alt="bol" style={{
                     width: this.getFlagSize()
-                }} />
+                }} className="clickable" />
                 <img src="/img/flags/col-flag.png" alt="col" style={{
                     width: this.getFlagSize()
-                }} />
+                }} className="clickable" />
                 <img src="/img/flags/mex-flag.png" alt="mex" style={{
                     width: this.getFlagSize()
-                }} />
+                }} className="clickable" />
             </div>
         );
     }

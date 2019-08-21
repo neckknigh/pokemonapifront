@@ -2,51 +2,50 @@ import React, { Component } from 'react';
 import "./promotions.component.scss";
 import TitleContainerComponent from '../widgets/title-container/title-container.component';
 import CardCarrouselComponent, { CardCarrouselItem } from '../widgets/carrousel/card-carrousel.component';
-import { promotionService } from '../../services/data/promotion.service';
 import { Promotion } from '../../models/promotion.model';
 import { ConfigProvider as CP } from '../../services/config/config.service';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { promotionActions } from '../../redux/action-creators/promotion.action.creator';
+import { IAppState } from '../../redux/app-state';
+import { utilService } from '../../services/util.service';
 
-interface IPromotionsComponentState {
-    // TOOD: Quitar esto
-    promotions: Promotion[];
-    comunitylogosUrl: string;
+interface IPromotionsComponentProps {
+    readonly loadPromotions?: () => void;
+    readonly promotions?: Promotion[];
 }
 
-export default class PromotionsComponent extends Component<{}, IPromotionsComponentState> {
+interface IPromotionsComponentState {
+    promotionslogosUrl: string;
+    mainTitle: string;
+    totalComuityfounded: string;
+}
+
+class PromotionsComponent extends Component<IPromotionsComponentProps, IPromotionsComponentState> {
 
     constructor(props: any) {
         super(props);
 
         this.state = {
-            promotions: [],
-            comunitylogosUrl: CP.get(CP.ANNOUNCEMENTS_LOGOS_URL)
+            promotionslogosUrl: CP.get(CP.ANNOUNCEMENTS_LOGOS_URL),
+            mainTitle: CP.get(CP.PROMOTIONS_MAIN_TITLE),
+            totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY)
         };
+    }
 
-        // TODO: Sacar esto de aquí
-        promotionService.getPromotions()
-            .subscribe(
-                (promotions: Promotion[]) => {
-                    this.setState({
-                        promotions
-                    })
-                }, error => {
-                    console.log(error);
-                },
-                () => {
-                    //done();
-                }
-            );
+    componentDidMount() {
+        this.props.loadPromotions!();
     }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
         const items: CardCarrouselItem[] = [];
 
-        this.state.promotions.forEach((promotion: Promotion) => {
+        this.props.promotions!.forEach((promotion: Promotion) => {
             items.push(
                 {
                     title: promotion.name,
                     showUserLikes: false,
-                    img: `${this.state.comunitylogosUrl}${promotion.imagePath}`,
+                    img: `${this.state.promotionslogosUrl}${promotion.imagePath}`,
                     innerTitles: [
                         promotion.description
                     ]
@@ -56,11 +55,20 @@ export default class PromotionsComponent extends Component<{}, IPromotionsCompon
         return items;
     }
 
+    public getPromotionsCount(): number {
+        return this.props.promotions!.length;
+    }
+
     public render(): JSX.Element {
         return (
             <TitleContainerComponent
-                mainTitle="Promociones"
-                secondaryTitle="(8 encontradas)"
+                mainTitle={this.state.mainTitle}
+                secondaryTitle={utilService.replaceParamsInString(
+                    this.state.totalComuityfounded,
+                    {
+                        count: this.getPromotionsCount()
+                    }
+                )}
             >
                 <div>
                     <CardCarrouselComponent
@@ -72,3 +80,17 @@ export default class PromotionsComponent extends Component<{}, IPromotionsCompon
         );
     }
 }
+
+const mapDispachToProps = (dispatch: Dispatch): IPromotionsComponentProps => {
+    return {
+        loadPromotions: () => dispatch(promotionActions.loadPromotions())
+    }
+}
+
+const mapStateToProps = (state: IAppState): IPromotionsComponentProps => {
+    return {
+        promotions: state.promotionState.promotions
+    }
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(PromotionsComponent);

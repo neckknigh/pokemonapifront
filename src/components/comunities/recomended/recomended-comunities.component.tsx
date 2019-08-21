@@ -66,7 +66,6 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
         return (
             <TitleContainerComponent
                 mainTitle={this.state.mainTitle}
-                // TODO: Mover el armado de este texto al componente TitleContainerComponent
                 secondaryTitle={utilService.replaceParamsInString(
                     this.state.totalComuityfounded,
                     {

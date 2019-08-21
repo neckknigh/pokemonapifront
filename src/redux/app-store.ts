@@ -10,6 +10,7 @@ import { createLogicMiddleware } from 'redux-logic';
 import appLogic from './app-logic';
 import { systemReducer } from './reducers/system.reducer';
 import { comunityReducer } from './reducers/comunity.reducer';
+import { promotionReducer } from './reducers/promotion.reducer';
 
 
 const depts = {
@@ -25,7 +26,8 @@ export const rootReducer = combineReducers<IAppState>({
     userState: userReducer,
     authState: authReducer,
     systemState: systemReducer,
-    comunityState: comunityReducer
+    comunityState: comunityReducer,
+    promotionState: promotionReducer
 
 });
 

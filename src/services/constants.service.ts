@@ -52,6 +52,11 @@ export enum ComunityConstants {
     SAVE_RECOMENDED_COMUNITIES = "SAVE_RECOMENDED_COMUNITIES"
 }
 
+export enum PromotionsConstants {
+    LOAD_PROMOTIONS = "LOAD_PROMOTIONS",
+    SAVE_PROMOTIONS = "SAVE_PROMOTIONS"
+}
+
 export enum API_CONSTANTS {
     API_BASE_URL = "http://www.comunidadesdoo.com/admon/ws",
     FACEBOOK_SIGNIN_API = "/facebookSignIn.php"

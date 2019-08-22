@@ -1,7 +1,7 @@
 @import "../../../styles/_main";
 
 .comunity-summary {
-    color: red;
+    color: $white;
 
     .top {
         position: relative;
@@ -20,6 +20,40 @@
             .logo {
                 height: 10rem;
                 @include border-radius(17px);
+            }
+
+            .info-details {
+                padding: 26px 0;
+
+                .title {
+                    font-size: 20px;
+                    margin: 0;
+                }
+
+                .favorite {
+                    margin-left: 1rem;
+
+                    .icon-favorite {
+                        font-size: 20px;
+                        color: $white;
+                    }
+                }
+
+                .category {
+                    @include roboto-regular-font;
+                    font-size: 16px;
+                }
+
+                .ratings {
+                    margin-top: 0.5rem;
+
+                    .star-icon {
+                        font-size: 20px;
+                        color: yellow;
+                    }
+                }
+
+
             }
         }
     }

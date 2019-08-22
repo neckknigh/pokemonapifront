@@ -145,6 +145,7 @@
 	height: $maximum-percentage;
 }
 
+// see https://www.websitedimensions.com/
 @mixin breakpoint($class) {
 	@if $class==xs {
 		@media (max-width: 767px) {

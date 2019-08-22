@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./card.component.scss";
 import { utilService } from '../../../services/util.service';
 
-interface CardComponentProps {
+interface ICardComponentProps {
     readonly showUserLikes?: boolean;
     readonly image: string;
     readonly title: string;
@@ -10,13 +10,13 @@ interface CardComponentProps {
     readonly previewImages?: string[];
 }
 
-interface CardComponentState {
+interface ICardComponentState {
     maximunPreviewImagesShown: number;
 }
 
-export default class CardComponent extends Component<CardComponentProps, CardComponentState> {
+export default class CardComponent extends Component<ICardComponentProps, ICardComponentState> {
 
-    public constructor(props: CardComponentProps) {
+    public constructor(props: ICardComponentProps) {
         super(props);
 
         this.state = {
@@ -29,7 +29,6 @@ export default class CardComponent extends Component<CardComponentProps, CardCom
     }
 
     private buildPreviewImagesContainer(): JSX.Element {
-        //debugger;
         let container: JSX.Element | null = null;
         if (this.getShowPreviewImages()) {
 
@@ -61,7 +60,6 @@ export default class CardComponent extends Component<CardComponentProps, CardCom
         }
 
         return container!;
-
     }
 
     public render(): JSX.Element {

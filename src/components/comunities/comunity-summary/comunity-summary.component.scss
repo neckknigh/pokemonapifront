@@ -1,0 +1,26 @@
+@import "../../../styles/_main";
+
+.comunity-summary {
+    color: red;
+
+    .top {
+        position: relative;
+
+        .banner {
+
+            @include maximum-width;
+            //height: 223px;
+        }
+
+        .banner-summary-info {
+            position: absolute;
+            top: 0;
+            @include maximun-size;
+
+            .logo {
+                height: 10rem;
+                @include border-radius(17px);
+            }
+        }
+    }
+}

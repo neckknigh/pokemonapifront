@@ -54,7 +54,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
     render() {
         const readOnlyMode = !this.props.userHasSession || !this.props.isAdminUser;
         return (
-            <header>
+            <header >
                 <nav className="grid">
                     <div className="column flex-row-start-items-center left-container">
                         {

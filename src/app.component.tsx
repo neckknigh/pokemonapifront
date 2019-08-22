@@ -16,6 +16,7 @@ import IncomingFeaturesComponent from './components/incoming-features/incoming-f
 import SideMenuComponent from './components/widgets/side-menu/side-menu.component';
 import DashBoardComponent from './components/dashboard/dashboard.component';
 import FooterComponent from './components/footer/footer.component';
+import ComunitySummaryComponent from './components/comunities/comunity-summary/comunity-summary.component';
 
 /**
  * Interface para mapear las propiedades del 
@@ -60,6 +61,8 @@ class App extends React.Component<IAppProps, IApplicationState> {
                 <Route exact path="/" component={AuthComponent} />
                 <Route exact path="/auth" component={AuthComponent} />
                 <Route exact path="/comunities" component={DashBoardComponent} />
+                <Route exact path="/comunities/:id([0-9]+)" component={ComunitySummaryComponent} />
+
                 <Route exact path="/signup" component={SignUpComponent} />
                 <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
 

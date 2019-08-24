@@ -30,7 +30,7 @@ class AccountSummaryComponent extends Component<IAccountSummaryComponentProps, {
         return (
             <Popup
                 trigger={
-                    <div className="clickable">
+                    <div>
                         <ImageContainerComponent
                             img={this.getUserProfileImage(userInfo!)}
                             displayText="CUENTA"

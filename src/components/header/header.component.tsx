@@ -10,6 +10,7 @@ import SearcherComponent from '../widgets/searcher/searcher.component';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
 import AccountSummaryComponent from '../account/account-sumary.component';
+import ImageContainerComponent from '../widgets/image-container/image-container.component';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
@@ -100,9 +101,26 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                                 </button> :
 
                                 !readOnlyMode &&
-                                <div className="account-container">
-                                    <AccountSummaryComponent />
-                                </div>
+                                <section className="flex-row-center-items-center grid header-right-items">
+                                    <div className="column clickable">
+                                        <ImageContainerComponent
+                                            img="/img/flags/col-flag.png"
+                                            displayText="Colombia"
+                                            iconCls="fas fa-chevron-down"
+                                            showIcon={true}
+                                        />
+                                    </div>
+                                    <div className="column clickable">
+                                        <ImageContainerComponent
+                                            displayText="Bogotá"
+                                            iconCls="fas fa-chevron-down"
+                                            showIcon={true}
+                                        />
+                                    </div>
+                                    <div className="column clickable">
+                                        <AccountSummaryComponent />
+                                    </div>
+                                </section>
                         }
                     </div>
                 </nav>

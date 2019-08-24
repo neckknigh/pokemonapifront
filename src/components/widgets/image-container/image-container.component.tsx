@@ -8,7 +8,7 @@ export enum ImageContainerPosition {
 }
 
 export interface ImageContainerComponentProps {
-    readonly img: string;
+    readonly img?: string;
     readonly displayText: string | undefined;
     readonly iconCls?: string;
     readonly showIcon?: boolean;
@@ -96,13 +96,17 @@ class ImageContainerComponent extends Component<ImageContainerComponentProps, {}
     }
 
     public render(): JSX.Element {
+        const { img } = this.props;
         return (
             <div className={this.getContainerCls()}>
-                <img
-                    src={this.props.img}
-                    alt="container"
-                    className={this.getImageCls()}
-                />
+                {
+                    !utilService.isEmpty(img) &&
+                    <img
+                        src={img}
+                        alt="container"
+                        className={this.getImageCls()}
+                    />
+                }
                 <div className={this.getTextContainerCls()}>
                     <span className={this.getTextCls()}>
                         {this.props.displayText}

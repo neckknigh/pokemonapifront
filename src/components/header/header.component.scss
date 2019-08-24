@@ -59,6 +59,12 @@ header {
                 background: transparent;
                 border: none;
             }
+
+            .header-right-items {
+                .column+.column {
+                    margin-left: 2rem;
+                }
+            }
         }
     }
 }

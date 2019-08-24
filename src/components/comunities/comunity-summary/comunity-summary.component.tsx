@@ -44,10 +44,10 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                     </ResponsiveImage>
 
                     <div className="grid banner-summary-info">
-                        <section className="test-border column-20 maximum-height flex-row-center-items-center ">
+                        <section className="column-20 maximum-height flex-row-center-items-center ">
                             <img src="https://picsum.photos/150/150" alt="logo" className="logo" />
                         </section>
-                        <section className="test-border column maximum-height info-details">
+                        <section className="column maximum-height info-details">
                             <div className="flex-row-items-center">
                                 <h3 className="title">Touch to go - Las mejores alitas del mundos</h3>
                                 <button className="btn-transparent favorite flex-row-items-center">

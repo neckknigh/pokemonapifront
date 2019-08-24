@@ -16,30 +16,10 @@ $border-radius: 10px;
             @include border-top-radius($border-radius);
         }
 
-        .preview-images-container {
+        .card-thumbnail-container {
             position: absolute;
             bottom: -0.9rem;
-            margin: 0 1rem;
-            @include flex-display();
-
-            .circle {
-                height: 33px;
-                width: 33px;
-                background-color: $white;
-                @include border-radius(50%);
-                display: inline-block;
-                border: 2px solid $ligh-gray-color;
-                margin-left: -0.5rem;
-
-                &.with-inner-text {
-                    font-family: Helvetica Neue;
-                    font-size: 9px;
-                    @include flex-display();
-                    @include align-items(center);
-                    @include justify-content(center);
-                    color: #707070;
-                }
-            }
+            margin: 0 0.5rem;
         }
     }
 
@@ -50,7 +30,7 @@ $border-radius: 10px;
         .card-title {
             @include roboto-regular-font;
             font-size: 16px;
-            margin: 0 0 .75rem 0;
+            margin: 0 0 0.5rem 0;
         }
     }
 }

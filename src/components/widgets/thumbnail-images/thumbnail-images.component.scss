@@ -1,0 +1,27 @@
+@import "../../../styles/_main";
+
+.thumbnail-container {
+    @include flex-display();
+
+    .thumbnail {
+        height: 33px;
+        width: 33px;
+        background-color: $white;
+        @include border-radius(50%);
+        display: inline-block;
+        border: 2px solid $ligh-gray-color;
+
+        &.with-inner-text {
+            font-family: Helvetica Neue;
+            font-size: 9px;
+            @include flex-display();
+            @include align-items(center);
+            @include justify-content(center);
+            color: $gray-44;
+        }
+    }
+
+    .thumbnail+.thumbnail {
+        margin-left: -0.5rem;
+    }
+}

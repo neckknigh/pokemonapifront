@@ -72,6 +72,20 @@
     @include align-items(center);
 }
 
+.flex-row-space-around-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(space-around);
+    @include align-items(center);
+}
+
+.flex-row-space-between-items-center {
+    @include flex-display();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(center);
+}
+
 .flex-row-baseline-items {
     @include flex-display();
     @include flex-direction(row);

@@ -4,10 +4,9 @@ import { withRouter, RouteComponentProps } from 'react-router';
 //@ts-ignore
 import { ResponsiveImage, ResponsiveImageSize } from 'react-responsive-image';
 import StarRatingComponent from 'react-star-rating-component';
+import ThumbnailImagesComponent from '../../widgets/thumbnail-images/thumbnail-images.component';
 
 interface IComunitySummaryComponentProps extends RouteComponentProps {
-    //readonly history?: History.History;
-    //readonly match?: any;
 }
 
 class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps, {}> {
@@ -45,10 +44,10 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                     </ResponsiveImage>
 
                     <div className="grid banner-summary-info">
-                        <section className="column-20 flex-row-center-items-center ">
+                        <section className="test-border column-20 maximum-height flex-row-center-items-center ">
                             <img src="https://picsum.photos/150/150" alt="logo" className="logo" />
                         </section>
-                        <section className="column info-details">
+                        <section className="test-border column maximum-height info-details">
                             <div className="flex-row-items-center">
                                 <h3 className="title">Touch to go - Las mejores alitas del mundos</h3>
                                 <button className="btn-transparent favorite flex-row-items-center">
@@ -73,6 +72,34 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                                         );
                                     }}
                                 />
+                            </div>
+                            <div className="flex-row-space-between-items-center details">
+                                <ThumbnailImagesComponent images={[
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150",
+                                    "https://picsum.photos/150/150"
+                                ]}
+                                    imageCls="circle"
+                                />
+                                <div className="flex-column-center-items">
+                                    <p className="feature-value">$ 3.500</p>
+                                    <p className="feature-name">Valor Domicilio</p>
+                                </div>
+                                <div className="flex-column-center-items">
+                                    <p className="feature-value">30 mins.</p>
+                                    <p className="feature-name">Entrega</p>
+                                </div>
+                                <div className="flex-column-center-items">
+                                    <p className="feature-value schedule">Abierto</p>
+                                    <p className="feature-name">Horario</p>
+                                </div>
+                                <div>
+                                    Medios de Pago
+                                </div>
                             </div>
                         </section>
                     </div>

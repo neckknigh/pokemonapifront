@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./card.component.scss";
 import { utilService } from '../../../services/util.service';
+import ThumbnailImagesComponent from '../thumbnail-images/thumbnail-images.component';
 
 interface ICardComponentProps {
     readonly showUserLikes?: boolean;
@@ -69,9 +70,10 @@ export default class CardComponent extends Component<ICardComponentProps, ICardC
             <div className="card-container">
                 <div className="card-header-container">
                     <img src={image} alt="card" className="card-img" />
-                    {
-                        this.buildPreviewImagesContainer()
-                    }
+                    <ThumbnailImagesComponent
+                        images={this.props.previewImages}
+                        containerCls="card-thumbnail-container"
+                    />
                 </div>
                 <div className="card-body-container">
                     <h3 className="card-title">{title}</h3>

@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { Account } from "../models/account.model";
+import * as uniqid from "uniqid";
 
 class UtilService {
 
@@ -56,6 +57,24 @@ class UtilService {
         }
 
         return returnedText;
+    }
+
+
+    // TODO: No usar hasta verificar que el mecanismo de getUniqueID presente problemas
+    private uniqueIDNotUsed() {
+        function chr4() {
+            return Math.random().toString(16).slice(-4);
+        }
+        return chr4() + chr4() +
+            '-' + chr4() +
+            '-' + chr4() +
+            '-' + chr4() +
+            '-' + chr4() + chr4() + chr4();
+    }
+
+    public getUniqueID() {
+        //TODO: Volver doo- una constante.
+        return uniqid.process("doo-");
     }
 
 }

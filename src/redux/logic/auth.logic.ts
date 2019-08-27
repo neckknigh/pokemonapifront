@@ -272,7 +272,7 @@ export const validateUserSession = createLogic({
     type: AuthConstants.VALIDATE_USER_SESSION,
     latest: true,
     // eslint-disable-next-line
-    process({ }, dispatch, done) {
+    async process({ }, dispatch, done) {
 
         debugger;
         const userToken = authService.getToken();
@@ -285,7 +285,6 @@ export const validateUserSession = createLogic({
                 authService.getUserId()
             ).subscribe(
                 (account: Account) => {
-                    debugger;
 
                     // No se encontró usuario con ese ID
                     const userExist = !utilService.isEmpty(account);
@@ -298,6 +297,7 @@ export const validateUserSession = createLogic({
 
                         // Se abre el menú lateral
                         dispatch(systemActions.openSideMenu(true));
+
 
                         /**
                          * Después de consultar al usuario, 

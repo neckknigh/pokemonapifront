@@ -9,8 +9,12 @@ import { IAppState } from '../../../redux/app-state';
 import { Comunity } from '../../../models/comunity.model';
 import { ConfigProvider as CP } from '../../../services/config/config.service';
 import { utilService } from '../../../services/util.service';
+import * as BrowserHistory from 'history';
+import { withRouter } from 'react-router';
+import { urlProvider } from '../../../services/config/url.service';
 
 interface IRecomendedComunitiesComponentProps {
+    readonly history?: BrowserHistory.History;
     readonly loadRecomendedComunities?: () => void;
     readonly recomendedComunities?: Comunity[];
 }
@@ -19,6 +23,7 @@ interface IRecomendedComunitiesComponentState {
     comunitylogosUrl: string;
     mainTitle: string;
     totalComuityfounded: string;
+    comunityDetailURL: string;
 }
 
 class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesComponentProps, IRecomendedComunitiesComponentState> {
@@ -29,7 +34,8 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
         this.state = {
             comunitylogosUrl: CP.get(CP.COMUNITY_LOGOS_URL),
             mainTitle: CP.get(CP.RECOMENDED_COMUNITY_MAIN_TITLE),
-            totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY)
+            totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY),
+            comunityDetailURL: urlProvider.get(urlProvider.URL_COMUNITY_DETAIL)
         }
     }
 
@@ -51,7 +57,8 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
                     innerTitles: [
                         recomendedComunity.description
                     ],
-                    previewImages: recomendedComunity.likeUserPhotos
+                    previewImages: recomendedComunity.likeUserPhotos,
+                    id: recomendedComunity.id
                 }
             );
         });
@@ -60,6 +67,17 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
 
     private getRecomendedComunitiesCount(): number {
         return this.props.recomendedComunities!.length;
+    }
+
+    /**
+     * Permite redireccionar al detalle de una comunidad
+     */
+    private onTapCard = (selectedCardItem: CardCarrouselItem) => {
+        this.props.history!.push(
+            utilService.replaceParamsInString(this.state.comunityDetailURL, {
+                id: selectedCardItem.id
+            })
+        );
     }
 
     public render(): JSX.Element {
@@ -76,6 +94,7 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
                 <div className="carrousel-container">
                     <CardCarrouselComponent
                         cardItems={this.getCarrouselItems()}
+                        onTap={this.onTapCard}
                     />
                 </div>
             </TitleContainerComponent>
@@ -95,5 +114,5 @@ const mapStateToProps = (state: IAppState): IRecomendedComunitiesComponentProps 
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecomendedComunitiesComponent);
+export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(RecomendedComunitiesComponent));
 

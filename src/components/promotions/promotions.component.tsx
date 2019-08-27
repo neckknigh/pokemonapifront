@@ -48,7 +48,8 @@ class PromotionsComponent extends Component<IPromotionsComponentProps, IPromotio
                     img: `${this.state.promotionslogosUrl}${promotion.imagePath}`,
                     innerTitles: [
                         promotion.description
-                    ]
+                    ],
+                    id: utilService.getUniqueID()
                 }
             );
         })

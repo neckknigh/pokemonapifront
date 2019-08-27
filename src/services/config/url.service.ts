@@ -11,6 +11,7 @@ class URLProvider {
     public readonly URL_RECOMENDED_COMUNITIES: string = "recomended_comunities";
     public readonly URL_PROMOTIONS: string = "promotions";
     public readonly URL_USER_BY_ID: string = "user_by_id";
+    public readonly URL_COMUNITY_DETAIL: string = "comunity_detail";
 
     private baseUrl: string;
     private urls: any;
@@ -26,6 +27,9 @@ class URLProvider {
         this.urls[this.URL_RECOMENDED_COMUNITIES] = this.baseUrl + "getComReco.php";
         this.urls[this.URL_USER_BY_ID] = this.baseUrl + "getDooUserById.php";
         this.urls[this.URL_PROMOTIONS] = this.baseUrl + "prcGetAnunciosNew.php";
+
+        // internal urls
+        this.urls[this.URL_COMUNITY_DETAIL] = "/comunities/:id";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {

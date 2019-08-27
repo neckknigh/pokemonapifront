@@ -4,6 +4,7 @@ import ItemsCarousel from 'react-items-carousel';
 import "./card-carrousel.component.scss";
 import ChevronComponent from './chevron/chevron.component';
 import CardComponent from '../card/card.component';
+import { utilService } from '../../../services/util.service';
 
 export interface CardCarrouselItem {
     title: string;
@@ -11,6 +12,7 @@ export interface CardCarrouselItem {
     img: string;
     innerTitles: string[];
     previewImages?: string[];
+    id: string;
 }
 
 interface CardCarrouselComponentState {
@@ -35,6 +37,8 @@ interface CardCarrouselComponentProps {
 
     // items que se mostrarán en el carrousel
     cardItems?: CardCarrouselItem[];
+
+    onTap?: (id: any) => void;
 }
 
 export default class CardCarrouselComponent extends React.Component<CardCarrouselComponentProps, CardCarrouselComponentState> {
@@ -51,7 +55,18 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
     private onTapChevron = (newIndex: number): void => {
         this.setState({
             activeCardIndex: newIndex
-        })
+        });
+    }
+
+    /**
+     * Permite manejar el evento click sobre una carta
+     * 
+     * @return {CardCarrouselItem} una referencia del item de la carta.
+     */
+    private onTapCard = (id: string) => {
+        const { onTap, cardItems } = this.props;
+        utilService.isDefined(onTap) && onTap!(
+            cardItems!.find((cardItem: CardCarrouselItem) => cardItem.id === id));
     }
 
     render() {
@@ -87,6 +102,8 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                                 innerTitles={cardItem.innerTitles}
                                 title={cardItem.title}
                                 previewImages={cardItem.previewImages}
+                                onTap={this.onTapCard}
+                                id={cardItem.id}
                             />
                         })
                     }

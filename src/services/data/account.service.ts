@@ -33,7 +33,6 @@ class AccountService {
                 headersService.getHeaders()
             )
                 .then((response: any) => {
-                    //debugger;
 
                     // TODO: Sacar el 1 como constante
                     if (response.status === 1) {

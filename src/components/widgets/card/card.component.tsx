@@ -9,10 +9,13 @@ interface ICardComponentProps {
     readonly title: string;
     readonly innerTitles: string[];
     readonly previewImages?: string[];
+    onTap?: (cardId: string) => void;
+    id: string;
 }
 
 interface ICardComponentState {
     maximunPreviewImagesShown: number;
+    previewImages: any[];
 }
 
 export default class CardComponent extends Component<ICardComponentProps, ICardComponentState> {
@@ -21,53 +24,21 @@ export default class CardComponent extends Component<ICardComponentProps, ICardC
         super(props);
 
         this.state = {
-            maximunPreviewImagesShown: 4
+            maximunPreviewImagesShown: 4,
+            previewImages: []
         }
     }
 
-    private getShowPreviewImages = (): boolean => {
-        return !utilService.isUndefined(this.props.previewImages);
-    }
-
-    private buildPreviewImagesContainer(): JSX.Element {
-        let container: JSX.Element | null = null;
-        if (this.getShowPreviewImages()) {
-
-            let { previewImages } = this.props;
-            const { maximunPreviewImagesShown } = this.state;
-            const limitImages = maximunPreviewImagesShown < previewImages!.length;
-            const rest = previewImages!.length - maximunPreviewImagesShown;
-            previewImages = limitImages ? previewImages!.slice(0, maximunPreviewImagesShown) : previewImages;
-            container =
-                <div className="preview-images-container">
-                    {
-                        previewImages!.map((previewImage: string, index: number) =>
-                            <img
-                                src={previewImage}
-                                alt={`previewImage${index}`}
-                                className="circle"
-                                key={index}
-                            />
-                        )
-                    }
-                    {
-                        limitImages && <span className="circle with-inner-text">
-                            {
-                                `+${rest}`
-                            }
-                        </span>
-                    }
-                </div>;
-        }
-
-        return container!;
+    private onCardClickHandler = () => {
+        const { onTap, id } = this.props;
+        utilService.isDefined(onTap) && onTap!(id);
     }
 
     public render(): JSX.Element {
-        let { title, innerTitles, image } = this.props;
+        let { title, innerTitles, image, id } = this.props;
 
         return (
-            <div className="card-container">
+            <div className="card-container clickable" onClick={this.onCardClickHandler} id={id}>
                 <div className="card-header-container">
                     <img src={image} alt="card" className="card-img" />
                     <ThumbnailImagesComponent

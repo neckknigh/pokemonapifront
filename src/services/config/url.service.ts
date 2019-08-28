@@ -12,6 +12,7 @@ class URLProvider {
     public readonly URL_PROMOTIONS: string = "promotions";
     public readonly URL_USER_BY_ID: string = "user_by_id";
     public readonly URL_COMUNITY_DETAIL: string = "comunity_detail";
+    public readonly URL_LOAD_COMUNITY: string = "load_comunity";
 
     private baseUrl: string;
     private urls: any;
@@ -27,6 +28,9 @@ class URLProvider {
         this.urls[this.URL_RECOMENDED_COMUNITIES] = this.baseUrl + "getComReco.php";
         this.urls[this.URL_USER_BY_ID] = this.baseUrl + "getDooUserById.php";
         this.urls[this.URL_PROMOTIONS] = this.baseUrl + "prcGetAnunciosNew.php";
+        this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "prcGetAnunciosNew.php";
+        this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "getComById.php";
+
 
         // internal urls
         this.urls[this.URL_COMUNITY_DETAIL] = "/comunities/:id";
@@ -75,11 +79,19 @@ class URLProvider {
     }
 
     isRoot(): boolean {
-        return window.location.pathname === "/";
+        return window.location.pathname === this.getRootPath();
     }
 
     getRootPath(): string {
         return "/";
+    }
+
+    public getComunityIdFromPath(): string {
+        return this.getPathArray()[2];
+    }
+
+    private getPathArray(): string[] {
+        return this.getURLWithoutQueryParams().split(this.getRootPath());
     }
 }
 

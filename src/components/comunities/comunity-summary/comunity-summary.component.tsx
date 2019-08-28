@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import "./comunity-summary.component.scss";
-import { withRouter, RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router';
 //@ts-ignore
 import { ResponsiveImage, ResponsiveImageSize } from 'react-responsive-image';
 import StarRatingComponent from 'react-star-rating-component';
 import ThumbnailImagesComponent from '../../widgets/thumbnail-images/thumbnail-images.component';
+import { Dispatch } from 'redux';
+import { ComunityActions } from '../../../redux/actions/comunity.actions';
+import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
+import { connect } from 'react-redux';
+import { urlProvider } from '../../../services/config/url.service';
 
-interface IComunitySummaryComponentProps extends RouteComponentProps {
+interface IComunitySummaryComponentProps {
+    loadComunity?: (comunityId: string) => any;
 }
 
 class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps, {}> {
+
+    componentDidMount(): void {
+        this.props.loadComunity!(urlProvider.getComunityIdFromPath());
+    }
 
     public render(): JSX.Element {
         debugger
@@ -110,4 +120,10 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
     }
 }
 
-export default withRouter<RouteComponentProps>(ComunitySummaryComponent);
+const mapDispatchToProps = ((dispatch: Dispatch<ComunityActions>): IComunitySummaryComponentProps => {
+    return {
+        loadComunity: (comunityId: string) => dispatch(comunityActions.loadComunity(comunityId))
+    }
+});
+
+export default withRouter<any>(connect(null, mapDispatchToProps)(ComunitySummaryComponent));

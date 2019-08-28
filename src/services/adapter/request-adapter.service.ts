@@ -81,6 +81,18 @@ class RequestAdapter {
     }
 
     /**
+     * Permite obtener el detalle de una comunidad por su id.
+     * @param {String} communityId id de la comunidad a consultar
+     */
+    public getBodyForLoadComunity(communityId: string): string {
+        const body = {
+            communityId
+        }
+
+        return JSON.stringify(body);
+    }
+
+    /**
      * Permite obtener el body necesario para el servicio
      * de consulta de promociones.
      * TODO: Servicio pendiente de finalizar.

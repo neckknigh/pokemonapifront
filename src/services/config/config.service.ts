@@ -67,7 +67,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_LOGIN_ERROR] = "No se pudo completar el inicio de sesión";
         ConfigProvider.configs[ConfigProvider.SEARCHER_PLACEHOLDER] = "¿Que estás buscando?";
         ConfigProvider.configs[ConfigProvider.ADMINS] = [
-            "4040", "9"
+            "4040", "9", "69", "2267"
         ];
         ConfigProvider.configs[ConfigProvider.COMUNITY_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/communityphoto/";
         ConfigProvider.configs[ConfigProvider.ANNOUNCEMENTS_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/picanuncios/";

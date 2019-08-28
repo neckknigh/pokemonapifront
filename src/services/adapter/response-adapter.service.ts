@@ -1,6 +1,7 @@
 import { Account } from "../../models/account.model";
 import { Comunity } from "../../models/comunity.model";
 import { Promotion } from "../../models/promotion.model";
+import { utilService } from "../util.service";
 
 class ResponseAdapter {
     public adaptAccountKitUserForAccount(accountKitUserData: any): Account {
@@ -35,17 +36,16 @@ class ResponseAdapter {
         const comunities: Comunity[] = [];
 
         rawComunities.forEach((rawComunity: any) => {
-            comunities.push({
-                id: rawComunity.id,
-                name: rawComunity.name,
-                logo: rawComunity.logo,
-                description: rawComunity.description,
-                likeUserPhotos: rawComunity.userPhotos.map((userPhoto: any): string => userPhoto.profileImage)
-            })
+            comunities.push(this.adaptComunity(rawComunity));
         });
 
         debugger
         return comunities;
+    }
+
+    private adaptUserPhotosForUserLikesPhotos(userPhotos: any[]): string[] {
+        debugger;
+        return userPhotos.map((userPhoto: any): string => userPhoto.profileImage);
     }
 
     public adaptPromotionsForPromotions(rawResponse: any): Promotion[] {
@@ -62,6 +62,18 @@ class ResponseAdapter {
         });
 
         return promotions;
+    }
+
+    public adaptComunity(rawResponse: any): Comunity {
+
+        const rawCommunity = utilService.isDefined(rawResponse.community) ? rawResponse.community : rawResponse;
+        return {
+            id: rawCommunity.id,
+            name: rawCommunity.name,
+            logo: rawCommunity.logo,
+            description: rawCommunity.description,
+            likeUserPhotos: this.adaptUserPhotosForUserLikesPhotos(rawCommunity.userPhotos)
+        }
     }
 }
 

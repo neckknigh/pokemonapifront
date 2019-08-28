@@ -24,6 +24,25 @@ class ComunityService {
                 });
         });
     }
+
+    /**
+     * Permite consultar una comunidad por su id
+     * @param {String} id id de la comunidad a consultar
+     */
+    public loadComunity(comunityId: string): Observable<Comunity> {
+        return new Observable<Comunity>((observer: Observer<Comunity>) => {
+            clientService.post(
+                urlProvider.get(urlProvider.URL_LOAD_COMUNITY),
+                requestAdapter.getBodyForLoadComunity(comunityId),
+                headersService.getHeaders()
+            )
+                .then(((response: any) => observer.next(responseAdapter.adaptComunity(response))))
+                .catch((error: any) => observer.error(error))
+                .finally(() => {
+                    observer.complete();
+                });
+        });
+    }
 }
 
 export const comunityService = new ComunityService();

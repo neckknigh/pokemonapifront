@@ -11,16 +11,17 @@ import { systemActions } from '../../redux/action-creators/system.action.creator
 import { authActions } from '../../redux/action-creators/auth.action.creator';
 import AccountSummaryComponent from '../account/account-sumary.component';
 import ImageContainerComponent from '../widgets/image-container/image-container.component';
+import { NullableString } from '../../types/types';
 
 interface IHeaderComponentProps {
     readonly userHasPendingRegistration?: boolean;
     readonly history?: any;
     readonly deletePendingRegistration?: () => void;
-    readonly userHasSession?: boolean;
+    readonly userHasSession?: NullableString;
     readonly showSideMenu?: (open: boolean) => void;
     readonly isSideMenuOpen?: boolean;
     readonly validateUserSession?: () => void;
-    readonly isAdminUser?: boolean;
+    readonly isAdminUser?: NullableString;
 }
 
 interface IHeaderComponentState {
@@ -53,7 +54,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
 
     // TODO: Refactorizar este render para que solo evalue una vez la session
     render() {
-        const readOnlyMode = !this.props.userHasSession || !this.props.isAdminUser;
+        const readOnlyMode = this.props.userHasSession !== "Y" || this.props.isAdminUser !== "Y";
         return (
             <header >
                 <nav className="grid">

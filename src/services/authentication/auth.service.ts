@@ -234,9 +234,9 @@ class AuthService {
      * Carlos Navas.
      * La comparacion se realiza por sus tokens.
      */
-    public IsAdminUser() {
+    public IsAdminUser(): string {
         const adminsIds: string[] = CP.get(CP.ADMINS);
-        return utilService.includes(adminsIds, this.getUserId());
+        return utilService.includes(adminsIds, this.getUserId()) ? "Y" : "N";
     }
 
     public getAuthHeaders() {

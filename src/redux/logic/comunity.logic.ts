@@ -9,10 +9,11 @@ const getRecomendedComunities = createLogic({
     type: ComunityConstants.LOAD_RECOMENDED_COMUNITIES,
     latest: true,
     // eslint-disable-next-line
-    process({ action }, dispatch, done) {
-        console.log(action);
-        //debugger;
-
+    process(
+        ob,
+        dispatch,
+        done
+    ) {
         comunityService.getRecomendedComunities()
             .subscribe(
                 (comunities: Comunity[]) => {
@@ -41,8 +42,6 @@ const loadComunity = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-        console.log("LoadComunity", action);
-        //debugger;
 
         comunityService.loadComunity(action.comunityId)
             .subscribe(

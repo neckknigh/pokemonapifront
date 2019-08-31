@@ -1,6 +1,7 @@
 import { Action } from "redux";
 import { UserConstants } from "../../services/constants.service";
 import { Account } from "../../models/account.model";
+import { NullableString } from "../../types/types";
 
 /**
  * Interface de la acción que se dispara cuando 
@@ -50,7 +51,7 @@ export interface ISignUpUserRequestAction extends Action<UserConstants.SIGNUP_US
 }
 
 export interface IAdminUser extends Action<UserConstants.ADMIN_USER> {
-    isAdmin: boolean
+    isAdmin: NullableString
 }
 
 

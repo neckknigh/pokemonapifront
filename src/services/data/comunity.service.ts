@@ -11,7 +11,6 @@ class ComunityService {
 
     public getRecomendedComunities(): Observable<Comunity[]> {
         return new Observable((observer: Observer<Comunity[]>) => {
-
             clientService.post(
                 urlProvider.get(urlProvider.URL_RECOMENDED_COMUNITIES),
                 requestAdapter.getBodyForRecomendedComunities(),

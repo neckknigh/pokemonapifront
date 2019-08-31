@@ -1,4 +1,5 @@
 import { Account } from "../../models/account.model";
+import { NullableString } from "../../types/types";
 
 export interface IUserState {
 
@@ -21,7 +22,7 @@ export interface IUserState {
     readonly pendingRegistration: boolean;
 
     // Indica si el usuario es administrador del sistema.
-    readonly isAdmin: boolean;
+    readonly isAdmin: NullableString;
 
     // Datos básicos del usuario
     readonly userInfo: Account;

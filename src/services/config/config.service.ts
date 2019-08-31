@@ -33,6 +33,7 @@ export class ConfigProvider {
     static readonly TOTAL_ITEMS_FOUNDED_DISPLAY: string = "TOTAL_ITEMS_FOUNDED_DISPLAY";
     static readonly PROMOTIONS_MAIN_TITLE: string = "PROMOTIONS_MAIN_TITLE";
     static readonly YES: string = "YES";
+    static readonly NO: string = "NO";
 
     private static configs: any;
 
@@ -77,6 +78,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.TOTAL_ITEMS_FOUNDED_DISPLAY] = ":count encontradas";
         ConfigProvider.configs[ConfigProvider.PROMOTIONS_MAIN_TITLE] = "Promociones";
         ConfigProvider.configs[ConfigProvider.YES] = "Y";
+        ConfigProvider.configs[ConfigProvider.NO] = "N";
 
     }
 

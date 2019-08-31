@@ -2,6 +2,7 @@ import { AuthActions, IAccountKitSDKDoneLoadingAction } from "../actions/auth.ac
 import { AuthConstants } from "../../services/constants.service";
 import { ReactFacebookLoginInfo } from "react-facebook-login";
 import { Account } from "../../models/account.model";
+import { NullableString } from "../../types/types";
 
 const doneAccountKitSdkLoading = (loadStatus: any): AuthActions => {
     //debugger;
@@ -46,7 +47,7 @@ const startValidatingPhoneUser = (user: Account): AuthActions => {
  * Action-creator para lanzar la acción de establecimiento
  * de estado de logueado del usuario.
  */
-const setUserLoggedInStatus = (hasSession: boolean): AuthActions => {
+const setUserLoggedInStatus = (hasSession: NullableString): AuthActions => {
     return {
         type: AuthConstants.USER_HAS_SESSION,
         hasSession

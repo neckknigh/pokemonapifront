@@ -7,15 +7,16 @@ import { Dispatch } from 'redux';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
 import { Redirect } from 'react-router';
 import { urlProvider } from '../../services/config/url.service';
+import { NullableString } from '../../types/types';
 
 export interface IAuthComponentProps {
     isFacebookLoggedIn?: boolean;
     validateAccountKitLoginDone?: () => any;
     userHasPendingRegistration?: boolean;
-    userHasSession?: boolean;
+    userHasSession?: NullableString;
     history?: any;
     appHasError?: boolean;
-    isAdminUser?: boolean;
+    isAdminUser?: NullableString;
 }
 
 export interface IAuthComponentState {
@@ -67,16 +68,18 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
             componentToRender = <Redirect to='/signup' />;
         }
 
-        else if (isAdminUser) {
-            componentToRender = <Redirect to="/comunities" />;
-        }
+        else if (userHasSession === "Y") {
 
-        else if (userHasSession) {
+            if (isAdminUser === "Y") {
+                componentToRender = <Redirect to="/comunities" />;
+            }
+            else if (isAdminUser === "N") {
 
-            /**
-            * Si es usuario normal verá la página en construcción.
-            */
-            componentToRender = <Redirect to="/incoming_features" />;
+                /**
+                * Si es usuario normal verá la página en construcción.
+                */
+                componentToRender = <Redirect to="/incoming_features" />;
+            }
         }
 
         return componentToRender;

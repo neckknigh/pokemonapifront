@@ -11,7 +11,7 @@ const initialUserState: IUserState = {
     isAccountKitLogginIn: false,
     isAccountKitLoggedIn: false,
     pendingRegistration: false,
-    isAdmin: false,
+    isAdmin: null,
     userInfo: null!
 };
 

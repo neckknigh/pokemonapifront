@@ -1,5 +1,7 @@
+import { NullableString } from "../../types/types";
+
 export interface IAuthState {
     readonly accountKitSDKLoaded: boolean;
-    readonly userHasSession: boolean;
-    readonly sessionBeingValidated: string | null;
+    readonly userHasSession: NullableString;
+    readonly sessionBeingValidated: NullableString;
 }

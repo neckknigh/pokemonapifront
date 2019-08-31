@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./image-container.component.scss";
 import { utilService } from '../../../services/util.service';
+import { NullableString } from '../../../types/types';
 
 export enum ImageContainerPosition {
     CENTER,
@@ -9,7 +10,7 @@ export enum ImageContainerPosition {
 
 export interface ImageContainerComponentProps {
     readonly img?: string;
-    readonly displayText: string | undefined;
+    readonly displayText: NullableString;
     readonly iconCls?: string;
     readonly showIcon?: boolean;
     readonly containerCls?: string;
@@ -103,7 +104,7 @@ class ImageContainerComponent extends Component<ImageContainerComponentProps, {}
                     !utilService.isEmpty(img) &&
                     <img
                         src={img}
-                        alt="container"
+                        alt="thumbnail"
                         className={this.getImageCls()}
                     />
                 }

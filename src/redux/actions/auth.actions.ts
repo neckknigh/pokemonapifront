@@ -1,6 +1,7 @@
 import { Action } from "redux";
 import { AuthConstants } from "../../services/constants.service";
 import { Account } from "../../models/account.model";
+import { NullableString } from "../../types/types";
 
 /**
  * Interface de la acción que se dispara
@@ -31,7 +32,7 @@ export interface IValidatePhoneUserAction extends Action<AuthConstants.VALIDATE_
 }
 
 export interface IUserHasSessionAction extends Action<AuthConstants.USER_HAS_SESSION> {
-    hasSession: boolean;
+    hasSession: NullableString;
 }
 
 export interface IValidateUserSession extends Action<AuthConstants.VALIDATE_USER_SESSION> {

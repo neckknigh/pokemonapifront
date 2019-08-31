@@ -7,7 +7,7 @@ import { AuthActions } from "../actions/auth.actions";
 // Estado inicial del usuario
 const initialAuthState: IAuthState = {
     accountKitSDKLoaded: false,
-    userHasSession: false,
+    userHasSession: null,
     sessionBeingValidated: null
 };
 

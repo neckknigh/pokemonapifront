@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
 import "./incoming-features.component.scss";
-import { IAppState } from '../../redux/app-state';
 import { connect } from 'react-redux';
 
-interface IIncomingFeaturesProps {
-    userHasSession?: boolean;
-    history?: any;
-    isAdminUser: boolean;
-}
-
-
-class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
+class IncomingFeaturesComponent extends Component<{}, {}> {
 
     private handleGooglePlayBtn() {
         window.open("https://play.google.com/store/apps/details?id=and.doo.greenggers.com.doo&hl=es", "_blank")
@@ -22,26 +14,6 @@ class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
 
 
     render() {
-
-        /**
-         * No podrá acceder a esta ruta si no tiene sesión
-         */
-        /*
-        if (!this.props.userHasSession) {
-            this.props.history.push("/");
-        }
-        */
-
-        /**
-         * Si es un administrador, se redirecciona 
-         * al dashboard principal
-         */
-        /*
-        if (this.props.isAdminUser) {
-            this.props.history.push("/comunities");
-        }
-        */
-
         return (
             <div className="grid login-container incoming-features-container">
                 <div className="column-50 left-container flex-row-end-items-center">
@@ -105,12 +77,6 @@ class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
     }
 }
 
-const mapStateToProps = (appState: IAppState): IIncomingFeaturesProps => {
-    return {
-        userHasSession: appState.authState.userHasSession,
-        isAdminUser: appState.userState.isAdmin
-    }
-};
 
 
-export default connect(mapStateToProps)(IncomingFeaturesComponent);
+export default connect(null)(IncomingFeaturesComponent);

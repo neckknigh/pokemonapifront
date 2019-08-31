@@ -9,7 +9,6 @@ import { Dispatch } from 'redux';
 import { ComunityActions } from '../../../redux/actions/comunity.actions';
 import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
 import { connect } from 'react-redux';
-import { urlProvider } from '../../../services/config/url.service';
 
 interface IComunitySummaryComponentProps {
     loadComunity?: (comunityId: string) => any;

@@ -11,6 +11,7 @@ import {
     IAdminUser
 } from "../actions/user.actions";
 import { Account } from "../../models/account.model";
+import { NullableString } from "../../types/types";
 
 /**
  * Accion-creators para el usuario.
@@ -92,7 +93,7 @@ const startSignUpUserRequest = (userName: string, email: string): UserActions =>
     return signUpUserRequestAction;
 };
 
-const setIsAdminUser = (isAdmin: boolean): UserActions => {
+const setIsAdminUser = (isAdmin: NullableString): UserActions => {
     const setIsAdminUserAction: IAdminUser = {
         type: UserConstants.ADMIN_USER,
         isAdmin

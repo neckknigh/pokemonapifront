@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { sideMenuStyleConfig, items } from './side-menu-data.component';
 import "./side-menu.component.scss";
 import DropDownComponent from '../drop-down/drop-down.component';
+import { NullableString } from '../../../types/types';
 
 export interface ISideMenuComponentProps {
     readonly isSideMenuOpen: boolean;
-    readonly userHasSession: boolean;
+    readonly userHasSession: NullableString;
 }
 
 export interface ISideMenuComponentState {
@@ -42,7 +43,7 @@ class SideMenuComponent extends Component<ISideMenuComponentProps, ISideMenuComp
     render() {
 
         // Si el usuario no tiene sesión, no se muestra el menú lateral
-        if (!this.props.userHasSession) {
+        if (this.props.userHasSession !== "Y") {
             return (
                 <Fragment>
                     {this.props.children}

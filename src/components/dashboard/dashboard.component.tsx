@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import CarrouselComponent from '../widgets/carrousel/carrousel.component';
 import { connect } from 'react-redux';
-import { IAppState } from '../../redux/app-state';
 import "./dashboard.component.scss";
 import PromotionsComponent from '../promotions/promotions.component';
 import ComunitiesComponent from '../comunities/comunities.component';
 import { utilService } from '../../services/util.service';
 
-interface IDashBoardComponentProps {
-    userHasSession?: boolean;
-    history?: any,
-    isAdminUser?: boolean;
-}
 
+class DashBoardComponent extends Component<{}, {}> {
 
-class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
-
-    constructor(props: IDashBoardComponentProps) {
+    constructor(props: any) {
         super(props);
 
         // TODO: Quitar esto de aquí
@@ -36,26 +29,6 @@ class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
     }
 
     render() {
-
-        /**
-         * No podrá acceder a esta ruta si no tiene sesión
-         */
-        /*
-        if (!this.props.userHasSession) {
-            this.props.history.push("/");
-        }
-        */
-
-        /**
-         * Si es un administrador, se redirecciona 
-         * al dashboard principal
-         */
-        /*
-        if (!this.props.isAdminUser) {
-            this.props.history.push("/incoming_features");
-        }
-        */
-
         return (
             <div className="dashboard-container">
                 <CarrouselComponent />
@@ -72,11 +45,4 @@ class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
     }
 }
 
-const mapStateToProps = (state: IAppState): IDashBoardComponentProps => {
-    return {
-        isAdminUser: state.userState.isAdmin,
-        userHasSession: state.authState.userHasSession
-    }
-}
-
-export default connect(mapStateToProps)(DashBoardComponent);
+export default connect(null)(DashBoardComponent);

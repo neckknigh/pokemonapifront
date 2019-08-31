@@ -21,13 +21,19 @@ class ResponseAdapter {
 
     public adaptUserForAccount(rawResponse: any): Account {
         const { user } = rawResponse;
-        return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            lastName: user.lastName,
-            profileImage: user.profileImage
+        let account: Account | null = null;
+
+        if (utilService.isDefined(user)) {
+            account = {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                lastName: user.lastName,
+                profileImage: user.profileImage
+            };
         }
+
+        return account!;
     }
 
     public adaptRecomendedComunitiesForComunities(rawResponse: any): Comunity[] {
@@ -75,6 +81,7 @@ class ResponseAdapter {
             likeUserPhotos: this.adaptUserPhotosForUserLikesPhotos(rawCommunity.userPhotos)
         }
     }
+
 }
 
 export const responseAdapter = new ResponseAdapter();

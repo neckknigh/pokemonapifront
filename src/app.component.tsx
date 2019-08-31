@@ -26,9 +26,7 @@ import { privateRoute } from './security/PrivateRoute';
  * state del método mapStateToProps
  */
 export interface IAppProps {
-  isAppLoading?: boolean;
-  sessionBeingValidated: string | null;
-  userHasSession: boolean;
+  readonly isAppLoading?: boolean;
 }
 
 interface IApplicationState {
@@ -48,8 +46,6 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
   render() {
     debugger;
-    const { sessionBeingValidated, userHasSession } = this.props;
-    console.log("sessionBeingValidated", sessionBeingValidated);
 
     return (
 
@@ -68,11 +64,11 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
                 <Route exact path="/" component={AuthComponent} />
                 <Route exact path="/auth" component={AuthComponent} />
-                <Route exact path="/comunities" component={privateRoute(DashBoardComponent, this.props)} />
-                <Route exact path="/comunities/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent, this.props)} />
+                <Route exact path="/comunities" component={privateRoute(DashBoardComponent)} />
+                <Route exact path="/comunities/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
 
-                <Route exact path="/signup" component={privateRoute(SignUpComponent, this.props)} />
-                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent, this.props)} />
+                <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
+                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
 
                 <FooterComponent />
               </SideMenuComponent>
@@ -92,9 +88,7 @@ class App extends React.Component<IAppProps, IApplicationState> {
 const mapStateToProps = (state: IAppState): IAppProps => {
   console.log(state);
   return {
-    isAppLoading: state.systemState.isAppLoading,
-    sessionBeingValidated: state.authState.sessionBeingValidated,
-    userHasSession: state.authState.userHasSession
+    isAppLoading: state.systemState.isAppLoading
   }
 };
 

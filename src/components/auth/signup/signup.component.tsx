@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import "./signup.component.scss";
-import { Redirect } from 'react-router';
-import { IAppState } from '../../../redux/app-state';
 import { connect } from 'react-redux';
 import AuthHeaderComponent from '../auth-header/auth-header.component';
 import { ConfigProvider as CP } from '../../../services/config/config.service';
@@ -12,9 +10,7 @@ import { userActions } from '../../../redux/action-creators/user.action.creator'
 import TextFieldComponent from '../../widgets/textfield/textfield.component';
 
 export interface SignUpComponentProps {
-    readonly userHasPendingRegistration?: boolean,
-    readonly startSignUpUserRequest?: (userName: string, email: string) => any,
-    readonly userHasSession?: boolean
+    readonly startSignUpUserRequest: (userName: string, email: string) => any;
 }
 
 export interface SignUpComponentState {
@@ -45,7 +41,7 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
         const { userName, email } = this.state;
 
         // Se lanza la petición de registro
-        this.props.startSignUpUserRequest!(
+        this.props.startSignUpUserRequest(
             userName!,
             email!
         );
@@ -72,15 +68,6 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
     }
 
     public render(): JSX.Element {
-
-        /**
-         * No se podrá acceder a esta ruta si no se ha realizado
-         * el login con account kit.
-         */
-        if (!this.props.userHasPendingRegistration) {
-            return (<Redirect to='/' />);
-        }
-
         return (
             <div className="signup-container flex-column-center-items">
                 <div className="sign-up-card flex-column-center-items">
@@ -127,12 +114,6 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
     }
 }
 
-const mapStateToProps = (state: IAppState): SignUpComponentProps => {
-    return {
-        userHasPendingRegistration: state.userState.pendingRegistration,
-        userHasSession: state.authState.userHasSession
-    }
-};
 
 const mapDispathToProps = (dispatch: Dispatch<UserActions>): SignUpComponentProps => {
     return {
@@ -140,4 +121,4 @@ const mapDispathToProps = (dispatch: Dispatch<UserActions>): SignUpComponentProp
     }
 };
 
-export default connect(mapStateToProps, mapDispathToProps)(SignUpComponent);
+export default connect(null, mapDispathToProps)(SignUpComponent);

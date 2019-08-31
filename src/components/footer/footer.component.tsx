@@ -3,10 +3,11 @@ import { IAppState } from '../../redux/app-state';
 import { connect } from 'react-redux';
 import "./footer.component.scss";
 import CountryFlagsComponent from '../widgets/country-flags/country-flags.component';
+import { NullableString } from '../../types/types';
 
 interface FooterComponentProps {
-    readonly userHasSession: boolean;
-    readonly isAdminUser: boolean;
+    readonly userHasSession: NullableString;
+    readonly isAdminUser: NullableString;
 }
 
 class FooterComponent extends Component<FooterComponentProps, {}> {
@@ -14,8 +15,8 @@ class FooterComponent extends Component<FooterComponentProps, {}> {
         return (
             <footer>
                 {
-                    (this.props.userHasSession &&
-                        this.props.isAdminUser) &&
+                    (this.props.userHasSession === "Y" &&
+                        this.props.isAdminUser === "Y") &&
                     <div className="footer-container">
                         <div className="grid footer-top">
                             <div className="column column-flex grid-justify-center">

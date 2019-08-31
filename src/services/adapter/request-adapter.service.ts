@@ -48,7 +48,6 @@ class RequestAdapter {
     }
 
     public getBodyDataForUserRegistration(userData: any, accountKitData: Account): string {
-        debugger;
         const { phone } = accountKitData;
         const body: any = {
             user: {

@@ -37,10 +37,16 @@ export interface IUserHasSessionAction extends Action<AuthConstants.USER_HAS_SES
 export interface IValidateUserSession extends Action<AuthConstants.VALIDATE_USER_SESSION> {
 }
 
+export interface ISetSessionIsBeingValidated extends Action<AuthConstants.SESSION_BEING_VALIDATE> {
+    sessionBeingValidate: string;
+}
+
+
 
 export type AuthActions = IAccountKitSDKDoneLoadingAction |
     IAccountKitLoginDoneAction |
     ISaveFacebookUserAction |
     IValidatePhoneUserAction |
     IUserHasSessionAction |
-    IValidateUserSession;
+    IValidateUserSession |
+    ISetSessionIsBeingValidated;

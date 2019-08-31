@@ -40,17 +40,21 @@ class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
         /**
          * No podrá acceder a esta ruta si no tiene sesión
          */
+        /*
         if (!this.props.userHasSession) {
             this.props.history.push("/");
         }
+        */
 
         /**
          * Si es un administrador, se redirecciona 
          * al dashboard principal
          */
+        /*
         if (!this.props.isAdminUser) {
             this.props.history.push("/incoming_features");
         }
+        */
 
         return (
             <div className="dashboard-container">

@@ -26,17 +26,21 @@ class IncomingFeaturesComponent extends Component<IIncomingFeaturesProps, {}> {
         /**
          * No podrá acceder a esta ruta si no tiene sesión
          */
+        /*
         if (!this.props.userHasSession) {
             this.props.history.push("/");
         }
+        */
 
         /**
          * Si es un administrador, se redirecciona 
          * al dashboard principal
          */
+        /*
         if (this.props.isAdminUser) {
             this.props.history.push("/comunities");
         }
+        */
 
         return (
             <div className="grid login-container incoming-features-container">

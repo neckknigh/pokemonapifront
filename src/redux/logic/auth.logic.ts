@@ -5,7 +5,8 @@ import { authActions } from '../action-creators/auth.action.creator';
 import {
     IAccountKitSDKDoneLoadingAction,
     ISaveFacebookUserAction,
-    IValidatePhoneUserAction
+    IValidatePhoneUserAction,
+    AuthActions
 } from '../actions/auth.actions';
 import { Account } from '../../models/account.model';
 import { userActions } from '../action-creators/user.action.creator';
@@ -13,6 +14,8 @@ import { ISignUpUserRequestAction } from '../actions/user.actions';
 import { systemActions } from '../action-creators/system.action.creator';
 import { accountService } from '../../services/data/account.service';
 import { utilService } from '../../services/util.service';
+import { IAppState } from '../app-state';
+import { IAuthState } from '../states/auth.state';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -150,46 +153,38 @@ export const validatePhoneUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
-        let hasPendingRegistration = false,
-            isAdmin = false;
 
         authService.validatePhoneUser(
             action.user
         ).subscribe(
             (response: any) => {
                 debugger;
+                let isAdminUser = false;
 
                 if (response.status !== 1) {
-                    hasPendingRegistration = true;
+                    // Se indica si el usuario necesita completar su registro
+                    dispatch(userActions.setUserHasPendingRegistration(true));
                 }
                 else {
-
-                    // Se indica que el usuario no tiene pendiente un registro
-                    dispatch(userActions.setUserHasPendingRegistration(false));
-
-                    // Se indica se logueó correctamente
-                    dispatch(authActions.setUserLoggedInStatus(true));
-
-                    // Se abre el menú lateral
-                    dispatch(systemActions.openSideMenu(true));
 
                     // Se crea la sessión
                     authService.createSession(response);
 
-                    isAdmin = authService.IsAdminUser();
+
+                    isAdminUser = authService.IsAdminUser();
 
                     // Se establece si el usuario es administrador
-                    dispatch(userActions.setIsAdminUser(isAdmin));
+                    dispatch(userActions.setIsAdminUser(isAdminUser));
+
+                    // Se indica se logueó correctamente
+                    dispatch(authActions.setUserLoggedInStatus(true));
+
+                    // Se indica que la sesión no está siendo validada
+                    dispatch(authActions.setSessionBeingValidated("N"));
+
+                    // Se abre el menú lateral
+                    dispatch(systemActions.openSideMenu(isAdminUser));
                 }
-
-                // Se indica si el usuario necesita completar su registro
-                dispatch(
-                    userActions.setUserHasPendingRegistration(
-                        hasPendingRegistration
-                    )
-                );
-
-                done();
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?
@@ -197,6 +192,7 @@ export const validatePhoneUser = createLogic<
                 done();
             },
             () => {
+                done();
                 console.log("Phone user Validated");
             }
         );
@@ -271,23 +267,49 @@ export const signUpUser = createLogic<
 export const validateUserSession = createLogic({
     type: AuthConstants.VALIDATE_USER_SESSION,
     latest: true,
+    validate(
+        { getState, action }: { getState: () => IAppState, action: AuthActions },
+        allow,
+        reject
+    ) {
+        debugger;
+        const { authState }: { authState: IAuthState } = getState();
+
+        /**
+         * Si la sessión ya está siendo validada
+         * o ya fué iniciada.
+         * se rechazan nuevas acciones de validación.
+         */
+        if (authState.sessionBeingValidated === "Y" || authState.userHasSession) {
+            reject(action);
+        }
+
+        else {
+            allow(action);
+        }
+    },
     // eslint-disable-next-line
-    async process({ }, dispatch, done) {
+    process({ }, dispatch, done) {
 
         debugger;
         const userToken = authService.getToken();
+        // const userToken = "123333";
 
         // Si existe un token
         if (!utilService.isEmpty(userToken)) {
+
+            dispatch(authActions.setSessionBeingValidated("Y"));
 
             // Se consutan sus datos
             accountService.getAccount(
                 authService.getUserId()
             ).subscribe(
                 (account: Account) => {
+                    debugger;
 
                     // No se encontró usuario con ese ID
                     const userExist = !utilService.isEmpty(account);
+                    let isAdminUser = false;
 
                     if (userExist) {
 
@@ -295,15 +317,25 @@ export const validateUserSession = createLogic({
                         dispatch(authActions.setUserLoggedInStatus(true));
 
 
-                        // Se abre el menú lateral
-                        dispatch(systemActions.openSideMenu(true));
+                        dispatch(authActions.setSessionBeingValidated("N"));
 
+
+                        /**
+                         * TODO: cuando se establezca la sesión, 
+                         * lanzar automaticamente setSessionBeingValidated("N")
+                         * systemActions.openSideMenu(isAdminUser)
+                         */
 
                         /**
                          * Después de consultar al usuario, 
                          * se establece su rol de admin, si lo tiene.
                          */
-                        dispatch(userActions.setIsAdminUser(authService.IsAdminUser()));
+                        isAdminUser = authService.IsAdminUser();
+                        dispatch(userActions.setIsAdminUser(isAdminUser));
+
+
+                        // Se abre el menú lateral
+                        dispatch(systemActions.openSideMenu(isAdminUser));
 
                         // Se guarda la data del usuario
                         dispatch(userActions.saveUserInfo(account));
@@ -314,6 +346,7 @@ export const validateUserSession = createLogic({
                 }, error => {
                     // TODO: Que hacer cuando falla el guardado del usuario?
                     console.log(error);
+                    dispatch(authActions.setSessionBeingValidated("N"));
                     done();
                 },
                 () => {
@@ -322,6 +355,7 @@ export const validateUserSession = createLogic({
             );
         }
         else {
+            dispatch(authActions.setSessionBeingValidated("N"));
             done();
         }
 

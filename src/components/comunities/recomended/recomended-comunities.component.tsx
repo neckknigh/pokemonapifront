@@ -41,7 +41,7 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
 
     componentDidMount = () => {
         debugger;
-        this.props.loadRecomendedComunities!();
+        //this.props.loadRecomendedComunities!();
     }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {

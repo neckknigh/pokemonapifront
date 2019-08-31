@@ -37,7 +37,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
         }
 
         // Se valida la sessión de usuario
-        this.props.validateUserSession!();
+        //this.props.validateUserSession!();
     }
 
     private handleClickCancelBtn = (): void => {

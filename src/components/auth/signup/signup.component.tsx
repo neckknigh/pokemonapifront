@@ -28,7 +28,7 @@ export interface SignUpComponentState {
 
 class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentState> {
 
-    constructor(props: SignUpComponentProps) {
+    public constructor(props: SignUpComponentProps) {
         super(props);
 
         this.state = {
@@ -71,16 +71,14 @@ class SignUpComponent extends Component<SignUpComponentProps, SignUpComponentSta
         this.setState({ disabledButton });
     }
 
-    render() {
+    public render(): JSX.Element {
 
         /**
          * No se podrá acceder a esta ruta si no se ha realizado
-         * el login con account kit ó
-         * si ya inició sesión.
+         * el login con account kit.
          */
-        if (!this.props.userHasPendingRegistration ||
-            this.props.userHasSession) {
-            return (<Redirect to='/' />)
+        if (!this.props.userHasPendingRegistration) {
+            return (<Redirect to='/' />);
         }
 
         return (

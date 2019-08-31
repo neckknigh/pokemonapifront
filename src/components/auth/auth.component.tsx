@@ -43,6 +43,7 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     }
 
     public componentWillReceiveProps(props: IAuthComponentProps): void {
+        //debugger;
         /**
          * Si hubo un cambio en el estado de error de la app
          * y si hubo un error, se redirecciona a la ruta base.  
@@ -54,35 +55,31 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
     }
 
     render() {
+        debugger;
+        const { userHasPendingRegistration, isAdminUser, userHasSession } = this.props;
+        let componentToRender = <LoginComponent />;
 
         /**
          * Si se tiene pendiente un registro,
          * se redirecciona
          */
-        if (this.props.userHasPendingRegistration) {
-            return (<Redirect to='/signup' />);
+        if (userHasPendingRegistration) {
+            componentToRender = <Redirect to='/signup' />;
         }
 
+        else if (isAdminUser) {
+            componentToRender = <Redirect to="/comunities" />;
+        }
 
-        /**
-         * Si ya ha iniciado sesión,
-         * redirecciona a la página princiipal.
-         */
-        if (this.props.userHasSession) {
+        else if (userHasSession) {
 
             /**
-             * Si es usuario normal verá la página en construcción.
-             */
-            return (<Redirect to="/incoming_features" />);
+            * Si es usuario normal verá la página en construcción.
+            */
+            componentToRender = <Redirect to="/incoming_features" />;
         }
 
-        if (this.props.isAdminUser) {
-            return (<Redirect to="/comunities" />);
-        }
-
-        return (
-            <LoginComponent />
-        );
+        return componentToRender;
     }
 }
 

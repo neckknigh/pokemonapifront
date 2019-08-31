@@ -4,20 +4,20 @@ import { Comunity } from "../../models/comunity.model";
 
 class ComunityActionCreator {
 
-    loadRecomendedComunities(): ComunityActions {
+    public loadRecomendedComunities(): ComunityActions {
         return {
             type: ComunityConstants.LOAD_RECOMENDED_COMUNITIES
         };
     }
 
-    saveRecomendedComunities(recomendedComunities: Comunity[]): ComunityActions {
+    public saveRecomendedComunities(recomendedComunities: Comunity[]): ComunityActions {
         return {
             type: ComunityConstants.SAVE_RECOMENDED_COMUNITIES,
             recomendedComunities
         }
     }
 
-    loadComunity(comunityId: string): ComunityActions {
+    public loadComunity(comunityId: string): ComunityActions {
         return {
             type: ComunityConstants.LOAD_COMUNITY,
             comunityId

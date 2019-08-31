@@ -34,7 +34,7 @@ class PromotionsComponent extends Component<IPromotionsComponentProps, IPromotio
     }
 
     componentDidMount() {
-        this.props.loadPromotions!();
+        //this.props.loadPromotions!();
     }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {

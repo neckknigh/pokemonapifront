@@ -7,7 +7,8 @@ import { AuthActions } from "../actions/auth.actions";
 // Estado inicial del usuario
 const initialAuthState: IAuthState = {
     accountKitSDKLoaded: false,
-    userHasSession: false
+    userHasSession: false,
+    sessionBeingValidated: null
 };
 
 // root reducer
@@ -30,6 +31,12 @@ export const authReducer: Reducer<IAuthState, AuthActions> = (
             return {
                 ...state,
                 userHasSession: action.hasSession
+            }
+
+        case AuthConstants.SESSION_BEING_VALIDATE:
+            return {
+                ...state,
+                sessionBeingValidated: action.sessionBeingValidate
             }
 
         default:

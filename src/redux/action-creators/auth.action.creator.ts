@@ -59,6 +59,13 @@ const validateUserSession = (): AuthActions => {
     }
 };
 
+const setSessionBeingValidated = (sessionBeingValidate: string): AuthActions => {
+    return {
+        type: AuthConstants.SESSION_BEING_VALIDATE,
+        sessionBeingValidate
+    }
+}
+
 
 export const authActions = {
     doneAccountKitSdkLoading,
@@ -66,5 +73,6 @@ export const authActions = {
     saveFacebookUser,
     startValidatingPhoneUser,
     setUserLoggedInStatus,
-    validateUserSession
+    validateUserSession,
+    setSessionBeingValidated
 }

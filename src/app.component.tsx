@@ -17,13 +17,18 @@ import SideMenuComponent from './components/widgets/side-menu/side-menu.componen
 import DashBoardComponent from './components/dashboard/dashboard.component';
 import FooterComponent from './components/footer/footer.component';
 import ComunitySummaryComponent from './components/comunities/comunity-summary/comunity-summary.component';
+import { privateRoute } from './security/PrivateRoute';
+
+
 
 /**
  * Interface para mapear las propiedades del 
  * state del método mapStateToProps
  */
-interface IAppProps {
-  isAppLoading?: boolean
+export interface IAppProps {
+  isAppLoading?: boolean;
+  sessionBeingValidated: string | null;
+  userHasSession: boolean;
 }
 
 interface IApplicationState {
@@ -42,6 +47,9 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
 
   render() {
+    debugger;
+    const { sessionBeingValidated, userHasSession } = this.props;
+    console.log("sessionBeingValidated", sessionBeingValidated);
 
     return (
 
@@ -60,11 +68,11 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
                 <Route exact path="/" component={AuthComponent} />
                 <Route exact path="/auth" component={AuthComponent} />
-                <Route exact path="/comunities" component={DashBoardComponent} />
-                <Route exact path="/comunities/:id([0-9]+)" component={ComunitySummaryComponent} />
+                <Route exact path="/comunities" component={privateRoute(DashBoardComponent, this.props)} />
+                <Route exact path="/comunities/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent, this.props)} />
 
-                <Route exact path="/signup" component={SignUpComponent} />
-                <Route exact path="/incoming_features" component={IncomingFeaturesComponent} />
+                <Route exact path="/signup" component={privateRoute(SignUpComponent, this.props)} />
+                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent, this.props)} />
 
                 <FooterComponent />
               </SideMenuComponent>
@@ -84,7 +92,9 @@ class App extends React.Component<IAppProps, IApplicationState> {
 const mapStateToProps = (state: IAppState): IAppProps => {
   console.log(state);
   return {
-    isAppLoading: state.systemState.isAppLoading
+    isAppLoading: state.systemState.isAppLoading,
+    sessionBeingValidated: state.authState.sessionBeingValidated,
+    userHasSession: state.authState.userHasSession
   }
 };
 

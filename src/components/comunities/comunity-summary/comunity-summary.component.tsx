@@ -18,7 +18,7 @@ interface IComunitySummaryComponentProps {
 class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps, {}> {
 
     componentDidMount(): void {
-        this.props.loadComunity!(urlProvider.getComunityIdFromPath());
+        //this.props.loadComunity!(urlProvider.getComunityIdFromPath());
     }
 
     public render(): JSX.Element {

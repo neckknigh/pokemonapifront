@@ -32,6 +32,7 @@ export class ConfigProvider {
     static readonly RECOMENDED_COMUNITY_MAIN_TITLE: string = "RECOMENDED_COMUNITY_MAIN_TITLE";
     static readonly TOTAL_ITEMS_FOUNDED_DISPLAY: string = "TOTAL_ITEMS_FOUNDED_DISPLAY";
     static readonly PROMOTIONS_MAIN_TITLE: string = "PROMOTIONS_MAIN_TITLE";
+    static readonly YES: string = "YES";
 
     private static configs: any;
 
@@ -75,6 +76,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.RECOMENDED_COMUNITY_MAIN_TITLE] = "Comunidades Recomendadas";
         ConfigProvider.configs[ConfigProvider.TOTAL_ITEMS_FOUNDED_DISPLAY] = ":count encontradas";
         ConfigProvider.configs[ConfigProvider.PROMOTIONS_MAIN_TITLE] = "Promociones";
+        ConfigProvider.configs[ConfigProvider.YES] = "Y";
 
     }
 

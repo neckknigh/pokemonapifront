@@ -44,8 +44,8 @@ class App extends React.Component<IAppProps, IApplicationState> {
   }
 
 
-  render() {
-    debugger;
+  public render(): JSX.Element {
+    //debugger;
 
     return (
 

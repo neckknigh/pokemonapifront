@@ -14,14 +14,22 @@ class ComunityActionCreator {
         return {
             type: ComunityConstants.SAVE_RECOMENDED_COMUNITIES,
             recomendedComunities
-        }
+        };
     }
 
     public loadComunity(comunityId: string): ComunityActions {
         return {
             type: ComunityConstants.LOAD_COMUNITY,
             comunityId
-        }
+        };
+    }
+
+    public saveComunityLoaded(comunity: Comunity): ComunityActions {
+        debugger;
+        return {
+            type: ComunityConstants.SAVE_COMUNITY_LOADED,
+            comunity
+        };
     }
 }
 

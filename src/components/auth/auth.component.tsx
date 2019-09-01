@@ -55,8 +55,8 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
         }
     }
 
-    render() {
-        debugger;
+    public render(): JSX.Element {
+        //debugger;
         const { userHasPendingRegistration, isAdminUser, userHasSession } = this.props;
         let componentToRender = <LoginComponent />;
 

@@ -151,7 +151,7 @@ export const validatePhoneUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
-                debugger;
+                //debugger;
 
                 if (response.status !== 1) {
 
@@ -208,13 +208,13 @@ export const signUpUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
-                debugger;
+                //debugger;
 
                 if (response.status !== 1) {
                     dispatch(systemActions.handleAppError(response.msg));
                 }
                 else {
-                    debugger;
+                    //debugger;
 
                     // TODO: Refactorizar esta lógica, arriba está repetida.
                     // Se actualiza el estado de logueado.
@@ -250,7 +250,7 @@ export const validateUserSession = createLogic({
         allow,
         reject
     ) {
-        debugger;
+        //debugger;
         const { authState }: { authState: IAuthState } = getState();
 
         /**
@@ -269,7 +269,7 @@ export const validateUserSession = createLogic({
     // eslint-disable-next-line
     process({ }, dispatch, done) {
 
-        debugger;
+        //debugger;
         const userToken = authService.getToken();
         // const userToken = "123333";
 
@@ -283,7 +283,7 @@ export const validateUserSession = createLogic({
                 authService.getUserId()
             ).subscribe(
                 (account: Account) => {
-                    debugger;
+                    //debugger;
 
                     // No se encontró usuario con ese ID
                     const userExist = !utilService.isEmpty(account);
@@ -329,7 +329,7 @@ export const setLoggedInStatus = createLogic({
     // eslint-disable-next-line
     process({ action }: { action: IUserHasSessionAction }, dispatch, done) {
         let isAdminUser: NullableString = null;
-        debugger;
+        //debugger;
         if (action.hasSession === "Y") {
 
             // Se indica si el usuario es admin

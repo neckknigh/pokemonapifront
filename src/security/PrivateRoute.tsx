@@ -72,7 +72,7 @@ export function privateRoute(WrappedComponent: any) {
                 userHasPendingRegistration,
                 isAdminUser
             } = this.props;
-            debugger;
+            //debugger;
 
             /**
              * Si la sessión está siendo validada o necesita validarse

@@ -3,14 +3,12 @@ import { ComunityConstants } from "../../services/constants.service";
 import { comunityService } from "../../services/data/comunity.service";
 import { Comunity } from "../../models/comunity.model";
 import { comunityActions } from "../action-creators/comunity.action.creator";
-import { ILoadComunityAction } from "../actions/comunity.actions";
 
 const getRecomendedComunities = createLogic({
     type: ComunityConstants.LOAD_RECOMENDED_COMUNITIES,
     latest: true,
     // eslint-disable-next-line
-    process(
-        ob,
+    process({ },
         dispatch,
         done
     ) {
@@ -29,26 +27,16 @@ const getRecomendedComunities = createLogic({
     }
 });
 
-const loadComunity = createLogic<
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    ILoadComunityAction
->({
+const loadComunity = createLogic({
     type: ComunityConstants.LOAD_COMUNITY,
     latest: true,
     // eslint-disable-next-line
-    process({ action }, dispatch, done) {
-
+    process({ action }: any, dispatch, done) {
         comunityService.loadComunity(action.comunityId)
             .subscribe(
-                (comunities: Comunity) => {
-
-
-                    console.log(comunities);
+                (comunity: Comunity) => {
+                    debugger;
+                    dispatch(comunityActions.saveComunityLoaded(comunity));
 
                 }, error => {
                     console.log(error);
@@ -58,9 +46,6 @@ const loadComunity = createLogic<
                     done();
                 }
             );
-
-        done();
-
     }
 });
 

@@ -14,6 +14,11 @@ export interface ILoadComunityAction extends Action<ComunityConstants.LOAD_COMUN
     comunityId: string;
 }
 
+export interface ISaveComunityLoaded extends Action<ComunityConstants.SAVE_COMUNITY_LOADED> {
+    comunity: Comunity;
+}
+
 export type ComunityActions = ILoadRecomendedComunitiesAction |
     ISaveRecomendedComunitiesAction |
-    ILoadComunityAction;
+    ILoadComunityAction |
+    ISaveComunityLoaded;

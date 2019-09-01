@@ -6,7 +6,8 @@ import { ComunityActions } from "../actions/comunity.actions";
 
 // Estado inicial del usuario
 const initialComunityState: IComunityState = {
-    recomendedComunities: []
+    recomendedComunities: [],
+    comunityLoaded: null
 };
 
 // root reducer
@@ -15,6 +16,7 @@ export const comunityReducer: Reducer<IComunityState, ComunityActions> = (
     action: ComunityActions
 ): IComunityState => {
 
+    console.log("action is", action);
     // Se examina la acción
     switch (action.type) {
 
@@ -22,6 +24,13 @@ export const comunityReducer: Reducer<IComunityState, ComunityActions> = (
             return {
                 ...state,
                 recomendedComunities: action.recomendedComunities
+            };
+
+        case ComunityConstants.SAVE_COMUNITY_LOADED:
+            debugger;
+            return {
+                ...state,
+                comunityLoaded: action.comunity
             };
 
         default:

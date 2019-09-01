@@ -86,11 +86,7 @@ class URLProvider {
         return "/";
     }
 
-    public getComunityIdFromPath(): string {
-        return this.getPathArray()[2];
-    }
-
-    private getPathArray(): string[] {
+    public getPathArray(): string[] {
         return this.getURLWithoutQueryParams().split(this.getRootPath());
     }
 }

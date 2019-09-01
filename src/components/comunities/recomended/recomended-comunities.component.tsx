@@ -20,7 +20,6 @@ interface IRecomendedComunitiesComponentProps {
 }
 
 interface IRecomendedComunitiesComponentState {
-    comunitylogosUrl: string;
     mainTitle: string;
     totalComuityfounded: string;
     comunityDetailURL: string;
@@ -32,7 +31,6 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
         super(props);
 
         this.state = {
-            comunitylogosUrl: CP.get(CP.COMUNITY_LOGOS_URL),
             mainTitle: CP.get(CP.RECOMENDED_COMUNITY_MAIN_TITLE),
             totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY),
             comunityDetailURL: urlProvider.get(urlProvider.URL_COMUNITY_DETAIL)
@@ -52,7 +50,7 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
                 {
                     title: recomendedComunity.name,
                     showUserLikes: true,
-                    img: `${this.state.comunitylogosUrl}${recomendedComunity.logo}`,
+                    img: recomendedComunity.logo,
                     innerTitles: [
                         recomendedComunity.description
                     ],

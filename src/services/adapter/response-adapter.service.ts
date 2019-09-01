@@ -2,6 +2,7 @@ import { Account } from "../../models/account.model";
 import { Comunity } from "../../models/comunity.model";
 import { Promotion } from "../../models/promotion.model";
 import { utilService } from "../util.service";
+import { ConfigProvider as CP } from "../config/config.service";
 
 class ResponseAdapter {
     public adaptAccountKitUserForAccount(accountKitUserData: any): Account {
@@ -37,7 +38,7 @@ class ResponseAdapter {
     }
 
     public adaptRecomendedComunitiesForComunities(rawResponse: any): Comunity[] {
-        debugger;
+        //debugger;
         const rawComunities = rawResponse.communities;
         const comunities: Comunity[] = [];
 
@@ -45,12 +46,12 @@ class ResponseAdapter {
             comunities.push(this.adaptComunity(rawComunity));
         });
 
-        debugger
+        //debugger
         return comunities;
     }
 
     private adaptUserPhotosForUserLikesPhotos(userPhotos: any[]): string[] {
-        debugger;
+        //debugger;
         return userPhotos.map((userPhoto: any): string => userPhoto.profileImage);
     }
 
@@ -76,9 +77,11 @@ class ResponseAdapter {
         return {
             id: rawCommunity.id,
             name: rawCommunity.name,
-            logo: rawCommunity.logo,
+            logo: `${CP.get(CP.COMUNITY_LOGOS_URL)}${rawCommunity.logo}`,
             description: rawCommunity.description,
-            likeUserPhotos: this.adaptUserPhotosForUserLikesPhotos(rawCommunity.userPhotos)
+            likeUserPhotos: this.adaptUserPhotosForUserLikesPhotos(rawCommunity.userPhotos),
+            category: rawCommunity.category,
+            averageScore: rawCommunity.averageScore
         }
     }
 

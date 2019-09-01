@@ -223,7 +223,7 @@ class AuthService {
      * iniciada o no.
      */
     public userHasSession(): boolean {
-        debugger;
+        //debugger;
         return !utilService.isEmpty(this.getToken());
     }
 

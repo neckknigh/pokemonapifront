@@ -104,7 +104,7 @@ class ImageContainerComponent extends Component<ImageContainerComponentProps, {}
                     !utilService.isEmpty(img) &&
                     <img
                         src={img}
-                        alt="thumbnail"
+                        alt=""
                         className={this.getImageCls()}
                     />
                 }

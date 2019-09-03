@@ -3,83 +3,55 @@
 .comunity-summary {
     color: $white;
 
-    .top {
-        position: relative;
-        height: 225px;
+    .body {
+        margin-top: 2rem;
 
-        .banner {
-
-            @include maximum-width;
-            //height: 223px;
+        .image-container+.image-container {
+            margin-top: 1rem;
         }
 
-        .banner-summary-info {
-            position: absolute;
-            top: 0;
-            @include maximun-size;
+        .aside {
 
-            .logo {
-                height: 10rem;
-                @include border-radius(17px);
+            @include flex(1 17%);
+            max-width: 17%;
+
+            padding: 1rem;
+            margin: 1rem 1rem 0 1rem;
+
+            .menu-text {
+                color: $comunity-heading-color;
             }
 
-            .info-details {
-                padding: 2.1rem 5.8rem 2.1rem 0;
+            .menu-item {
+                @include flex-display();
+                @include justify-content(flex-start);
+                @include align-items(center);
+            }
 
-                .title {
-                    font-size: 20px;
-                    margin: 0;
+            .menu-icon {
+                height: 3.5rem;
+            }
+        }
+
+        .content {
+            @include border-radius(10px);
+            border: 1px solid $ligh-gray-color;
+
+            .nav-tabs {
+                .nav-item+.nav-item {
+                    margin-left: 3rem;
                 }
 
-                .favorite {
-                    margin-left: 1rem;
-
-                    .icon-favorite {
-                        font-size: 20px;
-                        color: $white;
-                    }
+                .nav-item {
+                    border: none;
                 }
 
-                .category {
-                    @include roboto-regular-font;
-                    font-size: 16px;
-                }
-
-                .ratings {
-                    margin-top: 0.5rem;
-
-                    .star-icon {
-                        font-size: 20px;
-                        color: yellow;
-                    }
-                }
-
-                .details {
-                    .circle {
-                        height: 45px;
-                        width: 45px;
-                        border: 1px solid $gray-44;
-
-                        &.with-inner-text {
-                            font-size: 16px;
-                        }
-                    }
-
-                    .feature-value {
-                        @include roboto-medium-font;
-                        font-size: 16px;
-                    }
-
-                    .feature-name {
-                        @include roboto-regular-font;
-                        font-size: 14px;
-                    }
-
-                    .schedule {
-                        color: #ADCA42;
-                    }
+                .active {
+                    border: none;
+                    border-bottom: 2px solid $gray-44;
                 }
             }
         }
     }
+
 }

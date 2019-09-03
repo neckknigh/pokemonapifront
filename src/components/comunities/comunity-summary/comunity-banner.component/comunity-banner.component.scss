@@ -1,0 +1,76 @@
+@import "../../../../styles/_main";
+
+.comunity-banner {
+    color: $white;
+    width: 100%;
+    height: 16rem;
+    background-position: center center;
+    background-size: cover;
+
+
+    @include maximun-size;
+
+    .logo {
+        height: 10rem;
+        @include border-radius(17px);
+    }
+
+    .info-details {
+        padding: 2.1rem 5.8rem 2.1rem 0;
+
+        .title {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .favorite {
+            margin-left: 1rem;
+
+            .icon-favorite {
+                font-size: 20px;
+                color: $white;
+            }
+        }
+
+        .category {
+            @include roboto-regular-font;
+            font-size: 16px;
+        }
+
+        .ratings {
+            margin-top: 0.5rem;
+
+            .star-icon {
+                font-size: 20px;
+                color: yellow;
+            }
+        }
+
+        .details {
+            .circle {
+                height: 45px;
+                width: 45px;
+                border: 1px solid $gray-44;
+
+                &.with-inner-text {
+                    font-size: 16px;
+                }
+            }
+
+            .feature-value {
+                @include roboto-medium-font;
+                font-size: 16px;
+            }
+
+            .feature-name {
+                @include roboto-regular-font;
+                font-size: 14px;
+            }
+
+            .schedule {
+                color: #ADCA42;
+            }
+        }
+    }
+
+}

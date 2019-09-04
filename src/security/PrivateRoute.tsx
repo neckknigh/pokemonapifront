@@ -19,9 +19,9 @@ interface ISecureComponentProps {
 
 interface ISecureComponentState {
     YES: string;
-    signUpComponentName: string;
     rootPath: string;
     NO: string;
+    publicComponents: string[];
 }
 
 const array: any[] = [];
@@ -41,9 +41,12 @@ export function privateRoute(WrappedComponent: any) {
 
             this.state = {
                 YES: CP.get(CP.YES),
-                signUpComponentName: "SignUpComponent",
                 rootPath: urlProvider.getRootPath(),
-                NO: CP.get(CP.NO)
+                NO: CP.get(CP.NO),
+                publicComponents: [
+                    "SignUpComponent",
+                    "AuthComponent"
+                ]
             }
         }
 
@@ -59,11 +62,7 @@ export function privateRoute(WrappedComponent: any) {
             }
         }
 
-        private isSignUpComponent(): boolean {
-            return componentName === this.state.signUpComponentName;
-        }
-
-        render() {
+        public render(): JSX.Element | null {
             let componentToRender: JSX.Element | null = <WrappedComponent {...this.props} />;
             const { YES, rootPath, NO } = this.state;
             const {
@@ -93,7 +92,7 @@ export function privateRoute(WrappedComponent: any) {
             /**
              * Si tiene sesión, y cargo la ruta para hacer el registro
              */
-            else if (userHasSession === YES && this.isSignUpComponent()) {
+            else if (userHasSession === YES && this.isPublicComponent()) {
 
                 /**
                  * Si es administrador
@@ -112,6 +111,10 @@ export function privateRoute(WrappedComponent: any) {
             }
 
             return componentToRender;
+        }
+
+        private isPublicComponent(): boolean {
+            return this.state.publicComponents.includes(componentName);
         }
     };
 

@@ -1,0 +1,13 @@
+@import "../../../../styles/_main";
+
+.product-container {
+    color: $comunity-heading-color;
+    padding: 0.5rem 0.7rem;
+
+    border: 1px solid $ligh-gray-color;
+    @include border-radius(5px);
+
+    .product-thumbnail {
+        @include maximum-width;
+    }
+}

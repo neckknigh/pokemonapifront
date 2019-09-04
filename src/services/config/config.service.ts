@@ -1,4 +1,5 @@
 export class ConfigProvider {
+    static readonly DOMAIN: string = "DOMAIN";
     static readonly BASE_URL: string = "BASE_URL";
     static readonly ACCOUNT_KIT_APP_SECRET: string = "ACCOUNT_KIT_APP_SECRET";
     static readonly FACEBOOK_APP_ID: string = "FACEBOOK_APP_ID";
@@ -40,7 +41,8 @@ export class ConfigProvider {
 
     static _constructor() {
         ConfigProvider.configs = {};
-        ConfigProvider.configs[ConfigProvider.BASE_URL] = "http://www.comunidadesdoo.com/admon/ws/";
+        ConfigProvider.configs[ConfigProvider.DOMAIN] = "https://www.comunidadesdoo.com/";
+        ConfigProvider.configs[ConfigProvider.BASE_URL] = this.get(this.DOMAIN) + "admon/ws/";
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_APP_SECRET] = "451561d911947080fb697fcc53eef74f";
         ConfigProvider.configs[ConfigProvider.FACEBOOK_APP_ID] = "368256876708367";
         ConfigProvider.configs[ConfigProvider.ACCOUT_KIT_PARTIALLY_AUTH_STATUS] = "PARTIALLY_AUTHENTICATED";
@@ -71,8 +73,8 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.ADMINS] = [
             "4040", "9", "69", "2267"
         ];
-        ConfigProvider.configs[ConfigProvider.COMUNITY_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/communityphoto/";
-        ConfigProvider.configs[ConfigProvider.ANNOUNCEMENTS_LOGOS_URL] = "http://www.comunidadesdoo.com/admon/picanuncios/";
+        ConfigProvider.configs[ConfigProvider.COMUNITY_LOGOS_URL] = this.get(this.DOMAIN) + "admon/communityphoto/";
+        ConfigProvider.configs[ConfigProvider.ANNOUNCEMENTS_LOGOS_URL] = this.get(this.DOMAIN) + "admon/picanuncios/";
 
         ConfigProvider.configs[ConfigProvider.RECOMENDED_COMUNITY_MAIN_TITLE] = "Comunidades Recomendadas";
         ConfigProvider.configs[ConfigProvider.TOTAL_ITEMS_FOUNDED_DISPLAY] = ":count encontradas";

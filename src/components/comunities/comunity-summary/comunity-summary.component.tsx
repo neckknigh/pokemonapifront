@@ -12,6 +12,8 @@ import { utilService } from '../../../services/util.service';
 import ComunityBannerComponent from './comunity-banner.component/comunity-banner.component';
 import { Nav } from 'react-bootstrap';
 import ImageContainerComponent from '../../widgets/image-container/image-container.component';
+import TitleContainerComponent from '../../widgets/title-container/title-container.component';
+import ProductCardComponent from './product-card/product-card.component';
 
 interface IComunitySummaryComponentProps extends IRouterProps {
     loadComunity?: (comunityId: string) => any;
@@ -74,21 +76,116 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                             />
 
                         </aside>
-                        <section className="column-60 content">
-                            <Nav variant="tabs" defaultActiveKey="/home">
+                        <section className="column-70 content">
+                            <Nav justify variant="tabs" defaultActiveKey="costillas">
                                 <Nav.Item>
-                                    <Nav.Link href="#home">Costillas de cerdo</Nav.Link>
+                                    <Nav.Link href="#costillas" eventKey="costillas">Costillas de cerdo</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="link-1">Alitas</Nav.Link>
+                                    <Nav.Link href="#alitas">Alitas</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="link-2">Combos</Nav.Link>
+                                    <Nav.Link href="#combos">Combos</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="link-3">Bebidas</Nav.Link>
+                                    <Nav.Link href="#bebidas">Bebidas</Nav.Link>
                                 </Nav.Item>
                             </Nav>
+                            <div className="section-body">
+                                <TitleContainerComponent
+                                    mainTitle="Costillas de cerdo"
+                                    className="section-container"
+                                >
+
+                                    <div className="grid grid-justify-space-between products">
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                    </div>
+
+                                </TitleContainerComponent>
+
+                                <TitleContainerComponent
+                                    mainTitle="Alitas"
+                                    className="section-container"
+                                >
+
+                                    <div className="grid grid-justify-space-between products">
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                    </div>
+
+                                </TitleContainerComponent>
+
+                                <TitleContainerComponent
+                                    mainTitle="Acompañamientos"
+                                    className="section-container"
+                                >
+
+                                    <div className="grid grid-justify-space-between products">
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                    </div>
+
+                                </TitleContainerComponent>
+                                <TitleContainerComponent
+                                    mainTitle="Combos"
+                                    className="section-container"
+                                >
+
+                                    <div className="grid grid-justify-space-between products">
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                    </div>
+
+                                </TitleContainerComponent>
+
+                                <TitleContainerComponent
+                                    mainTitle="Bebidas"
+                                    className="section-container"
+                                >
+
+                                    <div className="grid grid-justify-space-between products">
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                        <ProductCardComponent
+                                            className="column-49"
+                                        />
+                                    </div>
+
+                                </TitleContainerComponent>
+                            </div>
                         </section>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import './styles/app.scss';
 
@@ -62,13 +62,16 @@ class App extends React.Component<IAppProps, IApplicationState> {
               <ErrorMessageComponent />
               <SideMenuComponent>
 
-                <Route exact path="/" component={AuthComponent} />
-                <Route exact path="/auth" component={AuthComponent} />
-                <Route exact path="/comunities" component={privateRoute(DashBoardComponent)} />
-                <Route exact path="/comunities/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
+                <Switch>
+                  <Route exact path="/" component={AuthComponent} />
+                  <Route exact path="/auth" component={AuthComponent} />
+                  <Route exact path="/comunities/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
+                  <Route exact path="/comunities" component={privateRoute(DashBoardComponent)} />
 
-                <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
-                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
+                  <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
+                  <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
+
+                </Switch>
 
                 <FooterComponent />
               </SideMenuComponent>

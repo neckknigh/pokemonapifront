@@ -9,10 +9,11 @@ import ComunitiesComponent from '../comunities/comunities.component';
 
 class DashBoardComponent extends Component<{}, {}> {
 
+    /*
     constructor(props: any) {
         super(props);
 
-        /*
+        
         // TODO: Quitar esto de aquí
         if (utilService.isDefined(navigator.geolocation)) {
             navigator.geolocation.getCurrentPosition(
@@ -26,9 +27,10 @@ class DashBoardComponent extends Component<{}, {}> {
                     console.error('An error has occured while retrieving location', error_message);
                 });
         }
-        */
+        
 
     }
+    */
 
     render() {
         return (

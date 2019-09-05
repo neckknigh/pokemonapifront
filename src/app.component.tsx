@@ -64,12 +64,12 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
                 <Switch>
                   <Route exact path="/" component={AuthComponent} />
-                  <Route exact path="/auth" component={AuthComponent} />
-                  <Route exact path="/comunity/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
-                  <Route exact path="/comunities/" component={privateRoute(DashBoardComponent)} />
+                  <Route path="/auth" component={AuthComponent} />
+                  <Route path="/comunity/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
+                  <Route path="/comunities/" component={privateRoute(DashBoardComponent)} />
 
-                  <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
-                  <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
+                  <Route path="/signup" component={privateRoute(SignUpComponent)} />
+                  <Route path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
 
                 </Switch>
 

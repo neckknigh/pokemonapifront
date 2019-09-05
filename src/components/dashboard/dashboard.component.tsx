@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import "./dashboard.component.scss";
 import PromotionsComponent from '../promotions/promotions.component';
 import ComunitiesComponent from '../comunities/comunities.component';
+import { withRouter } from 'react-router';
 //import { utilService } from '../../services/util.service';
 
 
@@ -49,4 +50,4 @@ class DashBoardComponent extends Component<{}, {}> {
     }
 }
 
-export default connect(null)(DashBoardComponent);
+export default withRouter<any>(connect(null)(DashBoardComponent));

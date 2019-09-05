@@ -8,6 +8,7 @@ import { Dispatch } from 'redux';
 import { UserActions } from '../../../redux/actions/user.actions';
 import { userActions } from '../../../redux/action-creators/user.action.creator';
 import TextFieldComponent from '../../widgets/textfield/textfield.component';
+import { withRouter } from 'react-router';
 
 export interface SignUpComponentProps {
     readonly startSignUpUserRequest: (userName: string, email: string) => any;
@@ -121,4 +122,4 @@ const mapDispathToProps = (dispatch: Dispatch<UserActions>): SignUpComponentProp
     }
 };
 
-export default connect(null, mapDispathToProps)(SignUpComponent);
+export default withRouter<any>(connect(null, mapDispathToProps)(SignUpComponent));

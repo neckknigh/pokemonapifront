@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "./incoming-features.component.scss";
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class IncomingFeaturesComponent extends Component<{}, {}> {
 
@@ -79,4 +80,4 @@ class IncomingFeaturesComponent extends Component<{}, {}> {
 
 
 
-export default connect(null)(IncomingFeaturesComponent);
+export default withRouter<any>(connect(null)(IncomingFeaturesComponent));

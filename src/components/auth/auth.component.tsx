@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AuthActions } from '../../redux/actions/auth.actions';
 import { Dispatch } from 'redux';
 import { authActions } from '../../redux/action-creators/auth.action.creator';
-import { Redirect } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import { urlProvider } from '../../services/config/url.service';
 import { NullableString } from '../../types/types';
 
@@ -102,4 +102,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AuthActions>): IAuthComponentProp
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthComponent);
+export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(AuthComponent));

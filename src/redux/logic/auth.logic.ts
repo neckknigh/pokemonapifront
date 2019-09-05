@@ -16,6 +16,7 @@ import { accountService } from '../../services/data/account.service';
 import { utilService } from '../../services/util.service';
 import { IAuthState } from '../states/auth.state';
 import { NullableString, ActionValidation } from '../../types/types';
+import { ConfigProvider as CP } from '../../services/config/config.service';
 
 export const loadAccountKitApiLogic = createLogic({
     type: UserConstants.ACCOUNT_KIT_LOGIN_REQUEST,
@@ -153,7 +154,7 @@ export const validatePhoneUser = createLogic<
             (response: any) => {
                 //debugger;
 
-                if (response.status !== 1) {
+                if (response.status !== CP.get(CP.STATUS_OK)) {
 
                     // Se indica que la sesión no está siendo validada
                     dispatch(authActions.setSessionBeingValidated("N"));
@@ -210,7 +211,7 @@ export const signUpUser = createLogic<
             (response: any) => {
                 //debugger;
 
-                if (response.status !== 1) {
+                if (response.status !== CP.get(CP.STATUS_OK)) {
                     dispatch(systemActions.handleAppError(response.msg));
                 }
                 else {
@@ -346,6 +347,22 @@ export const setLoggedInStatus = createLogic({
     }
 });
 
+/**
+ * Lógica que intercepta la acción enviada para marcar al usuario
+ * como logueado.
+ */
+export const destroySession = createLogic({
+    type: AuthConstants.DESTROY_SESSION,
+    latest: true,
+    // eslint-disable-next-line
+    process({ }, dispatch, done) {
+
+        authService.destroySession();
+        dispatch(authActions.setUserLoggedInStatus("N"));
+        done();
+    }
+});
+
 const authLogics = [
     loadAccountKitApiLogic,
     doAccountKitLogin,
@@ -354,7 +371,8 @@ const authLogics = [
     validatePhoneUser,
     signUpUser,
     validateUserSession,
-    setLoggedInStatus
+    setLoggedInStatus,
+    destroySession
 ];
 
 

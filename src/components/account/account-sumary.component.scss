@@ -45,18 +45,6 @@ $border-color: #C3C3C3;
         .account-sumary-footer {
             border-top: 1px solid $border-color;
             height: 3.21rem;
-
-            .btn-logout {
-                height: 100%;
-                padding: 0;
-
-                span {
-
-                    @include helvetica-neue-font();
-                    color: $hint-text-color;
-                    font-size: 16px;
-                }
-            }
         }
     }
 }

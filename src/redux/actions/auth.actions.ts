@@ -42,6 +42,10 @@ export interface ISetSessionIsBeingValidated extends Action<AuthConstants.SESSIO
     sessionBeingValidate: string;
 }
 
+export interface IDestroySessionAction extends Action<AuthConstants.DESTROY_SESSION> {
+
+}
+
 
 
 export type AuthActions = IAccountKitSDKDoneLoadingAction |
@@ -50,4 +54,5 @@ export type AuthActions = IAccountKitSDKDoneLoadingAction |
     IValidatePhoneUserAction |
     IUserHasSessionAction |
     IValidateUserSession |
-    ISetSessionIsBeingValidated;
+    ISetSessionIsBeingValidated |
+    IDestroySessionAction;

@@ -202,6 +202,11 @@ class AuthService {
         this.setToken(data.userToken);
     }
 
+    public destroySession() {
+        this.setToken("");
+        this.setUserId("");
+    }
+
     private setToken(token: string): void {
         localStorage.setItem(AuthService.ACCESS_TOKEN_NAME, token);
     }

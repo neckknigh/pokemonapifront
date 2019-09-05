@@ -6,6 +6,7 @@ import { IAppState } from '../../redux/app-state';
 import { Account } from '../../models/account.model';
 import { connect } from 'react-redux';
 import { utilService } from '../../services/util.service';
+import CloseSessionComponent from './close-session.component/close-session.component';
 
 export interface IAccountSummaryComponentProps {
     readonly userInfo?: Account;
@@ -98,9 +99,7 @@ class AccountSummaryComponent extends Component<IAccountSummaryComponentProps, {
 
                     </div>
                     <div className="account-sumary-footer ">
-                        <button className="btn btn-block trasnparent btn-logout">
-                            <span>Cerrar sesión</span>
-                        </button>
+                        <CloseSessionComponent />
                     </div>
 
                 </div>

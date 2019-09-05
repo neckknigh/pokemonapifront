@@ -35,6 +35,9 @@ export class ConfigProvider {
     static readonly PROMOTIONS_MAIN_TITLE: string = "PROMOTIONS_MAIN_TITLE";
     static readonly YES: string = "YES";
     static readonly NO: string = "NO";
+    static readonly STATUS_OK: string = "STATUS_OK";
+    static readonly CLOSE_SESSION_DISPLAY: string = "CLOSE_SESSION_DISPLAY";
+    static readonly CANCEL_DISPLAY: string = "CANCEL_DISPLAY";
 
     private static configs: any;
 
@@ -81,6 +84,9 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.PROMOTIONS_MAIN_TITLE] = "Promociones";
         ConfigProvider.configs[ConfigProvider.YES] = "Y";
         ConfigProvider.configs[ConfigProvider.NO] = "N";
+        ConfigProvider.configs[ConfigProvider.STATUS_OK] = 1;
+        ConfigProvider.configs[ConfigProvider.CLOSE_SESSION_DISPLAY] = "Cerrar Sesión";
+        ConfigProvider.configs[ConfigProvider.CANCEL_DISPLAY] = "Cancelar";
 
     }
 

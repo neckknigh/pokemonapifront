@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import "./dashboard.component.scss";
 import PromotionsComponent from '../promotions/promotions.component';
 import ComunitiesComponent from '../comunities/comunities.component';
-import { utilService } from '../../services/util.service';
+//import { utilService } from '../../services/util.service';
 
 
 class DashBoardComponent extends Component<{}, {}> {
@@ -12,6 +12,7 @@ class DashBoardComponent extends Component<{}, {}> {
     constructor(props: any) {
         super(props);
 
+        /*
         // TODO: Quitar esto de aquí
         if (utilService.isDefined(navigator.geolocation)) {
             navigator.geolocation.getCurrentPosition(
@@ -25,6 +26,7 @@ class DashBoardComponent extends Component<{}, {}> {
                     console.error('An error has occured while retrieving location', error_message);
                 });
         }
+        */
 
     }
 

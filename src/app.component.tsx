@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import './styles/app.scss';
 
@@ -62,16 +62,24 @@ class App extends React.Component<IAppProps, IApplicationState> {
               <ErrorMessageComponent />
               <SideMenuComponent>
 
-                <BrowserRouter>
-                  <Route exact path="/" component={AuthComponent} />
-                  <Route path="/auth" component={AuthComponent} />
-                  <Route path="/comunities" component={privateRoute(DashBoardComponent)} />
-                  <Route path="/comunity/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
+                <Route exact path="/" component={AuthComponent} />
+                <Route path="/auth" component={AuthComponent} />
+                <Route path="/comunities" render={() => {
+                  const Comp = privateRoute(DashBoardComponent);
+                  return <Comp></Comp>;
+                }} />
+                <Route path="/comunity/:id([0-9]+)"
+                  render={() => {
+                    const Comp = privateRoute(ComunitySummaryComponent);
+                    return <Comp></Comp>;
+                  }}
+
+                />
 
 
-                  <Route path="/signup" component={privateRoute(SignUpComponent)} />
-                  <Route path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
-                </BrowserRouter>
+                <Route path="/signup" component={privateRoute(SignUpComponent)} />
+                <Route path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
+
 
                 <FooterComponent />
               </SideMenuComponent>

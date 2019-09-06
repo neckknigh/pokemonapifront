@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IAppState } from '../redux/app-state';
-import { Redirect } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import { Dispatch } from 'redux';
 import { authActions } from '../redux/action-creators/auth.action.creator';
 import { utilService } from '../services/util.service';
@@ -118,13 +118,13 @@ export function privateRoute(WrappedComponent: any) {
         }
     };
 
-    const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(SecureComponent);
+    const connectedComponent = withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(SecureComponent));
     array.push({
         component: connectedComponent,
         name: componentName
     });
 
-    return connectedComponent;
+    return (connectedComponent);
 }
 
 const mapStateToProps = (state: IAppState): ISecureComponentProps => {

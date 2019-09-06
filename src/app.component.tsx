@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import './styles/app.scss';
 
@@ -55,48 +55,28 @@ class App extends React.Component<IAppProps, IApplicationState> {
         text={this.state.loadingTextDisplay}
         className="maximun-size"
       >
-        <Router>
-          <div className="maximun-size">
+
+        <div className="maximun-size">
+          <Router>
             <HeaderComponent />
             <main className="main-container maximun-size">
               <ErrorMessageComponent />
               <SideMenuComponent>
 
                 <Route exact path="/" component={AuthComponent} />
-                <Route path="/auth" component={AuthComponent} />
-                <Route path="/comunities" render={() => {
-                  const Comp = privateRoute(DashBoardComponent);
-                  return <Comp />;
-                }} />
-                <Route path="/comunity/:id([0-9]+)"
-                  render={() => {
-                    const Comp = privateRoute(ComunitySummaryComponent);
-                    return <Comp />;
-                  }}
+                <Route exact path="/auth" component={AuthComponent} />
+                <Route exact path="/comunities" component={privateRoute(DashBoardComponent)} />
+                <Route exact path="/comunity/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
 
-                />
-
-
-                <Route path="/signup"
-                  render={() => {
-                    const Comp = privateRoute(SignUpComponent);
-                    return <Comp />;
-                  }}
-                />
-                <Route path="/incoming_features"
-                  render={() => {
-                    const Comp = privateRoute(IncomingFeaturesComponent);
-                    return <Comp />;
-                  }}
-                />
-
+                <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
+                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
 
                 <FooterComponent />
               </SideMenuComponent>
 
             </main>
-          </div>
-        </Router>
+          </Router>
+        </div>
       </LoadingOverlay>
 
 

@@ -5,16 +5,13 @@ import axios from "axios";
 import { userReducer } from "./reducers/user.reducer";
 import { authReducer } from './reducers/auth.reducer';
 
+import { IAppState } from './app-state';
 import { createLogicMiddleware } from 'redux-logic';
 import appLogic from './app-logic';
 import { systemReducer } from './reducers/system.reducer';
 import { comunityReducer } from './reducers/comunity.reducer';
 import { promotionReducer } from './reducers/promotion.reducer';
-import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
-import { routerMiddleware } from 'connected-react-router';
 
-export const historyDoo = createBrowserHistory();
 
 const depts = {
     httpClient: axios
@@ -23,32 +20,19 @@ const depts = {
 // @ts-ignore
 const logicMiddleware = createLogicMiddleware(appLogic, depts);
 
-const composedMiddleware = compose(applyMiddleware(
-    logicMiddleware,
-    routerMiddleware(historyDoo)
-));
+const composedMiddleware = compose(applyMiddleware(logicMiddleware));
 
-const createRootReducer = (history: any) => combineReducers({
-    router: connectRouter(history),
-    userState: userReducer,
-    authState: authReducer,
-    systemState: systemReducer,
-    comunityState: comunityReducer,
-    promotionState: promotionReducer
-});
-
-/*
 export const rootReducer = combineReducers<IAppState>({
     userState: userReducer,
     authState: authReducer,
     systemState: systemReducer,
     comunityState: comunityReducer,
     promotionState: promotionReducer
+
 });
-*/
 
 const appStore = createStore(
-    createRootReducer(historyDoo),
+    rootReducer,
     composedMiddleware
 );
 

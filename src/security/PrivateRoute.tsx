@@ -8,6 +8,10 @@ import { utilService } from '../services/util.service';
 import { ConfigProvider as CP } from '../services/config/config.service';
 import { urlProvider } from '../services/config/url.service';
 import { NullableString } from '../types/types';
+import DashBoardComponent from '../components/dashboard/dashboard.component';
+import ComunitySummaryComponent from '../components/comunities/comunity-summary/comunity-summary.component';
+import SignupComponent from '../components/auth/signup/signup.component';
+import IncomingFeaturesComponent from '../components/incoming-features/incoming-features.component';
 
 interface ISecureComponentProps {
     userHasSession?: NullableString;
@@ -26,13 +30,13 @@ interface ISecureComponentState {
 
 const array: any[] = [];
 
-export function privateRoute(WrappedComponent: any) {
-    const componentName = WrappedComponent.WrappedComponent.name;
+export function secureComponentFactory(componentName: string) {
     const cached = array.find((entry) => entry.name === componentName);
 
     if (!utilService.isEmpty(cached)) {
         return cached.component;
     }
+
 
     class SecureComponent extends Component<ISecureComponentProps, ISecureComponentState> {
 
@@ -63,7 +67,7 @@ export function privateRoute(WrappedComponent: any) {
         }
 
         public render(): JSX.Element | null {
-            let componentToRender: JSX.Element | null = <WrappedComponent {...this.props} />;
+            let componentToRender: JSX.Element | null = null;
             const { YES, rootPath, NO } = this.state;
             const {
                 userHasSession,
@@ -71,7 +75,6 @@ export function privateRoute(WrappedComponent: any) {
                 userHasPendingRegistration,
                 isAdminUser
             } = this.props;
-            //debugger;
 
             /**
              * Si la sessión está siendo validada o necesita validarse
@@ -110,6 +113,27 @@ export function privateRoute(WrappedComponent: any) {
                 }
             }
 
+            else {
+
+                switch (componentName) {
+                    case "DashBoardComponent":
+                        componentToRender = <DashBoardComponent {...this.props} />;
+                        break;
+
+                    case "ComunitySummaryComponent":
+                        componentToRender = <ComunitySummaryComponent {...this.props} />;
+                        break;
+
+                    case "SignUpComponent":
+                        componentToRender = <SignupComponent {...this.props} />;
+                        break;
+
+                    case "IncomingFeaturesComponent":
+                        componentToRender = <IncomingFeaturesComponent {...this.props} />;
+                        break;
+                }
+            }
+
             return componentToRender;
         }
 
@@ -119,10 +143,13 @@ export function privateRoute(WrappedComponent: any) {
     };
 
     const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(SecureComponent);
+
+
     array.push({
         component: connectedComponent,
         name: componentName
     });
+
 
     return (connectedComponent);
 }

@@ -7,17 +7,14 @@ import HeaderComponent from "./components/header/header.component";
 import AuthComponent from './components/auth/auth.component';
 import { connect } from 'react-redux';
 import { IAppState } from './redux/app-state';
-import SignUpComponent from './components/auth/signup/signup.component';
 // @ts-ignore
 import LoadingOverlay from 'react-loading-overlay';
 import { ConfigProvider as CP } from './services/config/config.service';
 import ErrorMessageComponent from './components/widgets/error-message/error-message.component';
-import IncomingFeaturesComponent from './components/incoming-features/incoming-features.component';
 import SideMenuComponent from './components/widgets/side-menu/side-menu.component';
-import DashBoardComponent from './components/dashboard/dashboard.component';
 import FooterComponent from './components/footer/footer.component';
-import ComunitySummaryComponent from './components/comunities/comunity-summary/comunity-summary.component';
-import { privateRoute } from './security/PrivateRoute';
+import { secureComponentFactory } from './security/PrivateRoute';
+import { privateRoutes } from './app.routing';
 
 
 
@@ -65,12 +62,15 @@ class App extends React.Component<IAppProps, IApplicationState> {
 
                 <Route exact path="/" component={AuthComponent} />
                 <Route exact path="/auth" component={AuthComponent} />
-                <Route exact path="/comunities" component={privateRoute(DashBoardComponent)} />
-                <Route exact path="/comunity/:id([0-9]+)" component={privateRoute(ComunitySummaryComponent)} />
-
-                <Route exact path="/signup" component={privateRoute(SignUpComponent)} />
-                <Route exact path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
-
+                {
+                  privateRoutes.map((privateRoute: any, index: number) => {
+                    return <Route
+                      key={index}
+                      exact
+                      path={privateRoute.path}
+                      component={secureComponentFactory(privateRoute.component)} />
+                  })
+                }
                 <FooterComponent />
               </SideMenuComponent>
 
@@ -78,8 +78,6 @@ class App extends React.Component<IAppProps, IApplicationState> {
           </Router>
         </div>
       </LoadingOverlay>
-
-
 
     );
   }

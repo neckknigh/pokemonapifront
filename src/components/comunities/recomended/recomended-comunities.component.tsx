@@ -12,6 +12,8 @@ import { utilService } from '../../../services/util.service';
 import * as BrowserHistory from 'history';
 import { withRouter } from 'react-router';
 import { urlProvider } from '../../../services/config/url.service';
+import appStore from '../../../redux/app-store';
+import { push } from 'connected-react-router';
 
 interface IRecomendedComunitiesComponentProps {
     readonly history?: BrowserHistory.History;
@@ -70,11 +72,18 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
      * Permite redireccionar al detalle de una comunidad
      */
     private onTapCard = (selectedCardItem: CardCarrouselItem) => {
+        debugger;
+        /*
         this.props.history!.push(
             utilService.replaceParamsInString(this.state.comunityDetailURL, {
                 id: selectedCardItem.id
             })
         );
+        */
+
+        appStore.dispatch(push(utilService.replaceParamsInString(this.state.comunityDetailURL, {
+            id: selectedCardItem.id
+        })));
     }
 
     public render(): JSX.Element {

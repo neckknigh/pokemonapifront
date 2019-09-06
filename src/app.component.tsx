@@ -66,19 +66,29 @@ class App extends React.Component<IAppProps, IApplicationState> {
                 <Route path="/auth" component={AuthComponent} />
                 <Route path="/comunities" render={() => {
                   const Comp = privateRoute(DashBoardComponent);
-                  return <Comp></Comp>;
+                  return <Comp />;
                 }} />
                 <Route path="/comunity/:id([0-9]+)"
                   render={() => {
                     const Comp = privateRoute(ComunitySummaryComponent);
-                    return <Comp></Comp>;
+                    return <Comp />;
                   }}
 
                 />
 
 
-                <Route path="/signup" component={privateRoute(SignUpComponent)} />
-                <Route path="/incoming_features" component={privateRoute(IncomingFeaturesComponent)} />
+                <Route path="/signup"
+                  render={() => {
+                    const Comp = privateRoute(SignUpComponent);
+                    return <Comp />;
+                  }}
+                />
+                <Route path="/incoming_features"
+                  render={() => {
+                    const Comp = privateRoute(IncomingFeaturesComponent);
+                    return <Comp />;
+                  }}
+                />
 
 
                 <FooterComponent />

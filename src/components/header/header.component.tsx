@@ -8,19 +8,17 @@ import { userActions } from '../../redux/action-creators/user.action.creator';
 import { urlProvider } from '../../services/config/url.service';
 import SearcherComponent from '../widgets/searcher/searcher.component';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
-import { authActions } from '../../redux/action-creators/auth.action.creator';
 import AccountSummaryComponent from '../account/account-sumary.component';
 import ImageContainerComponent from '../widgets/image-container/image-container.component';
 import { NullableString } from '../../types/types';
 
 interface IHeaderComponentProps {
-    readonly userHasPendingRegistration?: boolean;
+    readonly userHasPendingRegistration?: NullableString;
     readonly history?: any;
     readonly deletePendingRegistration?: () => void;
     readonly userHasSession?: NullableString;
     readonly showSideMenu?: (open: boolean) => void;
     readonly isSideMenuOpen?: boolean;
-    readonly validateUserSession?: () => void;
     readonly isAdminUser?: NullableString;
 }
 
@@ -36,9 +34,6 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
         this.state = {
             basePath: urlProvider.getRootPath()
         }
-
-        // Se valida la sessión de usuario
-        //this.props.validateUserSession!();
     }
 
     private handleClickCancelBtn = (): void => {
@@ -92,7 +87,7 @@ class HeaderComponent extends Component<IHeaderComponentProps, IHeaderComponentS
                     </div>
                     <div className="column flex-row-end-items-center right-container">
                         {
-                            this.props.userHasPendingRegistration ?
+                            this.props.userHasPendingRegistration === "Y" ?
                                 <button
                                     type="button"
                                     className="cancel-heading"
@@ -141,9 +136,8 @@ const mapStateToProps = (state: IAppState): IHeaderComponentProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IHeaderComponentProps => {
     return {
-        deletePendingRegistration: () => dispatch(userActions.setUserHasPendingRegistration(false)),
-        showSideMenu: (open: boolean) => dispatch(systemActions.openSideMenu(open)),
-        validateUserSession: () => dispatch(authActions.validateUserSession())
+        deletePendingRegistration: () => dispatch(userActions.setUserHasPendingRegistration("N")),
+        showSideMenu: (open: boolean) => dispatch(systemActions.openSideMenu(open))
     }
 };
 

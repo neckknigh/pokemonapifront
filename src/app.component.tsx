@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './styles/app.scss';
 
 import HeaderComponent from "./components/header/header.component";
-import AuthComponent from './components/auth/auth.component';
 import { connect } from 'react-redux';
 import { IAppState } from './redux/app-state';
 // @ts-ignore
@@ -59,9 +58,6 @@ class App extends React.Component<IAppProps, IApplicationState> {
             <main className="main-container maximun-size">
               <ErrorMessageComponent />
               <SideMenuComponent>
-
-                <Route exact path="/" component={AuthComponent} />
-                <Route exact path="/auth" component={AuthComponent} />
                 {
                   privateRoutes.map((privateRoute: any, index: number) => {
                     return <Route

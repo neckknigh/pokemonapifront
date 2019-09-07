@@ -1,5 +1,13 @@
 export const privateRoutes = [
     {
+        path: "/",
+        component: "AuthComponent"
+    },
+    {
+        path: "/auth",
+        component: "AuthComponent"
+    },
+    {
         path: "/comunities",
         component: "DashBoardComponent"
     },

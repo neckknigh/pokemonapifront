@@ -43,7 +43,7 @@ export interface IAccountKitLoggedSucessAction extends Action<UserConstants.ACCO
  * se logueó por account kit y requiere registro.
  */
 export interface IHasPendingRegistrationAction extends Action<UserConstants.HAS_PENDING_REGISTRATION> {
-    hasPendingRegistration: boolean
+    hasPendingRegistration: NullableString
 }
 
 export interface ISignUpUserRequestAction extends Action<UserConstants.SIGNUP_USER_REQUEST> {

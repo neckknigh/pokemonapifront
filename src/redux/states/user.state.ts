@@ -19,7 +19,7 @@ export interface IUserState {
     readonly isAccountKitLoggedIn: boolean;
 
     // Indica si necesita completar el proceso de registro
-    readonly pendingRegistration: boolean;
+    readonly pendingRegistration: NullableString;
 
     // Indica si el usuario es administrador del sistema.
     readonly isAdmin: NullableString;

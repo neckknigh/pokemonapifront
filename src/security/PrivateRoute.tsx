@@ -12,12 +12,13 @@ import DashBoardComponent from '../components/dashboard/dashboard.component';
 import ComunitySummaryComponent from '../components/comunities/comunity-summary/comunity-summary.component';
 import SignupComponent from '../components/auth/signup/signup.component';
 import IncomingFeaturesComponent from '../components/incoming-features/incoming-features.component';
+import AuthComponent from '../components/auth/auth.component';
 
 interface ISecureComponentProps {
     userHasSession?: NullableString;
     validateSession?: () => void;
     sessionBeingValidated?: NullableString;
-    userHasPendingRegistration?: boolean;
+    userHasPendingRegistration?: NullableString;
     isAdminUser?: NullableString;
 }
 
@@ -68,13 +69,14 @@ export function secureComponentFactory(componentName: string) {
 
         public render(): JSX.Element | null {
             let componentToRender: JSX.Element | null = null;
-            const { YES, rootPath, NO } = this.state;
+            const { YES, NO } = this.state;
             const {
                 userHasSession,
                 sessionBeingValidated,
                 userHasPendingRegistration,
                 isAdminUser
             } = this.props;
+            debugger;
 
             /**
              * Si la sessión está siendo validada o necesita validarse
@@ -85,15 +87,48 @@ export function secureComponentFactory(componentName: string) {
 
             /**
              * Terminó de validar la sesión,
-             * el usuario no tiene sesión y tampoco tiene pendiente
-             * el registro.
+             * el usuario no tiene sesión.
+             * y no es el componente de completar registro.
              */
-            else if (userHasSession === NO && !userHasPendingRegistration) {
-                componentToRender = <Redirect to={rootPath} />
+            else if (userHasSession === NO && componentName !== "SignUpComponent") {
+
+                /**
+                 * Si se cargó la ruta /auth
+                 */
+                if (componentName === "AuthComponent") {
+
+                    // Si no se ha evaluado si hay o no pendiente registro
+                    if (utilService.isEmpty(userHasPendingRegistration)) {
+                        componentToRender = <AuthComponent {...this.props} />
+                    }
+
+                    // Ya se evaluó si hay o no pendiente de registro
+                    else {
+
+                        // Si lo hay, se redirecciona a completar el registro
+                        if (userHasPendingRegistration === "Y") {
+                            componentToRender = <Redirect to='/signup' />;
+                        }
+
+                        // Si no, se devuelve al path base.
+                        else {
+                            componentToRender = <Redirect to='/' />;
+                        }
+                    }
+                }
+
+                /**
+                 * No hay sesión, y cargo cualquier otra ruta,
+                 * se redirecciona al path base.
+                 */
+                else if (!this.isPublicComponent()) {
+                    componentToRender = <Redirect to='/' />;
+                }
             }
 
             /**
-             * Si tiene sesión, y cargo la ruta para hacer el registro
+             * Si tiene sesión,
+             * entro a la ruta /auth o /signup
              */
             else if (userHasSession === YES && this.isPublicComponent()) {
 

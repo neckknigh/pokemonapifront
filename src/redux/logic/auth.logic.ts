@@ -110,12 +110,13 @@ export const saveFacebookUser = createLogic<
             action.facebookUserData
         ).subscribe(
             (response: any) => {
+                
+                // Se crea la sessión
+                authService.createSession(response);
 
                 // Se indica se logueó correctamente
                 dispatch(authActions.setUserLoggedInStatus("Y"));
 
-                // Se crea la sessión
-                authService.createSession(response);
 
             }, error => {
                 // TODO: Que hacer cuando falla el guardado del usuario?
@@ -152,15 +153,17 @@ export const validatePhoneUser = createLogic<
             action.user
         ).subscribe(
             (response: any) => {
-                //debugger;
+                debugger;
 
                 if (response.status !== CP.get(CP.STATUS_OK)) {
+
+                    
+                    // Se indica si el usuario necesita completar su registro
+                    dispatch(userActions.setUserHasPendingRegistration("Y"));
 
                     // Se indica que la sesión no está siendo validada
                     dispatch(authActions.setSessionBeingValidated("N"));
 
-                    // Se indica si el usuario necesita completar su registro
-                    dispatch(userActions.setUserHasPendingRegistration(true));
 
                 }
                 else {
@@ -216,13 +219,15 @@ export const signUpUser = createLogic<
                 }
                 else {
                     //debugger;
+                     // Se crea la sessión
+                     authService.createSession(response);
 
                     // TODO: Refactorizar esta lógica, arriba está repetida.
                     // Se actualiza el estado de logueado.
                     dispatch(authActions.setUserLoggedInStatus("Y"));
 
                     // Se indica que el usuario no tiene pendiente un registro
-                    dispatch(userActions.setUserHasPendingRegistration(false));
+                    dispatch(userActions.setUserHasPendingRegistration("N"));
                 }
 
             }, error => {

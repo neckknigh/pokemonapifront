@@ -10,7 +10,7 @@ const initialUserState: IUserState = {
     isFacebookLogginIn: false,
     isAccountKitLogginIn: false,
     isAccountKitLoggedIn: false,
-    pendingRegistration: false,
+    pendingRegistration: null,
     isAdmin: null,
     userInfo: null!
 };

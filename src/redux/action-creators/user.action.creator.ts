@@ -73,7 +73,7 @@ const setAccountKitLoggedInStatus = (isAccountKitLoggedIn: boolean): UserActions
     return accountKitLoggedInAction;
 };
 
-const setUserHasPendingRegistration = (hasPendingRegistration: boolean): UserActions => {
+const setUserHasPendingRegistration = (hasPendingRegistration: NullableString): UserActions => {
     const hasPendingRegistrationAction: IHasPendingRegistrationAction = {
         type: UserConstants.HAS_PENDING_REGISTRATION,
         hasPendingRegistration

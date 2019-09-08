@@ -39,7 +39,7 @@ class RequestAdapter {
         const { phone } = user;
         const body = {
             user: {
-                //phone: phone!.number + "22"
+                //phone: phone!.number + "23"
                 phone: phone!.number
             }
         }

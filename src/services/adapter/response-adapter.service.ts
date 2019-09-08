@@ -72,7 +72,6 @@ class ResponseAdapter {
     }
 
     public adaptComunity(rawResponse: any): Comunity {
-
         const rawCommunity = utilService.isDefined(rawResponse.community) ? rawResponse.community : rawResponse;
         return {
             id: rawCommunity.id,
@@ -83,6 +82,34 @@ class ResponseAdapter {
             category: rawCommunity.category,
             averageScore: rawCommunity.averageScore
         }
+    }
+
+    public adaptSaveFacebookuser(rawFacebookData: any, response: any): any {
+        return Object.assign(
+            {},
+            response,
+            {
+                user: this.adaptFacebookUserForAccount(rawFacebookData)
+            }
+        );
+    }
+
+    private adaptFacebookUserForAccount(rawFacebookData: any): Account {
+        const {
+            picture,
+            email,
+            first_name,
+            id,
+            last_name
+        } = rawFacebookData;
+
+        return {
+            email,
+            name: first_name,
+            id,
+            lastName: last_name,
+            profileImage: utilService.isDefined(picture) ? picture.data.url : ""
+        };
     }
 
 }

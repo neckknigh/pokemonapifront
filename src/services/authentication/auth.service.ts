@@ -149,12 +149,11 @@ class AuthService {
                 urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
                 requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
             )
-                .then(((response: any) => observer.next(response)))
+                .then(((response: any) => observer.next(responseAdapter.adaptSaveFacebookuser(facebookUserData, response))))
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
                     observer.complete();
                 });
-
         });
     }
 

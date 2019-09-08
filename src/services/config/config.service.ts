@@ -54,7 +54,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_VERSION] = "v1.1";
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_DEBUG_MODE] = true;
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_STATE] = "31e2a963ada08b93e2667243805407c3";
-        ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_ENABLE_FACEBOOK_EVENTS] = true;
+        ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_ENABLE_FACEBOOK_EVENTS] = false;
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_SDK_SRC] = "https://sdk.accountkit.com/es_LA/sdk.js";
         ConfigProvider.configs[ConfigProvider.ACCOUNT_KIT_LOGIN_IN_DISPLAY] = "Ingresar con tu celular";
 

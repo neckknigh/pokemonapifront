@@ -105,17 +105,23 @@ export const saveFacebookUser = createLogic<
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
 
+        const {facebookUserData} = action;
+
         // Se registra al usuario en el sistema
         authService.saveFacebookUser(
-            action.facebookUserData
+            facebookUserData
         ).subscribe(
             (response: any) => {
+                debugger;
                 
                 // Se crea la sessión
                 authService.createSession(response);
 
                 // Se indica se logueó correctamente
                 dispatch(authActions.setUserLoggedInStatus("Y"));
+
+                // Se guarda la información del usuario.
+                dispatch(userActions.saveUserInfo(response.user));
 
 
             }, error => {

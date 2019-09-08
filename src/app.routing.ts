@@ -8,12 +8,12 @@ export const privateRoutes = [
         component: "AuthComponent"
     },
     {
-        path: "/comunities",
-        component: "DashBoardComponent"
+        path: "/comunities/:id([0-9]+)",
+        component: "ComunitySummaryComponent"
     },
     {
-        path: "/comunity/:id([0-9]+)",
-        component: "ComunitySummaryComponent"
+        path: "/comunities",
+        component: "DashBoardComponent"
     },
     {
         path: "/signup",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import './styles/app.scss';
 
@@ -58,15 +58,17 @@ class App extends React.Component<IAppProps, IApplicationState> {
             <main className="main-container maximun-size">
               <ErrorMessageComponent />
               <SideMenuComponent>
-                {
-                  privateRoutes.map((privateRoute: any, index: number) => {
-                    return <Route
-                      key={index}
-                      exact
-                      path={privateRoute.path}
-                      component={secureComponentFactory(privateRoute.component)} />
-                  })
-                }
+                <Switch>
+                  {
+                    privateRoutes.map((privateRoute: any, index: number) => {
+                      return <Route
+                        key={index}
+                        exact
+                        path={privateRoute.path}
+                        component={secureComponentFactory(privateRoute.component)} />
+                    })
+                  }
+                </Switch>
                 <FooterComponent />
               </SideMenuComponent>
 

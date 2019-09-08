@@ -33,7 +33,7 @@ class URLProvider {
 
 
         // internal urls
-        this.urls[this.URL_COMUNITY_DETAIL] = "/comunity/:id";
+        this.urls[this.URL_COMUNITY_DETAIL] = "/comunities/:id";
     }
 
     get(key: string, URLPathParams?: any, queryStringParams?: any): string {

@@ -3,6 +3,7 @@ import "./title-container.component.scss";
 import { utilService } from '../../../services/util.service';
 
 interface TitleContainerComponentProps {
+    readonly id?: string;
     readonly mainTitle: string;
     readonly secondaryTitle?: string;
     readonly className?: string;
@@ -21,9 +22,9 @@ class TitleContainerComponent extends Component<TitleContainerComponentProps, {}
         return cls;
     }
     public render(): JSX.Element {
-        const { mainTitle, secondaryTitle } = this.props;
+        const { mainTitle, secondaryTitle, id } = this.props;
         return (
-            <div className={this.getMainContainerCls()}>
+            <div className={this.getMainContainerCls()} id={id}>
                 <div className="title-header-container flex-row-items-center">
                     <h1 className="header">{mainTitle}</h1>
                     {

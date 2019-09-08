@@ -77,24 +77,28 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
 
                         </aside>
                         <section className="column-70 content">
-                            <Nav justify variant="tabs" defaultActiveKey="costillas">
+                            <Nav fill variant="tabs" defaultActiveKey="costillas">
                                 <Nav.Item>
                                     <Nav.Link href="#costillas" eventKey="costillas">Costillas de cerdo</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link href="#alitas">Alitas</Nav.Link>
+                                    <Nav.Link href="#alitas" eventKey="alitas">Alitas</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link href="#combos">Combos</Nav.Link>
+                                    <Nav.Link href="#acompañamientos" eventKey="acompañamientos">Acompañamientos</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link href="#bebidas">Bebidas</Nav.Link>
+                                    <Nav.Link href="#combos" eventKey="combos">Combos</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link href="#bebidas" eventKey="bebidas">Bebidas</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                             <div className="section-body">
                                 <TitleContainerComponent
                                     mainTitle="Costillas de cerdo"
                                     className="section-container"
+                                    id="costillas"
                                 >
 
                                     <div className="grid grid-justify-space-between products">
@@ -114,6 +118,7 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                                 <TitleContainerComponent
                                     mainTitle="Alitas"
                                     className="section-container"
+                                    id="alitas"
                                 >
 
                                     <div className="grid grid-justify-space-between products">
@@ -133,6 +138,7 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                                 <TitleContainerComponent
                                     mainTitle="Acompañamientos"
                                     className="section-container"
+                                    id="acompañamientos"
                                 >
 
                                     <div className="grid grid-justify-space-between products">
@@ -151,6 +157,7 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                                 <TitleContainerComponent
                                     mainTitle="Combos"
                                     className="section-container"
+                                    id="combos"
                                 >
 
                                     <div className="grid grid-justify-space-between products">
@@ -170,6 +177,7 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                                 <TitleContainerComponent
                                     mainTitle="Bebidas"
                                     className="section-container"
+                                    id="bebidas"
                                 >
 
                                     <div className="grid grid-justify-space-between products">

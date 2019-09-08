@@ -71,6 +71,11 @@
             .schedule {
                 color: #ADCA42;
             }
+
+            .payment-ways-btn {
+                color: $white;
+                @include border-radius(20px);
+            }
         }
     }
 

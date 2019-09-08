@@ -53,7 +53,6 @@ class AccountSummaryComponent extends Component<IAccountSummaryComponentProps, {
                     background: "#434343 0% 0% no-repeat padding-box",
                     opacity: 0.33
                 }}
-                // TODO: Quitar esto
                 closeOnDocumentClick={true}
                 className="account-summary"
             >

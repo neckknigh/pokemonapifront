@@ -2,6 +2,8 @@ import React, { Component, CSSProperties } from 'react';
 import "./comunity-banner.component.scss";
 import StarRatingComponent from 'react-star-rating-component';
 import ThumbnailImagesComponent from '../../../widgets/thumbnail-images/thumbnail-images.component';
+import PaymentWaysComponent from '../../../widgets/payment-ways/payment-ways.component';
+import Popup from 'reactjs-popup';
 
 interface IComunityBannerComponentProps {
     bannerImage: string;
@@ -68,9 +70,21 @@ class ComunityBannerComponent extends Component<IComunityBannerComponentProps, {
                             <p className="feature-value schedule">Abierto</p>
                             <p className="feature-name">Horario</p>
                         </div>
-                        <div>
-                            Medios de Pago
-                        </div>
+                        <Popup
+                            trigger={
+                                <button className="btn payment-ways-btn">Medios de Pago</button>
+                            }
+                            position="bottom right"
+                            offsetX={0}
+                            contentStyle={{
+                                width: "270px",
+                                padding: 0
+                            }}
+                            closeOnDocumentClick={true}
+                            className=""
+                        >
+                            <PaymentWaysComponent />
+                        </Popup>
                     </div>
                 </section>
             </div>

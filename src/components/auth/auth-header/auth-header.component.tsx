@@ -3,11 +3,11 @@ import "./auth-header.component.scss";
 import { ConfigProvider as CP } from '../../../services/config/config.service';
 
 export interface AuthHeaderComponentProps {
-    hintText: string
+    hintText: string;
 }
 
 export interface AuthHeaderComponentState {
-    dooSlogan: string
+    dooSlogan: string;
 }
 
 class AuthHeaderComponent extends Component<AuthHeaderComponentProps, AuthHeaderComponentState> {

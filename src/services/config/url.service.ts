@@ -5,6 +5,8 @@ import { utilService } from "../util.service";
 class URLProvider {
     public readonly URL_ACCOUNT_KIT_AUTH_USER: string = "accountkit_auth";
     public readonly URL_USER_GRAPH_ACCOUNT_KIT: string = "accountkit_user";
+    public readonly URL_FACEBOOK_GRAPH: string = "URL_FACEBOOK_GRAPH";
+
     public readonly URL_USER_FACEBOOK_SIGN_IN: string = "facebook_signin";
     public readonly URL_PHONE_USER_VALIDATION: string = "phone_user_validation";
     public readonly URL_USER_REGISTRATION: string = "user_registration";
@@ -30,6 +32,7 @@ class URLProvider {
         this.urls[this.URL_PROMOTIONS] = this.baseUrl + "prcGetAnunciosNew.php";
         this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "prcGetAnunciosNew.php";
         this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "getComById.php";
+        this.urls[this.URL_FACEBOOK_GRAPH] = "https://graph.facebook.com/:version/me?fields=:fields&access_token=:accessToken";
 
 
         // internal urls

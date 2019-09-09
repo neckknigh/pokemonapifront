@@ -11,18 +11,24 @@ export class Account {
     email?: string;
     phone?: IAccountPhone;
     profileImage?: string;
+    gender?: string;
+    birthday?: string;
 
     constructor(
         id: string,
         phone: IAccountPhone,
         name: string = "",
         lastName: string = "",
-        email: string = ""
+        email: string = "",
+        gender: string = "",
+        birthday: string = ""
     ) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.gender = gender;
+        this.birthday = birthday;
     }
 }

@@ -1,120 +1,72 @@
-import React, { Fragment } from 'react'
-import * as CSS from 'csstype';
-import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
+import React, { Component } from 'react'
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { userActions } from '../../../../redux/action-creators/user.action.creator';
-import { authActions } from '../../../../redux/action-creators/auth.action.creator';
 import { ConfigProvider as CP } from "../../../../services/config/config.service";
+import "./facebook-login.component.scss";
+import { UserActions } from '../../../../redux/actions/user.actions';
+import { utilService } from '../../../../services/util.service';
 
-interface Style extends CSS.Properties, CSS.PropertiesHyphen { }
+export interface IFacebookLoginComponentProps {
+    readonly buttonClassName?: string;
+    readonly startFacebookRequestlogin?: () => void;
+}
 
 export interface IFacebookLoginComponentState {
 
     /**
-     *  Contendrá los estilos para el contenedor del
-     *  login de facebook.
-     */
-    containerStyle: Style,
-
-    /**
-     *  Contendrá los estilos para el contenedor del
-     *  botón interno de facebook.
-     */
-    buttonStyle: Style,
-
-    /**
-     * Identificador de la app de facebook.
-     */
-    facebookAppId: string,
-
-    /**
-     * Listado de la info del usuario de facebook a solicitar.
-     */
-    facebookRequestedFields: string,
-
-    /**
      * Texto a mostrar en el botón de login con facebook
      */
-    facebookLoginInDisplay: string
+    facebookLoginInDisplay: string;
 }
 
-class FacebookLoginComponent extends React.Component<any, IFacebookLoginComponentState> {
+class FacebookLoginComponent extends Component<IFacebookLoginComponentProps, IFacebookLoginComponentState> {
 
-    constructor(props: any) {
+    constructor(props: IFacebookLoginComponentProps) {
         super(props);
-        const facebookColor: string = CP.get(CP.FACEBOOK_COLOR);
 
-        const initialState: IFacebookLoginComponentState = {
-            containerStyle: {
-                width: "100%",
-                marginBottom: "0.5rem"
-            },
-            buttonStyle: {
-                backgroundColor: facebookColor,
-                borderColor: facebookColor
-            },
-            facebookAppId: CP.get(CP.FACEBOOK_APP_ID),
-            facebookRequestedFields: CP.get(CP.FACEBOOK_USER_REQUESTED_FIELDS),
+
+        this.state = {
             facebookLoginInDisplay: CP.get(CP.FACEBOOK_LOGIN_IN_DISPLAY)
-        }
-
-        this.state = initialState;
+        };
     }
 
-    handleFacebookBtnClick = () => {
+    private handleFacebookBtnClick = (): void => {
 
         // Se indica que se inicia proceso de login con facebook
-        this.props.startFacebookRequestlogin();
+        this.props.startFacebookRequestlogin!();
     }
 
-    handleFacebookResponse = (userInfo: ReactFacebookLoginInfo) => {
+    private buildButtonCls = (): string => {
+        let btnCls = "btn btn-primary btn-lg btn-block facebook-login-btn";
+        const { buttonClassName } = this.props;
 
-        // Se guarda al usuario logueado por facebook en el sistema.
-        this.props.saveFacebookUser!(userInfo);
+        if (!utilService.isEmpty(buttonClassName)) {
+            btnCls = `${btnCls} buttonClassName`;
+        }
+
+        return btnCls;
     }
 
-    handleFailureFacebookLoginResponse = (response: ReactFacebookFailureResponse) => {
-        console.log("Ocurrió un error");
-        // TODO: Revisar que logica ejuctar cuando falle.
-    }
-
-    render() {
+    public render(): JSX.Element {
         return (
-            <Fragment>
-                <FacebookLogin
-                    appId={this.state.facebookAppId}
-                    autoLoad={false}
-                    containerStyle={
-                        this.state.containerStyle
-                    }
-                    buttonStyle={
-                        this.state.buttonStyle
-                    }
-                    fields={this.state.facebookRequestedFields}
-                    textButton={this.state.facebookLoginInDisplay}
-                    typeButton="button"
-                    cssClass="btn btn-primary btn-lg btn-block login-btn"
-                    onClick={this.handleFacebookBtnClick}
-                    callback={this.handleFacebookResponse}
-                    onFailure={this.handleFailureFacebookLoginResponse}
-                />
-            </Fragment>
+            <button
+                className={this.buildButtonCls()}
+                onClick={this.handleFacebookBtnClick}
+            >
+                {this.state.facebookLoginInDisplay}
+            </button>
         );
     }
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): any => {
-    const props: any = {
+const mapDispatchToProps = (dispatch: Dispatch<UserActions>): IFacebookLoginComponentProps => {
+    return {
         startFacebookRequestlogin: () => dispatch(
             userActions.startFacebookRequestlogin()
-        ),
-        saveFacebookUser: (facebookUserData: ReactFacebookLoginInfo) => dispatch(
-            authActions.saveFacebookUser(facebookUserData)
         )
-    }
-    return props;
+    };
 }
 
 export default connect(null, mapDispatchToProps)(FacebookLoginComponent);

@@ -20,7 +20,7 @@ export interface IAccountKitLoginDoneAction extends Action<AuthConstants.ACCOUNT
  * en el servidor.
  */
 export interface ISaveFacebookUserAction extends Action<AuthConstants.SAVE_FACEBOOK_USER> {
-    facebookUserData: any
+    facebookUser: Account
 }
 
 /**

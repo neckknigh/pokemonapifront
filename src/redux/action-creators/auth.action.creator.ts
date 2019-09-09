@@ -1,6 +1,5 @@
 import { AuthActions } from "../actions/auth.actions";
 import { AuthConstants } from "../../services/constants.service";
-import { ReactFacebookLoginInfo } from "react-facebook-login";
 import { Account } from "../../models/account.model";
 import { NullableString } from "../../types/types";
 
@@ -24,10 +23,11 @@ class AuthActionCreator {
     * usuario de facebook en el servidor.
     * @param facebookUserData 
     */
-    public saveFacebookUser(facebookUserData: ReactFacebookLoginInfo): AuthActions {
+    public saveFacebookUser(facebookUser: Account): AuthActions {
+        debugger;
         return {
             type: AuthConstants.SAVE_FACEBOOK_USER,
-            facebookUserData
+            facebookUser
         }
     }
 

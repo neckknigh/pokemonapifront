@@ -28,6 +28,9 @@ class AuthComponent extends React.Component<IAuthComponentProps, IAuthComponentS
         this.state = {
             validateAccountKitLogin: !urlProvider.isRoot()
         }
+    }
+
+    componentDidMount() {
 
         /**
          * Si la url no es el path base

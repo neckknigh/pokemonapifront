@@ -3,28 +3,29 @@ import { Account } from "../../models/account.model";
 class RequestAdapter {
 
     public getBodyDataForSaveFacebookUser(
-        facebookUserData: any
+        facebookUser: Account
     ): string {
         const {
             email,
             id,
-            last_name,
-            first_name,
+            lastName,
+            name,
             gender,
-            birthday
-        } = facebookUserData;
+            birthday,
+            profileImage
+        } = facebookUser;
         const body = {
             user: {
                 email,
-                name: first_name,
-                lastName: last_name,
+                name,
+                lastName,
                 userName: this.buildDooUserName(
                     id,
-                    first_name,
-                    last_name
+                    name,
+                    lastName
                 ),
                 facebookId: id,
-                profileImage: facebookUserData.picture.data.url,
+                profileImage,
                 birth: birthday,
                 sex: gender
             }

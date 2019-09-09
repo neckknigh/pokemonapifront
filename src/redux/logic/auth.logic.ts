@@ -35,6 +35,46 @@ export const loadAccountKitApiLogic = createLogic({
     }
 });
 
+/**
+ * Lógica que permite cargar el SDK de facebook, e
+ * inicia el proceso de login.
+ */
+export const loadFacebookSDK = createLogic({
+    type: UserConstants.FACEBOOK_LOGIN_REQUEST,
+    latest: true,
+    // eslint-disable-next-line
+    process({ }, dispatch, done) {
+
+        authService.loadFacebookSDK().subscribe(
+            () => {
+
+                /**
+                 * Una vez esté cargado el SDK de facebook, 
+                 * se realiza el proceso de login.
+                 */
+                authService.doFacebookLogin().subscribe((facebookUser: Account)=> {
+                    debugger;
+
+                    /**
+                     * Una vez obtenida la data del usuario de facebook,
+                     * se guarda en el servidor.
+                     */
+                    dispatch(authActions.saveFacebookUser(facebookUser));                    
+                    done();
+                },
+                error => {
+                    console.error(error);
+                    done();
+                });
+
+            }, error => {
+                dispatch(systemActions.handleAppError(error));
+                done();
+            }
+        );
+    }
+});
+
 // TODO: Si falla la carga del sdk del account kit que hacemos?
 export const doAccountKitLogin = createLogic<
     any,
@@ -56,6 +96,7 @@ export const doAccountKitLogin = createLogic<
         }
         else {
             // Mostrar mensaje de error?
+            allow(systemActions.handleAppError("Cant load the script"));
         }
     }
 });
@@ -104,12 +145,13 @@ export const saveFacebookUser = createLogic<
     latest: true,
     // eslint-disable-next-line
     process({ action }, dispatch, done) {
+        debugger;
 
-        const {facebookUserData} = action;
+        const { facebookUser } = action;
 
         // Se registra al usuario en el sistema
         authService.saveFacebookUser(
-            facebookUserData
+            facebookUser
         ).subscribe(
             (response: any) => {
                 debugger;
@@ -383,7 +425,8 @@ const authLogics = [
     signUpUser,
     validateUserSession,
     setLoggedInStatus,
-    destroySession
+    destroySession,
+    loadFacebookSDK
 ];
 
 

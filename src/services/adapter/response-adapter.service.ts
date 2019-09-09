@@ -84,17 +84,17 @@ class ResponseAdapter {
         }
     }
 
-    public adaptSaveFacebookuser(rawFacebookData: any, response: any): any {
+    public adaptSaveFacebookuser(facebookUser: Account, response: any): any {
         return Object.assign(
             {},
             response,
             {
-                user: this.adaptFacebookUserForAccount(rawFacebookData)
+                user: facebookUser
             }
         );
     }
 
-    private adaptFacebookUserForAccount(rawFacebookData: any): Account {
+    public adaptFacebookUserForAccount(rawFacebookData: any): Account {
         const {
             picture,
             email,

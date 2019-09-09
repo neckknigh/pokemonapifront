@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import "./login.component.scss";
-import FacebookLoginComponent from './facebook-login/facebook-login.component';
 import AccountKitLoginComponent from "./accountkit-login/accountkit-login.component";
 import { ConfigProvider as CP } from '../../../services/config/config.service';
 import AuthHeaderComponent from '../auth-header/auth-header.component';
 import AuthFooterComponent from '../auth-footer/auth-footer.component';
-
+import FacebookLoginComponent from './facebook-login/facebook-login.component';
 
 export interface ILoginComponentState {
     logInHint: string,
@@ -23,8 +22,7 @@ class LoginComponent extends Component<{}, ILoginComponentState> {
         }
     }
 
-    render() {
-
+    public render(): JSX.Element {
         return (
             <div className="grid login-container">
                 <div className="column-50 left-container flex-row-end-items-center">

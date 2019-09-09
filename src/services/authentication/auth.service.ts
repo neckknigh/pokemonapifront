@@ -52,7 +52,6 @@ class AuthService {
         return loadPromise;
     }
 
-
     private initializeAccountKit(): void {
         const me = this;
 
@@ -66,6 +65,92 @@ class AuthService {
                 debug: CP.get(CP.ACCOUNT_KIT_DEBUG_MODE)
             });
         }
+    }
+
+    /**
+     * Permite cargar el api (SDK) de Faebook 
+     * on demand.
+     */
+    public loadFacebookSDK(): Observable<Boolean> {
+        return new Observable((observer: Observer<Boolean>) => {
+            // Si ya existe el script, no se carga nuevamente.
+            if (utilService.isDefined(this.rootWindow[CP.get(CP.FACEBOOK_SDK_WINDOW_PROPERTY)])) {
+                observer.next(true);
+                observer.complete();
+            }
+            else {
+                const script = document.createElement('script');
+                script.type = "text/javascript";
+                script.async = true;
+                script.defer = true;
+                script.src = CP.get(CP.FACEBOOK_SDK_SRC);
+                script.onload = () => {
+                    this.initializeFacebookSDK();
+                    observer.next(true);
+                    observer.complete();
+                };
+                script.onerror = (error: any) => {
+                    observer.error(error);
+                    observer.complete();
+                }
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
+        });
+    }
+
+    /**
+     * Permite inicializar el SDK de facebook.
+     * La inicialización se realiza, una vez cargado el script
+     * con el SDK.
+     */
+    private initializeFacebookSDK(): void {
+        const me = this;
+
+        // initialize Account Kit with CSRF protection
+        this.rootWindow[CP.get(CP.FACEBOOK_SDK_WINDOW_PROPERTY)] = function () {
+            me.rootWindow[CP.get(CP.FACEBOOK_SDK_API)].init({
+                appId: CP.get(CP.FACEBOOK_APP_ID),
+                version: CP.get(CP.FACEBOOK_GRAPH_API_VERSION),
+                cookie: true,  // enable cookies to allow the server to access the session
+                xfbml: true,  // parse social plugins on this page
+            });
+        }
+    }
+
+    public doFacebookLogin(): Observable<Account> {
+        return new Observable((observer: Observer<Account>) => {
+
+            this.rootWindow[CP.get(CP.FACEBOOK_SDK_API)].login(function (response: any) {
+                console.log(response);
+
+                // Si el status es conectado
+                if (response.status === CP.get(CP.FACEBOOK_CONNECTED_STATUS)) {
+
+                    // Se extrae la data del perfil de facebook
+                    clientService.get(
+                        urlProvider.get(
+                            urlProvider.URL_FACEBOOK_GRAPH,
+                            {
+                                version: CP.get(CP.FACEBOOK_GRAPH_API_VERSION),
+                                fields: CP.get(CP.FACEBOOK_USER_REQUESTED_FIELDS),
+                                accessToken: response.authResponse.accessToken
+                            }
+                        )
+                    )
+                        .then((response: any) => observer.next(responseAdapter.adaptFacebookUserForAccount(response)))
+                        .catch((error: any) => observer.error(error))
+                        .finally(() => {
+                            observer.complete();
+                        });
+
+                }
+                else {
+                    observer.error("Can´t login with facebook");
+                    observer.complete();
+                }
+
+            });
+        });
     }
 
     /**
@@ -140,16 +225,16 @@ class AuthService {
     /**
      * Permite guardar los datos obtenidos de la api de facebook
      * al servicio web de doo
-     * @param facebookUserData datos del usuario de facebook 
+     * @param facebookUser datos del usuario de facebook 
      */
-    public saveFacebookUser(facebookUserData: any): Observable<any> {
+    public saveFacebookUser(facebookUser: Account): Observable<any> {
         return new Observable((observer: Observer<any>) => {
 
             clientService.post(
                 urlProvider.get(urlProvider.URL_USER_FACEBOOK_SIGN_IN),
-                requestAdapter.getBodyDataForSaveFacebookUser(facebookUserData)
+                requestAdapter.getBodyDataForSaveFacebookUser(facebookUser)
             )
-                .then(((response: any) => observer.next(responseAdapter.adaptSaveFacebookuser(facebookUserData, response))))
+                .then(((response: any) => observer.next(responseAdapter.adaptSaveFacebookuser(facebookUser, response))))
                 .catch((error: any) => observer.error(error))
                 .finally(() => {
                     observer.complete();

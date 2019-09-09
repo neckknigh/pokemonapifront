@@ -8,4 +8,9 @@
     font-size: 12px;
     height: 2.5rem;
     margin-bottom: 0.5rem;
+
+    &:hover {
+        background-color: $facebook-color;
+        border-color: $facebook-color;
+    }
 }

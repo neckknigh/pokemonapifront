@@ -84,6 +84,18 @@ class ResponseAdapter {
         }
     }
 
+    public adaptPopularComunitiesForComunities(rawResponse: any): Comunity[] {
+        const { categories }: { categories: any[] } = rawResponse;
+
+        return categories.map((rawComunity) => {
+            return {
+                id: rawComunity.id,
+                name: rawComunity.name,
+                logo: `${CP.get(CP.COMUNITY_LOGOS_URL)}${rawComunity.img}`
+            };
+        });
+    }
+
     public adaptSaveFacebookuser(facebookUser: Account, response: any): any {
         return Object.assign(
             {},

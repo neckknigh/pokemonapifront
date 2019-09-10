@@ -4,16 +4,16 @@ export class Comunity {
     id: string;
     name: string;
     logo: string;
-    description: string;
+    description?: string;
     likeUserPhotos?: string[];
-    category: Category;
+    category?: Category;
     averageScore?: number;
 
     constructor(
         id: string,
         name: string,
         logo: string,
-        description: string,
+        description: string = "",
         likeUserPhotos: string[],
         category: Category,
         averageScore: number = 0

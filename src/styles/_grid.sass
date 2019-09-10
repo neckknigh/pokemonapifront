@@ -82,6 +82,10 @@ $column-padding: 0 10px
 	+flex(0 0 30%)
 	max-width: 30%
 
+.column-32
+	+flex(0 0 32.5%)
+	max-width: 32.5%
+
 .column-33,
 .column-34
 	+flex(0 0 33.3333%)
@@ -203,6 +207,10 @@ $column-padding: 0 10px
 	& > .column-80,
 	& > .column-90
 		padding: $grid-padding
+
+.grid-with-padding-bottom
+	.column-32 
+		padding: 0 1rem 1rem 0;
 
 .column-padding
 	padding: $column-padding

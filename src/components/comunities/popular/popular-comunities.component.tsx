@@ -1,35 +1,70 @@
 import React, { Component } from 'react';
 import "./popular-comunities.component.scss";
+import { ConfigProvider as CP } from '../../../services/config/config.service';
+import { Dispatch } from 'redux';
+import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
+import { connect } from 'react-redux';
+import { Comunity } from '../../../models/comunity.model';
+import { IAppState } from '../../../redux/app-state';
 
-class PopularComunities extends Component<{}, {}> {
+interface IPopularComunitiesState {
+    mainTitle: string;
+}
+
+interface IPopularComunitiesProps {
+    loadPopularComunities?: () => void;
+    popularComunities?: Comunity[];
+}
+
+class PopularComunities extends Component<IPopularComunitiesProps, IPopularComunitiesState> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            mainTitle: CP.get(CP.POPULAR_COMUNITIES_DISPLAY)
+        }
+    }
+
+    public componentDidMount() {
+        this.props.loadPopularComunities!();
+    }
 
     public render() {
         return (
             <div className="popular-comunities-container">
                 <div className="comunity-header-container">
-                    <h1 className="header">Comunidades Populares</h1>
+                    <h1 className="header">{this.state.mainTitle}</h1>
                 </div>
-                <div className="flex-row-center-items-center-wrap cards-comunities-container">
-                    <div className="comunity-card">
-                        <img alt="comunity" className="card-comunity-img" src="https://via.placeholder.com/350x100.png" />
-                        <p className="card-comunity-title">DooMarket</p>
-                    </div>
+                <div className="grid grid-with-padding-bottom cards-comunities-container">
 
-                    <div className="comunity-card">
-                        <img alt="comunity" className="card-comunity-img" src="https://via.placeholder.com/350x100.png" />
-                        <p className="card-comunity-title">DooFarmacia</p>
-                    </div>
+                    {
+                        this.props.popularComunities!.map((popularComunity, index: number) => {
+                            return (
+                                <div key={index} className="column-32 comunity-card">
+                                    <img alt="" className="card-comunity-img" src={popularComunity.logo} />
+                                    <p className="card-comunity-title">{popularComunity.name}</p>
+                                </div>
+                            );
+                        })
+                    }
 
-                    <div className="comunity-card">
-                        <img alt="comunity" className="card-comunity-img" src="https://via.placeholder.com/350x100.png" />
-                        <p className="card-comunity-title">Almuerzos</p>
-                    </div>
                 </div>
 
             </div>
         );
     }
-
 }
 
-export default PopularComunities;
+const mapDispatchToProps = (dispatch: Dispatch): IPopularComunitiesProps => {
+    return {
+        loadPopularComunities: () => dispatch(comunityActions.loadPopularComunities())
+    };
+}
+
+const mapStateToProps = (state: IAppState): IPopularComunitiesProps => {
+    return {
+        popularComunities: state.comunityState.popularComunities
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopularComunities);

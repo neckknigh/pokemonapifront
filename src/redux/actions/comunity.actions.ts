@@ -18,7 +18,16 @@ export interface ISaveComunityLoaded extends Action<ComunityConstants.SAVE_COMUN
     comunity: Comunity;
 }
 
+export interface ILoadPopularComunitiesAction extends Action<ComunityConstants.LOAD_POPULAR_COMUNITIES> { }
+
+export interface ISavePopularComunitiesAction extends Action<ComunityConstants.SAVE_POPULAR_COMUNITIES> {
+    popularComunities: Comunity[];
+}
+
+
 export type ComunityActions = ILoadRecomendedComunitiesAction |
     ISaveRecomendedComunitiesAction |
     ILoadComunityAction |
-    ISaveComunityLoaded;
+    ISaveComunityLoaded |
+    ILoadPopularComunitiesAction |
+    ISavePopularComunitiesAction;

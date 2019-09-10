@@ -52,7 +52,7 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
                     showUserLikes: true,
                     img: recomendedComunity.logo,
                     innerTitles: [
-                        recomendedComunity.description
+                        recomendedComunity.description!
                     ],
                     previewImages: recomendedComunity.likeUserPhotos,
                     id: recomendedComunity.id

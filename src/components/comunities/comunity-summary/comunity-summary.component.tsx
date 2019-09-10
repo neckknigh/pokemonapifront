@@ -40,7 +40,7 @@ class ComunitySummaryComponent extends Component<IComunitySummaryComponentProps,
                         bannerImage="https://picsum.photos/1300/230"
                         logo={comunityLoaded!.logo}
                         name={comunityLoaded!.name}
-                        category={comunityLoaded!.category.name}
+                        category={comunityLoaded!.category!.name}
                         likeUserPhotos={comunityLoaded!.likeUserPhotos}
                         score={comunityLoaded!.averageScore!}
                     />

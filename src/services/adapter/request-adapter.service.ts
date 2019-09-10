@@ -92,6 +92,15 @@ class RequestAdapter {
         return JSON.stringify(body);
     }
 
+    public getBodyForLoadPopularComunities(): string {
+        const body = {
+            userGPS: "4.715596, -74.037143",
+            city: "Bogotá"
+        }
+
+        return JSON.stringify(body);
+    }
+
     /**
      * Permite obtener el body necesario para el servicio
      * de consulta de promociones.

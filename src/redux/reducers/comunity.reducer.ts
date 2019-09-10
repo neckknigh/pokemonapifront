@@ -7,7 +7,8 @@ import { ComunityActions } from "../actions/comunity.actions";
 // Estado inicial del usuario
 const initialComunityState: IComunityState = {
     recomendedComunities: [],
-    comunityLoaded: null
+    comunityLoaded: null,
+    popularComunities: []
 };
 
 // root reducer
@@ -32,6 +33,12 @@ export const comunityReducer: Reducer<IComunityState, ComunityActions> = (
                 ...state,
                 comunityLoaded: action.comunity
             };
+
+        case ComunityConstants.SAVE_POPULAR_COMUNITIES:
+            return {
+                ...state,
+                popularComunities: action.popularComunities
+            }
 
         default:
             return state;

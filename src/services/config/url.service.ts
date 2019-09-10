@@ -15,6 +15,7 @@ class URLProvider {
     public readonly URL_USER_BY_ID: string = "user_by_id";
     public readonly URL_COMUNITY_DETAIL: string = "comunity_detail";
     public readonly URL_LOAD_COMUNITY: string = "load_comunity";
+    public readonly URL_LOAD_POPULAR_COMUNITIES: string = "URL_LOAD_POPULAR_COMUNITIES";
 
     private baseUrl: string;
     private urls: any;
@@ -33,7 +34,7 @@ class URLProvider {
         this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "prcGetAnunciosNew.php";
         this.urls[this.URL_LOAD_COMUNITY] = this.baseUrl + "getComById.php";
         this.urls[this.URL_FACEBOOK_GRAPH] = "https://graph.facebook.com/:version/me?fields=:fields&access_token=:accessToken";
-
+        this.urls[this.URL_LOAD_POPULAR_COMUNITIES] = this.baseUrl + "getPrimaryComs.php";
 
         // internal urls
         this.urls[this.URL_COMUNITY_DETAIL] = "/comunities/:id";

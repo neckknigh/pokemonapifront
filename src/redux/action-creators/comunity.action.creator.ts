@@ -25,11 +25,23 @@ class ComunityActionCreator {
     }
 
     public saveComunityLoaded(comunity: Comunity): ComunityActions {
-        debugger;
         return {
             type: ComunityConstants.SAVE_COMUNITY_LOADED,
             comunity
         };
+    }
+
+    public loadPopularComunities(): ComunityActions {
+        return {
+            type: ComunityConstants.LOAD_POPULAR_COMUNITIES
+        }
+    }
+
+    public savePopularComunities(popularComunities: Comunity[]): ComunityActions {
+        return {
+            type: ComunityConstants.SAVE_POPULAR_COMUNITIES,
+            popularComunities
+        }
     }
 }
 

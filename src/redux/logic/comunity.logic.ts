@@ -49,9 +49,32 @@ const loadComunity = createLogic({
     }
 });
 
+const loadPopularComunities = createLogic({
+    type: ComunityConstants.LOAD_POPULAR_COMUNITIES,
+    latest: true,
+    // eslint-disable-next-line
+    process({ action }: any, dispatch, done) {
+        console.log("llego la accion");
+        comunityService.getPopularComunities()
+            .subscribe(
+                (popularComunities: Comunity[]) => {
+                    dispatch(comunityActions.savePopularComunities(popularComunities));
+
+                }, error => {
+                    console.log(error);
+                    done();
+                },
+                () => {
+                    done();
+                }
+            );
+    }
+});
+
 const comunityLogics = [
     getRecomendedComunities,
-    loadComunity
+    loadComunity,
+    loadPopularComunities
 ];
 
 

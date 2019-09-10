@@ -42,6 +42,23 @@ class ComunityService {
                 });
         });
     }
+
+    public getPopularComunities(): Observable<Comunity[]> {
+        return new Observable<Comunity[]>((observer: Observer<Comunity[]>) => {
+            clientService.post(
+                urlProvider.get(urlProvider.URL_LOAD_POPULAR_COMUNITIES),
+                requestAdapter.getBodyForLoadPopularComunities(),
+                headersService.getHeaders()
+            )
+                .then((response: any) => observer.next(responseAdapter.adaptPopularComunitiesForComunities(response)))
+                .catch((error: any) => observer.error(error))
+                .finally(() => {
+                    observer.complete();
+                });
+        });
+    }
+
+
 }
 
 export const comunityService = new ComunityService();

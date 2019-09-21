@@ -30,7 +30,8 @@ export enum SystemConstants {
     APP_HAS_ERROR = "APP_HAS_ERROR",
     APP_ERROR_MESSAGE = "APP_ERROR_MESSAGE",
     HANDLE_APP_ERROR = "HANDLE_APP_ERROR",
-    OPEN_SIDE_MENU = "OPEN_SIDE_MENU"
+    OPEN_SIDE_MENU = "OPEN_SIDE_MENU",
+    LOAD_MAIN_DATA = "LOAD_MAIN_DATA"
 };
 
 // Constantes de Autorización

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import "./recomended-comunities.component.scss";
 import CardCarrouselComponent, { CardCarrouselItem } from '../../widgets/carrousel/card-carrousel.component';
 import TitleContainerComponent from '../../widgets/title-container/title-container.component';
-import { Dispatch } from 'redux';
-import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
 import { connect } from 'react-redux';
 import { IAppState } from '../../../redux/app-state';
 import { Comunity } from '../../../models/comunity.model';
@@ -15,7 +13,6 @@ import { urlProvider } from '../../../services/config/url.service';
 
 interface IRecomendedComunitiesComponentProps {
     readonly history?: BrowserHistory.History;
-    readonly loadRecomendedComunities?: () => void;
     readonly recomendedComunities?: Comunity[];
 }
 
@@ -35,10 +32,6 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
             totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY),
             comunityDetailURL: urlProvider.get(urlProvider.URL_COMUNITY_DETAIL)
         }
-    }
-
-    componentDidMount = () => {
-        this.props.loadRecomendedComunities!();
     }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
@@ -99,17 +92,11 @@ class RecomendedComunitiesComponent extends Component<IRecomendedComunitiesCompo
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): IRecomendedComunitiesComponentProps => {
-    return {
-        loadRecomendedComunities: () => dispatch(comunityActions.loadRecomendedComunities())
-    };
-};
-
 const mapStateToProps = (state: IAppState): IRecomendedComunitiesComponentProps => {
     return {
         recomendedComunities: state.comunityState.recomendedComunities
     };
 };
 
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(RecomendedComunitiesComponent));
+export default withRouter<any>(connect(mapStateToProps)(RecomendedComunitiesComponent));
 

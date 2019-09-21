@@ -5,10 +5,16 @@ import "./dashboard.component.scss";
 import PromotionsComponent from '../promotions/promotions.component';
 import ComunitiesComponent from '../comunities/comunities.component';
 import { withRouter } from 'react-router';
+import { Dispatch } from 'redux';
+import { systemActions } from '../../redux/action-creators/system.action.creator';
 //import { utilService } from '../../services/util.service';
 
+interface IDashBoardComponentProps {
+    loadMainData: () => void;
+}
 
-class DashBoardComponent extends Component<{}, {}> {
+
+class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
 
     /*
     constructor(props: any) {
@@ -33,7 +39,11 @@ class DashBoardComponent extends Component<{}, {}> {
     }
     */
 
-    render() {
+    public componentDidMount() {
+        this.props.loadMainData();
+    }
+
+    public render(): JSX.Element {
         return (
             <div className="dashboard-container">
                 <CarrouselComponent />
@@ -50,4 +60,10 @@ class DashBoardComponent extends Component<{}, {}> {
     }
 }
 
-export default withRouter<any>(connect(null)(DashBoardComponent));
+const mapDispachToProps = (dispatch: Dispatch): IDashBoardComponentProps => {
+    return {
+        loadMainData: () => dispatch(systemActions.loadMainData())
+    }
+};
+
+export default withRouter<any>(connect(null, mapDispachToProps)(DashBoardComponent));

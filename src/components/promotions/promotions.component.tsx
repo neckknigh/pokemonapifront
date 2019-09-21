@@ -5,13 +5,10 @@ import CardCarrouselComponent, { CardCarrouselItem } from '../widgets/carrousel/
 import { Promotion } from '../../models/promotion.model';
 import { ConfigProvider as CP } from '../../services/config/config.service';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { promotionActions } from '../../redux/action-creators/promotion.action.creator';
 import { IAppState } from '../../redux/app-state';
 import { utilService } from '../../services/util.service';
 
 interface IPromotionsComponentProps {
-    readonly loadPromotions?: () => void;
     readonly promotions?: Promotion[];
 }
 
@@ -31,10 +28,6 @@ class PromotionsComponent extends Component<IPromotionsComponentProps, IPromotio
             mainTitle: CP.get(CP.PROMOTIONS_MAIN_TITLE),
             totalComuityfounded: CP.get(CP.TOTAL_ITEMS_FOUNDED_DISPLAY)
         };
-    }
-
-    componentDidMount() {
-        this.props.loadPromotions!();
     }
 
     private getCarrouselItems = (): CardCarrouselItem[] => {
@@ -82,16 +75,10 @@ class PromotionsComponent extends Component<IPromotionsComponentProps, IPromotio
     }
 }
 
-const mapDispachToProps = (dispatch: Dispatch): IPromotionsComponentProps => {
-    return {
-        loadPromotions: () => dispatch(promotionActions.loadPromotions())
-    }
-}
-
 const mapStateToProps = (state: IAppState): IPromotionsComponentProps => {
     return {
         promotions: state.promotionState.promotions
     }
 }
 
-export default connect(mapStateToProps, mapDispachToProps)(PromotionsComponent);
+export default connect(mapStateToProps)(PromotionsComponent);

@@ -26,8 +26,13 @@ export interface IOpenSideMenuAction extends Action<SystemConstants.OPEN_SIDE_ME
     openSideMenu: boolean;
 }
 
+export interface ILoadMainDataAction extends Action<SystemConstants.LOAD_MAIN_DATA> {
+
+}
+
 export type SystemActions = IAppIsLoadingAction |
     IAppHasErrorAction |
     IAppErrorMessageAction |
     IHandleAppErrorAction |
-    IOpenSideMenuAction;
+    IOpenSideMenuAction |
+    ILoadMainDataAction;

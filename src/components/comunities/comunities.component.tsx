@@ -20,6 +20,7 @@ class ComunitiesComponent extends Component<{}, {}> {
                 <div className="recomended-container">
                     <RecomendedComunitiesComponent />
                 </div>
+
             </div>
         );
     }

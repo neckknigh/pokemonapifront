@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "./popular-comunities.component.scss";
 import { ConfigProvider as CP } from '../../../services/config/config.service';
-import { Dispatch } from 'redux';
-import { comunityActions } from '../../../redux/action-creators/comunity.action.creator';
 import { connect } from 'react-redux';
 import { Comunity } from '../../../models/comunity.model';
 import { IAppState } from '../../../redux/app-state';
@@ -12,7 +10,6 @@ interface IPopularComunitiesState {
 }
 
 interface IPopularComunitiesProps {
-    loadPopularComunities?: () => void;
     popularComunities?: Comunity[];
 }
 
@@ -23,10 +20,6 @@ class PopularComunities extends Component<IPopularComunitiesProps, IPopularComun
         this.state = {
             mainTitle: CP.get(CP.POPULAR_COMUNITIES_DISPLAY)
         }
-    }
-
-    public componentDidMount() {
-        this.props.loadPopularComunities!();
     }
 
     public render() {
@@ -55,16 +48,10 @@ class PopularComunities extends Component<IPopularComunitiesProps, IPopularComun
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): IPopularComunitiesProps => {
-    return {
-        loadPopularComunities: () => dispatch(comunityActions.loadPopularComunities())
-    };
-}
-
 const mapStateToProps = (state: IAppState): IPopularComunitiesProps => {
     return {
         popularComunities: state.comunityState.popularComunities
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopularComunities);
+export default connect(mapStateToProps)(PopularComunities);

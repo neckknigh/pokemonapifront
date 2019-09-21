@@ -4,6 +4,7 @@ import { comunityService } from "../../services/data/comunity.service";
 import { Comunity } from "../../models/comunity.model";
 import { comunityActions } from "../action-creators/comunity.action.creator";
 
+// TODO: Esto no se está usando, revisar si quitar
 const getRecomendedComunities = createLogic({
     type: ComunityConstants.LOAD_RECOMENDED_COMUNITIES,
     latest: true,
@@ -49,12 +50,13 @@ const loadComunity = createLogic({
     }
 });
 
+// TODO: Esto no se está usando, revisar si quitar
 const loadPopularComunities = createLogic({
     type: ComunityConstants.LOAD_POPULAR_COMUNITIES,
     latest: true,
     // eslint-disable-next-line
-    process({ action }: any, dispatch, done) {
-        console.log("llego la accion");
+    process({ }, dispatch, done) {
+
         comunityService.getPopularComunities()
             .subscribe(
                 (popularComunities: Comunity[]) => {

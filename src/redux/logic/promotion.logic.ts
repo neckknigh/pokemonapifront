@@ -4,6 +4,7 @@ import { promotionService } from "../../services/data/promotion.service";
 import { Promotion } from "../../models/promotion.model";
 import { promotionActions } from "../action-creators/promotion.action.creator";
 
+// TODO: Esto no se está usando, revisar si quitarlo.
 const getPromotions = createLogic({
     type: PromotionsConstants.LOAD_PROMOTIONS,
     latest: true,

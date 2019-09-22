@@ -30,9 +30,14 @@ export interface ILoadMainDataAction extends Action<SystemConstants.LOAD_MAIN_DA
 
 }
 
+export interface IGetCurrentLocationAction extends Action<SystemConstants.GET_CURRENT_LOCATION> {
+
+}
+
 export type SystemActions = IAppIsLoadingAction |
     IAppHasErrorAction |
     IAppErrorMessageAction |
     IHandleAppErrorAction |
     IOpenSideMenuAction |
-    ILoadMainDataAction;
+    ILoadMainDataAction |
+    IGetCurrentLocationAction;

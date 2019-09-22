@@ -59,6 +59,12 @@ class SystemActionCreator {
             type: SystemConstants.LOAD_MAIN_DATA
         };
     }
+
+    public getCurrentLocation(): SystemActions {
+        return {
+            type: SystemConstants.GET_CURRENT_LOCATION
+        };
+    }
 }
 
 export const systemActions = new SystemActionCreator();

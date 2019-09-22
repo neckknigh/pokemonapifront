@@ -8,6 +8,8 @@ import { comunityService } from "../../services/data/comunity.service";
 import { promotionService } from "../../services/data/promotion.service";
 import { comunityActions } from "../action-creators/comunity.action.creator";
 import { promotionActions } from "../action-creators/promotion.action.creator";
+import { locationService } from "../../services/data/location.service";
+import { ConfigProvider as CP } from "../../services/config/config.service";
 
 /**
  * Permite establecer un mensaje de error en la aplicación.
@@ -37,7 +39,8 @@ const handleAppError = createLogic<
 const loadMainData = createLogic({
     type: SystemConstants.LOAD_MAIN_DATA,
     latest: true,
-    process({ action }, dispatch, done) {
+    // eslint-disable-next-line
+    process({}, dispatch, done) {
         
         Observable.forkJoin(
 			comunityService.getPopularComunities(),
@@ -51,15 +54,45 @@ const loadMainData = createLogic({
                 dispatch(comunityActions.saveRecomendedComunities(recomendedComunities));
                 dispatch(promotionActions.savePromotions(promotions));
 
+                /**
+                 * Después de consultada la información principal,
+                 * se soliicta al usuario su posición.
+                 */
+                setTimeout(() => {
+                    dispatch(systemActions.getCurrentLocation());
+                    done();
+                }, CP.get(CP.TIME_FOR_LOCATION));
+
+			}, error => {
+                console.log(error);
                 done();
-			}
+            }
 		);
+    }
+});
+
+const getCurrentLocation = createLogic({
+    type: SystemConstants.GET_CURRENT_LOCATION,
+    latest: true,
+    // eslint-disable-next-line
+    process({}, dispatch, done) {
+        
+        locationService.getCurrentLocation().subscribe(
+            (response: Position) => {
+                console.log(response);
+                done();
+            }, error => {
+                console.log(error);
+                done();
+            }
+        );
     }
 });
 
 const systemLogics = [
     handleAppError,
-    loadMainData
+    loadMainData,
+    getCurrentLocation
 ];
 
 export default systemLogics;

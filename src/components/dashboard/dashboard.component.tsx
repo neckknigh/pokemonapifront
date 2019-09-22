@@ -7,7 +7,6 @@ import ComunitiesComponent from '../comunities/comunities.component';
 import { withRouter } from 'react-router';
 import { Dispatch } from 'redux';
 import { systemActions } from '../../redux/action-creators/system.action.creator';
-//import { utilService } from '../../services/util.service';
 
 interface IDashBoardComponentProps {
     loadMainData: () => void;
@@ -15,29 +14,6 @@ interface IDashBoardComponentProps {
 
 
 class DashBoardComponent extends Component<IDashBoardComponentProps, {}> {
-
-    /*
-    constructor(props: any) {
-        super(props);
-
-        
-        // TODO: Quitar esto de aquí
-        if (utilService.isDefined(navigator.geolocation)) {
-            navigator.geolocation.getCurrentPosition(
-                function success(position) {
-                    // for when getting location is a success
-                    console.log('latitude', position.coords.latitude,
-                        'longitude', position.coords.longitude);
-                },
-                function error(error_message) {
-                    // for when getting location results in an error
-                    console.error('An error has occured while retrieving location', error_message);
-                });
-        }
-        
-
-    }
-    */
 
     public componentDidMount() {
         this.props.loadMainData();

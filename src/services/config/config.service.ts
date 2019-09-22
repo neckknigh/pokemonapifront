@@ -44,6 +44,7 @@ export class ConfigProvider {
     static readonly FACEBOOK_GRAPH_API_VERSION: string = "FACEBOOK_GRAPH_API_VERSION";
     static readonly FACEBOOK_CONNECTED_STATUS: string = "FACEBOOK_CONNECTED_STATUS";
     static readonly POPULAR_COMUNITIES_DISPLAY: string = "POPULAR_COMUNITIES_DISPLAY";
+    static readonly TIME_FOR_LOCATION: string = "TIME_FOR_LOCATION";
 
 
     private static configs: any;
@@ -98,6 +99,7 @@ export class ConfigProvider {
         ConfigProvider.configs[ConfigProvider.FACEBOOK_GRAPH_API_VERSION] = "v4.0";
         ConfigProvider.configs[ConfigProvider.FACEBOOK_CONNECTED_STATUS] = "connected";
         ConfigProvider.configs[ConfigProvider.POPULAR_COMUNITIES_DISPLAY] = "Comunidades Populares";
+        ConfigProvider.configs[ConfigProvider.TIME_FOR_LOCATION] = 1500;
     }
 
     public static get(key: string): any {

@@ -1,9 +1,0 @@
-@import "../../../styles/_main";
-
-.textfield-container {
-    @include maximun-size();
-
-    .input-text {
-        @include maximum-height();
-    }
-}

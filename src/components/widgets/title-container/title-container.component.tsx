@@ -25,7 +25,7 @@ class TitleContainerComponent extends Component<TitleContainerComponentProps, {}
         const { mainTitle, secondaryTitle, id } = this.props;
         return (
             <div className={this.getMainContainerCls()} id={id}>
-                <div className="title-header-container flex-row-items-center">
+                <div className="title-header-container flex-row-center-items-center">
                     <h1 className="header">{mainTitle}</h1>
                     {
                         secondaryTitle && <div>

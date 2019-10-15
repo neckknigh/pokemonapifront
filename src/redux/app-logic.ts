@@ -1,13 +1,7 @@
-import authLogics from "./logic/auth.logic";
-import systemLogics from "./logic/system.logic";
-import comunityLogics from "./logic/comunity.logic";
-import promotionLogics from "./logic/promotion.logic";
+import pokemonFightResultLogics from "./logic/pokemonfightresult.logic";
 
 const appLogic = [
-    ...authLogics,
-    ...systemLogics,
-    ...comunityLogics,
-    ...promotionLogics
+    ...pokemonFightResultLogics
 ];
 
 export default appLogic;

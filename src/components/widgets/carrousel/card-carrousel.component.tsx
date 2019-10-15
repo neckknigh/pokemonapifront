@@ -8,10 +8,7 @@ import { utilService } from '../../../services/util.service';
 
 export interface CardCarrouselItem {
     title: string;
-    showUserLikes: boolean;
     img: string;
-    innerTitles: string[];
-    previewImages?: string[];
     id: string;
 }
 
@@ -98,10 +95,7 @@ export default class CardCarrouselComponent extends React.Component<CardCarrouse
                             return <CardComponent
                                 key={index}
                                 image={cardItem.img}
-                                showUserLikes={cardItem.showUserLikes}
-                                innerTitles={cardItem.innerTitles}
                                 title={cardItem.title}
-                                previewImages={cardItem.previewImages}
                                 onTap={this.onTapCard}
                                 id={cardItem.id}
                             />

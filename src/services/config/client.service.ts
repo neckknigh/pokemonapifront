@@ -1,6 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { systemActions } from "../../redux/action-creators/system.action.creator";
-import appStore from "../../redux/app-store";
 
 class ClientHttpService {
     private axiosClient: AxiosInstance;
@@ -23,11 +21,9 @@ class ClientHttpService {
     private interceptRequest() {
         this.axiosClient.interceptors.request.use(
             (config: AxiosRequestConfig): AxiosRequestConfig => {
-                appStore.dispatch(systemActions.showLoadingScreen());
                 return config;
             },
             (error: any) => {
-                appStore.dispatch(systemActions.showLoadingScreen());
                 console.log("error: mostrando mascara");
                 return Promise.reject(error);
             }
@@ -42,15 +38,9 @@ class ClientHttpService {
         this.axiosClient.interceptors.response.use(
             (response: any) => {
 
-                // se elimina cualquier mensaje de error existente
-                appStore.dispatch(systemActions.handleAppError());
-
-                // Se oculta la pantalla de carga
-                appStore.dispatch(systemActions.hideLoadingScreen());
                 return response.data;
             },
             (error: any) => {
-                appStore.dispatch(systemActions.hideLoadingScreen());
                 return Promise.reject(error);
             }
         );
